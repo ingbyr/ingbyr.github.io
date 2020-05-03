@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on ingbyr博客</title>
+    <link>http://localhost:1313/tags/python/</link>
+    <description>Recent content in Python on ingbyr博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 14 Apr 2016 14:45:42 +0000</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>北邮网关登陆工具</title>
+      <link>http://localhost:1313/post/bupt-net-login/</link>
+      <pubDate>Thu, 14 Apr 2016 14:45:42 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/bupt-net-login/</guid>
+      <description>北邮校园网网关登陆工具，适配新网关 ngw.bupt.edu.cn。已开源至 GitHub。 安装 使用pip安装 pip3 install BUPTNetLogin 使用便携版 下载页面 使用方法 使</description>
+    </item>
+    
+  </channel>
+</rss>

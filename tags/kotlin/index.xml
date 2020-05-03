@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kotlin on ingbyr博客</title>
+    <link>http://localhost:1313/tags/kotlin/</link>
+    <description>Recent content in Kotlin on ingbyr博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 31 Aug 2018 10:55:22 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/kotlin/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>VDM中文说明</title>
+      <link>http://localhost:1313/post/youget-zh/</link>
+      <pubDate>Fri, 31 Aug 2018 10:55:22 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/youget-zh/</guid>
+      <description>下载 需要提前安装JRE8 （已安装JRE8的跳过此步骤） 下载页面下载VDM.zip，解压缩后运行VDM.jar 简介 VDM是适配多个视频命令行下</description>
+    </item>
+    
+  </channel>
+</rss>

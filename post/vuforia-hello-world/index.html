@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Unity3D/Android/Vuforia环境搭建 - ingbyr博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ingbyr" /><meta name="description" content="开发环境配置 安装包下载 点击下方文字进行安装，请自备梯子 Unity3D Android SDK Vuforia SDK U3D配置 配置编译安卓的环境，如下图所示 第一个虚拟现实应用 参考 https://developer.vuforia.com/library/articles/Solution/Compiling-a-Simple-Unity-Project 创建一个新项" /><meta name="keywords" content="ingbyr, blog, 博客" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.2 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/vuforia-hello-world/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Unity3D/Android/Vuforia环境搭建" />
+<meta property="og:description" content="开发环境配置 安装包下载 点击下方文字进行安装，请自备梯子 Unity3D Android SDK Vuforia SDK U3D配置 配置编译安卓的环境，如下图所示 第一个虚拟现实应用 参考 https://developer.vuforia.com/library/articles/Solution/Compiling-a-Simple-Unity-Project 创建一个新项" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/vuforia-hello-world/" />
+<meta property="article:published_time" content="2016-02-17T12:29:24+00:00" />
+<meta property="article:modified_time" content="2016-02-17T12:29:24+00:00" />
+<meta itemprop="name" content="Unity3D/Android/Vuforia环境搭建">
+<meta itemprop="description" content="开发环境配置 安装包下载 点击下方文字进行安装，请自备梯子 Unity3D Android SDK Vuforia SDK U3D配置 配置编译安卓的环境，如下图所示 第一个虚拟现实应用 参考 https://developer.vuforia.com/library/articles/Solution/Compiling-a-Simple-Unity-Project 创建一个新项">
+<meta itemprop="datePublished" content="2016-02-17T12:29:24&#43;00:00" />
+<meta itemprop="dateModified" content="2016-02-17T12:29:24&#43;00:00" />
+<meta itemprop="wordCount" content="425">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Unity3D/Android/Vuforia环境搭建"/>
+<meta name="twitter:description" content="开发环境配置 安装包下载 点击下方文字进行安装，请自备梯子 Unity3D Android SDK Vuforia SDK U3D配置 配置编译安卓的环境，如下图所示 第一个虚拟现实应用 参考 https://developer.vuforia.com/library/articles/Solution/Compiling-a-Simple-Unity-Project 创建一个新项"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ingbyr</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ingbyr</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Unity3D/Android/Vuforia环境搭建</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2016-02-17 </span>
+        
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#安装包下载">安装包下载</a></li>
+    <li><a href="#u3d配置">U3D配置</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#创建一个新项目">创建一个新项目</a></li>
+    <li><a href="#导入应用key">导入应用Key</a></li>
+    <li><a href="#导入素材">导入素材</a></li>
+    <li><a href="#应用发布">应用发布</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+  <div class="post-outdated">
+    <div class="warn">
+      <p>【注意】最后更新于 <span class="timeago" datetime="2016-02-17T12:29:24" title="February 17, 2016">February 17, 2016</span>，文中内容可能已过时，请谨慎使用。</p>
+    </div>
+  </div>
+    <div class="post-content">
+      <h1 id="开发环境配置">开发环境配置</h1>
+<h2 id="安装包下载">安装包下载</h2>
+<p>点击下方文字进行安装，请自备梯子</p>
+<ul>
+<li><a href="https://unity3d.com/cn/get-unity">Unity3D</a></li>
+<li><a href="https://developer.android.com/sdk/installing/index.html">Android SDK</a></li>
+<li><a href="https://developer.vuforia.com/downloads/sdk">Vuforia SDK</a></li>
+</ul>
+<h2 id="u3d配置">U3D配置</h2>
+<p>配置编译安卓的环境，如下图所示
+<img src="https://ww4.sinaimg.cn/large/bca3b20djw1f128ca2kfbj20e20bxt9x.jpg" alt="">
+<img src="https://ww4.sinaimg.cn/large/bca3b20djw1f128caerdmj20f108tq3t.jpg" alt=""></p>
+<h1 id="第一个虚拟现实应用">第一个虚拟现实应用</h1>
+<blockquote>
+<p>参考 <a href="https://developer.vuforia.com/library/articles/Solution/Compiling-a-Simple-Unity-Project">https://developer.vuforia.com/library/articles/Solution/Compiling-a-Simple-Unity-Project</a></p>
+</blockquote>
+<h2 id="创建一个新项目">创建一个新项目</h2>
+<p>U3D中新建项目，双击下载好的SDK：vuforia-unity-xx-yy-zz.unitypackage 将SDK导入到项目中，完成后如下图
+<img src="https://ww1.sinaimg.cn/large/bca3b20djw1f128v76x00j20fl06lmxq.jpg" alt=""></p>
+<h2 id="导入应用key">导入应用Key</h2>
+<p>在Vuforia官网中生成一个key，复制key到项目中的ARCamera的属性key中，如图
+<img src="https://ww3.sinaimg.cn/large/bca3b20djw1f128v7pxk6j20aj08jq3v.jpg" alt=""></p>
+<h2 id="导入素材">导入素材</h2>
+<p>删除默认Camera，导入AR Camera,导入IamgeTarget。将识别目标图片上传至目标管理页面，下载data双击导入到项目中，将IamgeTarget属性Data Set设置为刚刚导入的data。然后随便新建一个3D素材，此处以立方体为例，将新建的Cube拖至IamgeTarget 的Children中，并调整至ImageTarget的中央，如图
+<img src="https://ww1.sinaimg.cn/large/bca3b20djw1f128v874hfj211y0lcagl.jpg" alt="">
+随后将AR Camera其中的输入设置如下
+<img src="https://ww3.sinaimg.cn/large/bca3b20djw1f128v8rj7zj20aj02djrg.jpg" alt=""></p>
+<h2 id="应用发布">应用发布</h2>
+<p>记得修改Bundle Identifier
+<img src="https://ww4.sinaimg.cn/large/bca3b20djw1f128v9smo8j20q00hpjug.jpg" alt="">
+然后点击build and run 即可</p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ingbyr</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2016-02-17
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/bupt-net-login/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">北邮网关登陆工具</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/pic16f877-ljt/">
+            <span class="next-text nav-default">基于PIC16F877单片机的智能垃圾桶</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2016-02-17 12:29:24 \x2b0000 UTC',
+        title: 'Unity3D\/Android\/Vuforia环境搭建',
+        clientID: 'a2aa3ae53bcd24e70e07',
+        clientSecret: '1d8e2237f2c076d322cdb89a2ab82aa3c98dbce3',
+        repo: 'ingbyr.github.io',
+        owner: 'ingbyr',
+        admin: ['ingbyr'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="ingbyr@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/ingbyr" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/zwkv5" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/ingbyr/activities" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">ingbyr</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

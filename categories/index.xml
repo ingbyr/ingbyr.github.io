@@ -6,9 +6,19 @@
     <description>Recent content in Categories on ingbyr博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+    <lastBuildDate>Mon, 04 May 2020 11:16:10 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java</title>
+      <link>http://localhost:1313/categories/java/</link>
+      <pubDate>Mon, 04 May 2020 11:16:10 +0800</pubDate>
+      
+      <guid>http://localhost:1313/categories/java/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

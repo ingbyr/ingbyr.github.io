@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Baetyl V2安装指南 - ingbyr博客</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="ingbyr" /><meta name="description" content="Baetyl v2.0.0安装指南
+" /><meta name="keywords" content="Baetyl" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Baetyl V2安装指南" />
+<meta property="og:description" content="Baetyl v2.0.0安装指南" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" />
+<meta property="article:published_time" content="2020-08-31T17:29:12+08:00" />
+<meta property="article:modified_time" content="2020-08-31T17:29:12+08:00" />
+<meta itemprop="name" content="Baetyl V2安装指南">
+<meta itemprop="description" content="Baetyl v2.0.0安装指南">
+<meta itemprop="datePublished" content="2020-08-31T17:29:12+08:00" />
+<meta itemprop="dateModified" content="2020-08-31T17:29:12+08:00" />
+<meta itemprop="wordCount" content="644">
+
+
+
+<meta itemprop="keywords" content="Baetyl," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Baetyl V2安装指南"/>
+<meta name="twitter:description" content="Baetyl v2.0.0安装指南"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">ingbyr</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">ingbyr</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Baetyl V2安装指南</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-08-31 </span>
+        <div class="post-category">
+            <a href="/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/"> 边缘计算 </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#docker">Docker</a></li>
+    <li><a href="#kubernets">Kubernets</a>
+      <ul>
+        <li><a href="#k8s">K8S</a></li>
+        <li><a href="#k3s">k3s</a></li>
+        <li><a href="#rancher">Rancher</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装baetyl">安装Baetyl</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>Baetyl v2.0.0安装指南</p>
+<h2 id="docker">Docker</h2>
+<p><code>/etc/docker/daemon.json</code>中添加/修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;exec-opts&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;native.cgroupdriver=systemd&#34;</span><span class="p">],</span>
+    <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;https://docker.mirrors.ustc.edu.cn/&#34;</span><span class="p">],</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>重启Docker</p>
+<h2 id="kubernets">Kubernets</h2>
+<h3 id="k8s">K8S</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装 kubeadm kubectl kubelet</span>
+gpg --keyserver keyserver.ubuntu.com --recv-keys BA07F4FB
+gpg --export --armor BA07F4FB <span class="p">|</span> sudo apt-key add -
+<span class="nb">echo</span> <span class="s2">&#34;deb https://mirrors.tuna.tsinghua.edu.cn/kubernetes/apt kubernetes-xenial main&#34;</span> &gt; /etc/apt/sources.list.d/kubernetes.list 
+apt update
+apt install kubeadm kubectl kubelet
+
+<span class="c1"># 查看指定k8s版本需要哪些镜像</span>
+kubeadm config images list --kubernetes-version v1.18.3
+</code></pre></td></tr></table>
+</div>
+</div><p>终端输出：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">k8s.gcr.io/kube-apiserver:1.18.3
+k8s.gcr.io/kube-controller-manager:v1.18.3
+k8s.gcr.io/kube-scheduler:v1.18.3
+k8s.gcr.io/kube-proxy:v1.18.3
+k8s.gcr.io/pause:3.2
+k8s.gcr.io/etcd:3.4.3-0
+k8s.gcr.io/coredns:1.6.7
+</code></pre></td></tr></table>
+</div>
+</div><p>新建脚本<code>get-k8s-images.sh </code>并替换版本号：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">images</span><span class="o">=(</span>
+    kube-apiserver:v1.18.3
+    kube-controller-manager:v1.18.3
+    kube-scheduler:v1.18.3
+    kube-proxy:v1.18.3
+    pause:3.2
+    etcd:3.4.3-0
+    coredns:1.6.7
+<span class="o">)</span>
+
+<span class="k">for</span> imageName in <span class="si">${</span><span class="nv">images</span><span class="p">[@]</span><span class="si">}</span> <span class="p">;</span> <span class="k">do</span>
+    docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/<span class="nv">$imageName</span>
+    docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/<span class="nv">$imageName</span> k8s.gcr.io/<span class="nv">$imageName</span>
+    docker rmi registry.cn-hangzhou.aliyuncs.com/google_containers/<span class="nv">$imageName</span>
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行<code>get-k8s-images.sh </code>以便从国内hub获取镜像。修改kubelet配置中的默认cgroup driver：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat &gt; /var/lib/kubelet/config.yaml <span class="s">&lt;&lt;EOF
+</span><span class="s">apiVersion: kubelet.config.k8s.io/v1beta1
+</span><span class="s">kind: KubeletConfiguration
+</span><span class="s">cgroupDriver: systemd
+</span><span class="s">EOF</span>
+systemctl restart kubelet
+</code></pre></td></tr></table>
+</div>
+</div><p>启动k8s：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">kubeadm init --pod-network-cidr<span class="o">=</span>10.244.0.0/16 --kubernetes-version<span class="o">=</span>v1.18.3
+</code></pre></td></tr></table>
+</div>
+</div><p>启动完毕后有后续步骤的相关提示，具体操作为配置<code>$HOME/.kube/config</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir -p <span class="nv">$HOME</span>/.kube
+sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
+</code></pre></td></tr></table>
+</div>
+</div><p>添加网络组件（Flannel）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f kube-flannel.yml
+</code></pre></td></tr></table>
+</div>
+</div><p>添加本地存储支持：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+kubectl create -f local-path-storage.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>设置该存储为默认存储：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="k3s">k3s</h3>
+<p>使用国内源安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn sh -s - server --docker
+</code></pre></td></tr></table>
+</div>
+</div><p>配置config</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+</code></pre></td></tr></table>
+</div>
+</div><p>添加本地存储支持：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+kubectl create -f local-path-storage.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>设置该存储为默认存储：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="rancher">Rancher</h3>
+<p>参考<a href="https://docs.rancher.cn/docs/k3s/installation/_index">官方文档</a></p>
+<h2 id="安装baetyl">安装Baetyl</h2>
+<p>参考<a href="https://docs.baetyl.io/zh_CN/latest/develop/install.html">官方文档</a></p>
+<p>在安装边缘节点时报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">curl -d <span class="s2">&#34;{\&#34;name\&#34;:\&#34;demo-node\&#34;}&#34;</span> -H <span class="s2">&#34;Content-Type: application/json&#34;</span> -X POST http://0.0.0.0:30004/v1/nodes
+<span class="o">{</span><span class="s2">&#34;code&#34;</span>:<span class="s2">&#34;UnknownError&#34;</span>,<span class="s2">&#34;message&#34;</span>:<span class="s2">&#34;nodes.cloud.baetyl.io \&#34;demo-node\&#34; is forbidden: User \&#34;system:serviceaccount:default:baetyl-cloud\&#34; cannot get resource \&#34;nodes\&#34; in API group \&#34;cloud.baetyl.io\&#34; in the namespace \&#34;baetyl-cloud\&#34;&#34;</span>,<span class="s2">&#34;requestId&#34;</span>:<span class="s2">&#34;&#34;</span><span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>临时的解决办法：为账户baetyl-cloud添加所有相关权限：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRole<span class="w">
+</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io/v1<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-cr<span class="w">
+</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">custom</span><span class="p">:</span><span class="w"> </span>role-patch<span class="w">
+</span><span class="w"></span><span class="k">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">apiGroups</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- cloud.baetyl.io<span class="w">
+</span><span class="w">    </span><span class="k">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- nodes<span class="w">
+</span><span class="w">      </span>- applications<span class="w">
+</span><span class="w">      </span>- configurations<span class="w">
+</span><span class="w">      </span>- nodedesires<span class="w">
+</span><span class="w">      </span>- nodereports<span class="w">
+</span><span class="w">      </span>- secrets<span class="w">
+</span><span class="w">    </span><span class="k">verbs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- get<span class="w">
+</span><span class="w">      </span>- list<span class="w">
+</span><span class="w">      </span>- watch<span class="w">
+</span><span class="w">      </span>- create<span class="w">
+</span><span class="w">      </span>- update<span class="w">
+</span><span class="w">      </span>- patch<span class="w">
+</span><span class="w">      </span>- delete<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io/v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRoleBinding<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-crb<span class="w">
+</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">custom</span><span class="p">:</span><span class="w"> </span>role-patch<span class="w">
+</span><span class="w"></span><span class="k">roleRef</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">apiGroup</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io<span class="w">
+</span><span class="w">  </span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRole<span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-cr<span class="w">
+</span><span class="w"></span><span class="k">subjects</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">kind</span><span class="p">:</span><span class="w"> </span>ServiceAccount<span class="w">
+</span><span class="w">    </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>baetyl-cloud<span class="w">
+</span><span class="w">    </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>default<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">ingbyr</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-08-31
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/wechat.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="/img/reward/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/baetyl/">Baetyl</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
+            <span class="next-text nav-default">Kubeedge 国内环境安装</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitalk = new Gitalk({
+        id: '2020-08-31 17:29:12 \u002b0800 CST',
+        title: 'Baetyl V2安装指南',
+        clientID: 'a2aa3ae53bcd24e70e07',
+        clientSecret: '1d8e2237f2c076d322cdb89a2ab82aa3c98dbce3',
+        repo: 'ingbyr.github.io',
+        owner: 'ingbyr',
+        admin: ['ingbyr'],
+        body: decodeURI(location.href)
+      });
+      gitalk.render('gitalk-container');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="ingbyr@outlook.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://github.com/ingbyr" class="iconfont icon-github" title="github"></a>
+      <a href="https://weibo.com/zwkv5" class="iconfont icon-weibo" title="weibo"></a>
+      <a href="https://www.zhihu.com/people/ingbyr/activities" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2016 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">ingbyr</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
+  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
+    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
+    timeago().render(document.querySelectorAll('.timeago'), languageCode);
+    timeago.cancel();  
+  </script>
+
+
+
+<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

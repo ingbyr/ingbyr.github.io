@@ -1,33 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Linux on ingbyr博客</title>
-    <link>http://localhost:1313/tags/linux/</link>
-    <description>Recent content in Linux on ingbyr博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 21 Nov 2017 19:10:48 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Linux日常使用配置</title>
-      <link>http://localhost:1313/post/general-config-for-linux/</link>
-      <pubDate>Tue, 21 Nov 2017 19:10:48 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/general-config-for-linux/</guid>
-      <description>配置软件换源 备份及修改 1 2 sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup sudo gedit /etc/apt/sources.list IPV6源 点我生成配置 配置Neovim 编辑配置文件~/.config/nvim/init.vim 1 2</description>
-    </item>
-    
-    <item>
-      <title>Linux Server使用IPV6 BT资源</title>
-      <link>http://localhost:1313/post/remote-torrent-sys/</link>
-      <pubDate>Mon, 14 Aug 2017 15:19:18 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/remote-torrent-sys/</guid>
-      <description>啰嗦几句 权利的游戏终于又更新啦，然而目前网络没有IPV6所以怎么下载资源成了最大的问题，试了试公网上的bt，速度慢的令人发指，所以决定还是想</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Linux - 标签 - ingbyr</title>
+        <link>http://localhost:1313/tags/linux/</link>
+        <description>Linux - 标签 - ingbyr</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 21 Nov 2017 19:10:48 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux日常使用配置</title>
+    <link>http://localhost:1313/post/general-config-for-linux/</link>
+    <pubDate>Tue, 21 Nov 2017 19:10:48 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://localhost:1313/post/general-config-for-linux/</guid>
+    <description><![CDATA[配置软件换源 备份及修改 1 2 sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup sudo gedit /etc/apt/sources.list IPV6源 点我生成配置 配置Neovim 编辑配置文件~/.config/nvim/init.vim 1 2]]></description>
+</item><item>
+    <title>Linux Server使用IPV6 BT资源</title>
+    <link>http://localhost:1313/post/remote-torrent-sys/</link>
+    <pubDate>Mon, 14 Aug 2017 15:19:18 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://localhost:1313/post/remote-torrent-sys/</guid>
+    <description><![CDATA[啰嗦几句 权利的游戏终于又更新啦，然而目前网络没有IPV6所以怎么下载资源成了最大的问题，试了试公网上的bt，速度慢的令人发指，所以决定还是想]]></description>
+</item></channel>
 </rss>

@@ -1,171 +1,109 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Minecraft服务器搭建 - ingbyr博客</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="ingbyr" /><meta name="description" content="Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如" /><meta name="keywords" content="ingbyr, blog, 博客" />
-
-
-
-
-
-
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
-
-
-<link rel="canonical" href="http://localhost:1313/post/mc-linux-server/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.651e6917abb0239242daa570c2bec9867267bbcd83646da5a850afe573347b44.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-
-
-<meta property="og:title" content="Minecraft服务器搭建" />
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Minecraft服务器搭建 - ingbyr</title><meta name="Description" content="ingbyr"><meta property="og:title" content="Minecraft服务器搭建" />
 <meta property="og:description" content="Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/mc-linux-server/" />
+<meta property="og:image" content="http://localhost:1313/logo.png"/>
 <meta property="article:published_time" content="2018-08-03T16:03:27+08:00" />
 <meta property="article:modified_time" content="2018-08-03T16:03:27+08:00" />
-<meta itemprop="name" content="Minecraft服务器搭建">
-<meta itemprop="description" content="Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如">
-<meta itemprop="datePublished" content="2018-08-03T16:03:27+08:00" />
-<meta itemprop="dateModified" content="2018-08-03T16:03:27+08:00" />
-<meta itemprop="wordCount" content="1366">
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/logo.png"/>
 
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Minecraft服务器搭建"/>
 <meta name="twitter:description" content="Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如"/>
+<meta name="application-name" content="ingbyr">
+<meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/post/mc-linux-server/" /><link rel="prev" href="http://localhost:1313/post/compress-video-by-ffmpeg/" /><link rel="next" href="http://localhost:1313/post/youget-zh/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Minecraft服务器搭建",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/post\/mc-linux-server\/"
+        },"genre": "post","wordcount":  1366 ,
+        "url": "http:\/\/localhost:1313\/post\/mc-linux-server\/","datePublished": "2018-08-03T16:03:27+08:00","dateModified": "2018-08-03T16:03:27+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ingbyr"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">ingbyr</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">首页</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">归档</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">标签</li>
-      </a><a href="/categories/">
-        <li class="mobile-menu-item">分类</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">ingbyr</a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">首页</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">归档</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">标签</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/categories/">分类</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Minecraft服务器搭建</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2018-08-03 </span>
-        
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#介绍">介绍</a></li>
-    <li><a href="#安装">安装</a></li>
-    <li><a href="#插件配置">插件配置</a></li>
-    <li><a href="#运行服务器">运行服务器</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#介绍-1">介绍</a></li>
-    <li><a href="#安装-1">安装</a></li>
-    <li><a href="#mod配置">mod配置</a></li>
-    <li><a href="#运行服务器-1">运行服务器</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#介绍-2">介绍</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#安装optifine">安装optifine</a></li>
-    <li><a href="#安装forge">安装forge</a></li>
-  </ul>
-</nav>
-  </div>
-</div>
-  <div class="post-outdated">
-    <div class="warn">
-      <p>【注意】最后更新于 <span class="timeago" datetime="2018-08-03T16:03:27" title="August 3, 2018">August 3, 2018</span>，文中内容可能已过时，请谨慎使用。</p>
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ingbyr">ingbyr</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/post/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-    <div class="post-content">
-      <h1 id="spigot服务器类bukkit">Spigot服务器（类Bukkit）</h1>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ingbyr">ingbyr</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/post/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animated pulse faster">Minecraft服务器搭建</h1><div class="content" id="content"><h1 id="spigot服务器类bukkit">Spigot服务器（类Bukkit）</h1>
 <h2 id="介绍">介绍</h2>
-<p><a href="https://www.spigotmc.org/">spigotmc</a>是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如果使用人数规模庞大需要追求高性能服务器，Spigot是不二的选择。</p>
+<p><a href="https://www.spigotmc.org/" target="_blank" rel="noopener noreffer">spigotmc</a>是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如果使用人数规模庞大需要追求高性能服务器，Spigot是不二的选择。</p>
 <h2 id="安装">安装</h2>
 <p>在官网下载BuildTools.jar文件后，需要自行编译出所需版本的服务器端文件，格式如下：</p>
 <div class="highlight"><div class="chroma">
@@ -210,16 +148,16 @@
 </div><p>终止服务器直接 ctrl+c 即可</p>
 <h1 id="forge服务器">Forge服务器</h1>
 <h2 id="介绍-1">介绍</h2>
-<p>如果服务端需要运行一些mod（例如著名的暮色森林mod），此时spigot就不再适用了，而<a href="https://files.minecraftforge.net/">Forge</a>正是为mod而生的服务端和客户端工具。</p>
+<p>如果服务端需要运行一些mod（例如著名的暮色森林mod），此时spigot就不再适用了，而<a href="https://files.minecraftforge.net/" target="_blank" rel="noopener noreffer">Forge</a>正是为mod而生的服务端和客户端工具。</p>
 <h2 id="安装-1">安装</h2>
-<p>在<a href="https://files.minecraftforge.net/">Forge下载页面</a>选择需要的forge版本，生成服务端所需的文件要在本地新建一个空文件夹，生成所需文件后整体上传到服务器。</p>
+<p>在<a href="https://files.minecraftforge.net/" target="_blank" rel="noopener noreffer">Forge下载页面</a>选择需要的forge版本，生成服务端所需的文件要在本地新建一个空文件夹，生成所需文件后整体上传到服务器。</p>
 <h2 id="mod配置">mod配置</h2>
 <p>将mod直接拖入<code>mod</code>文件夹即可。</p>
 <h2 id="运行服务器-1">运行服务器</h2>
 <p>运行forge*.jar文件即可创建服务器。具体可参考Spigot中的 <code>运行服务器</code>一节</p>
 <h1 id="sponge">Sponge</h1>
 <h2 id="介绍-2">介绍</h2>
-<p><a href="https://www.spongepowered.org/">Sponge</a>据说是同时支持Bukkit插件和MOD功能的服务器端工具，具体没用使用过，大家可以去官网自行阅读文档安装体验。</p>
+<p><a href="https://www.spongepowered.org/" target="_blank" rel="noopener noreffer">Sponge</a>据说是同时支持Bukkit插件和MOD功能的服务器端工具，具体没用使用过，大家可以去官网自行阅读文档安装体验。</p>
 <h1 id="serverproperties说明">server.properties说明</h1>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -290,147 +228,24 @@ view-distance<span class="o">=</span>10					<span class="c1">#客戶端視野距
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="mc客户端">MC客户端</h1>
-<p>推荐使用<a href="https://github.com/huanghongxun/HMCL">HMCL</a>。</p>
+<p>推荐使用<a href="https://github.com/huanghongxun/HMCL" target="_blank" rel="noopener noreffer">HMCL</a>。</p>
 <h2 id="安装optifine">安装optifine</h2>
-<p>虽然HMCL中有自动安装optifine的功能，但经常会出现依赖配置错误导致的运行失败，所以optifine和forge推荐自行安装。选择对应版本下载<a href="https://www.optifine.net/downloads">optifine</a>，之后将jar文件导入mod或使用HMCL提供的MOD管理导入即可。</p>
+<p>虽然HMCL中有自动安装optifine的功能，但经常会出现依赖配置错误导致的运行失败，所以optifine和forge推荐自行安装。选择对应版本下载<a href="https://www.optifine.net/downloads" target="_blank" rel="noopener noreffer">optifine</a>，之后将jar文件导入mod或使用HMCL提供的MOD管理导入即可。</p>
 <h2 id="安装forge">安装forge</h2>
-<p>在<a href="https://files.minecraftforge.net/">Forge下载页面</a>选择需要的forge版本，安装客户端forge时需要选中游戏所在的<code>.minecraft</code>文件夹（不是公共资源文件夹），然后点击安装即可。</p>
-
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">ingbyr</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2018-08-03
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title">许可协议</span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
-</div>
-<div class="post-reward">
-  <input type="checkbox" name="reward" id="reward" hidden />
-  <label class="reward-button" for="reward">赞赏支持</label>
-  <div class="qr-code">
-    
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="/img/reward/wechat.png">
-        <span>微信打赏</span>
-      </label>
-    <label class="qr-code-image" for="reward">
-        <img class="image" src="/img/reward/alipay.png">
-        <span>支付宝打赏</span>
-      </label>
-  </div>
-</div><footer class="post-footer">
-      
-      <nav class="post-nav">
-        <a class="prev" href="/post/youget-zh/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">VDM中文说明</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        <a class="next" href="/post/compress-video-by-ffmpeg/">
-            <span class="next-text nav-default">使用ffmpeg压缩60FPS视频并上传至Bilibili</span>
-            <span class="next-text nav-mobile">下一篇</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
+<p>在<a href="https://files.minecraftforge.net/" target="_blank" rel="noopener noreffer">Forge下载页面</a>选择需要的forge版本，安装客户端forge时需要选中游戏所在的<code>.minecraft</code>文件夹（不是公共资源文件夹），然后点击安装即可。</p>
+</div><div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
-        <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      var gitalk = new Gitalk({
-        id: '2018-08-03 16:03:27 \u002b0800 CST',
-        title: 'Minecraft服务器搭建',
-        clientID: 'a2aa3ae53bcd24e70e07',
-        clientSecret: '1d8e2237f2c076d322cdb89a2ab82aa3c98dbce3',
-        repo: 'ingbyr.github.io',
-        owner: 'ingbyr',
-        admin: ['ingbyr'],
-        body: decodeURI(location.href)
-      });
-      gitalk.render('gitalk-container');
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by gitalk.</a></noscript>
+    </footer></div>
 
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a href="ingbyr@outlook.com" class="iconfont icon-email" title="email"></a>
-      <a href="https://github.com/ingbyr" class="iconfont icon-github" title="github"></a>
-      <a href="https://weibo.com/zwkv5" class="iconfont icon-weibo" title="weibo"></a>
-      <a href="https://www.zhihu.com/people/ingbyr/activities" class="iconfont icon-zhihu" title="zhihu"></a>
-  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
-</div>
-
-<div class="copyright">
-  <span class="power-by">
-    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
-  </span>
-  <span class="division">|</span>
-  <span class="theme-info">
-    主题 - 
-    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
-  </span>
-
-  
-
-  <span class="copyright-year">
-    &copy; 
-    2016 - 
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">ingbyr</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js" integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js" integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin="anonymous"></script>
-  <script><!-- NOTE: timeago.js uses the language code format like "zh_CN" (underscore and case sensitive) -->
-    var languageCode = "zh-cn".replace(/-/g, '_').replace(/_(.*)/, function ($0, $1) {return $0.replace($1, $1.toUpperCase());});
-    timeago().render(document.querySelectorAll('.timeago'), languageCode);
-    timeago.cancel();  
-  </script>
-
-
-
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
-
-
-
-
-
-
-
-
-</body>
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["ingbyr"],"clientID":"a2aa3ae53bcd24e70e07","clientSecret":"1d8e2237f2c076d322cdb89a2ab82aa3c98dbce3","id":"2018-08-03T16:03:27+08:00","owner":"ingbyr","repo":"ingbyr.github.io","title":"Minecraft服务器搭建"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

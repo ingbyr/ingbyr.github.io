@@ -1,33 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Tutorial on ingbyr博客</title>
-    <link>http://localhost:1313/tags/tutorial/</link>
-    <description>Recent content in Tutorial on ingbyr博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Tue, 19 Dec 2017 22:42:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>使用ffmpeg压缩60FPS视频并上传至Bilibili</title>
-      <link>http://localhost:1313/post/compress-video-by-ffmpeg/</link>
-      <pubDate>Tue, 19 Dec 2017 22:42:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/compress-video-by-ffmpeg/</guid>
-      <description>样例 我们要达到的视频效果是这样的 确定压缩目标 bilibili不进行二压的参数要求如下： 视频码率最高1800kbps（H264/AVC编码） 音</description>
-    </item>
-    
-    <item>
-      <title>国内谷歌使用指南</title>
-      <link>http://localhost:1313/post/how-to-use-google/</link>
-      <pubDate>Sun, 18 Sep 2016 23:10:31 +0000</pubDate>
-      
-      <guid>http://localhost:1313/post/how-to-use-google/</guid>
-      <description>目前个人所使用过的方法有三种 使用代理 vpn或者ss都是很好的选择，个人正在使用ss，主要是因为IPV6的ss不仅可以实现校园网免流，而且速度</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Tutorial - 标签 - ingbyr</title>
+        <link>http://localhost:1313/tags/tutorial/</link>
+        <description>Tutorial - 标签 - ingbyr</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 19 Dec 2017 22:42:00 &#43;0000</lastBuildDate><atom:link href="http://localhost:1313/tags/tutorial/" rel="self" type="application/rss+xml" /><item>
+    <title>使用ffmpeg压缩60FPS视频并上传至Bilibili</title>
+    <link>http://localhost:1313/post/compress-video-by-ffmpeg/</link>
+    <pubDate>Tue, 19 Dec 2017 22:42:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://localhost:1313/post/compress-video-by-ffmpeg/</guid>
+    <description><![CDATA[样例 我们要达到的视频效果是这样的 确定压缩目标 bilibili不进行二压的参数要求如下： 视频码率最高1800kbps（H264/AVC编码） 音]]></description>
+</item><item>
+    <title>国内谷歌使用指南</title>
+    <link>http://localhost:1313/post/how-to-use-google/</link>
+    <pubDate>Sun, 18 Sep 2016 23:10:31 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>http://localhost:1313/post/how-to-use-google/</guid>
+    <description><![CDATA[目前个人所使用过的方法有三种 使用代理 vpn或者ss都是很好的选择，个人正在使用ss，主要是因为IPV6的ss不仅可以实现校园网免流，而且速度]]></description>
+</item></channel>
 </rss>

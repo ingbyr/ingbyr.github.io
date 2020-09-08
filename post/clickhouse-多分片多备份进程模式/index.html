@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>ClickHouse 多分片多备份进程模式 - ingbyr</title><meta name="Description" content="ingbyr"><meta property="og:title" content="ClickHouse 多分片多备份进程模式" />
+<meta property="og:description" content="基于原生安装方式进行部署" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" />
+<meta property="og:image" content="http://localhost:1313/logo.png"/>
+<meta property="article:published_time" content="2020-09-04T14:08:14+08:00" />
+<meta property="article:modified_time" content="2020-09-04T14:08:14+08:00" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/logo.png"/>
+
+<meta name="twitter:title" content="ClickHouse 多分片多备份进程模式"/>
+<meta name="twitter:description" content="基于原生安装方式进行部署"/>
+<meta name="application-name" content="ingbyr">
+<meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://localhost:1313/post/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" /><link rel="prev" href="http://localhost:1313/post/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ClickHouse 多分片多备份进程模式",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/localhost:1313\/post\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/"
+        },"genre": "post","keywords": "ClickHouse, 时序数据库","wordcount":  1434 ,
+        "url": "http:\/\/localhost:1313\/post\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/","datePublished": "2020-09-04T14:08:14+08:00","dateModified": "2020-09-04T14:08:14+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ingbyr"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ingbyr">ingbyr</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/post/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ingbyr">ingbyr</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/post/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="page single special"><h1 class="single-title animated pulse faster">ClickHouse 多分片多备份进程模式</h1><div class="content" id="content"><p>基于原生安装方式进行部署</p>
+<h2 id="服务器">服务器</h2>
+<ul>
+<li>s1r1（分片1副本1）、s3r2（分片3副本2） 位于 s1 服务器</li>
+<li>s2r1（分片2副本1）、s1r2 （分片1副本2）位于 s2 服务器</li>
+<li>s3r1（分片3副本1）、s2r2（分片2副本2） 位于 s3 服务器</li>
+<li>zoo1（位于s1）、zoo2（位于s2）、zoo3 （位于s3）为 zookeeper集群</li>
+</ul>
+<p>本文中的IP如下：</p>
+<ul>
+<li>s1 -&gt; 10.88.76.227</li>
+<li>s2 -&gt;10.88.76.228</li>
+<li>s3 -&gt; 10.88.76.229</li>
+</ul>
+<h2 id="设置host">设置Host</h2>
+<p>在 s1、s2、s3中的/etc/hosts 中添加以下内容（需替换为自己的IP）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">10.88.76.227 s1 
+10.88.76.228 s2 
+10.88.76.229 s3 
+
+10.88.76.227 s1r1 
+10.88.76.228 s1r2
+
+10.88.76.228 s2r1
+10.88.76.229 s2r2
+
+10.88.76.229 s3r1
+10.88.76.227 s3r2
+
+10.88.76.227 zoo1
+10.88.76.228 zoo2
+10.88.76.229 zoo3
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="部署zookeeper">部署Zookeeper</h2>
+<blockquote>
+<p>此处示例为3.6.1版本</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.6.1/apache-zookeeper-3.6.1-bin.tar.gz
+tar -zxf apache-zookeeper-3.6.1-bin.tar.gz
+<span class="nb">cd</span> apache-zookeeper-3.6.1-bin
+cp conf/zoo_sample.cfg conf/zoo.cfg
+vim conf/zoo.cfg <span class="c1"># 内容见下方</span>
+bin/zkServer.sh start
+</code></pre></td></tr></table>
+</div>
+</div><p>conf/zoo.cfg 内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">tickTime=2000
+initLimit=10
+syncLimit=5
+dataDir=/var/lib/zookeeper
+clientPort=2181
+server.1=s1:2888:3888
+server.2=s2:2888:3888
+server.3=s3:2888:3888
+</code></pre></td></tr></table>
+</div>
+</div><p>在s1、s2和s3服务器中分别执行命令验证安装结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh status
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="安装clickhouse">安装ClickHouse</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install apt-transport-https ca-certificates dirmngr
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
+<span class="nb">echo</span> <span class="s2">&#34;deb https://repo.clickhouse.tech/deb/stable/ main/&#34;</span> <span class="p">|</span> sudo tee <span class="se">\
+</span><span class="se"></span>    /etc/apt/sources.list.d/clickhouse.list
+sudo apt-get update
+sudo apt-get install -y clickhouse-server clickhouse-client
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="clickhouse工作目录">ClickHouse工作目录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
+├── create_table.sh		<span class="c1">#（测试用）创建表</span>
+├── data_p.csv				<span class="c1">#（测试用）示例数据</span>
+├── delete_table.sh		<span class="c1">#（测试用）删除表</span>
+├── insert_data.sh		<span class="c1">#（测试用）导入示例数据</span>
+├── query_table.sh		<span class="c1">#（测试用）查询导入的数据量</span>
+├── s1r1
+│   ├── config.xml		<span class="c1"># 配置文件</span>
+│   ├── metrika.xml		<span class="c1"># 分片配置文件</span>
+│   └── var						<span class="c1"># 数据库启动后的相关文件</span>
+├── s1r1.log					<span class="c1"># 日志</span>
+├── s3r2
+│   ├── config.xml
+│   ├── metrika.xml
+│   └── var
+├── s3r2.log
+└── users.xml
+
+<span class="c1"># s2</span>
+├── s1r2
+│   ├── config.xml
+│   ├── metrika.xml
+│   └── var
+├── s1r2.log
+├── s2r1
+│   ├── config.xml
+│   ├── metrika.xml
+│   └── var
+├── s2r1.log
+└── users.xml
+
+<span class="c1"># s3</span>
+├── s2r2
+│   ├── config.xml
+│   ├── metrika.xml
+│   └── var
+├── s2r2.log
+├── s3r1
+│   ├── config.xml
+│   ├── metrika.xml
+│   └── var
+├── s3r1.log
+└── users.xml
+</code></pre></td></tr></table>
+</div>
+</div><p>配置中tcp访问端口如下：</p>
+<ul>
+<li>s1r1:9111</li>
+<li>s3r2:9132</li>
+<li>s2r1:9121</li>
+<li>s1r2:9112</li>
+<li>s3r1:9131</li>
+<li>s2r2:9122</li>
+</ul>
+<h2 id="运行clickhouse">运行ClickHouse</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s1r1/config.xml &gt; s1r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s3r2/config.xml &gt; s3r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> 
+
+<span class="c1"># s2</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s1r2/config.xml &gt; s1r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s2r1/config.xml &gt; s2r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+
+<span class="c1"># s3</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s2r2/config.xml &gt; s2r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s3r1/config.xml &gt; s3r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>停止运行： ps -A | grep click | awk &lsquo;{print $1}&rsquo; | xargs kill</p>
+</blockquote>
+<h2 id="自定义用户名和密码">自定义用户名和密码</h2>
+<p>在users.xml中有详细的注释说明了如何添加用户、密码、用户权限等配置方法。（配置文件中已添加了以下内容，需要其他账户可参考以下步骤）</p>
+<p>添加defualt用户密码和新建一个tom用户，由于密码存储在文件，因此推荐使用sha256编码后放入文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>···
+<span class="c1"># 37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f</span>  
+
+<span class="nb">echo</span> -n <span class="s2">&#34;tom-password&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
+<span class="c1"># d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672</span>  
+</code></pre></td></tr></table>
+</div>
+</div><p>default用户密码为default，tom的密码为tom-password，添加至users.xml，在 users/default中删除password项，添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;password_sha256_hex&gt;</span>37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f<span class="nt">&lt;/password_sha256_hex&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在users/下添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tom&gt;</span>
+ <span class="nt">&lt;password_sha256_hex&gt;</span>d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672<span class="nt">&lt;/password_sha256_hex&gt;</span>
+  <span class="nt">&lt;profile&gt;</span>default<span class="nt">&lt;/profile&gt;</span>
+  <span class="nt">&lt;quota&gt;</span>default<span class="nt">&lt;/quota&gt;</span>
+  <span class="nt">&lt;networks</span> <span class="na">incl=</span><span class="s">&#34;networks&#34;</span> <span class="na">replace=</span><span class="s">&#34;replace&#34;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ip&gt;</span>::/0<span class="nt">&lt;/ip&gt;</span>
+  <span class="nt">&lt;/networks&gt;</span>
+<span class="nt">&lt;/tom&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>登陆数据库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1r1 -u default --password default --port <span class="m">9111</span>
+clickhouse-client --host s1r1 --user tom --password tom-password --port <span class="m">9111</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="测试在s1上执行操作">测试（在s1上执行操作）</h2>
+<p>执行<code>create_table.sh</code>来创建表，其内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">hosts</span><span class="o">=(</span><span class="s2">&#34;s1r1&#34;</span> <span class="s2">&#34;s3r2&#34;</span> <span class="s2">&#34;s2r1&#34;</span> <span class="s2">&#34;s1r2&#34;</span> <span class="s2">&#34;s3r1&#34;</span> <span class="s2">&#34;s2r2&#34;</span><span class="o">)</span>
+<span class="nv">ports</span><span class="o">=(</span><span class="s2">&#34;9111&#34;</span> <span class="s2">&#34;9132&#34;</span> <span class="s2">&#34;9121&#34;</span> <span class="s2">&#34;9112&#34;</span> <span class="s2">&#34;9131&#34;</span> <span class="s2">&#34;9122&#34;</span><span class="o">)</span>
+
+<span class="k">for</span> idx in <span class="o">{</span>0..5<span class="o">}</span>
+<span class="k">do</span>
+    <span class="nv">host</span><span class="o">=</span><span class="si">${</span><span class="nv">hosts</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
+    <span class="nv">port</span><span class="o">=</span><span class="si">${</span><span class="nv">ports</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
+    <span class="nb">echo</span> <span class="s2">&#34;Creating table on </span><span class="nv">$host</span><span class="s2">:</span><span class="nv">$port</span><span class="s2">&#34;</span>
+    clickhouse-client --user default --password default --host <span class="nv">$host</span> --port <span class="nv">$port</span> --query <span class="se">\
+</span><span class="se"></span>    <span class="s2">&#34;CREATE TABLE p (
+</span><span class="s2">        ozone Int8,
+</span><span class="s2">        particullate_matter Int8,
+</span><span class="s2">        carbon_monoxide Int8,
+</span><span class="s2">        sulfure_dioxide Int8,
+</span><span class="s2">        nitrogen_dioxide Int8,
+</span><span class="s2">        longitude Float64,
+</span><span class="s2">        latitude Float64,
+</span><span class="s2">        timestamp DateTime
+</span><span class="s2">    ) ENGINE = ReplicatedMergeTree(&#39;/clickhouse/tables/p/{shard}&#39;,&#39;{replica}&#39;)
+</span><span class="s2">    ORDER BY timestamp
+</span><span class="s2">    PRIMARY KEY timestamp&#34;</span>
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>执行<code>insert_data.sh</code>来创建分布表并插入数据，其内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+clickhouse-client --host s1r1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;CREATE TABLE p_all AS p ENGINE = Distributed(p_3shards_2replicas, default, p, rand())&#34;</span>
+clickhouse-client --host s1r1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;INSERT INTO p_all FORMAT CSV&#34;</span> &lt; data_p.csv
+</code></pre></td></tr></table>
+</div>
+</div><p>执行<code>query_table.sh</code>来查询各个分片和备份的数据量，其内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="nv">hosts</span><span class="o">=(</span><span class="s2">&#34;s1r1&#34;</span> <span class="s2">&#34;s3r2&#34;</span> <span class="s2">&#34;s2r1&#34;</span> <span class="s2">&#34;s1r2&#34;</span> <span class="s2">&#34;s3r1&#34;</span> <span class="s2">&#34;s2r2&#34;</span><span class="o">)</span>
+<span class="nv">ports</span><span class="o">=(</span><span class="s2">&#34;9111&#34;</span> <span class="s2">&#34;9132&#34;</span> <span class="s2">&#34;9121&#34;</span> <span class="s2">&#34;9112&#34;</span> <span class="s2">&#34;9131&#34;</span> <span class="s2">&#34;9122&#34;</span><span class="o">)</span>
+
+<span class="k">for</span> idx in <span class="o">{</span>0..5<span class="o">}</span>
+<span class="k">do</span>
+    <span class="nv">host</span><span class="o">=</span><span class="si">${</span><span class="nv">hosts</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
+    <span class="nv">port</span><span class="o">=</span><span class="si">${</span><span class="nv">ports</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
+    <span class="nb">echo</span> <span class="s2">&#34;Data size from </span><span class="nv">$host</span><span class="s2">:</span><span class="nv">$port</span><span class="s2">&#34;</span>
+    clickhouse-client --user default --password default --host <span class="nv">$host</span> --port <span class="nv">$port</span> --query <span class="se">\
+</span><span class="se"></span>    <span class="s2">&#34;select count(*) from p&#34;</span>
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div></div><div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/gitalk/gitalk.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/gitalk/gitalk.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"gitalk":{"admin":["ingbyr"],"clientID":"a2aa3ae53bcd24e70e07","clientSecret":"1d8e2237f2c076d322cdb89a2ab82aa3c98dbce3","id":"2020-09-04T14:08:14+08:00","owner":"ingbyr","repo":"ingbyr.github.io","title":"ClickHouse 多分片多备份进程模式"}},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -22,6 +22,49 @@ Baetyl v2.0.0安装指南
 
 ## Kubernets
 
+### Rancher
+
+> 参考[官方文档](https://docs.rancher.cn/docs/k3s/installation/_index)和[国内部署](https://docs.rancher.cn/docs/rancher2/best-practices/use-in-china/_index)
+
+```bash
+docker run -itd -p 9080:80 -p 9443:443 \
+--name rancher \
+--restart=unless-stopped \
+-e CATTLE_AGENT_IMAGE="registry.cn-hangzhou.aliyuncs.com/rancher/rancher-agent:v2.4.2" \
+registry.cn-hangzhou.aliyuncs.com/rancher/rancher:v2.4.2
+```
+
+
+
+###  k3s
+
+使用国内源安装
+
+```bash
+curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server --docker
+```
+
+配置config
+
+```bash
+cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+```
+
+添加本地存储支持：
+
+```bash
+wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+kubectl create -f local-path-storage.yaml
+```
+
+设置该存储为默认存储：
+
+```bash
+kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+```
+
+
+
 ### K8S
 
 ```bash
@@ -114,41 +157,6 @@ kubectl create -f local-path-storage.yaml
 ```bash
 kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
 ```
-
-
-
-###  k3s
-
-使用国内源安装
-
-```bash
-curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh | INSTALL_K3S_MIRROR=cn sh -s - server --docker
-```
-
-配置config
-
-```bash
-cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-```
-
-添加本地存储支持：
-
-```bash
-wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
-kubectl create -f local-path-storage.yaml
-```
-
-设置该存储为默认存储：
-
-```bash
-kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-```
-
-
-
-### Rancher
-
-参考[官方文档](https://docs.rancher.cn/docs/k3s/installation/_index)
 
 
 

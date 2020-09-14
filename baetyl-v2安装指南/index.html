@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Baetyl","wordcount":  644 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Baetyl","wordcount":  671 ,
         "url": "https:\/\/ingbyr.github.io\/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97\/","datePublished": "2020-08-31T17:29:12+08:00","dateModified": "2020-08-31T17:29:12+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Baetyl V2安装指南</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/"><i class="far fa-folder fa-fw"></i>边缘计算</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-31">2020-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 644 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-31">2020-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 671 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -122,9 +122,9 @@
     <li><a href="#docker">Docker</a></li>
     <li><a href="#kubernets">Kubernets</a>
       <ul>
-        <li><a href="#k8s">K8S</a></li>
-        <li><a href="#k3s">k3s</a></li>
         <li><a href="#rancher">Rancher</a></li>
+        <li><a href="#k3s">k3s</a></li>
+        <li><a href="#k8s">K8S</a></li>
       </ul>
     </li>
     <li><a href="#安装baetyl">安装Baetyl</a></li>
@@ -149,7 +149,66 @@
 </div>
 </div><p>重启Docker</p>
 <h2 id="kubernets">Kubernets</h2>
-<h3 id="k8s">K8S</h3>
+<h3 id="rancher">Rancher</h3>
+<blockquote>
+<p>参考<a href="https://docs.rancher.cn/docs/k3s/installation/_index" target="_blank" rel="noopener noreffer">官方文档</a>和<a href="https://docs.rancher.cn/docs/rancher2/best-practices/use-in-china/_index" target="_blank" rel="noopener noreffer">国内部署</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run -itd -p 9080:80 -p 9443:443 <span class="se">\
+</span><span class="se"></span>--name rancher <span class="se">\
+</span><span class="se"></span>--restart<span class="o">=</span>unless-stopped <span class="se">\
+</span><span class="se"></span>-e <span class="nv">CATTLE_AGENT_IMAGE</span><span class="o">=</span><span class="s2">&#34;registry.cn-hangzhou.aliyuncs.com/rancher/rancher-agent:v2.4.2&#34;</span> <span class="se">\
+</span><span class="se"></span>registry.cn-hangzhou.aliyuncs.com/rancher/rancher:v2.4.2
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="k3s">k3s</h3>
+<p>使用国内源安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn sh -s - server --docker
+</code></pre></td></tr></table>
+</div>
+</div><p>配置config</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+</code></pre></td></tr></table>
+</div>
+</div><p>添加本地存储支持：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+kubectl create -f local-path-storage.yaml
+</code></pre></td></tr></table>
+</div>
+</div><p>设置该存储为默认存储：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="k8s">K8S</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -308,48 +367,7 @@ kubectl create -f local-path-storage.yaml
 <pre class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="k3s">k3s</h3>
-<p>使用国内源安装</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn sh -s - server --docker
-</code></pre></td></tr></table>
-</div>
-</div><p>配置config</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
-</code></pre></td></tr></table>
-</div>
-</div><p>添加本地存储支持：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
-kubectl create -f local-path-storage.yaml
-</code></pre></td></tr></table>
-</div>
-</div><p>设置该存储为默认存储：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="rancher">Rancher</h3>
-<p>参考<a href="https://docs.rancher.cn/docs/k3s/installation/_index" target="_blank" rel="noopener noreffer">官方文档</a></p>
-<h2 id="安装baetyl">安装Baetyl</h2>
+</div><h2 id="安装baetyl">安装Baetyl</h2>
 <p>参考<a href="https://docs.baetyl.io/zh_CN/latest/develop/install.html" target="_blank" rel="noopener noreffer">官方文档</a></p>
 <p>在安装边缘节点时报错：</p>
 <div class="highlight"><div class="chroma">

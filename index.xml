@@ -3,14 +3,21 @@
         <title>ingbyr</title>
         <link>https://ingbyr.github.io/</link>
         <description>ingbyr博客</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 11 Sep 2020 13:34:38 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 10 Oct 2020 10:44:48 &#43;0800</lastBuildDate>
             <atom:link href="https://ingbyr.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Linux环境配置备忘录</title>
-    <link>https://ingbyr.github.io/setup-linux-dev-env/</link>
+    <title>Hbuildx本地打包iOS</title>
+    <link>https://ingbyr.github.io/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/</link>
+    <pubDate>Sat, 10 Oct 2020 10:44:48 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://ingbyr.github.io/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/</guid>
+    <description><![CDATA[<p>懒得手动打包</p>]]></description>
+</item><item>
+    <title>个人Linux开发环境配置</title>
+    <link>https://ingbyr.github.io/%E4%B8%AA%E4%BA%BAlinux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
     <pubDate>Fri, 11 Sep 2020 13:34:38 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://ingbyr.github.io/setup-linux-dev-env/</guid>
+    <guid>https://ingbyr.github.io/%E4%B8%AA%E4%BA%BAlinux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
     <description><![CDATA[<p>一些配置备忘录</p>]]></description>
 </item><item>
     <title>ClickHouse 多分片多备份进程模式</title>
@@ -68,12 +75,5 @@
     <author>作者</author>
     <guid>https://ingbyr.github.io/compress-video-by-ffmpeg/</guid>
     <description><![CDATA[样例 我们要达到的视频效果是这样的 确定压缩目标 bilibili不进行二压的参数要求如下： 视频码率最高1800kbps（H264/AVC编码） 音]]></description>
-</item><item>
-    <title>Linux Server使用IPV6 BT资源</title>
-    <link>https://ingbyr.github.io/remote-torrent-sys/</link>
-    <pubDate>Mon, 14 Aug 2017 15:19:18 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://ingbyr.github.io/remote-torrent-sys/</guid>
-    <description><![CDATA[啰嗦几句 权利的游戏终于又更新啦，然而目前网络没有IPV6所以怎么下载资源成了最大的问题，试了试公网上的bt，速度慢的令人发指，所以决定还是想]]></description>
 </item></channel>
 </rss>

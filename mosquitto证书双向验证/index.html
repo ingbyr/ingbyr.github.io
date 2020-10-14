@@ -435,15 +435,15 @@ mosquitto_pub -h localhost -p <span class="m">1883</span> -t /t -m <span class="
 </span><span class="c1"></span>	<span class="c1">// Alternatively, manually add CA certificates to
 </span><span class="c1"></span>	<span class="c1">// default openssl CA bundle.
 </span><span class="c1"></span>	<span class="nx">certPool</span> <span class="o">:=</span> <span class="nx">x509</span><span class="p">.</span><span class="nf">NewCertPool</span><span class="p">()</span>
-	<span class="nx">pemCerts</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;/Users/ingbyr/Projects/iot/certs/caCrt.pem&#34;</span><span class="p">)</span>
+	<span class="nx">pemCerts</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">ioutil</span><span class="p">.</span><span class="nf">ReadFile</span><span class="p">(</span><span class="s">&#34;certs/caCrt.pem&#34;</span><span class="p">)</span>
 	<span class="k">if</span> <span class="nx">err</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
 		<span class="nx">certPool</span><span class="p">.</span><span class="nf">AppendCertsFromPEM</span><span class="p">(</span><span class="nx">pemCerts</span><span class="p">)</span>
 	<span class="p">}</span>
 
 	<span class="c1">// Import client certificate/key pair
 </span><span class="c1"></span>	<span class="nx">cert</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">tls</span><span class="p">.</span><span class="nf">LoadX509KeyPair</span><span class="p">(</span>
-		<span class="s">&#34;/Users/ingbyr/Projects/iot/certs/fakeMqttCrt.pem&#34;</span><span class="p">,</span>
-		<span class="s">&#34;/Users/ingbyr/Projects/iot/certs/fakeMqttKeyNoPass.pem&#34;</span><span class="p">)</span>
+		<span class="s">&#34;certs/fakeMqttCrt.pem&#34;</span><span class="p">,</span>
+		<span class="s">&#34;certs/fakeMqttKeyNoPass.pem&#34;</span><span class="p">)</span>
 	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
 		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
 	<span class="p">}</span>

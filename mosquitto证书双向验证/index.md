@@ -143,15 +143,15 @@ func NewTLSConfig() *tls.Config {
 	// Alternatively, manually add CA certificates to
 	// default openssl CA bundle.
 	certPool := x509.NewCertPool()
-	pemCerts, err := ioutil.ReadFile("/Users/ingbyr/Projects/iot/certs/caCrt.pem")
+	pemCerts, err := ioutil.ReadFile("certs/caCrt.pem")
 	if err == nil {
 		certPool.AppendCertsFromPEM(pemCerts)
 	}
 
 	// Import client certificate/key pair
 	cert, err := tls.LoadX509KeyPair(
-		"/Users/ingbyr/Projects/iot/certs/fakeMqttCrt.pem",
-		"/Users/ingbyr/Projects/iot/certs/fakeMqttKeyNoPass.pem")
+		"certs/fakeMqttCrt.pem",
+		"certs/fakeMqttKeyNoPass.pem")
 	if err != nil {
 		panic(err)
 	}

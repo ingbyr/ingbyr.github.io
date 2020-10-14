@@ -3,7 +3,14 @@
         <title>所有文章 - ingbyr</title>
         <link>https://ingbyr.github.io/posts/</link>
         <description>所有文章 | ingbyr</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 10 Oct 2020 10:44:48 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Oct 2020 09:08:58 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Mosquitto证书双向验证</title>
+    <link>https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</link>
+    <pubDate>Wed, 14 Oct 2020 09:08:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</guid>
+    <description><![CDATA[<p>使用openssl生成自签名证书并配置Mosquitto双向验证</p>]]></description>
+</item><item>
     <title>Hbuildx本地打包iOS</title>
     <link>https://ingbyr.github.io/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/</link>
     <pubDate>Sat, 10 Oct 2020 10:44:48 &#43;0800</pubDate>
@@ -66,12 +73,5 @@
     <author>作者</author>
     <guid>https://ingbyr.github.io/mc-linux-server/</guid>
     <description><![CDATA[Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如]]></description>
-</item><item>
-    <title>使用ffmpeg压缩60FPS视频并上传至Bilibili</title>
-    <link>https://ingbyr.github.io/compress-video-by-ffmpeg/</link>
-    <pubDate>Tue, 19 Dec 2017 22:42:00 &#43;0000</pubDate>
-    <author>作者</author>
-    <guid>https://ingbyr.github.io/compress-video-by-ffmpeg/</guid>
-    <description><![CDATA[样例 我们要达到的视频效果是这样的 确定压缩目标 bilibili不进行二压的参数要求如下： 视频码率最高1800kbps（H264/AVC编码） 音]]></description>
 </item></channel>
 </rss>

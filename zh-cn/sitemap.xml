@@ -2,18 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://ingbyr.github.io/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/</loc><lastmod>2020-10-10T10:44:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ingbyr.github.io/</loc><lastmod>2020-10-10T10:44:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="https://ingbyr.github.io/en/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-cn"
-                    href="https://ingbyr.github.io/"
-                    /></url><url>
-            <loc>https://ingbyr.github.io/posts/</loc><lastmod>2020-10-10T10:44:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>https://ingbyr.github.io/categories/</loc><lastmod>2020-09-11T13:34:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority><xhtml:link
+            <loc>https://ingbyr.github.io/categories/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://ingbyr.github.io/en/categories/"
@@ -22,9 +11,21 @@
                     hreflang="zh-cn"
                     href="https://ingbyr.github.io/categories/"
                     /></url><url>
-            <loc>https://ingbyr.github.io/tags/linux/</loc><lastmod>2020-09-11T13:34:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://ingbyr.github.io/categories/linux/</loc><lastmod>2020-09-11T13:34:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
-            <loc>https://ingbyr.github.io/tags/</loc><lastmod>2020-09-11T13:34:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority><xhtml:link
+            <loc>https://ingbyr.github.io/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="https://ingbyr.github.io/en/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="https://ingbyr.github.io/"
+                    /></url><url>
+            <loc>https://ingbyr.github.io/tags/mosquitto/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ingbyr.github.io/tags/mqtt/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ingbyr.github.io/categories/mqtt/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ingbyr.github.io/posts/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ingbyr.github.io/tags/</loc><lastmod>2020-10-14T09:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="https://ingbyr.github.io/en/tags/"
@@ -33,6 +34,9 @@
                     hreflang="zh-cn"
                     href="https://ingbyr.github.io/tags/"
                     /></url><url>
+            <loc>https://ingbyr.github.io/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/</loc><lastmod>2020-10-10T10:44:48&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>https://ingbyr.github.io/tags/linux/</loc><lastmod>2020-09-11T13:34:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
+            <loc>https://ingbyr.github.io/categories/linux/</loc><lastmod>2020-09-11T13:34:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
             <loc>https://ingbyr.github.io/%E4%B8%AA%E4%BA%BAlinux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</loc><lastmod>2020-09-11T13:34:38&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
             <loc>https://ingbyr.github.io/tags/clickhouse/</loc><lastmod>2020-09-04T14:08:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
             <loc>https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/</loc><lastmod>2020-09-04T14:08:14&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>

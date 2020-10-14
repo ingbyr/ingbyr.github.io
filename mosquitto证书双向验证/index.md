@@ -57,6 +57,12 @@ openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 
 > TODO：证书吊销 CRL
 
+> Golang中的私钥读取无法传入密码选项，因此可以不添加密码或使用以下命令附加密码至pem文件：
+>
+> ```bash
+> openssl rsa -in fakeMqttKey.pem -out fakeMqttKeyNoPass.pem -passin pass:your_password
+> ```
+
 此时目录如下（测试时CA服务和客户端位于同一目录）：
 
 ```bash
@@ -66,6 +72,7 @@ openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 ├── caKey.pem
 ├── fakeMqttCrt.pem
 ├── fakeMqttKey.pem
+├── fakeMqttKeyNoPass.pem
 ├── hubCrt.pem
 └── hubKey.pem
 ```
@@ -76,14 +83,14 @@ openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 
 ### 启用双向验证
 
-原始配置文件注释比较多，因此我新建一份配置文件用于配置
+原始配置文件注释比较多，因此可以新建一份配置文件用于配置
 
 ```bash
 # 查看可配置的选项
 cat /usr/local/etc/mosquitto/mosquitto.conf
 ```
 
-新建 hub.conf 配置文件，其中3个file文件选项指向上文中创建的文件：
+新建 hub.conf 配置文件，其中3个file文件选项指向自己创建的密钥文件：
 
 ```bash
 port 1883
@@ -114,6 +121,99 @@ mosquitto_pub -h localhost -p 1883 -t /t -m "hello" \
 --cafile certs/caCrt.pem \
 --cert certs/fakeMqttCrt.pem \
 --key certs/fakeMqttKey.pem
+```
+
+使用go与hub交互
+
+```go
+package main
+
+import (
+	"crypto/tls"
+	"crypto/x509"
+	"fmt"
+	"io/ioutil"
+	"time"
+
+	mqtt "github.com/eclipse/paho.mqtt.golang"
+)
+
+func NewTLSConfig() *tls.Config {
+	// Import trusted certificates from CAfile.pem.
+	// Alternatively, manually add CA certificates to
+	// default openssl CA bundle.
+	certPool := x509.NewCertPool()
+	pemCerts, err := ioutil.ReadFile("/Users/ingbyr/Projects/iot/certs/caCrt.pem")
+	if err == nil {
+		certPool.AppendCertsFromPEM(pemCerts)
+	}
+
+	// Import client certificate/key pair
+	cert, err := tls.LoadX509KeyPair(
+		"/Users/ingbyr/Projects/iot/certs/fakeMqttCrt.pem",
+		"/Users/ingbyr/Projects/iot/certs/fakeMqttKeyNoPass.pem")
+	if err != nil {
+		panic(err)
+	}
+
+	// Just to print out the client certificate..
+	cert.Leaf, err = x509.ParseCertificate(cert.Certificate[0])
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(cert.Leaf)
+
+	// Create tls.Config with desired tls properties
+	return &tls.Config{
+		// RootCAs = certs used to verify server cert.
+		RootCAs: certPool,
+		// ClientAuth = whether to request cert from server.
+		// Since the server is set up for SSL, this happens
+		// anyways.
+		ClientAuth: tls.NoClientCert,
+		// ClientCAs = certs used to validate client cert.
+		ClientCAs: nil,
+		// InsecureSkipVerify = verify that cert contents
+		// match server. IP matches what is in cert etc.
+		InsecureSkipVerify: true,
+		// Certificates = list of certs client sends to server.
+		Certificates: []tls.Certificate{cert},
+	}
+}
+
+var f mqtt.MessageHandler = func(client mqtt.Client, msg mqtt.Message) {
+	fmt.Printf("TOPIC: %s\n", msg.Topic())
+	fmt.Printf("MSG: %s\n", msg.Payload())
+}
+
+func main() {
+	tlsconfig := NewTLSConfig()
+
+	opts := mqtt.NewClientOptions()
+	opts.AddBroker("ssl://localhost:1883")
+	opts.SetClientID("ssl-sample").SetTLSConfig(tlsconfig)
+	opts.SetDefaultPublishHandler(f)
+
+	// Start the connection
+	c := mqtt.NewClient(opts)
+	if token := c.Connect(); token.Wait() && token.Error() != nil {
+		panic(token.Error())
+	}
+
+	c.Subscribe("/go-mqtt/sample", 0, nil)
+
+	i := 0
+	for range time.Tick(time.Duration(1) * time.Second) {
+		if i == 5 {
+			break
+		}
+		text := fmt.Sprintf("this is msg #%d!", i)
+		c.Publish("/go-mqtt/sample", 0, false, text)
+		i++
+	}
+
+	c.Disconnect(250)
+}
 ```
 
 

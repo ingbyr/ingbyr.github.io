@@ -57,12 +57,6 @@ openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 
 > TODO：证书吊销 CRL
 
-> Golang中的私钥读取无法传入密码选项，因此可以不添加密码或使用以下命令附加密码至pem文件：
->
-> ```bash
-> openssl rsa -in fakeMqttKey.pem -out fakeMqttKeyNoPass.pem -passin pass:your_password
-> ```
-
 此时目录如下（测试时CA服务和客户端位于同一目录）：
 
 ```bash
@@ -123,7 +117,19 @@ mosquitto_pub -h localhost -p 1883 -t /t -m "hello" \
 --key certs/fakeMqttKey.pem
 ```
 
-使用go与hub交互
+
+
+
+
+### Go测试
+
+Golang中的私钥读取无法传入密码选项，因此可以不添加密码或使用以下命令附加密码至pem文件
+
+```bash
+openssl rsa -in fakeMqttKey.pem -out fakeMqttKeyNoPass.pem -passin pass:your_password
+```
+
+
 
 ```go
 package main

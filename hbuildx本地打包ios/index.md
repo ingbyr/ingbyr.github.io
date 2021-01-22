@@ -138,6 +138,101 @@ ingbyr@ingbyr-mbp ~/app> tree -L 1
   </plist>
   ```
 
-  
 
 
+
+## 企业分发
+
+若开发者账户类型为企业开发者,则可以通过`In House`模式打包可以直接在Safari中发布应用.`ExportOptions.plist`参考如下:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<false/>
+	<key>destination</key>
+	<string>export</string>
+	<key>manifest</key>
+	<dict>
+		<key>appURL</key>
+		<string>[Ipa文件Url]<string>
+		<key>displayImageURL</key>
+		<string>[57x57分辨率logo的Url]</string>
+		<key>fullSizeImageURL</key>
+		<string>[512x512分辨率logo的Url]</string>
+	</dict>
+	<key>method</key>
+	<string>enterprise</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>[Bundle ID]</key>
+		<string>[Name]</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Distribution</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>[Team ID]</string>
+	<key>thinning</key>
+	<string>&lt;none&gt;</string>
+</dict>
+</plist>
+```
+
+其中三个Url地址需要是Https开头,否则无法正常安装. 随后随便写一个发布页面挂在网站上即可,用户通过`Safari`访问后即可安装对应应用, Html页面参考:
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>CHEC Construction Site of Intelligentization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container" style="width: 50rem;">
+        <div class="row ">
+            <div class="col">
+                <p class="text-center fs-4 fw-bold">应用名称</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card mx-auto" style="width: 20rem;">
+                    <img src="./static/apple.svg" class="card-img-top mx-auto" style="width: 12rem;">
+                    <div class="card-body text-center">
+                        <p class="card-text mx-auto">Please open this page via safari.</p>
+                        <a href="itms-services://?action=download-manifest&url=[manifest.plist的Url]"
+                        class="btn btn-primary">Download iOS</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mx-auto" style="width: 20rem;">
+                    <img src="./static/android.svg" class="card-img-top mx-auto" style="width: 12rem;">
+                    <div class="card-body text-center">
+                        <p class="card-text">Please open this page via any browser.</p>
+                        <a href="[Android Apk 的 Url]" class="btn btn-primary">Download Android</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+```
+
+> 最重要的是 <a href="itms-services://?action=download-manifest&url=[manifest.plist的Url] 这一行

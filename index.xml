@@ -3,9 +3,16 @@
         <title>ingbyr</title>
         <link>https://ingbyr.github.io/</link>
         <description>ingbyr博客</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 14 Oct 2020 09:08:58 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 29 Jan 2021 15:58:29 &#43;0800</lastBuildDate>
             <atom:link href="https://ingbyr.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Go实现LRU与LFU</title>
+    <link>https://ingbyr.github.io/go%E5%AE%9E%E7%8E%B0lru%E4%B8%8Elfu/</link>
+    <pubDate>Fri, 29 Jan 2021 15:58:29 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://ingbyr.github.io/go%E5%AE%9E%E7%8E%B0lru%E4%B8%8Elfu/</guid>
+    <description><![CDATA[<p>记录下LRU和LFU的实现细节</p>]]></description>
+</item><item>
     <title>Mosquitto证书双向验证</title>
     <link>https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</link>
     <pubDate>Wed, 14 Oct 2020 09:08:58 &#43;0800</pubDate>
@@ -68,12 +75,5 @@
     <author>作者</author>
     <guid>https://ingbyr.github.io/youget-zh/</guid>
     <description><![CDATA[下载 需要提前安装JRE8 （已安装JRE8的跳过此步骤） 下载页面下载VDM.zip，解压缩后运行VDM.jar 简介 VDM是适配多个视频命令行下]]></description>
-</item><item>
-    <title>Minecraft服务器搭建</title>
-    <link>https://ingbyr.github.io/mc-linux-server/</link>
-    <pubDate>Fri, 03 Aug 2018 16:03:27 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://ingbyr.github.io/mc-linux-server/</guid>
-    <description><![CDATA[Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如]]></description>
 </item></channel>
 </rss>

@@ -5,6 +5,10 @@
 
 <!--more-->
 
+部署进程模式下的ClickHouse
+
+<!--more-->
+
 ## 服务器
 
 - s1r1（分片1副本1）、s3r2（分片3副本2） 位于 s1 服务器
@@ -12,12 +16,8 @@
 - s3r1（分片3副本1）、s2r2（分片2副本2） 位于 s3 服务器
 - zoo1（位于s1）、zoo2（位于s2）、zoo3 （位于s3）为 zookeeper集群
 
-本文中的IP如下：
 
-- s1 -> 10.88.76.227 
-- s2 ->10.88.76.228
-- s3 -> 10.88.76.229
-
+> 注意端口限制，有些可能需要手动设置防火墙放行端口
 
 
 ## 设置Host
@@ -25,118 +25,146 @@
 在 s1、s2、s3中的/etc/hosts 中添加以下内容（需替换为自己的IP）
 
 ```bash
-10.88.76.227 s1 
-10.88.76.228 s2 
-10.88.76.229 s3 
-
-10.88.76.227 s1r1 
-10.88.76.228 s1r2
-
-10.88.76.228 s2r1
-10.88.76.229 s2r2
-
-10.88.76.229 s3r1
-10.88.76.227 s3r2
-
-10.88.76.227 zoo1
-10.88.76.228 zoo2
-10.88.76.229 zoo3
+s1-ip s1
+s2-ip s2
+s3-ip s3
 ```
 
 
+## 配置Zookeeper
 
-## 部署Zookeeper
+### 下载
 
-> 此处示例为3.6.1版本
+[Zookeeper官网](https://zookeeper.apache.org/releases.html)
 
 ```bash
-wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.6.1/apache-zookeeper-3.6.1-bin.tar.gz
-tar -zxf apache-zookeeper-3.6.1-bin.tar.gz
-cd apache-zookeeper-3.6.1-bin
-cp conf/zoo_sample.cfg conf/zoo.cfg
-vim conf/zoo.cfg # 内容见下方
-bin/zkServer.sh start
+# 使用国内镜像源，下载前请确认当前版本在镜像中存在
+wget https://mirrors.bfsu.edu.cn/apache/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+tar -zxf apache-zookeeper-3.6.2-bin.tar.gz && mv apache-zookeeper-3.6.2-bin zookeeper
+cd zookeeper && cp conf/zoo_sample.cfg conf/zoo.cfg && vim conf/zoo.cfg
 ```
 
-conf/zoo.cfg 内容为：
+### 配置
+
+修改 `conf/zoo.cfg` 内容为：
 
 ```properties
+# The number of milliseconds of each tick
 tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
 initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
 syncLimit=5
-dataDir=/var/lib/zookeeper
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/data/zookeeper
+# the port at which the clients will connect
 clientPort=2181
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+
+## Metrics Providers
+#
+# https://prometheus.io Metrics Exporter
+#metricsProvider.className=org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider
+#metricsProvider.httpPort=7000
+#metricsProvider.exportJvmInfo=true
+
+## Cluster 如果是云服务器需要使用内网地址ip或在白名单中的hostname
 server.1=s1:2888:3888
 server.2=s2:2888:3888
 server.3=s3:2888:3888
 ```
 
-在s1、s2和s3服务器中分别执行命令验证安装结果：
+- 修改`conf/log4j.properties` `zookeeper.log.dir=/data/log/zookeeper`
+- 在`～/.bashrc`中添加 `export ZOO_LOG_DIR=/data/log/zookeeper`
+- 在`dataDir`对应目录下新建`myid`文件，分别在s1、s2、s3上填入 1 2 3
+
+### 启动
+
+```bash
+bin/zkServer.sh start
+```
+
+执行命令验证安装结果：
 
 ```bash
 bin/zkServer.sh status
 ```
 
 
-
 ## 安装ClickHouse
+
+[官方文档](https://clickhouse.tech/docs/zh/getting-started/install/)
 
 ```bash
 sudo apt-get install apt-transport-https ca-certificates dirmngr
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
+
 echo "deb https://repo.clickhouse.tech/deb/stable/ main/" | sudo tee \
     /etc/apt/sources.list.d/clickhouse.list
 sudo apt-get update
+
 sudo apt-get install -y clickhouse-server clickhouse-client
+
+sudo service clickhouse-server start
+clickhouse-client
 ```
 
-
+手动安装
+```bash
+wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-common-static_20.9.7.11_amd64.deb
+wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-client_20.9.7.11_all.deb
+wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-server_20.9.7.11_all.deb
+dpkg -i clickhouse-common-static_20.9.7.11_amd64.deb
+dpkg -i clickhouse-client_20.9.7.11_all.deb
+dpkg -i clickhouse-server_20.9.7.11_all.deb
+```
 
 ## ClickHouse工作目录
 
 ```bash
 # s1
-├── create_table.sh		#（测试用）创建表
 ├── data_p.csv				#（测试用）示例数据
-├── delete_table.sh		#（测试用）删除表
-├── insert_data.sh		#（测试用）导入示例数据
-├── query_table.sh		#（测试用）查询导入的数据量
 ├── s1r1
-│   ├── config.xml		# 配置文件
-│   ├── metrika.xml		# 分片配置文件
-│   └── var						# 数据库启动后的相关文件
-├── s1r1.log					# 日志
+│   ├── config.xml		# 配置文件
+│   ├── metrika.xml		# 分片配置文件
 ├── s3r2
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s3r2.log
+│   ├── config.xml
+│   ├── metrika.xml
 └── users.xml
 
 # s2
 ├── s1r2
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s1r2.log
+│   ├── config.xml
+│   ├── metrika.xml
 ├── s2r1
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s2r1.log
+│   ├── config.xml
+│   ├── metrika.xml
 └── users.xml
 
 # s3
 ├── s2r2
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s2r2.log
+│   ├── config.xml
+│   ├── metrika.xml
 ├── s3r1
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s3r1.log
+│   ├── config.xml
+│   ├── metrika.xml
 └── users.xml
 ```
 
@@ -150,35 +178,50 @@ sudo apt-get install -y clickhouse-server clickhouse-client
 - s2r2:9122
 
 
+配置中http访问端口（datagrip工具使用此端口通信）如下：
+
+- s1r1:9011
+- s3r2:9032
+- s2r1:9021
+- s1r2:9012
+- s3r1:9031
+- s2r2:9022
 
 ## 运行ClickHouse
 
+停止默认clickhouse
+```bash
+sudo service clickhouse stop
+```
+运行clickhouse
 ```bash
 # s1
-nohup clickhouse-server --config-file=/root/iot/chdb/s1r1/config.xml > s1r1.log 2>&1 &
-nohup clickhouse-server --config-file=/root/iot/chdb/s3r2/config.xml > s3r2.log 2>&1 & 
+nohup clickhouse-server --config-file=/data/ch/s1r1/config.xml > /data/log/ch/s1r1.log 2>&1 &
+nohup clickhouse-server --config-file=/data/ch/s3r2/config.xml > /data/log/ch/s3r2.log 2>&1 & 
 
 # s2
-nohup clickhouse-server --config-file=/root/iot/chdb/s1r2/config.xml > s1r2.log 2>&1 &
-nohup clickhouse-server --config-file=/root/iot/chdb/s2r1/config.xml > s2r1.log 2>&1 &
+nohup clickhouse-server --config-file=/data/ch/s1r2/config.xml > /data/log/ch/s1r2.log 2>&1 &
+nohup clickhouse-server --config-file=/data/ch/s2r1/config.xml > /data/log/ch/s2r1.log 2>&1 &
 
 # s3
-nohup clickhouse-server --config-file=/root/iot/chdb/s2r2/config.xml > s2r2.log 2>&1 &
-nohup clickhouse-server --config-file=/root/iot/chdb/s3r1/config.xml > s3r1.log 2>&1 &
+nohup clickhouse-server --config-file=/data/ch/s2r2/config.xml > /data/log/ch/s2r2.log 2>&1 &
+nohup clickhouse-server --config-file=/data/ch/s3r1/config.xml > /data/log/ch/s3r1.log 2>&1 &
 ```
 
-> 停止运行： ps -A | grep click | awk '{print $1}' | xargs kill 
+> 停止运行： ps -A | grep clickhouse | grep -v grep | awk '{print $1}' | xargs kill 
 
 
 
 ## 自定义用户名和密码
+
+** 在metrika.xml中需要设置密码，注意同步 **
 
 在users.xml中有详细的注释说明了如何添加用户、密码、用户权限等配置方法。（配置文件中已添加了以下内容，需要其他账户可参考以下步骤）
 
 添加defualt用户密码和新建一个tom用户，由于密码存储在文件，因此推荐使用sha256编码后放入文件：
 
 ```bash
-echo -n "default" | sha256sum | tr -d '-'···
+echo -n "default" | sha256sum | tr -d '-'
 # 37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f  
 
 echo -n "tom-password" | sha256sum | tr -d '-'
@@ -207,66 +250,193 @@ default用户密码为default，tom的密码为tom-password，添加至users.xml
 登陆数据库：
 
 ```bash
-clickhouse-client --host s1r1 -u default --password default --port 9111
-clickhouse-client --host s1r1 --user tom --password tom-password --port 9111
+clickhouse-client --host s1 -u default --password default --port 9111
+clickhouse-client --host s1 --user tom --password tom-password --port 9111
 ```
 
 
-
-## 测试（在s1上执行操作）
-
-执行`create_table.sh`来创建表，其内容如下：
-
-```bash
-#!/bin/bash
-
-hosts=("s1r1" "s3r2" "s2r1" "s1r2" "s3r1" "s2r2")
-ports=("9111" "9132" "9121" "9112" "9131" "9122")
-
-for idx in {0..5}
-do
-    host=${hosts[${idx}]}
-    port=${ports[${idx}]}
-    echo "Creating table on $host:$port"
-    clickhouse-client --user default --password default --host $host --port $port --query \
-    "CREATE TABLE p (
-        ozone Int8,
-        particullate_matter Int8,
-        carbon_monoxide Int8,
-        sulfure_dioxide Int8,
-        nitrogen_dioxide Int8,
-        longitude Float64,
-        latitude Float64,
-        timestamp DateTime
-    ) ENGINE = ReplicatedMergeTree('/clickhouse/tables/p/{shard}','{replica}')
-    ORDER BY timestamp
-    PRIMARY KEY timestamp"
-done
+## 测试
+登陆任意副本数据库，创建测试表
+```sql
+-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+CREATE TABLE p_local ON CLUSTER p_3shards_2replicas
+(
+    ozone Int64,
+    particullate_matter Int8,
+    carbon_monoxide Int8,
+    sulfure_dioxide Int8,
+    nitrogen_dioxide Int8,
+    longitude Float64,
+    latitude Float64,
+    timestamp DateTime
+) ENGINE = ReplicatedMergeTree('/clickhouse/default/tables/p/{shard}','{replica}')
+PARTITION BY toYYYYMM(timestamp)
+ORDER BY timestamp
+PRIMARY KEY timestamp
 ```
 
-执行`insert_data.sh`来创建分布表并插入数据，其内容如下：
-
-```bash
-#!/bin/bash
-
-clickhouse-client --host s1r1 -u default --password default --port 9111 --query "CREATE TABLE p_all AS p ENGINE = Distributed(p_3shards_2replicas, default, p, rand())"
-clickhouse-client --host s1r1 -u default --password default --port 9111 --query "INSERT INTO p_all FORMAT CSV" < data_p.csv
+为表`p_local`创建分布表`p`
+```sql
+-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+CREATE TABLE p ON CLUSTER p_3shards_2replicas AS p_local 
+ENGINE = Distributed(p_3shards_2replicas, default, p_local, rand())
 ```
 
-执行`query_table.sh`来查询各个分片和备份的数据量，其内容如下：
+退出数据库交互界面，在终端中执行语句导入数据
+```bash
+clickhouse-client --host s1 -u default --password default --port 9111 --query "INSERT INTO p FORMAT CSV" < data_p.csv
+```
+
+删除测试表
+```sql
+drop table p on cluster p_3shards_2replicas
+drop table p_local on cluster p_3shards_2replicas
+```
+
+## 配置kafka
+
+### 下载
+
+[Kafka官网](https://kafka.apache.org/downloads)
 
 ```bash
-#!/bin/bash
+# 使用国内镜像源，下载前请确认当前版本在镜像中存在
+wget https://mirrors.bfsu.edu.cn/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+tar -zxf kafka_2.13-2.6.0.tgz && mv kafka_2.13-2.6.0 kafka
+```
 
-hosts=("s1r1" "s3r2" "s2r1" "s1r2" "s3r1" "s2r2")
-ports=("9111" "9132" "9121" "9112" "9131" "9122")
+### 配置
 
-for idx in {0..5}
-do
-    host=${hosts[${idx}]}
-    port=${ports[${idx}]}
-    echo "Data size from $host:$port"
-    clickhouse-client --user default --password default --host $host --port $port --query \
-    "select count(*) from p"
-done
+修改配置
+
+```bash
+cd kafka && vim config/server.properties
+```
+
+通用配置
+
+```properties
+# A comma separated list of directories under which to store log files
+log.dirs=/data/log/kafka
+
+# root directory for all kafka znodes.
+zookeeper.connect=s1:2181,s2:2181,s3:2181
+```
+
+分节点配置
+
+- s1
+
+    ```properties
+    broker.id=1
+    listeners=PLAINTEXT://s1:9092
+    ```
+
+- s2
+
+  ```properties
+  broker.id=2
+  listeners=PLAINTEXT://s2:9092
+  ```
+
+- s3
+
+  ```properties
+  broker.id=3
+  listeners=PLAINTEXT://s3:9092
+  ```
+
+### 启动
+
+```bash
+./bin/kafka-server-start.sh -daemon ./config/server.properties
+```
+
+查看topic
+```bash
+bin/kafka-topics.sh --list --bootstrap-server s1:9092
+```
+
+
+## 添加kafka缓冲
+
+创建kafka主题
+```bash
+# ./bin/kafka-topics.sh --delete --bootstrap-server s1:9092 --topic topic-p
+./bin/kafka-topics.sh --create --bootstrap-server s1:9092 --replication-factor 2 --partitions 6 --topic topic-p
+```
+
+创建kafka消费表
+```sql
+-- DROP TABLE p_stream ON CLUSTER p_3shards_2replicas
+CREATE TABLE p_stream ON CLUSTER p_3shards_2replicas
+(
+    ozone Int64,
+    particullate_matter Int8,
+    carbon_monoxide Int8,
+    sulfure_dioxide Int8,
+    nitrogen_dioxide Int8,
+    longitude Float64,
+    latitude Float64,
+    timestamp DateTime
+) ENGINE = Kafka()
+SETTINGS
+    kafka_broker_list = 's1:9092',
+    kafka_topic_list = 'topic-p',
+    kafka_group_name = 'clickhouse',
+    kafka_format = 'JSONEachRow',
+    kafka_row_delimiter = '\n'
+```
+> 添加 kafka_skip_broken_messages = N 跳过非法消息
+
+创建本地表
+```sql
+-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+CREATE TABLE p_local ON CLUSTER p_3shards_2replicas
+(
+    ozone Int64,
+    particullate_matter Int8,
+    carbon_monoxide Int8,
+    sulfure_dioxide Int8,
+    nitrogen_dioxide Int8,
+    longitude Float64,
+    latitude Float64,
+    timestamp DateTime
+) ENGINE = ReplicatedMergeTree('/clickhouse/tables/p/{shard}','{replica}')
+PARTITION BY toYYYYMM(timestamp)
+ORDER BY timestamp
+PRIMARY KEY timestamp
+```
+
+创建分布表
+```sql
+-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+-- CREATE TABLE p ON CLUSTER p_3shards_2replicas AS p_local ENGINE = Distributed(p_3shards_2replicas, default, p_local, rand())
+CREATE TABLE p ON CLUSTER p_3shards_2replicas 
+(
+    ozone Int64,
+    particullate_matter Int8,
+    carbon_monoxide Int8,
+    sulfure_dioxide Int8,
+    nitrogen_dioxide Int8,
+    longitude Float64,
+    latitude Float64,
+    timestamp DateTime
+)
+ENGINE = Distributed(p_3shards_2replicas, default, p_local, rand())
+```
+
+创建物化视图
+```sql
+-- DROP TABLE p_consumer ON CLUSTER p_3shards_2replicas
+CREATE MATERIALIZED VIEW p_consumer ON CLUSTER p_3shards_2replicas TO p AS SELECT * FROM p_stream;
+```
+
+发送数据
+```bash
+./bin/kafka-console-producer.sh --broker-list s1:9092 --topic topic-p
+```
+
+```json
+{"ozone":1, "particullate_matter":69, "carbon_monoxide":57, "sulfure_dioxide":67, "nitrogen_dioxide":83, "longitude":10.189355309192706, "latitude":56.18210217593679, "timestamp":"2014-09-01 00:05:00"}
 ```

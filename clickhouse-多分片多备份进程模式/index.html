@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "ClickHouse, 时序数据库","wordcount":  1434 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "ClickHouse, 时序数据库","wordcount":  2032 ,
         "url": "https:\/\/ingbyr.github.io\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/","datePublished": "2020-09-04T14:08:14+08:00","dateModified": "2020-09-04T14:08:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">ClickHouse 多分片多备份进程模式</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>时序数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-04">2020-09-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1434 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-04">2020-09-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2032 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -121,15 +121,31 @@
   <ul>
     <li><a href="#服务器">服务器</a></li>
     <li><a href="#设置host">设置Host</a></li>
-    <li><a href="#部署zookeeper">部署Zookeeper</a></li>
+    <li><a href="#配置zookeeper">配置Zookeeper</a>
+      <ul>
+        <li><a href="#下载">下载</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#启动">启动</a></li>
+      </ul>
+    </li>
     <li><a href="#安装clickhouse">安装ClickHouse</a></li>
     <li><a href="#clickhouse工作目录">ClickHouse工作目录</a></li>
     <li><a href="#运行clickhouse">运行ClickHouse</a></li>
     <li><a href="#自定义用户名和密码">自定义用户名和密码</a></li>
-    <li><a href="#测试在s1上执行操作">测试（在s1上执行操作）</a></li>
+    <li><a href="#测试">测试</a></li>
+    <li><a href="#配置kafka">配置kafka</a>
+      <ul>
+        <li><a href="#下载-1">下载</a></li>
+        <li><a href="#配置-1">配置</a></li>
+        <li><a href="#启动-1">启动</a></li>
+      </ul>
+    </li>
+    <li><a href="#添加kafka缓冲">添加kafka缓冲</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>基于原生安装方式进行部署</p>
+<p>部署进程模式下的ClickHouse</p>
+<!--more-->
 <h2 id="服务器">服务器</h2>
 <ul>
 <li>s1r1（分片1副本1）、s3r2（分片3副本2） 位于 s1 服务器</li>
@@ -137,126 +153,42 @@
 <li>s3r1（分片3副本1）、s2r2（分片2副本2） 位于 s3 服务器</li>
 <li>zoo1（位于s1）、zoo2（位于s2）、zoo3 （位于s3）为 zookeeper集群</li>
 </ul>
-<p>本文中的IP如下：</p>
-<ul>
-<li>s1 -&gt; 10.88.76.227</li>
-<li>s2 -&gt;10.88.76.228</li>
-<li>s3 -&gt; 10.88.76.229</li>
-</ul>
+<blockquote>
+<p>注意端口限制，有些可能需要手动设置防火墙放行端口</p>
+</blockquote>
 <h2 id="设置host">设置Host</h2>
 <p>在 s1、s2、s3中的/etc/hosts 中添加以下内容（需替换为自己的IP）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">10.88.76.227 s1 
-10.88.76.228 s2 
-10.88.76.229 s3 
-
-10.88.76.227 s1r1 
-10.88.76.228 s1r2
-
-10.88.76.228 s2r1
-10.88.76.229 s2r2
-
-10.88.76.229 s3r1
-10.88.76.227 s3r2
-
-10.88.76.227 zoo1
-10.88.76.228 zoo2
-10.88.76.229 zoo3
+<pre class="chroma"><code class="language-bash" data-lang="bash">s1-ip s1
+s2-ip s2
+s3-ip s3
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="部署zookeeper">部署Zookeeper</h2>
-<blockquote>
-<p>此处示例为3.6.1版本</p>
-</blockquote>
+</div><h2 id="配置zookeeper">配置Zookeeper</h2>
+<h3 id="下载">下载</h3>
+<p><a href="https://zookeeper.apache.org/releases.html" target="_blank" rel="noopener noreffer">Zookeeper官网</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.6.1/apache-zookeeper-3.6.1-bin.tar.gz
-tar -zxf apache-zookeeper-3.6.1-bin.tar.gz
-<span class="nb">cd</span> apache-zookeeper-3.6.1-bin
-cp conf/zoo_sample.cfg conf/zoo.cfg
-vim conf/zoo.cfg <span class="c1"># 内容见下方</span>
-bin/zkServer.sh start
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
+wget https://mirrors.bfsu.edu.cn/apache/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+tar -zxf apache-zookeeper-3.6.2-bin.tar.gz <span class="o">&amp;&amp;</span> mv apache-zookeeper-3.6.2-bin zookeeper
+<span class="nb">cd</span> zookeeper <span class="o">&amp;&amp;</span> cp conf/zoo_sample.cfg conf/zoo.cfg <span class="o">&amp;&amp;</span> vim conf/zoo.cfg
 </code></pre></td></tr></table>
 </div>
-</div><p>conf/zoo.cfg 内容为：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">tickTime=2000
-initLimit=10
-syncLimit=5
-dataDir=/var/lib/zookeeper
-clientPort=2181
-server.1=s1:2888:3888
-server.2=s2:2888:3888
-server.3=s3:2888:3888
-</code></pre></td></tr></table>
-</div>
-</div><p>在s1、s2和s3服务器中分别执行命令验证安装结果：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh status
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="安装clickhouse">安装ClickHouse</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install apt-transport-https ca-certificates dirmngr
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
-<span class="nb">echo</span> <span class="s2">&#34;deb https://repo.clickhouse.tech/deb/stable/ main/&#34;</span> <span class="p">|</span> sudo tee <span class="se">\
-</span><span class="se"></span>    /etc/apt/sources.list.d/clickhouse.list
-sudo apt-get update
-sudo apt-get install -y clickhouse-server clickhouse-client
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="clickhouse工作目录">ClickHouse工作目录</h2>
+</div><h3 id="配置">配置</h3>
+<p>修改 <code>conf/zoo.cfg</code> 内容为：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -299,53 +231,180 @@ sudo apt-get install -y clickhouse-server clickhouse-client
 </span><span class="lnt">38
 </span><span class="lnt">39
 </span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/data/zookeeper
+# the port at which the clients will connect
+clientPort=2181
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to &#34;0&#34; to disable auto purge feature
+#autopurge.purgeInterval=1
+
+## Metrics Providers
+#
+# https://prometheus.io Metrics Exporter
+#metricsProvider.className=org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider
+#metricsProvider.httpPort=7000
+#metricsProvider.exportJvmInfo=true
+
+## Cluster 如果是云服务器需要使用内网地址ip或在白名单中的hostname
+server.1=s1:2888:3888
+server.2=s2:2888:3888
+server.3=s3:2888:3888
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改<code>conf/log4j.properties</code> <code>zookeeper.log.dir=/data/log/zookeeper</code></li>
+<li>在<code>～/.bashrc</code>中添加 <code>export ZOO_LOG_DIR=/data/log/zookeeper</code></li>
+<li>在<code>dataDir</code>对应目录下新建<code>myid</code>文件，分别在s1、s2、s3上填入 1 2 3</li>
+</ul>
+<h3 id="启动">启动</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh start
+</code></pre></td></tr></table>
+</div>
+</div><p>执行命令验证安装结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh status
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="安装clickhouse">安装ClickHouse</h2>
+<p><a href="https://clickhouse.tech/docs/zh/getting-started/install/" target="_blank" rel="noopener noreffer">官方文档</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install apt-transport-https ca-certificates dirmngr
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
+
+<span class="nb">echo</span> <span class="s2">&#34;deb https://repo.clickhouse.tech/deb/stable/ main/&#34;</span> <span class="p">|</span> sudo tee <span class="se">\
+</span><span class="se"></span>    /etc/apt/sources.list.d/clickhouse.list
+sudo apt-get update
+
+sudo apt-get install -y clickhouse-server clickhouse-client
+
+sudo service clickhouse-server start
+clickhouse-client
+</code></pre></td></tr></table>
+</div>
+</div><p>手动安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-common-static_20.9.7.11_amd64.deb
+wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-client_20.9.7.11_all.deb
+wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-server_20.9.7.11_all.deb
+dpkg -i clickhouse-common-static_20.9.7.11_amd64.deb
+dpkg -i clickhouse-client_20.9.7.11_all.deb
+dpkg -i clickhouse-server_20.9.7.11_all.deb
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="clickhouse工作目录">ClickHouse工作目录</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
-├── create_table.sh		<span class="c1">#（测试用）创建表</span>
 ├── data_p.csv				<span class="c1">#（测试用）示例数据</span>
-├── delete_table.sh		<span class="c1">#（测试用）删除表</span>
-├── insert_data.sh		<span class="c1">#（测试用）导入示例数据</span>
-├── query_table.sh		<span class="c1">#（测试用）查询导入的数据量</span>
 ├── s1r1
-│   ├── config.xml		<span class="c1"># 配置文件</span>
-│   ├── metrika.xml		<span class="c1"># 分片配置文件</span>
-│   └── var						<span class="c1"># 数据库启动后的相关文件</span>
-├── s1r1.log					<span class="c1"># 日志</span>
+│   ├── config.xml		<span class="c1"># 配置文件</span>
+│   ├── metrika.xml		<span class="c1"># 分片配置文件</span>
 ├── s3r2
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s3r2.log
+│   ├── config.xml
+│   ├── metrika.xml
 └── users.xml
 
 <span class="c1"># s2</span>
 ├── s1r2
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s1r2.log
+│   ├── config.xml
+│   ├── metrika.xml
 ├── s2r1
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s2r1.log
+│   ├── config.xml
+│   ├── metrika.xml
 └── users.xml
 
 <span class="c1"># s3</span>
 ├── s2r2
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s2r2.log
+│   ├── config.xml
+│   ├── metrika.xml
 ├── s3r1
-│   ├── config.xml
-│   ├── metrika.xml
-│   └── var
-├── s3r1.log
+│   ├── config.xml
+│   ├── metrika.xml
 └── users.xml
 </code></pre></td></tr></table>
 </div>
@@ -358,7 +417,26 @@ sudo apt-get install -y clickhouse-server clickhouse-client
 <li>s3r1:9131</li>
 <li>s2r2:9122</li>
 </ul>
+<p>配置中http访问端口（datagrip工具使用此端口通信）如下：</p>
+<ul>
+<li>s1r1:9011</li>
+<li>s3r2:9032</li>
+<li>s2r1:9021</li>
+<li>s1r2:9012</li>
+<li>s3r1:9031</li>
+<li>s2r2:9022</li>
+</ul>
 <h2 id="运行clickhouse">运行ClickHouse</h2>
+<p>停止默认clickhouse</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo service clickhouse stop
+</code></pre></td></tr></table>
+</div>
+</div><p>运行clickhouse</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -375,22 +453,23 @@ sudo apt-get install -y clickhouse-server clickhouse-client
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
-nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s1r1/config.xml &gt; s1r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s3r2/config.xml &gt; s3r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> 
+nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s1r1/config.xml &gt; /data/log/ch/s1r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r2/config.xml &gt; /data/log/ch/s3r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> 
 
 <span class="c1"># s2</span>
-nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s1r2/config.xml &gt; s1r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s2r1/config.xml &gt; s2r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s1r2/config.xml &gt; /data/log/ch/s1r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s2r1/config.xml &gt; /data/log/ch/s2r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
 
 <span class="c1"># s3</span>
-nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s2r2/config.xml &gt; s2r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
-nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s3r1/config.xml &gt; s3r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s2r2/config.xml &gt; /data/log/ch/s2r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r1/config.xml &gt; /data/log/ch/s3r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>停止运行： ps -A | grep click | awk &lsquo;{print $1}&rsquo; | xargs kill</p>
+<p>停止运行： ps -A | grep clickhouse | grep -v grep | awk &lsquo;{print $1}&rsquo; | xargs kill</p>
 </blockquote>
 <h2 id="自定义用户名和密码">自定义用户名和密码</h2>
+<p>** 在metrika.xml中需要设置密码，注意同步 **</p>
 <p>在users.xml中有详细的注释说明了如何添加用户、密码、用户权限等配置方法。（配置文件中已添加了以下内容，需要其他账户可参考以下步骤）</p>
 <p>添加defualt用户密码和新建一个tom用户，由于密码存储在文件，因此推荐使用sha256编码后放入文件：</p>
 <div class="highlight"><div class="chroma">
@@ -402,7 +481,7 @@ nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s3r1
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>···
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
 <span class="c1"># 37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f</span>  
 
 <span class="nb">echo</span> -n <span class="s2">&#34;tom-password&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
@@ -448,12 +527,196 @@ nohup clickhouse-server --config-file<span class="o">=</span>/root/iot/chdb/s3r1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1r1 -u default --password default --port <span class="m">9111</span>
-clickhouse-client --host s1r1 --user tom --password tom-password --port <span class="m">9111</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span>
+clickhouse-client --host s1 --user tom --password tom-password --port <span class="m">9111</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="测试在s1上执行操作">测试（在s1上执行操作）</h2>
-<p>执行<code>create_table.sh</code>来创建表，其内容如下：</p>
+</div><h2 id="测试">测试</h2>
+<p>登陆任意副本数据库，创建测试表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p_local</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span>
+<span class="p">(</span>
+    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
+    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="k">timestamp</span> <span class="n">DateTime</span>
+<span class="p">)</span> <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/default/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span>
+<span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">timestamp</span>
+<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">timestamp</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为表<code>p_local</code>创建分布表<code>p</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span> <span class="k">AS</span> <span class="n">p_local</span> 
+<span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span> <span class="k">default</span><span class="p">,</span> <span class="n">p_local</span><span class="p">,</span> <span class="n">rand</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>退出数据库交互界面，在终端中执行语句导入数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;INSERT INTO p FORMAT CSV&#34;</span> &lt; data_p.csv
+</code></pre></td></tr></table>
+</div>
+</div><p>删除测试表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">drop</span> <span class="k">table</span> <span class="n">p</span> <span class="k">on</span> <span class="k">cluster</span> <span class="n">p_3shards_2replicas</span>
+<span class="k">drop</span> <span class="k">table</span> <span class="n">p_local</span> <span class="k">on</span> <span class="k">cluster</span> <span class="n">p_3shards_2replicas</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="配置kafka">配置kafka</h2>
+<h3 id="下载-1">下载</h3>
+<p><a href="https://kafka.apache.org/downloads" target="_blank" rel="noopener noreffer">Kafka官网</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
+wget https://mirrors.bfsu.edu.cn/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+tar -zxf kafka_2.13-2.6.0.tgz <span class="o">&amp;&amp;</span> mv kafka_2.13-2.6.0 kafka
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="配置-1">配置</h3>
+<p>修改配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> kafka <span class="o">&amp;&amp;</span> vim config/server.properties
+</code></pre></td></tr></table>
+</div>
+</div><p>通用配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># A comma separated list of directories under which to store log files
+log.dirs=/data/log/kafka
+
+# root directory for all kafka znodes.
+zookeeper.connect=s1:2181,s2:2181,s3:2181
+</code></pre></td></tr></table>
+</div>
+</div><p>分节点配置</p>
+<ul>
+<li>
+<p>s1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=1
+listeners=PLAINTEXT://s1:9092
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>s2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=2
+listeners=PLAINTEXT://s2:9092
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>s3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=3
+listeners=PLAINTEXT://s3:9092
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="启动-1">启动</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-server-start.sh -daemon ./config/server.properties
+</code></pre></td></tr></table>
+</div>
+</div><p>查看topic</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">bin/kafka-topics.sh --list --bootstrap-server s1:9092
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="添加kafka缓冲">添加kafka缓冲</h2>
+<p>创建kafka主题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ./bin/kafka-topics.sh --delete --bootstrap-server s1:9092 --topic topic-p</span>
+./bin/kafka-topics.sh --create --bootstrap-server s1:9092 --replication-factor <span class="m">2</span> --partitions <span class="m">6</span> --topic topic-p
+</code></pre></td></tr></table>
+</div>
+</div><p>创建kafka消费表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -474,56 +737,32 @@ clickhouse-client --host s1r1 --user tom --password tom-password --port <span cl
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="nv">hosts</span><span class="o">=(</span><span class="s2">&#34;s1r1&#34;</span> <span class="s2">&#34;s3r2&#34;</span> <span class="s2">&#34;s2r1&#34;</span> <span class="s2">&#34;s1r2&#34;</span> <span class="s2">&#34;s3r1&#34;</span> <span class="s2">&#34;s2r2&#34;</span><span class="o">)</span>
-<span class="nv">ports</span><span class="o">=(</span><span class="s2">&#34;9111&#34;</span> <span class="s2">&#34;9132&#34;</span> <span class="s2">&#34;9121&#34;</span> <span class="s2">&#34;9112&#34;</span> <span class="s2">&#34;9131&#34;</span> <span class="s2">&#34;9122&#34;</span><span class="o">)</span>
-
-<span class="k">for</span> idx in <span class="o">{</span>0..5<span class="o">}</span>
-<span class="k">do</span>
-    <span class="nv">host</span><span class="o">=</span><span class="si">${</span><span class="nv">hosts</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
-    <span class="nv">port</span><span class="o">=</span><span class="si">${</span><span class="nv">ports</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
-    <span class="nb">echo</span> <span class="s2">&#34;Creating table on </span><span class="nv">$host</span><span class="s2">:</span><span class="nv">$port</span><span class="s2">&#34;</span>
-    clickhouse-client --user default --password default --host <span class="nv">$host</span> --port <span class="nv">$port</span> --query <span class="se">\
-</span><span class="se"></span>    <span class="s2">&#34;CREATE TABLE p (
-</span><span class="s2">        ozone Int8,
-</span><span class="s2">        particullate_matter Int8,
-</span><span class="s2">        carbon_monoxide Int8,
-</span><span class="s2">        sulfure_dioxide Int8,
-</span><span class="s2">        nitrogen_dioxide Int8,
-</span><span class="s2">        longitude Float64,
-</span><span class="s2">        latitude Float64,
-</span><span class="s2">        timestamp DateTime
-</span><span class="s2">    ) ENGINE = ReplicatedMergeTree(&#39;/clickhouse/tables/p/{shard}&#39;,&#39;{replica}&#39;)
-</span><span class="s2">    ORDER BY timestamp
-</span><span class="s2">    PRIMARY KEY timestamp&#34;</span>
-<span class="k">done</span>
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_stream ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p_stream</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span>
+<span class="p">(</span>
+    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
+    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="k">timestamp</span> <span class="n">DateTime</span>
+<span class="p">)</span> <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Kafka</span><span class="p">()</span>
+<span class="n">SETTINGS</span>
+    <span class="n">kafka_broker_list</span> <span class="o">=</span> <span class="s1">&#39;s1:9092&#39;</span><span class="p">,</span>
+    <span class="n">kafka_topic_list</span> <span class="o">=</span> <span class="s1">&#39;topic-p&#39;</span><span class="p">,</span>
+    <span class="n">kafka_group_name</span> <span class="o">=</span> <span class="s1">&#39;clickhouse&#39;</span><span class="p">,</span>
+    <span class="n">kafka_format</span> <span class="o">=</span> <span class="s1">&#39;JSONEachRow&#39;</span><span class="p">,</span>
+    <span class="n">kafka_row_delimiter</span> <span class="o">=</span> <span class="s1">&#39;\n&#39;</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>执行<code>insert_data.sh</code>来创建分布表并插入数据，其内容如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-clickhouse-client --host s1r1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;CREATE TABLE p_all AS p ENGINE = Distributed(p_3shards_2replicas, default, p, rand())&#34;</span>
-clickhouse-client --host s1r1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;INSERT INTO p_all FORMAT CSV&#34;</span> &lt; data_p.csv
-</code></pre></td></tr></table>
-</div>
-</div><p>执行<code>query_table.sh</code>来查询各个分片和备份的数据量，其内容如下：</p>
+</div><blockquote>
+<p>添加 kafka_skip_broken_messages = N 跳过非法消息</p>
+</blockquote>
+<p>创建本地表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -539,21 +778,88 @@ clickhouse-client --host s1r1 -u default --password default --port <span class="
 </span><span class="lnt">11
 </span><span class="lnt">12
 </span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="nv">hosts</span><span class="o">=(</span><span class="s2">&#34;s1r1&#34;</span> <span class="s2">&#34;s3r2&#34;</span> <span class="s2">&#34;s2r1&#34;</span> <span class="s2">&#34;s1r2&#34;</span> <span class="s2">&#34;s3r1&#34;</span> <span class="s2">&#34;s2r2&#34;</span><span class="o">)</span>
-<span class="nv">ports</span><span class="o">=(</span><span class="s2">&#34;9111&#34;</span> <span class="s2">&#34;9132&#34;</span> <span class="s2">&#34;9121&#34;</span> <span class="s2">&#34;9112&#34;</span> <span class="s2">&#34;9131&#34;</span> <span class="s2">&#34;9122&#34;</span><span class="o">)</span>
-
-<span class="k">for</span> idx in <span class="o">{</span>0..5<span class="o">}</span>
-<span class="k">do</span>
-    <span class="nv">host</span><span class="o">=</span><span class="si">${</span><span class="nv">hosts</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
-    <span class="nv">port</span><span class="o">=</span><span class="si">${</span><span class="nv">ports</span><span class="p">[</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="p">]</span><span class="si">}</span>
-    <span class="nb">echo</span> <span class="s2">&#34;Data size from </span><span class="nv">$host</span><span class="s2">:</span><span class="nv">$port</span><span class="s2">&#34;</span>
-    clickhouse-client --user default --password default --host <span class="nv">$host</span> --port <span class="nv">$port</span> --query <span class="se">\
-</span><span class="se"></span>    <span class="s2">&#34;select count(*) from p&#34;</span>
-<span class="k">done</span>
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p_local</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span>
+<span class="p">(</span>
+    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
+    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="k">timestamp</span> <span class="n">DateTime</span>
+<span class="p">)</span> <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span>
+<span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span>
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">timestamp</span>
+<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">timestamp</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建分布表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+</span><span class="c1">-- CREATE TABLE p ON CLUSTER p_3shards_2replicas AS p_local ENGINE = Distributed(p_3shards_2replicas, default, p_local, rand())
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span> 
+<span class="p">(</span>
+    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
+    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
+    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
+    <span class="k">timestamp</span> <span class="n">DateTime</span>
+<span class="p">)</span>
+<span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span> <span class="k">default</span><span class="p">,</span> <span class="n">p_local</span><span class="p">,</span> <span class="n">rand</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>创建物化视图</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_consumer ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="n">MATERIALIZED</span> <span class="k">VIEW</span> <span class="n">p_consumer</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span> <span class="k">TO</span> <span class="n">p</span> <span class="k">AS</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">p_stream</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>发送数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-console-producer.sh --broker-list s1:9092 --topic topic-p
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;ozone&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="nt">&#34;particullate_matter&#34;</span><span class="p">:</span><span class="mi">69</span><span class="p">,</span> <span class="nt">&#34;carbon_monoxide&#34;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span> <span class="nt">&#34;sulfure_dioxide&#34;</span><span class="p">:</span><span class="mi">67</span><span class="p">,</span> <span class="nt">&#34;nitrogen_dioxide&#34;</span><span class="p">:</span><span class="mi">83</span><span class="p">,</span> <span class="nt">&#34;longitude&#34;</span><span class="p">:</span><span class="mf">10.189355309192706</span><span class="p">,</span> <span class="nt">&#34;latitude&#34;</span><span class="p">:</span><span class="mf">56.18210217593679</span><span class="p">,</span> <span class="nt">&#34;timestamp&#34;</span><span class="p">:</span><span class="s2">&#34;2014-09-01 00:05:00&#34;</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">

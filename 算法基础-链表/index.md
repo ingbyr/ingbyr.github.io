@@ -255,3 +255,88 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 ```
 
 
+
+## 分隔链表
+
+> [分隔链表](https://leetcode-cn.com/problems/partition-list/description/) 给你一个链表的头节点 `head` 和一个特定值 `x` ，请你对链表进行分隔，使得所有 **小于** `x` 的节点都出现在 **大于或等于** `x` 的节点之前。
+>
+> 你应当 **保留** 两个分区中每个节点的初始相对位置。
+
+```go
+func partition(head *ListNode, x int) *ListNode {
+	if head == nil {
+		return nil
+	}
+	smallHead := &ListNode{0, nil} // 保存小于x的节点
+	small := smallHead
+	largeHead := &ListNode{0, nil}	// 保存大于等于x的节点
+	large := largeHead
+	for node := head; node != nil; node = node.Next {
+		if node.Val < x {
+			small.Next = node
+			small = small.Next
+		} else {
+			large.Next = node
+			large = large.Next
+		}
+	}
+	small.Next = largeHead.Next // 合并节点
+	large.Next = nil	// 断开后续节点
+	return smallHead.Next
+}
+```
+
+
+
+## [排序链表](https://leetcode-cn.com/problems/sort-list/description/)
+
+>[排序链表](https://leetcode-cn.com/problems/sort-list/description/) `O(n log n)` 时间复杂度和常数级空间复杂度下对链表进行排序。
+
+```go
+// 基于分治思想，使用归并排序
+func sortList(head *ListNode) *ListNode {
+	return sort(head, nil)
+}
+
+// 对区间 [left, right) 排序
+func sort(left, right *ListNode) *ListNode {
+	if left == nil {
+		return nil
+	}
+	if left.Next == right { // 只有一个left节点
+		left.Next = nil // 断开连接以便合并多截链表
+		return left
+	}
+	// 快慢指针寻找中间节点
+	slow, fast := left, left
+	for fast != right && fast.Next != right { // 右侧结尾是right节点
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	mid := slow
+	return merge(sort(left, mid), sort(mid, right))
+}
+
+func merge(head1, head2 *ListNode) *ListNode {
+	dummyHead := &ListNode{0, nil}
+	cur, cur1, cur2 := dummyHead, head1, head2
+	for cur1 != nil && cur2 != nil {
+		if cur1.Val < cur2.Val {
+			cur.Next = cur1
+			cur1 = cur1.Next
+		} else {
+			cur.Next = cur2
+			cur2 = cur2.Next
+		}
+		cur = cur.Next
+	}
+	if cur1 != nil {
+		cur.Next = cur1
+	} else if cur2 != nil {
+		cur.Next = cur2
+	}
+	return dummyHead.Next
+}
+```
+
+

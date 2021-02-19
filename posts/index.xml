@@ -3,13 +3,20 @@
         <title>所有文章 - ingbyr</title>
         <link>https://ingbyr.github.io/posts/</link>
         <description>所有文章 | ingbyr</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 29 Jan 2021 15:58:29 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Go实现LRU与LFU</title>
-    <link>https://ingbyr.github.io/go%E5%AE%9E%E7%8E%B0lru%E4%B8%8Elfu/</link>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 19 Feb 2021 14:22:03 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>算法基础-链表</title>
+    <link>https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8/</link>
+    <pubDate>Fri, 19 Feb 2021 14:22:03 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8/</guid>
+    <description><![CDATA[<p>链表基础算法题目</p>]]></description>
+</item><item>
+    <title>算法设计-LRU与LFU</title>
+    <link>https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1-lru%E4%B8%8Elfu/</link>
     <pubDate>Fri, 29 Jan 2021 15:58:29 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://ingbyr.github.io/go%E5%AE%9E%E7%8E%B0lru%E4%B8%8Elfu/</guid>
-    <description><![CDATA[<p>记录下LRU和LFU的实现细节</p>]]></description>
+    <guid>https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1-lru%E4%B8%8Elfu/</guid>
+    <description><![CDATA[<p>go实现LRU和LFU</p>]]></description>
 </item><item>
     <title>Mosquitto证书双向验证</title>
     <link>https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</link>
@@ -24,13 +31,6 @@
     <author>作者</author>
     <guid>https://ingbyr.github.io/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/</guid>
     <description><![CDATA[<p>务必先阅读 <a href="https://nativesupport.dcloud.net.cn/AppDocs/usesdk/ios" target="_blank" rel="noopener noreffer">Hbuildx官方文档</a></p>]]></description>
-</item><item>
-    <title>个人Linux开发环境配置</title>
-    <link>https://ingbyr.github.io/%E4%B8%AA%E4%BA%BAlinux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
-    <pubDate>Fri, 11 Sep 2020 13:34:38 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://ingbyr.github.io/%E4%B8%AA%E4%BA%BAlinux%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
-    <description><![CDATA[<p>一些配置备忘录</p>]]></description>
 </item><item>
     <title>ClickHouse 多分片多备份进程模式</title>
     <link>https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/</link>
@@ -67,11 +67,11 @@
     <guid>https://ingbyr.github.io/javafx%E7%B3%BB%E5%88%97-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
     <description><![CDATA[<p>本文主要介绍JavaFX环境的搭建和如何部署JavaFX应用</p>]]></description>
 </item><item>
-    <title>VDM中文说明</title>
-    <link>https://ingbyr.github.io/youget-zh/</link>
-    <pubDate>Fri, 31 Aug 2018 10:55:22 &#43;0800</pubDate>
+    <title>Minecraft服务器搭建</title>
+    <link>https://ingbyr.github.io/mc-linux-server/</link>
+    <pubDate>Fri, 03 Aug 2018 16:03:27 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://ingbyr.github.io/youget-zh/</guid>
-    <description><![CDATA[下载 需要提前安装JRE8 （已安装JRE8的跳过此步骤） 下载页面下载VDM.zip，解压缩后运行VDM.jar 简介 VDM是适配多个视频命令行下]]></description>
+    <guid>https://ingbyr.github.io/mc-linux-server/</guid>
+    <description><![CDATA[Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如]]></description>
 </item></channel>
 </rss>

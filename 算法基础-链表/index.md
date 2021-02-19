@@ -163,4 +163,95 @@ func reverseN(head *ListNode, n int) *ListNode {
 }
 ```
 
+迭代
+
+```go
+func reverseBetween(head *ListNode, m int, n int) *ListNode {
+	if head == nil {
+		return nil
+	}
+	dummyHead := &ListNode{0, head} // 头节点可能被反转
+	// 反转区间表示为[l, r]，pre为区间外左侧第一个节点，next为右侧第一个节点
+	// head 移动到 l
+	head = dummyHead
+	var pre *ListNode // 区间左侧第一个节点
+	l := 0
+	for l < m {
+		pre = head
+		head = head.Next
+		l++
+	}
+	lNode := head // 位于 l 的节点
+	var rNode *ListNode // 位于 r 的节点 （下面for循环结束后）
+	r := l
+	for r <= n {
+		next := head.Next
+		head.Next = inPre
+		rNode = head // 循环中代表head的前一个节点
+		head = next
+		r++
+	} // 结束时 head=next 位于r+1
+	lNode.Next = next
+	pre.Next = inPre
+	return dummyHead.Next
+}
+```
+
+
+
+## 合并两个有序链表
+
+> [合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/description/) 将两个升序链表合并为一个新的 **升序** 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
+
+递归
+
+```go
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+	var head *ListNode
+	if l1.Val < l2.Val {
+		head = l1
+		head.Next = mergeTwoLists(l1.Next, l2)
+	} else {
+		head = l2
+		head.Next = mergeTwoLists(l1, l2.Next)
+	}
+	return head
+}
+```
+
+迭代
+
+```go
+func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	dummyHead := &ListNode{0, nil}
+	curr := dummyHead
+	for l1 != nil && l2 != nil {
+		if l1.Val < l2.Val {
+			curr.Next = l1
+			l1 = l1.Next
+		} else {
+			curr.Next = l2
+			l2 = l2.Next
+		}
+		curr = curr.Next
+	}
+	if l1 == nil && l2 == nil {
+		return dummyHead.Next
+	}
+	if l1 == nil {
+		curr.Next = l2
+	}
+	if l2 == nil {
+		curr.Next = l1
+	}
+	return dummyHead.Next
+}
+```
+
 

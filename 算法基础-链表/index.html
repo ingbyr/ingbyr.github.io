@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法基础","wordcount":  536 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法基础","wordcount":  897 ,
         "url": "https:\/\/ingbyr.github.io\/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8\/","datePublished": "2021-02-19T14:22:03+08:00","dateModified": "2021-02-19T14:22:03+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">算法基础-链表</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-19">2021-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 536 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-19">2021-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 897 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -119,14 +119,16 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#删除排序链表中的重复元素httpsleetcode-cncomproblemsremove-duplicates-from-sorted-listdescription"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/">删除排序链表中的重复元素</a></a></li>
-    <li><a href="#删除排序链表中的重复元素-iihttpsleetcode-cncomproblemsremove-duplicates-from-sorted-list-iidescription"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/description/">删除排序链表中的重复元素 II</a></a></li>
+    <li><a href="#删除排序链表中的重复元素">删除排序链表中的重复元素</a></li>
+    <li><a href="#删除排序链表中的重复元素-ii">删除排序链表中的重复元素 II</a></li>
+    <li><a href="#反转链表">反转链表</a></li>
+    <li><a href="#反转链表-ii">反转链表 II</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>链表基础算法题目</p>
-<h2 id="删除排序链表中的重复元素httpsleetcode-cncomproblemsremove-duplicates-from-sorted-listdescription"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/" target="_blank" rel="noopener noreffer">删除排序链表中的重复元素</a></h2>
+<h2 id="删除排序链表中的重复元素">删除排序链表中的重复元素</h2>
 <blockquote>
-<p>给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。</p>
+<p><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/description/" target="_blank" rel="noopener noreffer">删除排序链表中的重复元素</a> 给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。\</p>
 </blockquote>
 <p>递归</p>
 <div class="highlight"><div class="chroma">
@@ -196,9 +198,9 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="删除排序链表中的重复元素-iihttpsleetcode-cncomproblemsremove-duplicates-from-sorted-list-iidescription"><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/description/" target="_blank" rel="noopener noreffer">删除排序链表中的重复元素 II</a></h2>
+</div><h2 id="删除排序链表中的重复元素-ii">删除排序链表中的重复元素 II</h2>
 <blockquote>
-<p>给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 <em>没有重复出现</em> 的数字。</p>
+<p><a href="https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/description/" target="_blank" rel="noopener noreffer">删除排序链表中的重复元素 II</a> 给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 <em>没有重复出现</em> 的数字。</p>
 </blockquote>
 <p>递归</p>
 <div class="highlight"><div class="chroma">
@@ -226,7 +228,7 @@
 		<span class="k">for</span> <span class="nx">head</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
 			<span class="nx">head</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="c1">// head 与 head.Next值相同时，head指针无需保留，故向后移动
 </span><span class="c1"></span>		<span class="p">}</span>
-		<span class="k">return</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span> <span class="c1">// 重复的元素不保留，所以不是 head.Next = deleteDuplicates(head.Next)
+		<span class="k">return</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span> <span class="c1">// 重复的元素不保留
 </span><span class="c1"></span>	<span class="p">}</span>
 	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span>
 	<span class="k">return</span> <span class="nx">head</span>
@@ -261,7 +263,7 @@
 	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
 		<span class="k">return</span> <span class="nx">head</span>
 	<span class="p">}</span>
-	<span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="nx">head</span><span class="p">}</span> <span class="c1">// 头节点可能会被删除，故引入虚拟头节点
+  <span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="nx">head</span><span class="p">}</span> <span class="c1">// 头节点可能会被删除，故引入虚拟头节点
 </span><span class="c1"></span>	<span class="nx">head</span> <span class="p">=</span> <span class="nx">dummyHead</span>
 	<span class="nx">rmV</span> <span class="o">:=</span> <span class="mi">0</span> <span class="c1">// 重复值
 </span><span class="c1"></span>	<span class="k">for</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
@@ -275,6 +277,119 @@
 		<span class="p">}</span>
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="反转链表">反转链表</h2>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/reverse-linked-list/description/" target="_blank" rel="noopener noreffer">反转链表</a> 反转一个单链表。</p>
+</blockquote>
+<p>递归</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">head</span>	<span class="c1">// 返回反转后的头节点
+</span><span class="c1"></span>	<span class="p">}</span>
+	<span class="nx">newHead</span> <span class="o">:=</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span> <span class="c1">// 递归获取新头节点
+</span><span class="c1"></span>	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span> <span class="c1">// 反转当前节点和其后继节点的指向
+</span><span class="c1"></span>	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// 反转后的最后一个节点指向nil
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">newHead</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>迭代</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">head</span>
+	<span class="p">}</span>
+	<span class="kd">var</span> <span class="nx">pre</span> <span class="o">*</span><span class="nx">ListNode</span>
+	<span class="k">for</span> <span class="nx">head</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">pre</span>
+		<span class="nx">pre</span> <span class="p">=</span> <span class="nx">head</span>
+		<span class="nx">head</span> <span class="p">=</span> <span class="nx">next</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">pre</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="反转链表-ii">反转链表 II</h2>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/description/" target="_blank" rel="noopener noreffer">反转链表 II</a> 反转从位置 <em>m</em> 到 <em>n</em> 的链表。请使用一趟扫描完成反转。</p>
+</blockquote>
+<p>递归</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">m</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">m</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+	<span class="p">}</span>
+	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 递归移动到翻转区间
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">head</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">next</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="c1">// 保存翻转区间后的第一个节点
+</span><span class="c1">// 翻转链表的前n个节点
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+		<span class="nx">next</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="k">return</span> <span class="nx">head</span>
+	<span class="p">}</span>
+	<span class="nx">last</span> <span class="o">:=</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span>
+	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">next</span> <span class="c1">// 反转后的最后一个节点会指向next，其他的会被上一行覆盖
+</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">last</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>

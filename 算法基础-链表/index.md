@@ -288,7 +288,7 @@ func partition(head *ListNode, x int) *ListNode {
 
 
 
-## [排序链表](https://leetcode-cn.com/problems/sort-list/description/)
+## 排序链表
 
 >[排序链表](https://leetcode-cn.com/problems/sort-list/description/) `O(n log n)` 时间复杂度和常数级空间复杂度下对链表进行排序。
 
@@ -304,7 +304,7 @@ func sort(left, right *ListNode) *ListNode {
 		return nil
 	}
 	if left.Next == right { // 只有一个left节点
-		left.Next = nil // 断开连接以便合并多截链表
+		left.Next = nil // 断开连接所有节点的链接，在merge中会排序后再次连接
 		return left
 	}
 	// 快慢指针寻找中间节点
@@ -336,6 +336,102 @@ func merge(head1, head2 *ListNode) *ListNode {
 		cur.Next = cur2
 	}
 	return dummyHead.Next
+}
+```
+
+
+
+## 两两交换链表中的节点
+
+> [两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/description/) 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。
+
+递归
+
+```go
+func swapPairs(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	pre, cur, next := head, head.Next, head.Next.Next
+	cur.Next = pre
+	pre.Next = swapPairs(next)
+	return cur
+}
+```
+
+
+
+## 环形链表
+
+> [环形链表](https://leetcode-cn.com/problems/linked-list-cycle/description/) 给定一个链表，判断链表中是否有环。
+
+```go
+func hasCycle(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return false
+	}
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		if slow == fast { // 在环内每执行一次快慢指针距离减1
+			return true
+		}
+	}
+	return false
+}
+```
+
+
+
+## 环形链表 II
+
+> [环形链表 II](https://leetcode-cn.com/problems/linked-list-cycle-ii/description/)  给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 `null`。
+>
+> [原始题解](https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/)
+
+```
+         a            入环点          
++----------------------#------------------X 相遇点
+                       |                  |
+                       |                  |
+                       |                  |
+                       +------------------+
+                                 b
+```
+
+入环前节点个数为`a`，环内节点个数为`b`，快指针移动距离`f`，慢指针移动距离`s`，快慢指针**相遇**时有：
+
+- `f = 2s`  快指针移动距离是慢指针的两倍
+- `f = s + nb`  双指针都走过 `a` 步，然后在环内绕圈直到重合，重合时 `fast` 比 `slow` 多走 **环的长度整数倍** 
+
+由上可得：
+
+- `f = 2nb` `fast`移动了`2n`个环长
+- `s = nb` `slow`移动了n个环长
+
+又当指针`ptr`处于入环点时有`k = a + nb`，因此只需要使`slow`移动`a`个长度则可使slow指向入环点，而`a`长度可以由头节点移动到入环点得到，此时`ptr = slow = #`，即都指向入环点。
+
+```go
+func detectCycle(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return nil
+	}
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+		if slow == fast { // 相遇点
+			p := head // p指向头节点开始移动a个距离
+			for p != slow {
+				p = p.Next
+				slow = slow.Next
+			}
+			return p
+		}
+	}
+	// 无环
+	return nil
 }
 ```
 

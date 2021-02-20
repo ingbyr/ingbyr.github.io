@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法基础","wordcount":  1860 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法基础","wordcount":  2478 ,
         "url": "https:\/\/ingbyr.github.io\/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8\/","datePublished": "2021-02-19T14:22:03+08:00","dateModified": "2021-02-19T14:22:03+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">算法基础-链表</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-19">2021-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1860 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-02-19">2021-02-19</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2478 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -125,7 +125,10 @@
     <li><a href="#反转链表-ii">反转链表 II</a></li>
     <li><a href="#合并两个有序链表">合并两个有序链表</a></li>
     <li><a href="#分隔链表">分隔链表</a></li>
-    <li><a href="#排序链表httpsleetcode-cncomproblemssort-listdescription"><a href="https://leetcode-cn.com/problems/sort-list/description/">排序链表</a></a></li>
+    <li><a href="#排序链表">排序链表</a></li>
+    <li><a href="#两两交换链表中的节点">两两交换链表中的节点</a></li>
+    <li><a href="#环形链表">环形链表</a></li>
+    <li><a href="#环形链表-ii">环形链表 II</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>链表基础算法题目</p>
@@ -614,7 +617,7 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="排序链表httpsleetcode-cncomproblemssort-listdescription"><a href="https://leetcode-cn.com/problems/sort-list/description/" target="_blank" rel="noopener noreffer">排序链表</a></h2>
+</div><h2 id="排序链表">排序链表</h2>
 <blockquote>
 <p><a href="https://leetcode-cn.com/problems/sort-list/description/" target="_blank" rel="noopener noreffer">排序链表</a> <code>O(n log n)</code> 时间复杂度和常数级空间复杂度下对链表进行排序。</p>
 </blockquote>
@@ -677,7 +680,7 @@
 		<span class="k">return</span> <span class="kc">nil</span>
 	<span class="p">}</span>
 	<span class="k">if</span> <span class="nx">left</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="nx">right</span> <span class="p">{</span> <span class="c1">// 只有一个left节点
-</span><span class="c1"></span>		<span class="nx">left</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// 断开连接以便合并多截链表
+</span><span class="c1"></span>		<span class="nx">left</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// 断开连接所有节点的链接，在merge中会排序后再次连接
 </span><span class="c1"></span>		<span class="k">return</span> <span class="nx">left</span>
 	<span class="p">}</span>
 	<span class="c1">// 快慢指针寻找中间节点
@@ -709,6 +712,155 @@
 		<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur2</span>
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="两两交换链表中的节点">两两交换链表中的节点</h2>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs/description/" target="_blank" rel="noopener noreffer">两两交换链表中的节点</a> 给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
+</blockquote>
+<p>递归</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">swapPairs</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="nx">head</span>
+	<span class="p">}</span>
+	<span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">,</span> <span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+	<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">pre</span>
+	<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">swapPairs</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">cur</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="环形链表">环形链表</h2>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/linked-list-cycle/description/" target="_blank" rel="noopener noreffer">环形链表</a> 给定一个链表，判断链表中是否有环。</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="kc">false</span>
+	<span class="p">}</span>
+	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
+	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="k">if</span> <span class="nx">slow</span> <span class="o">==</span> <span class="nx">fast</span> <span class="p">{</span> <span class="c1">// 在环内每执行一次快慢指针距离减1
+</span><span class="c1"></span>			<span class="k">return</span> <span class="kc">true</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="环形链表-ii">环形链表 II</h2>
+<blockquote>
+<p><a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/description/" target="_blank" rel="noopener noreffer">环形链表 II</a>  给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 <code>null</code>。</p>
+<p><a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/linked-list-cycle-ii-kuai-man-zhi-zhen-shuang-zhi-/" target="_blank" rel="noopener noreffer">原始题解</a></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">         a            入环点          
++----------------------#------------------X 相遇点
+                       |                  |
+                       |                  |
+                       |                  |
+                       +------------------+
+                                 b
+</code></pre></td></tr></table>
+</div>
+</div><p>入环前节点个数为<code>a</code>，环内节点个数为<code>b</code>，快指针移动距离<code>f</code>，慢指针移动距离<code>s</code>，快慢指针<strong>相遇</strong>时有：</p>
+<ul>
+<li><code>f = 2s</code>  快指针移动距离是慢指针的两倍</li>
+<li><code>f = s + nb</code>  双指针都走过 <code>a</code> 步，然后在环内绕圈直到重合，重合时 <code>fast</code> 比 <code>slow</code> 多走 <strong>环的长度整数倍</strong></li>
+</ul>
+<p>由上可得：</p>
+<ul>
+<li><code>f = 2nb</code> <code>fast</code>移动了<code>2n</code>个环长</li>
+<li><code>s = nb</code> <code>slow</code>移动了n个环长</li>
+</ul>
+<p>又当指针<code>ptr</code>处于入环点时有<code>k = a + nb</code>，因此只需要使<code>slow</code>移动<code>a</code>个长度则可使slow指向入环点，而<code>a</code>长度可以由头节点移动到入环点得到，此时<code>ptr = slow = #</code>，即都指向入环点。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">detectCycle</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="kc">nil</span>
+	<span class="p">}</span>
+	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
+	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="k">if</span> <span class="nx">slow</span> <span class="o">==</span> <span class="nx">fast</span> <span class="p">{</span> <span class="c1">// 相遇点
+</span><span class="c1"></span>			<span class="nx">p</span> <span class="o">:=</span> <span class="nx">head</span> <span class="c1">// p指向头节点开始移动a个距离
+</span><span class="c1"></span>			<span class="k">for</span> <span class="nx">p</span> <span class="o">!=</span> <span class="nx">slow</span> <span class="p">{</span>
+				<span class="nx">p</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Next</span>
+				<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+			<span class="p">}</span>
+			<span class="k">return</span> <span class="nx">p</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="c1">// 无环
+</span><span class="c1"></span>	<span class="k">return</span> <span class="kc">nil</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>

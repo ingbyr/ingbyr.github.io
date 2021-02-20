@@ -409,30 +409,30 @@ kubectl create -f local-path-storage.yaml
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRole<span class="w">
-</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io/v1<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-cr<span class="w">
-</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">custom</span><span class="p">:</span><span class="w"> </span>role-patch<span class="w">
-</span><span class="w"></span><span class="k">rules</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">apiGroups</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- cloud.baetyl.io<span class="w">
-</span><span class="w">    </span><span class="k">resources</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- nodes<span class="w">
-</span><span class="w">      </span>- applications<span class="w">
-</span><span class="w">      </span>- configurations<span class="w">
-</span><span class="w">      </span>- nodedesires<span class="w">
-</span><span class="w">      </span>- nodereports<span class="w">
-</span><span class="w">      </span>- secrets<span class="w">
-</span><span class="w">    </span><span class="k">verbs</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- get<span class="w">
-</span><span class="w">      </span>- list<span class="w">
-</span><span class="w">      </span>- watch<span class="w">
-</span><span class="w">      </span>- create<span class="w">
-</span><span class="w">      </span>- update<span class="w">
-</span><span class="w">      </span>- patch<span class="w">
-</span><span class="w">      </span>- delete<span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-baetyl-cr</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">custom</span><span class="p">:</span><span class="w"> </span><span class="l">role-patch</span><span class="w">
+</span><span class="w"></span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">cloud.baetyl.io</span><span class="w">
+</span><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">nodes</span><span class="w">
+</span><span class="w">      </span>- <span class="l">applications</span><span class="w">
+</span><span class="w">      </span>- <span class="l">configurations</span><span class="w">
+</span><span class="w">      </span>- <span class="l">nodedesires</span><span class="w">
+</span><span class="w">      </span>- <span class="l">nodereports</span><span class="w">
+</span><span class="w">      </span>- <span class="l">secrets</span><span class="w">
+</span><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">get</span><span class="w">
+</span><span class="w">      </span>- <span class="l">list</span><span class="w">
+</span><span class="w">      </span>- <span class="l">watch</span><span class="w">
+</span><span class="w">      </span>- <span class="l">create</span><span class="w">
+</span><span class="w">      </span>- <span class="l">update</span><span class="w">
+</span><span class="w">      </span>- <span class="l">patch</span><span class="w">
+</span><span class="w">      </span>- <span class="l">delete</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
@@ -453,20 +453,20 @@ kubectl create -f local-path-storage.yaml
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io/v1<span class="w">
-</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRoleBinding<span class="w">
-</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-crb<span class="w">
-</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">custom</span><span class="p">:</span><span class="w"> </span>role-patch<span class="w">
-</span><span class="w"></span><span class="k">roleRef</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">apiGroup</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io<span class="w">
-</span><span class="w">  </span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRole<span class="w">
-</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-cr<span class="w">
-</span><span class="w"></span><span class="k">subjects</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">kind</span><span class="p">:</span><span class="w"> </span>ServiceAccount<span class="w">
-</span><span class="w">    </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>baetyl-cloud<span class="w">
-</span><span class="w">    </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>default<span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
+</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRoleBinding</span><span class="w">
+</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-baetyl-crb</span><span class="w">
+</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">custom</span><span class="p">:</span><span class="w"> </span><span class="l">role-patch</span><span class="w">
+</span><span class="w"></span><span class="nt">roleRef</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io</span><span class="w">
+</span><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
+</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-baetyl-cr</span><span class="w">
+</span><span class="w"></span><span class="nt">subjects</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
+</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">baetyl-cloud</span><span class="w">
+</span><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
@@ -501,7 +501,7 @@ kubectl create -f local-path-storage.yaml
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.74.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

@@ -436,3 +436,42 @@ func detectCycle(head *ListNode) *ListNode {
 ```
 
 
+
+## 回文链表
+
+> [回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/description/) 判断一个链表是否为回文链表。
+
+```go
+func isPalindrome(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return true
+	}
+	// 快慢指针找中点
+	slow, fast := head, head
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next
+		fast = fast.Next.Next
+	}
+	// 递归反转链表
+	right := reverse(slow)
+	// 判断回文
+	for left := head; left != nil && right != nil; left, right = left.Next, right.Next {
+		if left.Val != right.Val {
+			return false
+		}
+	}
+	return true
+}
+
+func reverse(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	last := reverse(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return last
+}
+```
+
+

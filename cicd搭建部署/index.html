@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "CICD","wordcount":  767 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "CICD","wordcount":  788 ,
         "url": "https:\/\/ingbyr.github.io\/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2\/","datePublished": "2021-03-04T14:35:59+08:00","dateModified": "2021-03-04T14:35:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">CICD搭建部署</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/cicd/"><i class="far fa-folder fa-fw"></i>CICD</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-04">2021-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 767 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-04">2021-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 788 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -259,7 +259,7 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="创建应用">创建应用</h3>
-<p>在<code>个人-设置-应用</code>中创建<code>OAuth2 应用</code>，并记录下<code>client id</code>和<code>client secret</code>，在后续Drone的部署中会用到</p>
+<p>在<code>个人-设置-应用</code>中创建<code>OAuth2 应用</code>，并记录下<code>client id</code>和<code>client secret</code>，在后续Drone的部署中会用到。其中<code>重定向 URI</code>设置为后文中 Drone 的登录地址 <code>http://[drone-ip]:11080/login</code></p>
 <h2 id="搭建drone">搭建Drone</h2>
 <h3 id="docker-drone-和-docker-drone-runner">Docker Drone 和 Docker Drone Runner</h3>
 <p>使用docker-compose部署：</p>
@@ -377,7 +377,7 @@
 <span class="na">DRONE_GITEA_CLIENT_ID</span><span class="o">=</span><span class="s">[gitea oauth2 app client id]</span>
 <span class="na">DRONE_GITEA_CLIENT_SECRET</span><span class="o">=</span><span class="s">[gitea oauth2 app client secret]</span>
 <span class="na">DRONE_RPC_SECRET</span><span class="o">=</span><span class="s">[rpc_secret]</span>
-<span class="na">DRONE_SERVER_HOST</span><span class="o">=</span><span class="s">[ip]:11080</span>
+<span class="na">DRONE_SERVER_HOST</span><span class="o">=</span><span class="s">[drone-ip]:11080</span>
 <span class="na">DRONE_SERVER_PROTO</span><span class="o">=</span><span class="s">http</span>
 </code></pre></td></tr></table>
 </div>
@@ -421,7 +421,7 @@
 </span><span class="w">  </span>- <span class="l">cp dist.zip /data/storage/iwop-ui/dist-$(date &#39;+%Y%m%d%H%M%S&#39;).zip</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
-</div><p><code>build.sh</code> 展示了构建一个外部 nodejs 项目的方式（另一种为个人认为可行的方案是 git submodule，尚未验证）</p>
+</div><p><code>build.sh</code> 展示了构建一个外部 nodejs 项目的方式（另一种个人认为可行的方案是 git submodule，尚未验证）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1

@@ -81,7 +81,7 @@ services:
 
 ### 创建应用
 
-在`个人-设置-应用`中创建`OAuth2 应用`，并记录下`client id`和`client secret`，在后续Drone的部署中会用到
+在`个人-设置-应用`中创建`OAuth2 应用`，并记录下`client id`和`client secret`，在后续Drone的部署中会用到。其中`重定向 URI`设置为后文中 Drone 的登录地址 `http://[drone-ip]:11080/login`
 
 
 
@@ -148,7 +148,7 @@ DRONE_GITEA_SERVER=http://[gitea-ip]:10080/
 DRONE_GITEA_CLIENT_ID=[gitea oauth2 app client id]
 DRONE_GITEA_CLIENT_SECRET=[gitea oauth2 app client secret]
 DRONE_RPC_SECRET=[rpc_secret]
-DRONE_SERVER_HOST=[ip]:11080
+DRONE_SERVER_HOST=[drone-ip]:11080
 DRONE_SERVER_PROTO=http
 ```
 
@@ -182,7 +182,7 @@ steps: # 以下为自定义的步骤流程
   - cp dist.zip /data/storage/iwop-ui/dist-$(date '+%Y%m%d%H%M%S').zip
 ```
 
-`build.sh` 展示了构建一个外部 nodejs 项目的方式（另一种为个人认为可行的方案是 git submodule，尚未验证）
+`build.sh` 展示了构建一个外部 nodejs 项目的方式（另一种个人认为可行的方案是 git submodule，尚未验证）
 
 ```sh
 #!/bin/bash

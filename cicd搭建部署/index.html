@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "CICD","wordcount":  458 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "CICD","wordcount":  767 ,
         "url": "https:\/\/ingbyr.github.io\/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2\/","datePublished": "2021-03-04T14:35:59+08:00","dateModified": "2021-03-04T14:35:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">CICD搭建部署</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/cicd/"><i class="far fa-folder fa-fw"></i>CICD</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-04">2021-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 458 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-04">2021-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 767 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -132,6 +132,7 @@
         <li><a href="#exec-runner">Exec Runner</a></li>
       </ul>
     </li>
+    <li><a href="#drone实战">Drone实战</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>基于Gitea和Drone实现CICD</p>
@@ -358,7 +359,7 @@
 </div>
 </div><p>环境变量的设置：</p>
 <blockquote>
-<p><code>[rpc_secret]</code> 用于 Drone 和 Runner验证，具体值为随机字符串</p>
+<p><code>[rpc_secret]</code> 用于 Drone 和 Runner 验证，具体值为随机字符串</p>
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -381,7 +382,119 @@
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="exec-runner">Exec Runner</h3>
-<p>参考<a href="https://docs.drone.io/runner/exec/overview/" target="_blank" rel="noopener noreffer">官方文档</a>安装即可</p></div><div class="post-footer" id="post-footer">
+<p>参考<a href="https://docs.drone.io/runner/exec/overview/" target="_blank" rel="noopener noreffer">官方文档</a>安装即可</p>
+<h2 id="drone实战">Drone实战</h2>
+<p>项目中添加<code>.drone.yml</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">pipeline</span><span class="w">
+</span><span class="w"></span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">exec</span><span class="w"> </span><span class="c"># 指定 Runner 的模式，此处为 Exec Runner</span><span class="w">
+</span><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+</span><span class="w"></span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="c"># Exec Runner 特有设置，提供 Runner 运行的相关信息</span><span class="w">
+</span><span class="w">  </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l">linux</span><span class="w">
+</span><span class="w">  </span><span class="nt">arch</span><span class="p">:</span><span class="w"> </span><span class="l">amd64</span><span class="w">
+</span><span class="w"></span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="c"># 以下为自定义的步骤流程</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
+</span><span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="l">bash build.sh</span><span class="w">
+</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span><span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="l">cd /data/projects/iwop-ui</span><span class="w">
+</span><span class="w">  </span>- <span class="l">zip -rq dist.zip dist/</span><span class="w">
+</span><span class="w">  </span>- <span class="l">cp dist.zip /data/storage/iwop-ui/dist-$(date &#39;+%Y%m%d%H%M%S&#39;).zip</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><code>build.sh</code> 展示了构建一个外部 nodejs 项目的方式（另一种为个人认为可行的方案是 git submodule，尚未验证）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="c1"># Create project dir and clone it</span>
+<span class="k">if</span> <span class="o">[</span> ! -d <span class="o">[</span>parent-dir<span class="o">]</span>/<span class="o">[</span>project-name<span class="o">]</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+  mkdir -p <span class="o">[</span>parent-dir<span class="o">]</span>
+  <span class="nb">cd</span> <span class="o">[</span>parent-dir<span class="o">]</span>
+  git clone -b dev --single-branch --depth<span class="o">=</span><span class="m">1</span> <span class="o">[</span>git-url<span class="o">]</span>
+<span class="k">fi</span>
+
+<span class="c1"># Go to project and update code</span>
+<span class="nb">cd</span> <span class="o">[</span>parent-dir<span class="o">]</span>/<span class="o">[</span>project-name<span class="o">]</span>
+<span class="c1"># If has custom we need to restore before update code</span>
+git restore .
+git pull --rebase
+
+<span class="c1"># Custom</span>
+<span class="nv">custom_files</span><span class="o">=(</span>
+	<span class="s2">&#34;file-1&#34;</span>
+	<span class="s2">&#34;file-2&#34;</span>
+<span class="o">)</span>
+<span class="k">for</span> i in <span class="s2">&#34;</span><span class="si">${</span><span class="nv">custom_files</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">;</span> <span class="k">do</span>
+    gsed -i <span class="s1">&#39;s/before text/after text/&#39;</span> <span class="nv">$i</span>  <span class="c1"># For linux add &#39;alias gsed=sed&#39; / For mac &#39;brew install gsed&#39;</span>
+<span class="k">done</span>
+
+<span class="c1"># Check command status</span>
+<span class="k">if</span> ! <span class="nb">command</span> -v cnpm <span class="p">&amp;</span>&gt; /dev/null<span class="p">;</span> <span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;Start to install cnpm ...&#34;</span>
+    npm install -g cnpm --registry<span class="o">=</span>https://registry.npm.taobao.org
+<span class="k">fi</span>
+
+<span class="c1"># Build</span>
+cnpm install
+npm run build-ws --no-progress
+</code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

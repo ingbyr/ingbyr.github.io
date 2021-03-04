@@ -140,7 +140,7 @@ services:
 
 环境变量的设置：
 
-> `[rpc_secret]` 用于 Drone 和 Runner验证，具体值为随机字符串
+> `[rpc_secret]` 用于 Drone 和 Runner 验证，具体值为随机字符串
 
 ```ini
 # .env
@@ -157,3 +157,67 @@ DRONE_SERVER_PROTO=http
 ### Exec Runner
 
 参考[官方文档](https://docs.drone.io/runner/exec/overview/)安装即可
+
+
+
+## Drone实战
+
+项目中添加`.drone.yml`
+
+```yml
+kind: pipeline
+type: exec # 指定 Runner 的模式，此处为 Exec Runner
+name: default
+platform: # Exec Runner 特有设置，提供 Runner 运行的相关信息
+  os: linux
+  arch: amd64
+steps: # 以下为自定义的步骤流程
+- name: build
+  commands:
+  - bash build.sh
+- name: deploy
+  commands:
+  - cd /data/projects/iwop-ui
+  - zip -rq dist.zip dist/
+  - cp dist.zip /data/storage/iwop-ui/dist-$(date '+%Y%m%d%H%M%S').zip
+```
+
+`build.sh` 展示了构建一个外部 nodejs 项目的方式（另一种为个人认为可行的方案是 git submodule，尚未验证）
+
+```sh
+#!/bin/bash
+
+# Create project dir and clone it
+if [ ! -d [parent-dir]/[project-name] ]; then
+  mkdir -p [parent-dir]
+  cd [parent-dir]
+  git clone -b dev --single-branch --depth=1 [git-url]
+fi
+
+# Go to project and update code
+cd [parent-dir]/[project-name]
+# If has custom we need to restore before update code
+git restore .
+git pull --rebase
+
+# Custom
+custom_files=(
+	"file-1"
+	"file-2"
+)
+for i in "${custom_files[@]}"; do
+    gsed -i 's/before text/after text/' $i  # For linux add 'alias gsed=sed' / For mac 'brew install gsed'
+done
+
+# Check command status
+if ! command -v cnpm &> /dev/null; then
+    echo "Start to install cnpm ..."
+    npm install -g cnpm --registry=https://registry.npm.taobao.org
+fi
+
+# Build
+cnpm install
+npm run build-ws --no-progress
+```
+
+

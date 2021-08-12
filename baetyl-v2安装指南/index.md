@@ -34,6 +34,29 @@ docker run -itd -p 9080:80 -p 9443:443 \
 registry.cn-hangzhou.aliyuncs.com/rancher/rancher:v2.4.2
 ```
 
+清空数据
+```bash
+docker stop $(docker ps -aq)
+docker system prune -f
+docker volume rm $(docker volume ls -q)
+docker image rm $(docker image ls -q)
+rm -rf /etc/ceph \
+       /etc/cni \
+       /etc/kubernetes \
+       /opt/cni \
+       /opt/rke \
+       /run/secrets/kubernetes.io \
+       /run/calico \
+       /run/flannel \
+       /var/lib/calico \
+       /var/lib/etcd \
+       /var/lib/cni \
+       /var/lib/kubelet \
+       /var/lib/rancher/rke/log \
+       /var/log/containers \
+       /var/log/pods \
+       /var/run/calico
+```
 
 
 ###  k3s

@@ -8,10 +8,10 @@
         <title>Baetyl V2安装指南 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Baetyl V2安装指南" />
 <meta property="og:description" content="Baetyl v2.0.0安装指南" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" />
-<meta property="og:image" content="https://ingbyr.github.io/logo.png"/>
-<meta property="article:published_time" content="2020-08-31T17:29:12+08:00" />
-<meta property="article:modified_time" content="2020-08-31T17:29:12+08:00" />
+<meta property="og:url" content="https://ingbyr.github.io/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-31T17:29:12&#43;08:00" />
+<meta property="article:modified_time" content="2020-08-31T17:29:12&#43;08:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
 
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Baetyl","wordcount":  671 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Baetyl","wordcount":  751 ,
         "url": "https:\/\/ingbyr.github.io\/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97\/","datePublished": "2020-08-31T17:29:12+08:00","dateModified": "2020-08-31T17:29:12+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content always-active" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Baetyl V2安装指南</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/"><i class="far fa-folder fa-fw"></i>边缘计算</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-31">2020-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 671 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-31">2020-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 751 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -167,6 +167,53 @@
 </span><span class="se"></span>--restart<span class="o">=</span>unless-stopped <span class="se">\
 </span><span class="se"></span>-e <span class="nv">CATTLE_AGENT_IMAGE</span><span class="o">=</span><span class="s2">&#34;registry.cn-hangzhou.aliyuncs.com/rancher/rancher-agent:v2.4.2&#34;</span> <span class="se">\
 </span><span class="se"></span>registry.cn-hangzhou.aliyuncs.com/rancher/rancher:v2.4.2
+</code></pre></td></tr></table>
+</div>
+</div><p>清空数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>
+docker system prune -f
+docker volume rm <span class="k">$(</span>docker volume ls -q<span class="k">)</span>
+docker image rm <span class="k">$(</span>docker image ls -q<span class="k">)</span>
+rm -rf /etc/ceph <span class="se">\
+</span><span class="se"></span>       /etc/cni <span class="se">\
+</span><span class="se"></span>       /etc/kubernetes <span class="se">\
+</span><span class="se"></span>       /opt/cni <span class="se">\
+</span><span class="se"></span>       /opt/rke <span class="se">\
+</span><span class="se"></span>       /run/secrets/kubernetes.io <span class="se">\
+</span><span class="se"></span>       /run/calico <span class="se">\
+</span><span class="se"></span>       /run/flannel <span class="se">\
+</span><span class="se"></span>       /var/lib/calico <span class="se">\
+</span><span class="se"></span>       /var/lib/etcd <span class="se">\
+</span><span class="se"></span>       /var/lib/cni <span class="se">\
+</span><span class="se"></span>       /var/lib/kubelet <span class="se">\
+</span><span class="se"></span>       /var/lib/rancher/rke/log <span class="se">\
+</span><span class="se"></span>       /var/log/containers <span class="se">\
+</span><span class="se"></span>       /var/log/pods <span class="se">\
+</span><span class="se"></span>       /var/run/calico
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="k3s">k3s</h3>
@@ -501,7 +548,7 @@ kubectl create -f local-path-storage.yaml
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

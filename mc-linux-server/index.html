@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/mc-linux-server\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  1366 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","wordcount":  872 ,
         "url": "https:\/\/ingbyr.github.io\/mc-linux-server\/","datePublished": "2018-08-03T16:03:27+08:00","dateModified": "2018-08-03T16:03:27+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Minecraft服务器搭建</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-08-03">2018-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1366 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-08-03">2018-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 872 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -198,76 +198,7 @@
 <h1 id="sponge">Sponge</h1>
 <h2 id="介绍-2">介绍</h2>
 <p><a href="https://www.spongepowered.org/" target="_blank" rel="noopener noreffer">Sponge</a>据说是同时支持Bukkit插件和MOD功能的服务器端工具，具体没用使用过，大家可以去官网自行阅读文档安装体验。</p>
-<h1 id="serverproperties说明">server.properties说明</h1>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">generator-settings<span class="o">=</span>					<span class="c1">#用於設定超平坦世界的函數，留空即可</span>
-op-permission-level<span class="o">=</span>4				<span class="c1">#設定OP的許可權等級</span>
-allow-nether<span class="o">=</span><span class="nb">true</span>					<span class="c1">#是否允許生成/進入下界</span>
-level-name<span class="o">=</span>world					<span class="c1">#世界名稱及其文件夾名</span>
-enable-query<span class="o">=</span><span class="nb">false</span>					<span class="c1">#允許使用GameSpy4協議的伺服器監聽器（用於收集伺服器信息）</span>
-allow-flight<span class="o">=</span><span class="nb">false</span>					<span class="c1">#是否允許玩家在生存模式透過MOD飛行</span>
-announce-player-achievements<span class="o">=</span><span class="nb">true</span>	<span class="c1">#是否公開顯示玩家成就</span>
-server-port<span class="o">=</span>25565					<span class="c1">#伺服器端口（默認為25565）</span>
-level-type<span class="o">=</span>DEFAULT					<span class="c1">#世界類型</span>
-enable-rcon<span class="o">=</span><span class="nb">false</span>					<span class="c1">#是否允許遠程訪問伺服器控制台</span>
-level-seed<span class="o">=</span>							<span class="c1">#世界種子</span>
-force-gamemode<span class="o">=</span><span class="nb">false</span>				<span class="c1">#玩家是否總是以默認游戲模式進入伺服器</span>
-server-ip<span class="o">=</span>							<span class="c1">#伺服器IP，一般來說留空即可</span>
-max-build-height<span class="o">=</span>256				<span class="c1">#最高建築高度（最高256）</span>
-spawn-npcs<span class="o">=</span><span class="nb">true</span>						<span class="c1">#是否生成村民NPC</span>
-white-list<span class="o">=</span><span class="nb">false</span>					<span class="c1">#是否開啟白名單認證</span>
-spawn-animals<span class="o">=</span><span class="nb">true</span>					<span class="c1">#是否生成動物</span>
-<span class="nv">hardcore</span><span class="o">=</span><span class="nb">false</span>						<span class="c1">#是否開啟極限模式</span>
-snooper-enabled<span class="o">=</span><span class="nb">true</span>				<span class="c1">#是否允許伺服器定期發送統計數據</span>
-online-mode<span class="o">=</span><span class="nb">true</span>					<span class="c1">#是否開啟正版認證（開啟後只有正版玩家可進入）</span>
-resource-pack<span class="o">=</span>						<span class="c1">#資源包URL（可讓玩家選擇是否使用伺服器提供的資源包）</span>
-<span class="nv">pvp</span><span class="o">=</span><span class="nb">true</span>							<span class="c1">#可否PVP</span>
-<span class="nv">difficulty</span><span class="o">=</span>1						<span class="c1">#難度</span>
-enable-command-block<span class="o">=</span><span class="nb">false</span>			<span class="c1">#是否可以使用命令方塊</span>
-<span class="nv">gamemode</span><span class="o">=</span>0							<span class="c1">#默認游戲模式</span>
-player-idle-timeout<span class="o">=</span>0				<span class="c1">#如果該玩家無反應超過設定值（單位：分鐘），將會被踢出</span>
-max-players<span class="o">=</span>20						<span class="c1">#最大玩家數量</span>
-spawn-monsters<span class="o">=</span><span class="nb">true</span>					<span class="c1">#是否生成怪物</span>
-generate-structures<span class="o">=</span><span class="nb">true</span>			<span class="c1">#是否生成建築物</span>
-view-distance<span class="o">=</span>10					<span class="c1">#客戶端視野距離的上限</span>
-<span class="nv">motd</span><span class="o">=</span>A Minecraft Server				<span class="c1">#伺服器在伺服器列表頁所顯示的信息</span>
-</code></pre></td></tr></table>
-</div>
-</div><h1 id="mc客户端">MC客户端</h1>
+<h1 id="mc客户端">MC客户端</h1>
 <p>推荐使用<a href="https://github.com/huanghongxun/HMCL" target="_blank" rel="noopener noreffer">HMCL</a>。</p>
 <h2 id="安装optifine">安装optifine</h2>
 <p>虽然HMCL中有自动安装optifine的功能，但经常会出现依赖配置错误导致的运行失败，所以optifine和forge推荐自行安装。选择对应版本下载<a href="https://www.optifine.net/downloads" target="_blank" rel="noopener noreffer">optifine</a>，之后将jar文件导入mod或使用HMCL提供的MOD管理导入即可。</p>

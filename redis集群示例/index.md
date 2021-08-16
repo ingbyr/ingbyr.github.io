@@ -141,6 +141,8 @@ redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 \
 
 执行完毕后将构建一个3主3从的Redis集群。
 
+> 对于Redis集群，命令行模式需要增加 -c 选项，否则无法操作Redis，即 `redis-cli -c -p 7001`
+
 
 ## 测试集群
 
@@ -186,4 +188,48 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
 2a5e09014c852fd15c2e54d500c532ec6ee2490e 127.0.0.1:7005@17005 slave 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c 0 1629083361647 3 connected
 ```
 
-可以看到7000已经切换为了salve模式，7003切换成了master模式
+可以看到7000已经切换为了salve模式，7003切换成了master模式。
+
+使用Go语言测试读写：
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"github.com/go-redis/redis/v8"
+)
+
+var ctx = context.Background()
+
+func redisAddrList() []string {
+	ip := "localhost"
+	addrList := []string{}
+	for port := 7000; port < 7006; port++ {
+		addrList = append(addrList, fmt.Sprintf("%s:%d", ip, port))
+	}
+	return addrList
+}
+
+func NewRedisClient() *redis.ClusterClient {
+	return redis.NewClusterClient(&redis.ClusterOptions{
+		Addrs: redisAddrList(),
+	})
+}
+
+func main() {
+	rdb := NewRedisClient()
+	err := rdb.Set(ctx, "foo", "bar", 0).Err()
+	if err != nil {
+		panic(err)
+	}
+
+	res, err := rdb.Get(ctx, "foo").Result()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(res)
+}
+```
+

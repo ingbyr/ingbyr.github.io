@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Redis集群 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Redis集群" />
+<meta property="og:description" content="Redis集群相关" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-16T09:55:00&#43;08:00" />
+<meta property="article:modified_time" content="2021-08-16T09:55:00&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Redis集群"/>
+<meta name="twitter:description" content="Redis集群相关"/>
+<meta name="application-name" content="ingbyr">
+<meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4/" /><link rel="prev" href="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Redis集群",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ingbyr.github.io\/redis%E9%9B%86%E7%BE%A4\/"
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Redis","wordcount":  732 ,
+        "url": "https:\/\/ingbyr.github.io\/redis%E9%9B%86%E7%BE%A4\/","datePublished": "2021-08-16T09:55:00+08:00","dateModified": "2021-08-16T09:55:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ingbyr"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ingbyr">ingbyr</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/redis%E9%9B%86%E7%BE%A4/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ingbyr">ingbyr</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/redis%E9%9B%86%E7%BE%A4/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Redis集群</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-08-16">2021-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 732 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#redis集群配置文件">Redis集群配置文件</a></li>
+    <li><a href="#redis集群启动">Redis集群启动</a></li>
+    <li><a href="#测试集群">测试集群</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>Redis集群相关</p>
+<h2 id="redis集群配置文件">Redis集群配置文件</h2>
+<p>Redis配置模版 <code>redis-cluster.tmpl</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">port ${PORT}
+protected-mode no
+cluster-enabled yes
+cluster-config-file nodes.conf
+cluster-node-timeout 5000
+appendonly yes
+</code></pre></td></tr></table>
+</div>
+</div><p>各个Redis实例配置生成脚本 <code>redis-cluster-config.sh</code>，脚本生成端口号 7000-7005 6个Redis实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="k">for</span> port in <span class="sb">`</span>seq <span class="m">7000</span> 7005<span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
+  mkdir -p ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf
+  <span class="nv">PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span> envsubst &lt; ./redis-cluster.tmpl &gt; ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/redis.conf
+  chmod <span class="m">666</span> ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/redis.conf
+  mkdir -p ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/data
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Redis Sentinel配置模版 <code>redis-sentinel-cluster.tmpl</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">port ${PORT}
+sentinel monitor mymaster 127.0.0.1 7000 2
+sentinel down-after-milliseconds mymaster 5000
+sentinel failover-timeout mymaster 60000
+</code></pre></td></tr></table>
+</div>
+</div><p>Redis Sentinel 实例的配置文件 <code>redis-sentinel-cluster-config.sh</code>，生成 5000-5002 3个实例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>
+<span class="k">for</span> port in <span class="sb">`</span>seq <span class="m">5000</span> 5002<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="se">\
+</span><span class="se"></span>  mkdir -p ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf
+  <span class="nv">PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span> envsubst &lt; ./redis-sentinel-cluster.tmpl &gt; ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/sentinel.conf
+  chmod <span class="m">666</span> ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/sentinel.conf
+  mkdir -p ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/data
+<span class="k">done</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="redis集群启动">Redis集群启动</h2>
+<p>使用 Docker Compose 部署：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">redis7000</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7000</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7000/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7000/data:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">redis7001</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7001</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7001/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7001/data:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">redis7002</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7002</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7002/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7002/data:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">redis7003</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7003</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7003/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7003/data:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">redis7004</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7004</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7004/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7004/data:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">redis7005</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7005</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7005/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-cluster/7005/data:/data</span><span class="w">
+</span><span class="w">    </span><span class="nt">sentinel5000</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5000</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5000/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5000/data:/data      </span><span class="w">
+</span><span class="w">    </span><span class="nt">sentinel5001</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5001</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5001/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5001/data:/data   </span><span class="w">
+</span><span class="w">    </span><span class="nt">sentinel5002</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5002</span><span class="w">
+</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
+</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5002/conf:/usr/local/etc/redis</span><span class="w">
+</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5002/data:/data</span><span class="w">
+</span><span class="w">            
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="测试集群">测试集群</h2>
+<p>连接到端口号为7000的Redis，查看节点信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:7000&gt; cluster nodes
+
+output&gt; 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c 127.0.0.1:7002@17002 master - <span class="m">0</span> <span class="m">1629082981000</span> <span class="m">3</span> connected 10923-16383
+fc92c1709a88bdca8e86b9b5a27d035609e46059 127.0.0.1:7001@17001 master - <span class="m">0</span> <span class="m">1629082982000</span> <span class="m">2</span> connected 5461-10922
+3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 127.0.0.1:7000@17000 myself,master - <span class="m">0</span> <span class="m">1629082981000</span> <span class="m">1</span> connected 0-5460
+cf361fc2b72ca2bfd070b282754ad19da7640485 127.0.0.1:7003@17003 slave 3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 <span class="m">0</span> <span class="m">1629082982590</span> <span class="m">1</span> connected
+fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88bdca8e86b9b5a27d035609e46059 <span class="m">0</span> <span class="m">1629082981586</span> <span class="m">2</span> connected
+2a5e09014c852fd15c2e54d500c532ec6ee2490e 127.0.0.1:7005@17005 slave 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c <span class="m">0</span> <span class="m">1629082982088</span> <span class="m">3</span> connected
+</code></pre></td></tr></table>
+</div>
+</div><p>连接至端口号为5000的哨兵，查看监控信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:5000&gt; SENTINEL get-master-addr-by-name mymaster
+1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;7000&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>现在让7000的实例离线30秒：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">redis-cli -p <span class="m">7000</span> DEBUG sleep <span class="m">30</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在哨兵5000中再次查看监控：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:5000&gt; SENTINEL get-master-addr-by-name mymaster
+1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+2<span class="o">)</span> <span class="s2">&#34;7003&#34;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到主节点已经由7000自动切换到了7003，现在看一下集群信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:7000&gt; cluster nodes
+2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c 127.0.0.1:7002@17002 master - <span class="m">0</span> <span class="m">1629083362653</span> <span class="m">3</span> connected 10923-16383
+fc92c1709a88bdca8e86b9b5a27d035609e46059 127.0.0.1:7001@17001 master - <span class="m">0</span> <span class="m">1629083361000</span> <span class="m">2</span> connected 5461-10922
+3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 127.0.0.1:7000@17000 myself,slave cf361fc2b72ca2bfd070b282754ad19da7640485 <span class="m">0</span> <span class="m">1629083362000</span> <span class="m">7</span> connected
+cf361fc2b72ca2bfd070b282754ad19da7640485 127.0.0.1:7003@17003 master - <span class="m">0</span> <span class="m">1629083362000</span> <span class="m">7</span> connected 0-5460
+fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88bdca8e86b9b5a27d035609e46059 <span class="m">0</span> <span class="m">1629083362553</span> <span class="m">2</span> connected
+2a5e09014c852fd15c2e54d500c532ec6ee2490e 127.0.0.1:7005@17005 slave 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c <span class="m">0</span> <span class="m">1629083361647</span> <span class="m">3</span> connected
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看到7000已经切换为了salve模式，7003切换成了master模式</p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2021-08-16</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/redis%E9%9B%86%E7%BE%A4/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4/" data-title="Redis集群" data-hashtags="Redis"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4/" data-hashtag="Redis"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4/" data-title="Redis集群"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4/" data-title="Redis集群"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4/" data-title="Redis集群" data-ralateuid="zwkv5"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/redis/">Redis</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/" class="prev" rel="prev" title="算法基础-堆"><i class="fas fa-angle-left fa-fw"></i>算法基础-堆</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.83.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["ingbyr"],"clientID":"f9a51bd6b0f1a981f818","clientSecret":"e26281e64a4ae2bc50ea1177260fc214d09f22ac","id":"2021-08-16T09:55:00+08:00","owner":"ingbyr","repo":"ingbyr.github.io","title":"Redis集群"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

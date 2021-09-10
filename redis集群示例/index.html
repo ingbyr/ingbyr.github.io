@@ -20,7 +20,7 @@
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B/" /><link rel="prev" href="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B/" /><link rel="prev" href="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/" /><link rel="next" href="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%8E%92%E5%BA%8F/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -382,10 +382,10 @@ sentinel failover-timeout mymaster 60000
 </code></pre></td></tr></table>
 </div>
 </div><p>执行完毕后将构建一个3主3从的Redis集群。</p>
-<blockquote>
-<p>对于Redis集群，命令行模式需要增加 -c 选项，否则无法操作Redis，即 <code>redis-cli -c -p 7001</code></p>
-</blockquote>
 <h2 id="测试集群">测试集群</h2>
+<blockquote>
+<p>对于Redis集群，命令行模式需要增加 -c 选项，否则无法操作Redis，即 <code>redis-cli -c -p 7000</code></p>
+</blockquote>
 <p>连接到端口号为7000的Redis，查看节点信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -576,13 +576,14 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
         </section>
     </div>
 
-    <div class="post-nav"><a href="/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/" class="prev" rel="prev" title="算法基础-堆"><i class="fas fa-angle-left fa-fw"></i>算法基础-堆</a></div>
+    <div class="post-nav"><a href="/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/" class="prev" rel="prev" title="算法基础-堆"><i class="fas fa-angle-left fa-fw"></i>算法基础-堆</a>
+            <a href="/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%8E%92%E5%BA%8F/" class="next" rel="next" title="算法基础-排序">算法基础-排序<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.87.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

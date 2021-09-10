@@ -141,10 +141,9 @@ redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 \
 
 执行完毕后将构建一个3主3从的Redis集群。
 
-> 对于Redis集群，命令行模式需要增加 -c 选项，否则无法操作Redis，即 `redis-cli -c -p 7001`
-
 
 ## 测试集群
+> 对于Redis集群，命令行模式需要增加 -c 选项，否则无法操作Redis，即 `redis-cli -c -p 7000`
 
 连接到端口号为7000的Redis，查看节点信息：
 ```sh

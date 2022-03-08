@@ -8,10 +8,10 @@
         <title>Kubeedge 国内环境安装 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Kubeedge 国内环境安装" />
 <meta property="og:description" content="国内网络环境下快速安装k8s" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" />
+<meta property="og:image" content="https://ingbyr.github.io/logo.png"/>
 <meta property="article:published_time" content="2020-08-31T17:26:02+08:00" />
 <meta property="article:modified_time" content="2020-08-31T17:26:02+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
 
@@ -135,14 +135,14 @@
 <p>安装 kubeadm、kubectl：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">gpg --keyserver keyserver.ubuntu.com --recv-keys BA07F4FB
+<pre class="chroma"><code class="language-bash" data-lang="bash">gpg --keyserver keyserver.ubuntu.com --recv-keys BA07F4FB
 gpg --export --armor BA07F4FB <span class="p">|</span> sudo apt-key add -
 <span class="nb">echo</span> <span class="s2">&#34;deb https://mirrors.tuna.tsinghua.edu.cn/kubernetes/apt kubernetes-xenial main&#34;</span> &gt; /etc/apt/sources.list.d/kubernetes.list 
 apt update
@@ -152,7 +152,7 @@ apt install kubeadm kubectl ipvsadm
 </div><p>下载Golang安装包并解压到 <code>/usr/local</code>，添加环境变量：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -161,7 +161,7 @@ apt install kubeadm kubectl ipvsadm
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Golang</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Golang</span>
 <span class="nb">export</span> <span class="nv">GOROOT</span><span class="o">=</span>/usr/local/go
 <span class="nb">export</span> <span class="nv">GOPATH</span><span class="o">=</span>/data/gopath
 <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOROOT</span>/bin:<span class="nv">$GOPATH</span>/bin
@@ -175,44 +175,44 @@ apt install kubeadm kubectl ipvsadm
 <p>克隆源码（gitclone.com 用于国内加速）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git clone https://gitclone.com/github.com/kubeedge/kubeedge <span class="nv">$GOPATH</span>/src/github.com/kubeedge/kubeedge 
+<pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://gitclone.com/github.com/kubeedge/kubeedge <span class="nv">$GOPATH</span>/src/github.com/kubeedge/kubeedge 
 </code></pre></td></tr></table>
 </div>
 </div><p>由于kubeedge安编译中需要使用git的历史信息，因此将remote改回github地址：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">git remote set-url origin https://github.com/kubeedge/kubeedge
+<pre class="chroma"><code class="language-bash" data-lang="bash">git remote set-url origin https://github.com/kubeedge/kubeedge
 git remote show origin
 </code></pre></td></tr></table>
 </div>
 </div><p>创建工作目录：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /data/gopath <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /data/gopath
+<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir -p /data/gopath <span class="o">&amp;&amp;</span> <span class="nb">cd</span> /data/gopath
 mkdir -p src pkg bin
 </code></pre></td></tr></table>
 </div>
 </div><p>编译：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/kubeedge/kubeedge
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> <span class="nv">$GOPATH</span>/src/github.com/kubeedge/kubeedge
 make all <span class="nv">WHAT</span><span class="o">=</span>keadm
 make all <span class="nv">WHAT</span><span class="o">=</span>cloudcore
 make all <span class="nv">WHAT</span><span class="o">=</span>edgecore
@@ -227,21 +227,21 @@ make all <span class="nv">WHAT</span><span class="o">=</span>edgecore
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir /etc/kubeedge
+<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir /etc/kubeedge
 <span class="nb">cd</span>  /etc/kubeedge <span class="o">&amp;&amp;</span> wget https://g.ioiox.com/https://github.com/kubeedge/kubeedge/releases/download/v1.3.1/kubeedge-v1.3.1-linux-amd64.tar.gz
 </code></pre></td></tr></table>
 </div>
 </div><p>同时可能需要添加 raw.githubusercontent.com 的DNS解析：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">151.101.108.133 raw.githubusercontent.com
+<pre class="chroma"><code class="language-bash" data-lang="bash">151.101.108.133 raw.githubusercontent.com
 </code></pre></td></tr></table>
 </div>
 </div><p>创建cloud节点：</p>
@@ -250,29 +250,29 @@ make all <span class="nv">WHAT</span><span class="o">=</span>edgecore
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">keadm init --advertise-address<span class="o">=</span><span class="s2">&#34;IP&#34;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">keadm init --advertise-address<span class="o">=</span><span class="s2">&#34;IP&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>查看日志：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">tail -f /var/log/kubeedge/cloudcore.log
+<pre class="chroma"><code class="language-bash" data-lang="bash">tail -f /var/log/kubeedge/cloudcore.log
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="创建edge节点">创建edge节点</h2>
 <p>在cloud端获取token：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">keadm gettoken
+<pre class="chroma"><code class="language-bash" data-lang="bash">keadm gettoken
 </code></pre></td></tr></table>
 </div>
 </div><p>将cloud端的<code>./_output/local/bin</code>二进制文件拷贝至edge端并加入PATH，随后创建edge节点：</p>
@@ -282,39 +282,39 @@ make all <span class="nv">WHAT</span><span class="o">=</span>edgecore
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">keadm join --cloudcore-ipport<span class="o">=</span>CLOUD_IP:10000 --token<span class="o">=</span>TOKEN
+<pre class="chroma"><code class="language-bash" data-lang="bash">keadm join --cloudcore-ipport<span class="o">=</span>CLOUD_IP:10000 --token<span class="o">=</span>TOKEN
 </code></pre></td></tr></table>
 </div>
 </div><p>查看日志：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">tail -f /var/log/kubeedge/edgecore.log
+<pre class="chroma"><code class="language-bash" data-lang="bash">tail -f /var/log/kubeedge/edgecore.log
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="删除重置kubeedge">删除/重置Kubeedge</h2>
 <p>停止当前运行的kubeedge组件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">keadm reset
+<pre class="chroma"><code class="language-bash" data-lang="bash">keadm reset
 </code></pre></td></tr></table>
 </div>
 </div><p>在cloud端：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">rm -r /etc/kubeedge
+<pre class="chroma"><code class="language-bash" data-lang="bash">rm -r /etc/kubeedge
 kubectl delete CustomResourceDefinition <span class="k">$(</span>k get CustomResourceDefinition <span class="p">|</span> grep kubeedge <span class="p">|</span> awk <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span> 
 </code></pre></td></tr></table>
 </div>
@@ -325,13 +325,13 @@ kubectl delete CustomResourceDefinition <span class="k">$(</span>k get CustomRes
 <p>在cloud端：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@mq-228 /e/kubeedge# kubectl get no                 
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@mq-228 /e/kubeedge# kubectl get no                 
 NAME     STATUS   ROLES        AGE   VERSION
 mq-228   Ready    master       11d   v1.18.6+k3s1
 mq-227   Ready    agent,edge   38m   v1.17.1-kubeedge-v1.3.1
@@ -373,8 +373,8 @@ mq-227   Ready    agent,edge   38m   v1.17.1-kubeedge-v1.3.1
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

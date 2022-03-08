@@ -8,10 +8,10 @@
         <title>ClickHouse 多分片多备份部署 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="ClickHouse 多分片多备份部署" />
 <meta property="og:description" content="基于Docker的部署方式" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2/" />
+<meta property="og:image" content="https://ingbyr.github.io/logo.png"/>
 <meta property="article:published_time" content="2020-08-31T17:20:48+08:00" />
 <meta property="article:modified_time" content="2020-08-31T17:20:48+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
 
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "ClickHouse, 时序数据库","wordcount":  2680 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "ClickHouse, 时序数据库","wordcount":  2673 ,
         "url": "https:\/\/ingbyr.github.io\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2\/","datePublished": "2020-08-31T17:20:48+08:00","dateModified": "2020-08-31T17:20:48+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">ClickHouse 多分片多备份部署</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>时序数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-31">2020-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2680 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-31">2020-08-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2673 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -154,7 +154,7 @@
 <p>/etc/hosts 映射信息，实际部署时需要替换为自己的服务器IP，本文只在s1服务器中添加hosts信息，后文中若未指明服务器名，则默认在s1中执行：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -168,7 +168,7 @@
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>S1<span class="o">]</span> s1 
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>S1<span class="o">]</span> s1 
 <span class="o">[</span>S2<span class="o">]</span> s2 
 <span class="o">[</span>S3<span class="o">]</span> s3
 <span class="o">[</span>S1<span class="o">]</span> s1r1 
@@ -189,7 +189,7 @@
 <p>zoo1（s1服务器）:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -209,21 +209,21 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">zoo1</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">zookeeper</span><span class="w">
-</span><span class="w">        </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">zoo1</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span><span class="w">  
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">zoo1</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>zookeeper<span class="w">
+</span><span class="w">        </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>zoo1<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">2181</span><span class="p">:</span><span class="m">2181</span><span class="w">
 </span><span class="w">            </span>- <span class="m">2888</span><span class="p">:</span><span class="m">2888</span><span class="w">
 </span><span class="w">            </span>- <span class="m">3888</span><span class="p">:</span><span class="m">3888</span><span class="w">
-</span><span class="w">        </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span><span class="nt">ZOO_MY_ID</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
-</span><span class="w">            </span><span class="nt">ZOO_SERVERS</span><span class="p">:</span><span class="w"> </span><span class="l">server.1=0.0.0.0:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=zoo3:2888:3888;2181</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">ZOO_MY_ID</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">            </span><span class="k">ZOO_SERVERS</span><span class="p">:</span><span class="w"> </span>server<span class="m">.1</span>=<span class="m">0.0.0.0</span><span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w"> </span>server<span class="m">.2</span>=zoo2<span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w"> </span>server<span class="m">.3</span>=zoo3<span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo3:[S3]&#34;</span><span class="w">
@@ -234,7 +234,7 @@
 <p>zoo2（s2服务器）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -254,21 +254,21 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">zoo2</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">zookeeper</span><span class="w">
-</span><span class="w">        </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">zoo2</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span><span class="w">  
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">zoo2</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>zookeeper<span class="w">
+</span><span class="w">        </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>zoo2<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">2181</span><span class="p">:</span><span class="m">2181</span><span class="w">
 </span><span class="w">            </span>- <span class="m">2888</span><span class="p">:</span><span class="m">2888</span><span class="w">
 </span><span class="w">            </span>- <span class="m">3888</span><span class="p">:</span><span class="m">3888</span><span class="w">
-</span><span class="w">        </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span><span class="nt">ZOO_MY_ID</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
-</span><span class="w">            </span><span class="nt">ZOO_SERVERS</span><span class="p">:</span><span class="w"> </span><span class="l">server.1=zoo1:2888:3888;2181 server.2=0.0.0.0:2888:3888;2181 server.3=zoo3:2888:3888;2181</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">ZOO_MY_ID</span><span class="p">:</span><span class="w"> </span><span class="m">2</span><span class="w">
+</span><span class="w">            </span><span class="k">ZOO_SERVERS</span><span class="p">:</span><span class="w"> </span>server<span class="m">.1</span>=zoo1<span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w"> </span>server<span class="m">.2</span>=<span class="m">0.0.0.0</span><span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w"> </span>server<span class="m">.3</span>=zoo3<span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo3:[S3]&#34;</span><span class="w">
@@ -279,7 +279,7 @@
 <p>zoo3（s3服务器）:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -299,21 +299,21 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">zoo3</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">zookeeper</span><span class="w">
-</span><span class="w">        </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">zoo3</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span><span class="w">  
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">zoo3</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>zookeeper<span class="w">
+</span><span class="w">        </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>zoo3<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">2181</span><span class="p">:</span><span class="m">2181</span><span class="w">
 </span><span class="w">            </span>- <span class="m">2888</span><span class="p">:</span><span class="m">2888</span><span class="w">
 </span><span class="w">            </span>- <span class="m">3888</span><span class="p">:</span><span class="m">3888</span><span class="w">
-</span><span class="w">        </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span><span class="nt">ZOO_MY_ID</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
-</span><span class="w">            </span><span class="nt">ZOO_SERVERS</span><span class="p">:</span><span class="w"> </span><span class="l">server.1=zoo1:2888:3888;2181 server.2=zoo2:2888:3888;2181 server.3=0.0.0.0:2888:3888;2181</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span><span class="k">ZOO_MY_ID</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="w">            </span><span class="k">ZOO_SERVERS</span><span class="p">:</span><span class="w"> </span>server<span class="m">.1</span>=zoo1<span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w"> </span>server<span class="m">.2</span>=zoo2<span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w"> </span>server<span class="m">.3</span>=<span class="m">0.0.0.0</span><span class="p">:</span><span class="m">2888</span><span class="p">:</span><span class="m">3888</span>;<span class="m">2181</span><span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;z003:[S3]&#34;</span><span class="w">
@@ -324,10 +324,10 @@
 <p>在s1、s2、s3上分别启动zookeeper：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker-compose up -d
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker-compose up -d
 </code></pre></td></tr></table>
 </div>
 </div><blockquote>
@@ -341,30 +341,30 @@
 <p>首先启动一个临时容器来获取配置文件config.xml：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker run -itd --rm --name db yandex/clickhouse-server 
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run -itd --rm --name db yandex/clickhouse-server 
 </code></pre></td></tr></table>
 </div>
 </div><p>拷贝config.xml和users.xml：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker cp db:/etc/clickhouse-server/config.xml ./config.xml
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker cp db:/etc/clickhouse-server/config.xml ./config.xml
 docker cp db:/etc/clickhouse-server/users.xml ./users.xml
 </code></pre></td></tr></table>
 </div>
 </div><p>停止容器：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker stop db
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker stop db
 </code></pre></td></tr></table>
 </div>
 </div><p><code>config.xml</code>在三台服务器上均需要2份（2备份），<code>users.xml</code>在三台服务器中各需要一份（2备份共享该配置）</p>
@@ -372,14 +372,14 @@ docker cp db:/etc/clickhouse-server/users.xml ./users.xml
 <p>在users.xml中有详细的注释说明了如何添加用户、密码、用户权限等配置方法。这里添加defualt用户密码和新建一个tom用户，由于密码存储在文件，因此推荐使用sha256编码后放入文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@mq-228 ~/i/chdb# <span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>···
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@mq-228 ~/i/chdb# <span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>···
 37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f  
 
 root@mq-228 ~/i/chdb# <span class="nb">echo</span> -n <span class="s2">&#34;tom-password&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
@@ -389,16 +389,16 @@ d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672
 </div><p>default用户密码为default，tom的密码为tom-password，添加至users.xml，在 users/default中删除password项，添加：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;password_sha256_hex&gt;</span>37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f<span class="nt">&lt;/password_sha256_hex&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;password_sha256_hex&gt;</span>37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f<span class="nt">&lt;/password_sha256_hex&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>在users/下添加：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -408,7 +408,7 @@ d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tom&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tom&gt;</span>
   <span class="nt">&lt;password_sha256_hex&gt;</span>d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672<span class="nt">&lt;/password_sha256_hex&gt;</span>
   <span class="nt">&lt;profile&gt;</span>default<span class="nt">&lt;/profile&gt;</span>
   <span class="nt">&lt;quota&gt;</span>default<span class="nt">&lt;/quota&gt;</span>
@@ -421,11 +421,11 @@ d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672
 </div><p>随后即可通过以下命令登陆数据库：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client -u default --password default --port <span class="m">9001</span> 
+<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client -u default --password default --port <span class="m">9001</span> 
 clickhouse-client -u tom --password tom-password --port <span class="m">9001</span>
 </code></pre></td></tr></table>
 </div>
@@ -433,11 +433,11 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 <p>confix.xml中取消 listen_host 行的注释：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- Listen specified host. use :: (wildcard IPv6 address), if you want to accept connections both with IPv4 and IPv6 from everywhere. --&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="c">&lt;!-- Listen specified host. use :: (wildcard IPv6 address), if you want to accept connections both with IPv4 and IPv6 from everywhere. --&gt;</span>
 <span class="nt">&lt;listen_host&gt;</span>::<span class="nt">&lt;/listen_host&gt;</span>
 </code></pre></td></tr></table>
 </div>
@@ -446,7 +446,7 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 <p>工作目录下的文件列表参考：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -462,7 +462,7 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">root@mq-227 ~/i/chdb# tree .         
+<pre class="chroma"><code class="language-bash" data-lang="bash">root@mq-227 ~/i/chdb# tree .         
 .
 ├── check_table_p.sh
 ├── config-s1r1.xml
@@ -481,7 +481,7 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>metrika-s1r1.xml内容（稍后在docker-compose.xml中会映射到容器内的metrika.xml）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -562,7 +562,7 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="lnt">79
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;yandex&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;yandex&gt;</span>
   
 <span class="c">&lt;!-- 集群配置 --&gt;</span>
 <span class="nt">&lt;clickhouse_remote_servers&gt;</span>
@@ -646,24 +646,24 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>复制之前导出的<code>config.xml</code>并重命名为config-s1r1.xml （后文同），修改其TCP连接端口和同步端口：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9001<span class="nt">&lt;/tcp_port&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9001<span class="nt">&lt;/tcp_port&gt;</span>
 <span class="nt">&lt;interserver_http_port&gt;</span>9011<span class="nt">&lt;/interserver_http_port&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>metrika-s3r2.xml 与 <code>metrika-s1r1.xml</code> 内容相同，只需修改环境变量配置部分：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
     <span class="nt">&lt;shard&gt;</span>s3<span class="nt">&lt;/shard&gt;</span>
     <span class="nt">&lt;replica&gt;</span>r2<span class="nt">&lt;/replica&gt;</span>
 <span class="nt">&lt;/macros&gt;</span>
@@ -672,18 +672,18 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>config-s3r2.xml 修改其TCP连接端口和同步端口:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9002<span class="nt">&lt;/tcp_port&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9002<span class="nt">&lt;/tcp_port&gt;</span>
 <span class="nt">&lt;interserver_http_port&gt;</span>9013<span class="nt">&lt;/interserver_http_port&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>docker-compose.xml内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -731,21 +731,21 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="nt">chdb-s1r1</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">yandex/clickhouse-server:latest</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">s1r1</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">chdb-s1r1</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>yandex/clickhouse-server<span class="p">:</span>latest<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>s1r1<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9001</span><span class="p">:</span><span class="m">9001</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9011</span><span class="p">:</span><span class="m">9011</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/users.xml:/etc/clickhouse-server/users.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/config-s1r1.xml:/etc/clickhouse-server/config.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/metrika-s1r1.xml:/etc/metrika.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/s1r1:/var/lib/clickhouse </span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/users.xml<span class="p">:</span>/etc/clickhouse-server/users.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/config-s1r1.xml<span class="p">:</span>/etc/clickhouse-server/config.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/metrika-s1r1.xml<span class="p">:</span>/etc/metrika.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/s1r1<span class="p">:</span>/var/lib/clickhouse<span class="w"> 
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s2r1:[S2]&#34;</span><span class="w">
@@ -756,18 +756,18 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="w">            </span>- <span class="s2">&#34;zoo2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo3:[S3]&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="nt">chdb-s3r2</span><span class="p">:</span><span class="w"> 
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">yandex/clickhouse-server:latest</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">s3r2</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">chdb-s3r2</span><span class="p">:</span><span class="w"> 
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>yandex/clickhouse-server<span class="p">:</span>latest<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>s3r2<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9002</span><span class="p">:</span><span class="m">9002</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9013</span><span class="p">:</span><span class="m">9013</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/users.xml:/etc/clickhouse-server/users.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/config-s3r2.xml:/etc/clickhouse-server/config.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/metrika-s3r2.xml:/etc/metrika.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/s3r2:/var/lib/clickhouse</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/users.xml<span class="p">:</span>/etc/clickhouse-server/users.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/config-s3r2.xml<span class="p">:</span>/etc/clickhouse-server/config.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/metrika-s3r2.xml<span class="p">:</span>/etc/metrika.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/s3r2<span class="p">:</span>/var/lib/clickhouse<span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s2r1:[S2]&#34;</span><span class="w">
@@ -784,13 +784,13 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 <p>metrika-s2r1.xml 与 metrika-s1r1.xml 类似，只需修改环境变量配置部分：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
     <span class="nt">&lt;shard&gt;</span>s2<span class="nt">&lt;/shard&gt;</span>
     <span class="nt">&lt;replica&gt;</span>r1<span class="nt">&lt;/replica&gt;</span>
 <span class="nt">&lt;/macros&gt;</span>
@@ -799,24 +799,24 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>config-s2r1.xml 修改其TCP连接端口和同步端口:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9001<span class="nt">&lt;/tcp_port&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9001<span class="nt">&lt;/tcp_port&gt;</span>
 <span class="nt">&lt;interserver_http_port&gt;</span>9012<span class="nt">&lt;/interserver_http_port&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>metrika-s1r2.xml 与 metrika-s1r1.xml 类似，只需修改环境变量配置部分：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
     <span class="nt">&lt;shard&gt;</span>s1<span class="nt">&lt;/shard&gt;</span>
     <span class="nt">&lt;replica&gt;</span>r2<span class="nt">&lt;/replica&gt;</span>
 <span class="nt">&lt;/macros&gt;</span>
@@ -825,18 +825,18 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>config-s1r2.xml 修改其TCP连接端口和同步端口:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9002<span class="nt">&lt;/tcp_port&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9002<span class="nt">&lt;/tcp_port&gt;</span>
 <span class="nt">&lt;interserver_http_port&gt;</span>9011<span class="nt">&lt;/interserver_http_port&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>docker-compose.xml内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -884,21 +884,21 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="nt">chdb-s2r1</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">yandex/clickhouse-server:latest</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">s2r1</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">chdb-s2r1</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>yandex/clickhouse-server<span class="p">:</span>latest<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>s2r1<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9001</span><span class="p">:</span><span class="m">9001</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9012</span><span class="p">:</span><span class="m">9012</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/users.xml:/etc/clickhouse-server/users.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/config-s2r1.xml:/etc/clickhouse-server/config.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/metrika-s2r1.xml:/etc/metrika.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/s2r1:/var/lib/clickhouse</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/users.xml<span class="p">:</span>/etc/clickhouse-server/users.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/config-s2r1.xml<span class="p">:</span>/etc/clickhouse-server/config.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/metrika-s2r1.xml<span class="p">:</span>/etc/metrika.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/s2r1<span class="p">:</span>/var/lib/clickhouse<span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s2r1:[S2]&#34;</span><span class="w">
@@ -909,18 +909,18 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="w">            </span>- <span class="s2">&#34;zoo2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo3:[S3]&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="nt">chdb-s1r2</span><span class="p">:</span><span class="w"> 
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">yandex/clickhouse-server:latest</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">s1r2</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">chdb-s1r2</span><span class="p">:</span><span class="w"> 
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>yandex/clickhouse-server<span class="p">:</span>latest<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>s1r2<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9002</span><span class="p">:</span><span class="m">9002</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9011</span><span class="p">:</span><span class="m">9011</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/users.xml:/etc/clickhouse-server/users.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/config-s1r2.xml:/etc/clickhouse-server/config.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/metrika-s1r2.xml:/etc/metrika.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/s1r2:/var/lib/clickhouse</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/users.xml<span class="p">:</span>/etc/clickhouse-server/users.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/config-s1r2.xml<span class="p">:</span>/etc/clickhouse-server/config.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/metrika-s1r2.xml<span class="p">:</span>/etc/metrika.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/s1r2<span class="p">:</span>/var/lib/clickhouse<span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s2r1:[S2]&#34;</span><span class="w">
@@ -936,13 +936,13 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 <p>metrika-s3r1.xml 需修改环境变量配置部分：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
     <span class="nt">&lt;shard&gt;</span>s3<span class="nt">&lt;/shard&gt;</span>
     <span class="nt">&lt;replica&gt;</span>r1<span class="nt">&lt;/replica&gt;</span>
 <span class="nt">&lt;/macros&gt;</span>
@@ -951,24 +951,24 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>config-s3r1.xml 修改其TCP连接端口和同步端口:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9001<span class="nt">&lt;/tcp_port&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9001<span class="nt">&lt;/tcp_port&gt;</span>
 <span class="nt">&lt;interserver_http_port&gt;</span>9013<span class="nt">&lt;/interserver_http_port&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>metrika-s2r2.xml 修改环境变量配置部分：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;macros&gt;</span>
     <span class="nt">&lt;shard&gt;</span>s2<span class="nt">&lt;/shard&gt;</span>
     <span class="nt">&lt;replica&gt;</span>r2<span class="nt">&lt;/replica&gt;</span>
 <span class="nt">&lt;/macros&gt;</span>
@@ -977,18 +977,18 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>config-s2r2.xml 修改其TCP连接端口和同步端口:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9002<span class="nt">&lt;/tcp_port&gt;</span>
+<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tcp_port&gt;</span>9002<span class="nt">&lt;/tcp_port&gt;</span>
 <span class="nt">&lt;interserver_http_port&gt;</span>9012<span class="nt">&lt;/interserver_http_port&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>docker-compose.xml内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1036,21 +1036,21 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="lnt">46
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.1&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="nt">chdb-s3r1</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">yandex/clickhouse-server:latest</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">s3r1</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">chdb-s3r1</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>yandex/clickhouse-server<span class="p">:</span>latest<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>s3r1<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9001</span><span class="p">:</span><span class="m">9001</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9013</span><span class="p">:</span><span class="m">9013</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/users.xml:/etc/clickhouse-server/users.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/config-s3r1.xml:/etc/clickhouse-server/config.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/metrika-s3r1.xml:/etc/metrika.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/s3r1:/var/lib/clickhouse</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/users.xml<span class="p">:</span>/etc/clickhouse-server/users.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/config-s3r1.xml<span class="p">:</span>/etc/clickhouse-server/config.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/metrika-s3r1.xml<span class="p">:</span>/etc/metrika.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/s3r1<span class="p">:</span>/var/lib/clickhouse<span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s2r1:[S2]&#34;</span><span class="w">
@@ -1061,18 +1061,18 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="w">            </span>- <span class="s2">&#34;zoo2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;zoo3:[S3]&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span><span class="nt">chdb-s2r2</span><span class="p">:</span><span class="w"> 
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">yandex/clickhouse-server:latest</span><span class="w">
-</span><span class="w">        </span><span class="nt">hostname</span><span class="p">:</span><span class="w"> </span><span class="l">s2r2</span><span class="w">
-</span><span class="w">        </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">chdb-s2r2</span><span class="p">:</span><span class="w"> 
+</span><span class="w">        </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>yandex/clickhouse-server<span class="p">:</span>latest<span class="w">
+</span><span class="w">        </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>s2r2<span class="w">
+</span><span class="w">        </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9002</span><span class="p">:</span><span class="m">9002</span><span class="w">
 </span><span class="w">            </span>- <span class="m">9012</span><span class="p">:</span><span class="m">9012</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/users.xml:/etc/clickhouse-server/users.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/config-s2r2.xml:/etc/clickhouse-server/config.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/metrika-s2r2.xml:/etc/metrika.xml</span><span class="w">
-</span><span class="w">            </span>- <span class="l">/root/iot/chdb/s2r2:/var/lib/clickhouse</span><span class="w">
-</span><span class="w">        </span><span class="nt">extra_hosts</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/users.xml<span class="p">:</span>/etc/clickhouse-server/users.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/config-s2r2.xml<span class="p">:</span>/etc/clickhouse-server/config.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/metrika-s2r2.xml<span class="p">:</span>/etc/metrika.xml<span class="w">
+</span><span class="w">            </span>- /root/iot/chdb/s2r2<span class="p">:</span>/var/lib/clickhouse<span class="w">
+</span><span class="w">        </span><span class="k">extra_hosts</span><span class="p">:</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r1:[S1]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s1r2:[S2]&#34;</span><span class="w">
 </span><span class="w">            </span>- <span class="s2">&#34;s2r1:[S2]&#34;</span><span class="w">
@@ -1088,10 +1088,10 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 <p>连接至任意数据库，查询集群信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client -u default --password default --host s1r1 --port <span class="m">9001</span> 
+<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client -u default --password default --host s1r1 --port <span class="m">9001</span> 
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="示例">示例</h2>
@@ -1099,7 +1099,7 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 <p>在s1服务器上执行<code>s1/create_table_p.sh</code>脚本来创建表：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1123,7 +1123,7 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="lnt">22
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">ports</span><span class="o">=</span><span class="s2">&#34;9001 9002&#34;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">ports</span><span class="o">=</span><span class="s2">&#34;9001 9002&#34;</span>
 <span class="nv">hosts</span><span class="o">=</span><span class="s2">&#34;s1 s2 s3&#34;</span>
 <span class="k">for</span> port in <span class="nv">$ports</span>
 <span class="k">do</span>
@@ -1150,27 +1150,27 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </div><p>为了使用分片，需要一个虚拟的统一入口表，ClickHouse中称为分布表（Distributed Table），可以简单认为是一个数据路由表。创建分布表：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1r1 -u default --password default --port <span class="m">9001</span> --query <span class="s2">&#34;CREATE TABLE p_all AS p
+<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1r1 -u default --password default --port <span class="m">9001</span> --query <span class="s2">&#34;CREATE TABLE p_all AS p
 </span><span class="s2">ENGINE = Distributed(perftest_3shards_2replicas, default, p, rand())&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>其中 perftest_3shards_2replicas 为之前定义的集群ID。然后导入测试数据：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1r1 -u default --password default --port <span class="m">9001</span> --query <span class="s2">&#34;INSERT INTO p_all FORMAT CSV&#34;</span> &lt; data_p.csv
+<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1r1 -u default --password default --port <span class="m">9001</span> --query <span class="s2">&#34;INSERT INTO p_all FORMAT CSV&#34;</span> &lt; data_p.csv
 </code></pre></td></tr></table>
 </div>
 </div><p>查看数据分片存储的情况 <code>s1/check_table_p.sh</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1182,7 +1182,7 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">ports</span><span class="o">=</span><span class="s2">&#34;9001 9002&#34;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">ports</span><span class="o">=</span><span class="s2">&#34;9001 9002&#34;</span>
 <span class="nv">hosts</span><span class="o">=</span><span class="s2">&#34;s1 s2 s3&#34;</span>
 <span class="k">for</span> port in <span class="nv">$ports</span>
 <span class="k">do</span>
@@ -1226,8 +1226,8 @@ clickhouse-client -u tom --password tom-password --port <span class="m">9001</sp
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

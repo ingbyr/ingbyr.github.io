@@ -8,10 +8,10 @@
         <title>CICD搭建部署 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="CICD搭建部署" />
 <meta property="og:description" content="基于Gitea和Drone实现CICD" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/" />
+<meta property="og:image" content="https://ingbyr.github.io/logo.png"/>
 <meta property="article:published_time" content="2021-03-04T14:35:59+08:00" />
 <meta property="article:modified_time" content="2021-03-04T14:35:59+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
 
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "CICD","wordcount":  788 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "CICD","wordcount":  780 ,
         "url": "https:\/\/ingbyr.github.io\/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2\/","datePublished": "2021-03-04T14:35:59+08:00","dateModified": "2021-03-04T14:35:59+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">CICD搭建部署</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/cicd/"><i class="far fa-folder fa-fw"></i>CICD</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-04">2021-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 788 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-03-04">2021-03-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 780 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -140,7 +140,7 @@
 <h3 id="docker-compose部署">docker-compose部署</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -185,49 +185,49 @@
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#docker-compose.yml</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#docker-compose.yml</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span><span class="w"></span><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">gitea</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w"></span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">gitea</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">external</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">gitea</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">gitea/gitea:1.13.2</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">USER_UID=1000</span><span class="w">
-</span><span class="w">      </span>- <span class="l">USER_GID=1000</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DB_TYPE=postgres</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DB_HOST=db:5432</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DB_NAME=gitea</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DB_USER=gitea</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DB_PASSWD=gitea</span><span class="w">
-</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">gitea</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">./gitea:/data</span><span class="w">
-</span><span class="w">      </span>- <span class="l">/etc/timezone:/etc/timezone:ro</span><span class="w">
-</span><span class="w">      </span>- <span class="l">/etc/localtime:/etc/localtime:ro</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">gitea</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>gitea/gitea<span class="p">:</span><span class="m">1.13.2</span><span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- USER_UID=<span class="m">1000</span><span class="w">
+</span><span class="w">      </span>- USER_GID=<span class="m">1000</span><span class="w">
+</span><span class="w">      </span>- DB_TYPE=postgres<span class="w">
+</span><span class="w">      </span>- DB_HOST=db<span class="p">:</span><span class="m">5432</span><span class="w">
+</span><span class="w">      </span>- DB_NAME=gitea<span class="w">
+</span><span class="w">      </span>- DB_USER=gitea<span class="w">
+</span><span class="w">      </span>- DB_PASSWD=gitea<span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- gitea<span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./gitea<span class="p">:</span>/data<span class="w">
+</span><span class="w">      </span>- /etc/timezone<span class="p">:</span>/etc/timezone<span class="p">:</span>ro<span class="w">
+</span><span class="w">      </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;10080:3000&#34;</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;10022:22&#34;</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">     </span>- <span class="l">db</span><span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">     </span>- db<span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="nt">db</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">postgres:9.6-alpine</span><span class="w">
-</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">POSTGRES_USER=gitea</span><span class="w">
-</span><span class="w">      </span>- <span class="l">POSTGRES_PASSWORD=gitea</span><span class="w">
-</span><span class="w">      </span>- <span class="l">POSTGRES_DB=gitea</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">gitea</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">./postgres:/var/lib/postgresql/data</span><span class="w">
+</span><span class="w">  </span><span class="k">db</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>postgres<span class="p">:</span><span class="m">9.6</span>-alpine<span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- POSTGRES_USER=gitea<span class="w">
+</span><span class="w">      </span>- POSTGRES_PASSWORD=gitea<span class="w">
+</span><span class="w">      </span>- POSTGRES_DB=gitea<span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- gitea<span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./postgres<span class="p">:</span>/var/lib/postgresql/data<span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><h3 id="初始化gitea">初始化Gitea</h3>
@@ -238,7 +238,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -248,7 +248,7 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[server]</span>
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[server]</span>
   <span class="na">APP_DATA_PATH</span>    <span class="o">=</span> <span class="s">/data/gitea
 </span><span class="s">  DOMAIN           = ip
 </span><span class="s">  SSH_DOMAIN       = ip
@@ -265,7 +265,7 @@
 <p>使用docker-compose部署：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -311,49 +311,49 @@
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="c"># docker-compose.yml</span><span class="w">
+<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="c"># docker-compose.yml</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span><span class="w"></span><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">drone</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">external</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w"></span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">drone</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">external</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">drone-server</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">drone/drone:1</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">drone</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">./drone-data:/var/lib/drone/data</span><span class="w">
-</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_GITEA_SERVER=${DRONE_GITEA_SERVER}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_GITEA_CLIENT_ID=${DRONE_GITEA_CLIENT_ID}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_GITEA_CLIENT_SECRET=${DRONE_GITEA_CLIENT_SECRET}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_RPC_SECRET=${DRONE_RPC_SECRET}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_SERVER_HOST=${DRONE_SERVER_HOST}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_SERVER_PROTO=${DRONE_SERVER_PROTO}</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">drone-server</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>drone/drone<span class="p">:</span><span class="m">1</span><span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- drone<span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./drone-data<span class="p">:</span>/var/lib/drone/data<span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- DRONE_GITEA_SERVER=${DRONE_GITEA_SERVER}<span class="w">
+</span><span class="w">      </span>- DRONE_GITEA_CLIENT_ID=${DRONE_GITEA_CLIENT_ID}<span class="w">
+</span><span class="w">      </span>- DRONE_GITEA_CLIENT_SECRET=${DRONE_GITEA_CLIENT_SECRET}<span class="w">
+</span><span class="w">      </span>- DRONE_RPC_SECRET=${DRONE_RPC_SECRET}<span class="w">
+</span><span class="w">      </span>- DRONE_SERVER_HOST=${DRONE_SERVER_HOST}<span class="w">
+</span><span class="w">      </span>- DRONE_SERVER_PROTO=${DRONE_SERVER_PROTO}<span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;11080:80&#34;</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;11443:443&#34;</span><span class="w">
 </span><span class="w">
-</span><span class="w">  </span><span class="nt">drone-runner</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">drone/drone-runner-docker:1</span><span class="w">
-</span><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
-</span><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">drone-server</span><span class="w">
-</span><span class="w">    </span><span class="nt">networks</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">drone</span><span class="w">
-</span><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">/var/run/docker.sock:/var/run/docker.sock</span><span class="w">
-</span><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_RPC_PROTO=${DRONE_SERVER_PROTO}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_RPC_HOST=${DRONE_SERVER_HOST}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_RPC_SECRET=${DRONE_RPC_SECRET}</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_RUNNER_CAPACITY=2</span><span class="w">
-</span><span class="w">      </span>- <span class="l">DRONE_RUNNER_NAME=${HOSTNAME}</span><span class="w">
-</span><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">drone-runner</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>drone/drone-runner-docker<span class="p">:</span><span class="m">1</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- drone-server<span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- drone<span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- /var/run/docker.sock<span class="p">:</span>/var/run/docker.sock<span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- DRONE_RPC_PROTO=${DRONE_SERVER_PROTO}<span class="w">
+</span><span class="w">      </span>- DRONE_RPC_HOST=${DRONE_SERVER_HOST}<span class="w">
+</span><span class="w">      </span>- DRONE_RPC_SECRET=${DRONE_RPC_SECRET}<span class="w">
+</span><span class="w">      </span>- DRONE_RUNNER_CAPACITY=<span class="m">2</span><span class="w">
+</span><span class="w">      </span>- DRONE_RUNNER_NAME=${HOSTNAME}<span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
 </span><span class="w">      </span>- <span class="s2">&#34;13000:3000&#34;</span><span class="w">
 </span></code></pre></td></tr></table>
 </div>
@@ -363,7 +363,7 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -372,7 +372,7 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># .env</span>
+<pre class="chroma"><code class="language-ini" data-lang="ini"><span class="c1"># .env</span>
 <span class="na">DRONE_GITEA_SERVER</span><span class="o">=</span><span class="s">http://[gitea-ip]:10080/</span>
 <span class="na">DRONE_GITEA_CLIENT_ID</span><span class="o">=</span><span class="s">[gitea oauth2 app client id]</span>
 <span class="na">DRONE_GITEA_CLIENT_SECRET</span><span class="o">=</span><span class="s">[gitea oauth2 app client secret]</span>
@@ -387,7 +387,7 @@
 <p>项目中添加<code>.drone.yml</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -404,27 +404,27 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">pipeline</span><span class="w">
-</span><span class="w"></span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">exec</span><span class="w"> </span><span class="c"># 指定 Runner 的模式，此处为 Exec Runner</span><span class="w">
-</span><span class="w"></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
-</span><span class="w"></span><span class="nt">platform</span><span class="p">:</span><span class="w"> </span><span class="c"># Exec Runner 特有设置，提供 Runner 运行的相关信息</span><span class="w">
-</span><span class="w">  </span><span class="nt">os</span><span class="p">:</span><span class="w"> </span><span class="l">linux</span><span class="w">
-</span><span class="w">  </span><span class="nt">arch</span><span class="p">:</span><span class="w"> </span><span class="l">amd64</span><span class="w">
-</span><span class="w"></span><span class="nt">steps</span><span class="p">:</span><span class="w"> </span><span class="c"># 以下为自定义的步骤流程</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">build</span><span class="w">
-</span><span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="l">bash build.sh</span><span class="w">
-</span><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
-</span><span class="w">  </span><span class="nt">commands</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="l">cd /data/projects/iwop-ui</span><span class="w">
-</span><span class="w">  </span>- <span class="l">zip -rq dist.zip dist/</span><span class="w">
-</span><span class="w">  </span>- <span class="l">cp dist.zip /data/storage/iwop-ui/dist-$(date &#39;+%Y%m%d%H%M%S&#39;).zip</span><span class="w">
+<pre class="chroma"><code class="language-yml" data-lang="yml"><span class="k">kind</span><span class="p">:</span><span class="w"> </span>pipeline<span class="w">
+</span><span class="w"></span><span class="k">type</span><span class="p">:</span><span class="w"> </span>exec<span class="w"> </span><span class="c"># 指定 Runner 的模式，此处为 Exec Runner</span><span class="w">
+</span><span class="w"></span><span class="k">name</span><span class="p">:</span><span class="w"> </span>default<span class="w">
+</span><span class="w"></span><span class="k">platform</span><span class="p">:</span><span class="w"> </span><span class="c"># Exec Runner 特有设置，提供 Runner 运行的相关信息</span><span class="w">
+</span><span class="w">  </span><span class="k">os</span><span class="p">:</span><span class="w"> </span>linux<span class="w">
+</span><span class="w">  </span><span class="k">arch</span><span class="p">:</span><span class="w"> </span>amd64<span class="w">
+</span><span class="w"></span><span class="k">steps</span><span class="p">:</span><span class="w"> </span><span class="c"># 以下为自定义的步骤流程</span><span class="w">
+</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>build<span class="w">
+</span><span class="w">  </span><span class="k">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- bash<span class="w"> </span>build.sh<span class="w">
+</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>deploy<span class="w">
+</span><span class="w">  </span><span class="k">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- cd<span class="w"> </span>/data/projects/iwop-ui<span class="w">
+</span><span class="w">  </span>- zip<span class="w"> </span>-rq<span class="w"> </span>dist.zip<span class="w"> </span>dist/<span class="w">
+</span><span class="w">  </span>- cp<span class="w"> </span>dist.zip<span class="w"> </span>/data/storage/iwop-ui/dist-$(date<span class="w"> </span><span class="s1">&#39;+%Y%m%d%H%M%S&#39;</span>).zip<span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><p><code>build.sh</code> 展示了构建一个外部 nodejs 项目的方式（另一种个人认为可行的方案是 git submodule，尚未验证）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -459,7 +459,7 @@
 </span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
+<pre class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="c1"># Create project dir and clone it</span>
 <span class="k">if</span> <span class="o">[</span> ! -d <span class="o">[</span>parent-dir<span class="o">]</span>/<span class="o">[</span>project-name<span class="o">]</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
@@ -526,8 +526,8 @@ npm run build-ws --no-progress
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

@@ -1,0 +1,14 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>CICD - 标签 - ingbyr</title>
+        <link>https://ingbyr.github.io/tags/cicd/</link>
+        <description>CICD - 标签 - ingbyr</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 04 Mar 2021 14:35:59 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/tags/cicd/" rel="self" type="application/rss+xml" /><item>
+    <title>CICD搭建部署</title>
+    <link>https://ingbyr.github.io/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/</link>
+    <pubDate>Thu, 04 Mar 2021 14:35:59 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://ingbyr.github.io/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/</guid>
+    <description><![CDATA[<p>基于Gitea和Drone实现CICD</p>]]></description>
+</item></channel>
+</rss>

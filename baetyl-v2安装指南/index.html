@@ -8,10 +8,10 @@
         <title>Baetyl V2安装指南 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Baetyl V2安装指南" />
 <meta property="og:description" content="Baetyl v2.0.0安装指南" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" />
+<meta property="og:image" content="https://ingbyr.github.io/logo.png"/>
 <meta property="article:published_time" content="2020-08-31T17:29:12+08:00" />
 <meta property="article:modified_time" content="2020-08-31T17:29:12+08:00" />
-
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
 
@@ -135,13 +135,13 @@
 <p><code>/etc/docker/daemon.json</code>中添加/修改：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
     <span class="nt">&#34;exec-opts&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;native.cgroupdriver=systemd&#34;</span><span class="p">],</span>
     <span class="nt">&#34;registry-mirrors&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;https://docker.mirrors.ustc.edu.cn/&#34;</span><span class="p">],</span>
 <span class="p">}</span>
@@ -155,14 +155,14 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker run -itd -p 9080:80 -p 9443:443 <span class="se">\
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker run -itd -p 9080:80 -p 9443:443 <span class="se">\
 </span><span class="se"></span>--name rancher <span class="se">\
 </span><span class="se"></span>--restart<span class="o">=</span>unless-stopped <span class="se">\
 </span><span class="se"></span>-e <span class="nv">CATTLE_AGENT_IMAGE</span><span class="o">=</span><span class="s2">&#34;registry.cn-hangzhou.aliyuncs.com/rancher/rancher-agent:v2.4.2&#34;</span> <span class="se">\
@@ -172,7 +172,7 @@
 </div><p>清空数据</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -194,7 +194,7 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker stop <span class="k">$(</span>docker ps -aq<span class="k">)</span>
 docker system prune -f
 docker volume rm <span class="k">$(</span>docker volume ls -q<span class="k">)</span>
 docker image rm <span class="k">$(</span>docker image ls -q<span class="k">)</span>
@@ -220,45 +220,45 @@ rm -rf /etc/ceph <span class="se">\
 <p>使用国内源安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn sh -s - server --docker
+<pre class="chroma"><code class="language-bash" data-lang="bash">curl -sfL http://rancher-mirror.cnrancher.com/k3s/k3s-install.sh <span class="p">|</span> <span class="nv">INSTALL_K3S_MIRROR</span><span class="o">=</span>cn sh -s - server --docker
 </code></pre></td></tr></table>
 </div>
 </div><p>配置config</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
+<pre class="chroma"><code class="language-bash" data-lang="bash">cp /etc/rancher/k3s/k3s.yaml ~/.kube/config
 </code></pre></td></tr></table>
 </div>
 </div><p>添加本地存储支持：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 kubectl create -f local-path-storage.yaml
 </code></pre></td></tr></table>
 </div>
 </div><p>设置该存储为默认存储：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="k8s">K8S</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -269,7 +269,7 @@ kubectl create -f local-path-storage.yaml
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装 kubeadm kubectl kubelet</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装 kubeadm kubectl kubelet</span>
 gpg --keyserver keyserver.ubuntu.com --recv-keys BA07F4FB
 gpg --export --armor BA07F4FB <span class="p">|</span> sudo apt-key add -
 <span class="nb">echo</span> <span class="s2">&#34;deb https://mirrors.tuna.tsinghua.edu.cn/kubernetes/apt kubernetes-xenial main&#34;</span> &gt; /etc/apt/sources.list.d/kubernetes.list 
@@ -283,7 +283,7 @@ kubeadm config images list --kubernetes-version v1.18.3
 </div><p>终端输出：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -292,7 +292,7 @@ kubeadm config images list --kubernetes-version v1.18.3
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">k8s.gcr.io/kube-apiserver:1.18.3
+<pre class="chroma"><code class="language-bash" data-lang="bash">k8s.gcr.io/kube-apiserver:1.18.3
 k8s.gcr.io/kube-controller-manager:v1.18.3
 k8s.gcr.io/kube-scheduler:v1.18.3
 k8s.gcr.io/kube-proxy:v1.18.3
@@ -304,7 +304,7 @@ k8s.gcr.io/coredns:1.6.7
 </div><p>新建脚本<code>get-k8s-images.sh </code>并替换版本号：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -323,7 +323,7 @@ k8s.gcr.io/coredns:1.6.7
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
 </span><span class="cp"></span>
 <span class="nv">images</span><span class="o">=(</span>
     kube-apiserver:v1.18.3
@@ -345,7 +345,7 @@ k8s.gcr.io/coredns:1.6.7
 </div><p>执行<code>get-k8s-images.sh </code>以便从国内hub获取镜像。修改kubelet配置中的默认cgroup driver：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -353,7 +353,7 @@ k8s.gcr.io/coredns:1.6.7
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">cat &gt; /var/lib/kubelet/config.yaml <span class="s">&lt;&lt;EOF
+<pre class="chroma"><code class="language-bash" data-lang="bash">cat &gt; /var/lib/kubelet/config.yaml <span class="s">&lt;&lt;EOF
 </span><span class="s">apiVersion: kubelet.config.k8s.io/v1beta1
 </span><span class="s">kind: KubeletConfiguration
 </span><span class="s">cgroupDriver: systemd
@@ -364,21 +364,21 @@ systemctl restart kubelet
 </div><p>启动k8s：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kubeadm init --pod-network-cidr<span class="o">=</span>10.244.0.0/16 --kubernetes-version<span class="o">=</span>v1.18.3
+<pre class="chroma"><code class="language-bash" data-lang="bash">kubeadm init --pod-network-cidr<span class="o">=</span>10.244.0.0/16 --kubernetes-version<span class="o">=</span>v1.18.3
 </code></pre></td></tr></table>
 </div>
 </div><p>启动完毕后有后续步骤的相关提示，具体操作为配置<code>$HOME/.kube/config</code>：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mkdir -p <span class="nv">$HOME</span>/.kube
+<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir -p <span class="nv">$HOME</span>/.kube
 sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
 sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
 </code></pre></td></tr></table>
@@ -386,32 +386,32 @@ sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k
 </div><p>添加网络组件（Flannel）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 kubectl apply -f kube-flannel.yml
 </code></pre></td></tr></table>
 </div>
 </div><p>添加本地存储支持：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
+<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://raw.githubusercontent.com/rancher/local-path-provisioner/master/deploy/local-path-storage.yaml
 kubectl create -f local-path-storage.yaml
 </code></pre></td></tr></table>
 </div>
 </div><p>设置该存储为默认存储：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">kubectl patch storageclass local-path -p <span class="s1">&#39;{&#34;metadata&#34;: {&#34;annotations&#34;:{&#34;storageclass.kubernetes.io/is-default-class&#34;:&#34;true&#34;}}}&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="安装baetyl">安装Baetyl</h2>
@@ -419,18 +419,18 @@ kubectl create -f local-path-storage.yaml
 <p>在安装边缘节点时报错：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">curl -d <span class="s2">&#34;{\&#34;name\&#34;:\&#34;demo-node\&#34;}&#34;</span> -H <span class="s2">&#34;Content-Type: application/json&#34;</span> -X POST http://0.0.0.0:30004/v1/nodes
+<pre class="chroma"><code class="language-bash" data-lang="bash">curl -d <span class="s2">&#34;{\&#34;name\&#34;:\&#34;demo-node\&#34;}&#34;</span> -H <span class="s2">&#34;Content-Type: application/json&#34;</span> -X POST http://0.0.0.0:30004/v1/nodes
 <span class="o">{</span><span class="s2">&#34;code&#34;</span>:<span class="s2">&#34;UnknownError&#34;</span>,<span class="s2">&#34;message&#34;</span>:<span class="s2">&#34;nodes.cloud.baetyl.io \&#34;demo-node\&#34; is forbidden: User \&#34;system:serviceaccount:default:baetyl-cloud\&#34; cannot get resource \&#34;nodes\&#34; in API group \&#34;cloud.baetyl.io\&#34; in the namespace \&#34;baetyl-cloud\&#34;&#34;</span>,<span class="s2">&#34;requestId&#34;</span>:<span class="s2">&#34;&#34;</span><span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>临时的解决办法：为账户baetyl-cloud添加所有相关权限：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -456,35 +456,35 @@ kubectl create -f local-path-storage.yaml
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
-</span><span class="w"></span><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-baetyl-cr</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">custom</span><span class="p">:</span><span class="w"> </span><span class="l">role-patch</span><span class="w">
-</span><span class="w"></span><span class="nt">rules</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="nt">apiGroups</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">cloud.baetyl.io</span><span class="w">
-</span><span class="w">    </span><span class="nt">resources</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">nodes</span><span class="w">
-</span><span class="w">      </span>- <span class="l">applications</span><span class="w">
-</span><span class="w">      </span>- <span class="l">configurations</span><span class="w">
-</span><span class="w">      </span>- <span class="l">nodedesires</span><span class="w">
-</span><span class="w">      </span>- <span class="l">nodereports</span><span class="w">
-</span><span class="w">      </span>- <span class="l">secrets</span><span class="w">
-</span><span class="w">    </span><span class="nt">verbs</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="l">get</span><span class="w">
-</span><span class="w">      </span>- <span class="l">list</span><span class="w">
-</span><span class="w">      </span>- <span class="l">watch</span><span class="w">
-</span><span class="w">      </span>- <span class="l">create</span><span class="w">
-</span><span class="w">      </span>- <span class="l">update</span><span class="w">
-</span><span class="w">      </span>- <span class="l">patch</span><span class="w">
-</span><span class="w">      </span>- <span class="l">delete</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRole<span class="w">
+</span><span class="w"></span><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io/v1<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-cr<span class="w">
+</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">custom</span><span class="p">:</span><span class="w"> </span>role-patch<span class="w">
+</span><span class="w"></span><span class="k">rules</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">apiGroups</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- cloud.baetyl.io<span class="w">
+</span><span class="w">    </span><span class="k">resources</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- nodes<span class="w">
+</span><span class="w">      </span>- applications<span class="w">
+</span><span class="w">      </span>- configurations<span class="w">
+</span><span class="w">      </span>- nodedesires<span class="w">
+</span><span class="w">      </span>- nodereports<span class="w">
+</span><span class="w">      </span>- secrets<span class="w">
+</span><span class="w">    </span><span class="k">verbs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- get<span class="w">
+</span><span class="w">      </span>- list<span class="w">
+</span><span class="w">      </span>- watch<span class="w">
+</span><span class="w">      </span>- create<span class="w">
+</span><span class="w">      </span>- update<span class="w">
+</span><span class="w">      </span>- patch<span class="w">
+</span><span class="w">      </span>- delete<span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -500,20 +500,20 @@ kubectl create -f local-path-storage.yaml
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io/v1</span><span class="w">
-</span><span class="w"></span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRoleBinding</span><span class="w">
-</span><span class="w"></span><span class="nt">metadata</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-baetyl-crb</span><span class="w">
-</span><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">custom</span><span class="p">:</span><span class="w"> </span><span class="l">role-patch</span><span class="w">
-</span><span class="w"></span><span class="nt">roleRef</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="nt">apiGroup</span><span class="p">:</span><span class="w"> </span><span class="l">rbac.authorization.k8s.io</span><span class="w">
-</span><span class="w">  </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ClusterRole</span><span class="w">
-</span><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">my-baetyl-cr</span><span class="w">
-</span><span class="w"></span><span class="nt">subjects</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l">ServiceAccount</span><span class="w">
-</span><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">baetyl-cloud</span><span class="w">
-</span><span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l">default</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">apiVersion</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io/v1<span class="w">
+</span><span class="w"></span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRoleBinding<span class="w">
+</span><span class="w"></span><span class="k">metadata</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-crb<span class="w">
+</span><span class="w">  </span><span class="k">labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">custom</span><span class="p">:</span><span class="w"> </span>role-patch<span class="w">
+</span><span class="w"></span><span class="k">roleRef</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">apiGroup</span><span class="p">:</span><span class="w"> </span>rbac.authorization.k8s.io<span class="w">
+</span><span class="w">  </span><span class="k">kind</span><span class="p">:</span><span class="w"> </span>ClusterRole<span class="w">
+</span><span class="w">  </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>my-baetyl-cr<span class="w">
+</span><span class="w"></span><span class="k">subjects</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">kind</span><span class="p">:</span><span class="w"> </span>ServiceAccount<span class="w">
+</span><span class="w">    </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>baetyl-cloud<span class="w">
+</span><span class="w">    </span><span class="k">namespace</span><span class="p">:</span><span class="w"> </span>default<span class="w">
 </span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
@@ -548,8 +548,8 @@ kubectl create -f local-path-storage.yaml
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.88.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

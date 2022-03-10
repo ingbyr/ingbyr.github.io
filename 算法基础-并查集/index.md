@@ -13,36 +13,39 @@ func NewUF(n int) *UnionFind {
 	for i := range parent {
 		parent[i] = i
 	}
-	return &UnionFind{parent: parent, count: n}
+	return &UnionFind{
+		parent: parent,
+		count:  n,
+	}
 }
 
 type UnionFind struct {
 	parent []int
-    count int
+	count  int
 }
 
-func (uf *UnionFind) Connect(a, b int) {
-	rootA := uf.FindRoot(a)
-	rootB := uf.FindRoot(b)
+func (uf *UnionFind) Union(a, b int) {
+	rootA := uf.Find(a)
+	rootB := uf.Find(b)
 	if rootA == rootB {
 		return
 	}
 	uf.parent[rootA] = rootB
-    uf.count--
+	uf.count--
 }
 
-func (uf *UnionFind) Connected(a, b int) bool {
-	rootA := uf.FindRoot(a)
-	rootB := uf.FindRoot(b)
-	return rootA == rootB
-}
-
-func (uf *UnionFind) FindRoot(a int) int {
+func (uf *UnionFind) Find(a int) int {
 	for uf.parent[a] != a {
-        // 压缩路径
+		// compress parent tree
 		uf.parent[a] = uf.parent[uf.parent[a]]
 		a = uf.parent[a]
 	}
 	return a
+}
+
+func (uf *UnionFind) Connected(a, b int) bool {
+	rootA := uf.Find(a)
+	rootB := uf.Find(b)
+	return rootA == rootB
 }
 ```

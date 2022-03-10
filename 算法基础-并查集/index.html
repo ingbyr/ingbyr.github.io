@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%B9%B6%E6%9F%A5%E9%9B%86\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法基础","wordcount":  157 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法基础","wordcount":  161 ,
         "url": "https:\/\/ingbyr.github.io\/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%B9%B6%E6%9F%A5%E9%9B%86\/","datePublished": "2022-03-08T17:38:39+08:00","dateModified": "2022-03-08T17:38:39+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,7 +110,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">算法基础-并查集</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 157 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-08">2022-03-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 161 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -163,6 +163,9 @@
 </span><span class="lnt">35
 </span><span class="lnt">36
 </span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">NewUF</span><span class="p">(</span><span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">UnionFind</span> <span class="p">{</span>
@@ -170,37 +173,40 @@
 	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">parent</span> <span class="p">{</span>
 		<span class="nx">parent</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">i</span>
 	<span class="p">}</span>
-	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">UnionFind</span><span class="p">{</span><span class="nx">parent</span><span class="p">:</span> <span class="nx">parent</span><span class="p">,</span> <span class="nx">count</span><span class="p">:</span> <span class="nx">n</span><span class="p">}</span>
+	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">UnionFind</span><span class="p">{</span>
+		<span class="nx">parent</span><span class="p">:</span> <span class="nx">parent</span><span class="p">,</span>
+		<span class="nx">count</span><span class="p">:</span>  <span class="nx">n</span><span class="p">,</span>
+	<span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">type</span> <span class="nx">UnionFind</span> <span class="kd">struct</span> <span class="p">{</span>
 	<span class="nx">parent</span> <span class="p">[]</span><span class="kt">int</span>
-    <span class="nx">count</span> <span class="kt">int</span>
+	<span class="nx">count</span>  <span class="kt">int</span>
 <span class="p">}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">uf</span> <span class="o">*</span><span class="nx">UnionFind</span><span class="p">)</span> <span class="nf">Connect</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">rootA</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">FindRoot</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
-	<span class="nx">rootB</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">FindRoot</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">uf</span> <span class="o">*</span><span class="nx">UnionFind</span><span class="p">)</span> <span class="nf">Union</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">rootA</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+	<span class="nx">rootB</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
 	<span class="k">if</span> <span class="nx">rootA</span> <span class="o">==</span> <span class="nx">rootB</span> <span class="p">{</span>
 		<span class="k">return</span>
 	<span class="p">}</span>
 	<span class="nx">uf</span><span class="p">.</span><span class="nx">parent</span><span class="p">[</span><span class="nx">rootA</span><span class="p">]</span> <span class="p">=</span> <span class="nx">rootB</span>
-    <span class="nx">uf</span><span class="p">.</span><span class="nx">count</span><span class="o">--</span>
+	<span class="nx">uf</span><span class="p">.</span><span class="nx">count</span><span class="o">--</span>
 <span class="p">}</span>
 
-<span class="kd">func</span> <span class="p">(</span><span class="nx">uf</span> <span class="o">*</span><span class="nx">UnionFind</span><span class="p">)</span> <span class="nf">Connected</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-	<span class="nx">rootA</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">FindRoot</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
-	<span class="nx">rootB</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">FindRoot</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">rootA</span> <span class="o">==</span> <span class="nx">rootB</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">uf</span> <span class="o">*</span><span class="nx">UnionFind</span><span class="p">)</span> <span class="nf">FindRoot</span><span class="p">(</span><span class="nx">a</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+<span class="kd">func</span> <span class="p">(</span><span class="nx">uf</span> <span class="o">*</span><span class="nx">UnionFind</span><span class="p">)</span> <span class="nf">Find</span><span class="p">(</span><span class="nx">a</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
 	<span class="k">for</span> <span class="nx">uf</span><span class="p">.</span><span class="nx">parent</span><span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="o">!=</span> <span class="nx">a</span> <span class="p">{</span>
-        <span class="c1">// 压缩路径
+		<span class="c1">// compress parent tree
 </span><span class="c1"></span>		<span class="nx">uf</span><span class="p">.</span><span class="nx">parent</span><span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="p">=</span> <span class="nx">uf</span><span class="p">.</span><span class="nx">parent</span><span class="p">[</span><span class="nx">uf</span><span class="p">.</span><span class="nx">parent</span><span class="p">[</span><span class="nx">a</span><span class="p">]]</span>
 		<span class="nx">a</span> <span class="p">=</span> <span class="nx">uf</span><span class="p">.</span><span class="nx">parent</span><span class="p">[</span><span class="nx">a</span><span class="p">]</span>
 	<span class="p">}</span>
 	<span class="k">return</span> <span class="nx">a</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="p">(</span><span class="nx">uf</span> <span class="o">*</span><span class="nx">UnionFind</span><span class="p">)</span> <span class="nf">Connected</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+	<span class="nx">rootA</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>
+	<span class="nx">rootB</span> <span class="o">:=</span> <span class="nx">uf</span><span class="p">.</span><span class="nf">Find</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">rootA</span> <span class="o">==</span> <span class="nx">rootB</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>

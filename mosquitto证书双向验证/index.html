@@ -8,10 +8,10 @@
         <title>Mosquitto证书双向验证 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Mosquitto证书双向验证" />
 <meta property="og:description" content="使用openssl生成自签名证书并配置Mosquitto双向验证" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/" />
-<meta property="og:image" content="https://ingbyr.github.io/logo.png"/>
+<meta property="og:url" content="https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-10-14T09:08:58+08:00" />
 <meta property="article:modified_time" content="2020-10-14T09:08:58+08:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
 
@@ -142,12 +142,12 @@
 <h3 id="生成根证书和密钥">生成根证书和密钥</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">openssl req -new -x509 -newkey rsa:2048 <span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl req -new -x509 -newkey rsa:2048 <span class="se">\
 </span><span class="se"></span>-keyout caKey.pem -out caCrt.pem -days <span class="m">365</span> <span class="se">\
 </span><span class="se"></span>-subj <span class="s2">&#34;/C=CN/ST=BJ/L=BJ/O=ZJ/OU=ROOT/CN=localhost/emailAddress=hello@world.com&#34;</span>
 </code></pre></td></tr></table>
@@ -155,7 +155,7 @@
 </div><h3 id="客户端生成密钥及证书签名请求">客户端生成密钥及证书签名请求</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -166,7 +166,7 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># mosquitto server 所需证书</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># mosquitto server 所需证书</span>
 openssl req -new -newkey rsa:2048 <span class="se">\
 </span><span class="se"></span>-keyout hubKey.pem -out hub.csr <span class="se">\
 </span><span class="se"></span>-subj <span class="s2">&#34;/C=CN/ST=BJ/L=BJ/O=ZJ/OU=HUB/CN=localhost/emailAddress=hello@world.com&#34;</span>
@@ -181,13 +181,13 @@ openssl req -new -newkey rsa:2048 <span class="se">\
 <p>将两个csr文件上传至CA服务器后，由CA服务器执行签发</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">openssl x509 -req -days <span class="m">365</span> <span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl x509 -req -days <span class="m">365</span> <span class="se">\
 </span><span class="se"></span>-in hub.csr -out hubCrt.pem <span class="se">\
 </span><span class="se"></span>-CA caCrt.pem -CAkey caKey.pem <span class="se">\
 </span><span class="se"></span>-CAcreateserial
@@ -196,12 +196,12 @@ openssl req -new -newkey rsa:2048 <span class="se">\
 </div><p>同理对 fakeMqtt.csr 进行签发</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">openssl x509 -req -days <span class="m">365</span> <span class="se">\
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl x509 -req -days <span class="m">365</span> <span class="se">\
 </span><span class="se"></span>-in fakeMqtt.csr -out fakeMqttCrt.pem <span class="se">\
 </span><span class="se"></span>-CA caCrt.pem -CAkey caKey.pem
 </code></pre></td></tr></table>
@@ -209,11 +209,11 @@ openssl req -new -newkey rsa:2048 <span class="se">\
 </div><h3 id="验证生成的证书">验证生成的证书</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">openssl verify -CAfile caCrt.pem hubCrt.pem
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl verify -CAfile caCrt.pem hubCrt.pem
 openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 </code></pre></td></tr></table>
 </div>
@@ -223,7 +223,7 @@ openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 <p>此时目录如下（测试时CA服务和客户端位于同一目录）：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -234,7 +234,7 @@ openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">&gt; tree .
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">&gt; tree .
 ├── caCrt.pem
 ├── caCrt.srl
 ├── caKey.pem
@@ -250,18 +250,18 @@ openssl verify -CAfile caCrt.pem fakeMqttCrt.pem
 <p>原始配置文件注释比较多，因此可以新建一份配置文件用于配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 查看可配置的选项</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 查看可配置的选项</span>
 cat /usr/local/etc/mosquitto/mosquitto.conf
 </code></pre></td></tr></table>
 </div>
 </div><p>新建 hub.conf 配置文件，其中3个file文件选项指向自己创建的密钥文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -269,7 +269,7 @@ cat /usr/local/etc/mosquitto/mosquitto.conf
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">port <span class="m">1883</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">port <span class="m">1883</span>
 cafile certs/caCrt.pem
 certfile certs/hubCrt.pem
 keyfile certs/hubKey.pem
@@ -280,16 +280,16 @@ use_identity_as_username <span class="nb">true</span>
 </div><h3 id="启动">启动</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mosquitto -c ./hub.conf
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">mosquitto -c ./hub.conf
 </code></pre></td></tr></table>
 </div>
 </div><h3 id="订阅发布测试">订阅发布测试</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -302,7 +302,7 @@ use_identity_as_username <span class="nb">true</span>
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 订阅</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 订阅</span>
 mosquitto_sub -h localhost -p <span class="m">1883</span> -t /t <span class="se">\
 </span><span class="se"></span>--cafile certs/caCrt.pem <span class="se">\
 </span><span class="se"></span>--cert certs/fakeMqttCrt.pem <span class="se">\
@@ -319,15 +319,15 @@ mosquitto_pub -h localhost -p <span class="m">1883</span> -t /t -m <span class="
 <p>Golang中的私钥读取无法传入密码选项，因此可以不添加密码或使用以下命令附加密码至pem文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">openssl rsa -in fakeMqttKey.pem -out fakeMqttKeyNoPass.pem -passin pass:your_password
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">openssl rsa -in fakeMqttKey.pem -out fakeMqttKeyNoPass.pem -passin pass:your_password
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -417,7 +417,7 @@ mosquitto_pub -h localhost -p <span class="m">1883</span> -t /t -m <span class="
 </span><span class="lnt">88
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
 	<span class="s">&#34;crypto/tls&#34;</span>
@@ -539,7 +539,7 @@ mosquitto_pub -h localhost -p <span class="m">1883</span> -t /t -m <span class="
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

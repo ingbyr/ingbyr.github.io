@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	
-	<sitemap>
-	   	<loc>https://ingbyr.github.io/en/sitemap.xml</loc>
-		
-	</sitemap>
-	
-	<sitemap>
-	   	<loc>https://ingbyr.github.io/zh-cn/sitemap.xml</loc>
-		
-	   	<lastmod>2022-03-10T14:42:47+08:00</lastmod>
-		
-	</sitemap>
-	
+  
+  <sitemap>
+    <loc>https://ingbyr.github.io/en/sitemap.xml</loc>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>https://ingbyr.github.io/zh-cn/sitemap.xml</loc>
+    
+      <lastmod>2022-03-15T10:53:07+08:00</lastmod>
+    
+  </sitemap>
+  
 </sitemapindex>

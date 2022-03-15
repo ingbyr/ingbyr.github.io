@@ -8,10 +8,10 @@
         <title>ClickHouse 多分片多备份进程模式 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="ClickHouse 多分片多备份进程模式" />
 <meta property="og:description" content="基于原生安装方式进行部署" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" />
-<meta property="og:image" content="https://ingbyr.github.io/logo.png"/>
+<meta property="og:url" content="https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-09-04T14:08:14+08:00" />
 <meta property="article:modified_time" content="2020-09-04T14:08:14+08:00" />
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
 
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "ClickHouse, 时序数据库","wordcount":  2032 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "ClickHouse, 时序数据库","wordcount":  1854 ,
         "url": "https:\/\/ingbyr.github.io\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/","datePublished": "2020-09-04T14:08:14+08:00","dateModified": "2020-09-04T14:08:14+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,8 +110,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">ClickHouse 多分片多备份进程模式</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/"><i class="far fa-folder fa-fw"></i>时序数据库</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-04">2020-09-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2032 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-04">2020-09-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1854 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -160,12 +160,12 @@
 <p>在 s1、s2、s3中的/etc/hosts 中添加以下内容（需替换为自己的IP）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">s1-ip s1
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">s1-ip s1
 s2-ip s2
 s3-ip s3
 </code></pre></td></tr></table>
@@ -175,13 +175,13 @@ s3-ip s3
 <p><a href="https://zookeeper.apache.org/releases.html" target="_blank" rel="noopener noreffer">Zookeeper官网</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
 wget https://mirrors.bfsu.edu.cn/apache/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
 tar -zxf apache-zookeeper-3.6.2-bin.tar.gz <span class="o">&amp;&amp;</span> mv apache-zookeeper-3.6.2-bin zookeeper
 <span class="nb">cd</span> zookeeper <span class="o">&amp;&amp;</span> cp conf/zoo_sample.cfg conf/zoo.cfg <span class="o">&amp;&amp;</span> vim conf/zoo.cfg
@@ -191,7 +191,7 @@ tar -zxf apache-zookeeper-3.6.2-bin.tar.gz <span class="o">&amp;&amp;</span> mv 
 <p>修改 <code>conf/zoo.cfg</code> 内容为：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -233,7 +233,7 @@ tar -zxf apache-zookeeper-3.6.2-bin.tar.gz <span class="o">&amp;&amp;</span> mv 
 </span><span class="lnt">40
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># The number of milliseconds of each tick
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># The number of milliseconds of each tick
 tickTime=2000
 # The number of ticks that the initial
 # synchronization phase can take
@@ -283,26 +283,26 @@ server.3=s3:2888:3888
 <h3 id="启动">启动</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh start
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh start
 </code></pre></td></tr></table>
 </div>
 </div><p>执行命令验证安装结果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh status
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bin/zkServer.sh status
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="安装clickhouse">安装ClickHouse</h2>
 <p><a href="https://clickhouse.tech/docs/zh/getting-started/install/" target="_blank" rel="noopener noreffer">官方文档</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -315,7 +315,7 @@ server.3=s3:2888:3888
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install apt-transport-https ca-certificates dirmngr
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install apt-transport-https ca-certificates dirmngr
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
 
 <span class="nb">echo</span> <span class="s2">&#34;deb https://repo.clickhouse.tech/deb/stable/ main/&#34;</span> <span class="p">|</span> sudo tee <span class="se">\
@@ -331,7 +331,7 @@ clickhouse-client
 </div><p>手动安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -339,7 +339,7 @@ clickhouse-client
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-common-static_20.9.7.11_amd64.deb
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-common-static_20.9.7.11_amd64.deb
 wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-client_20.9.7.11_all.deb
 wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-server_20.9.7.11_all.deb
 dpkg -i clickhouse-common-static_20.9.7.11_amd64.deb
@@ -350,7 +350,7 @@ dpkg -i clickhouse-server_20.9.7.11_all.deb
 </div><h2 id="clickhouse工作目录">ClickHouse工作目录</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -379,7 +379,7 @@ dpkg -i clickhouse-server_20.9.7.11_all.deb
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
 ├── data_p.csv				<span class="c1">#（测试用）示例数据</span>
 ├── s1r1
 │   ├── config.xml		<span class="c1"># 配置文件</span>
@@ -430,16 +430,16 @@ dpkg -i clickhouse-server_20.9.7.11_all.deb
 <p>停止默认clickhouse</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo service clickhouse stop
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo service clickhouse stop
 </code></pre></td></tr></table>
 </div>
 </div><p>运行clickhouse</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -452,7 +452,7 @@ dpkg -i clickhouse-server_20.9.7.11_all.deb
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># s1</span>
 nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s1r1/config.xml &gt; /data/log/ch/s1r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
 nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r2/config.xml &gt; /data/log/ch/s3r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> 
 
@@ -474,33 +474,33 @@ nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r1/confi
 <p>添加defualt用户密码和新建一个tom用户，由于密码存储在文件，因此推荐使用sha256编码后放入文件：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
-<span class="c1"># 37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f</span>  
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
+<span class="c1"># 37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f  </span>
 
 <span class="nb">echo</span> -n <span class="s2">&#34;tom-password&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
-<span class="c1"># d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672</span>  
+<span class="c1"># d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672  </span>
 </code></pre></td></tr></table>
 </div>
 </div><p>default用户密码为default，tom的密码为tom-password，添加至users.xml，在 users/default中删除password项，添加：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;password_sha256_hex&gt;</span>37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f<span class="nt">&lt;/password_sha256_hex&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;password_sha256_hex&gt;</span>37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f<span class="nt">&lt;/password_sha256_hex&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>在users/下添加：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -510,7 +510,7 @@ nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r1/confi
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tom&gt;</span>
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;tom&gt;</span>
  <span class="nt">&lt;password_sha256_hex&gt;</span>d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672<span class="nt">&lt;/password_sha256_hex&gt;</span>
   <span class="nt">&lt;profile&gt;</span>default<span class="nt">&lt;/profile&gt;</span>
   <span class="nt">&lt;quota&gt;</span>default<span class="nt">&lt;/quota&gt;</span>
@@ -523,11 +523,11 @@ nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r1/confi
 </div><p>登陆数据库：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span>
 clickhouse-client --host s1 --user tom --password tom-password --port <span class="m">9111</span>
 </code></pre></td></tr></table>
 </div>
@@ -535,7 +535,7 @@ clickhouse-client --host s1 --user tom --password tom-password --port <span clas
 <p>登陆任意副本数据库，创建测试表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -552,67 +552,67 @@ clickhouse-client --host s1 --user tom --password tom-password --port <span clas
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
-</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p_local</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span>
-<span class="p">(</span>
-    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
-    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="k">timestamp</span> <span class="n">DateTime</span>
-<span class="p">)</span> <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/default/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span>
-<span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">timestamp</span>
-<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">timestamp</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p_local</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/default/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">timestamp</span><span class="w">
+</span><span class="w"></span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">timestamp</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>为表<code>p_local</code>创建分布表<code>p</code></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
-</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span> <span class="k">AS</span> <span class="n">p_local</span> 
-<span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span> <span class="k">default</span><span class="p">,</span> <span class="n">p_local</span><span class="p">,</span> <span class="n">rand</span><span class="p">())</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p_local</span><span class="w"> 
+</span><span class="w"></span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">,</span><span class="w"> </span><span class="n">p_local</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">())</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>退出数据库交互界面，在终端中执行语句导入数据</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;INSERT INTO p FORMAT CSV&#34;</span> &lt; data_p.csv
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;INSERT INTO p FORMAT CSV&#34;</span> &lt; data_p.csv
 </code></pre></td></tr></table>
 </div>
 </div><p>删除测试表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">drop</span> <span class="k">table</span> <span class="n">p</span> <span class="k">on</span> <span class="k">cluster</span> <span class="n">p_3shards_2replicas</span>
-<span class="k">drop</span> <span class="k">table</span> <span class="n">p_local</span> <span class="k">on</span> <span class="k">cluster</span> <span class="n">p_3shards_2replicas</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">cluster</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span><span class="w"></span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">p_local</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">cluster</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><h2 id="配置kafka">配置kafka</h2>
 <h3 id="下载-1">下载</h3>
 <p><a href="https://kafka.apache.org/downloads" target="_blank" rel="noopener noreffer">Kafka官网</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
 wget https://mirrors.bfsu.edu.cn/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
 tar -zxf kafka_2.13-2.6.0.tgz <span class="o">&amp;&amp;</span> mv kafka_2.13-2.6.0 kafka
 </code></pre></td></tr></table>
@@ -621,23 +621,23 @@ tar -zxf kafka_2.13-2.6.0.tgz <span class="o">&amp;&amp;</span> mv kafka_2.13-2.
 <p>修改配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> kafka <span class="o">&amp;&amp;</span> vim config/server.properties
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> kafka <span class="o">&amp;&amp;</span> vim config/server.properties
 </code></pre></td></tr></table>
 </div>
 </div><p>通用配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># A comma separated list of directories under which to store log files
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># A comma separated list of directories under which to store log files
 log.dirs=/data/log/kafka
 
 # root directory for all kafka znodes.
@@ -650,11 +650,11 @@ zookeeper.connect=s1:2181,s2:2181,s3:2181
 <p>s1</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=1
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=1
 listeners=PLAINTEXT://s1:9092
 </code></pre></td></tr></table>
 </div>
@@ -663,11 +663,11 @@ listeners=PLAINTEXT://s1:9092
 <p>s2</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=2
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=2
 listeners=PLAINTEXT://s2:9092
 </code></pre></td></tr></table>
 </div>
@@ -676,11 +676,11 @@ listeners=PLAINTEXT://s2:9092
 <p>s3</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=3
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">broker.id=3
 listeners=PLAINTEXT://s3:9092
 </code></pre></td></tr></table>
 </div>
@@ -689,37 +689,37 @@ listeners=PLAINTEXT://s3:9092
 <h3 id="启动-1">启动</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-server-start.sh -daemon ./config/server.properties
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-server-start.sh -daemon ./config/server.properties
 </code></pre></td></tr></table>
 </div>
 </div><p>查看topic</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">bin/kafka-topics.sh --list --bootstrap-server s1:9092
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">bin/kafka-topics.sh --list --bootstrap-server s1:9092
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="添加kafka缓冲">添加kafka缓冲</h2>
 <p>创建kafka主题</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ./bin/kafka-topics.sh --delete --bootstrap-server s1:9092 --topic topic-p</span>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># ./bin/kafka-topics.sh --delete --bootstrap-server s1:9092 --topic topic-p</span>
 ./bin/kafka-topics.sh --create --bootstrap-server s1:9092 --replication-factor <span class="m">2</span> --partitions <span class="m">6</span> --topic topic-p
 </code></pre></td></tr></table>
 </div>
 </div><p>创建kafka消费表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -739,25 +739,25 @@ listeners=PLAINTEXT://s3:9092
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_stream ON CLUSTER p_3shards_2replicas
-</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p_stream</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span>
-<span class="p">(</span>
-    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
-    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="k">timestamp</span> <span class="n">DateTime</span>
-<span class="p">)</span> <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Kafka</span><span class="p">()</span>
-<span class="n">SETTINGS</span>
-    <span class="n">kafka_broker_list</span> <span class="o">=</span> <span class="s1">&#39;s1:9092&#39;</span><span class="p">,</span>
-    <span class="n">kafka_topic_list</span> <span class="o">=</span> <span class="s1">&#39;topic-p&#39;</span><span class="p">,</span>
-    <span class="n">kafka_group_name</span> <span class="o">=</span> <span class="s1">&#39;clickhouse&#39;</span><span class="p">,</span>
-    <span class="n">kafka_format</span> <span class="o">=</span> <span class="s1">&#39;JSONEachRow&#39;</span><span class="p">,</span>
-    <span class="n">kafka_row_delimiter</span> <span class="o">=</span> <span class="s1">&#39;\n&#39;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_stream ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p_stream</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kafka</span><span class="p">()</span><span class="w">
+</span><span class="w"></span><span class="n">SETTINGS</span><span class="w">
+</span><span class="w">    </span><span class="n">kafka_broker_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;s1:9092&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">kafka_topic_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;topic-p&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">kafka_group_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;clickhouse&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">kafka_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;JSONEachRow&#39;</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">kafka_row_delimiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>添加 kafka_skip_broken_messages = N 跳过非法消息</p>
@@ -765,7 +765,7 @@ listeners=PLAINTEXT://s3:9092
 <p>创建本地表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -782,27 +782,27 @@ listeners=PLAINTEXT://s3:9092
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
-</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p_local</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span>
-<span class="p">(</span>
-    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
-    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="k">timestamp</span> <span class="n">DateTime</span>
-<span class="p">)</span> <span class="n">ENGINE</span> <span class="o">=</span> <span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span>
-<span class="n">PARTITION</span> <span class="k">BY</span> <span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span>
-<span class="k">ORDER</span> <span class="k">BY</span> <span class="k">timestamp</span>
-<span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="k">timestamp</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p_local</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span><span class="w"></span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">timestamp</span><span class="w">
+</span><span class="w"></span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">timestamp</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>创建分布表</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -818,48 +818,48 @@ listeners=PLAINTEXT://s3:9092
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
 </span><span class="c1">-- CREATE TABLE p ON CLUSTER p_3shards_2replicas AS p_local ENGINE = Distributed(p_3shards_2replicas, default, p_local, rand())
-</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">p</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span> 
-<span class="p">(</span>
-    <span class="n">ozone</span> <span class="n">Int64</span><span class="p">,</span>
-    <span class="n">particullate_matter</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">carbon_monoxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">sulfure_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">nitrogen_dioxide</span> <span class="nb">Int8</span><span class="p">,</span>
-    <span class="n">longitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="n">latitude</span> <span class="n">Float64</span><span class="p">,</span>
-    <span class="k">timestamp</span> <span class="n">DateTime</span>
-<span class="p">)</span>
-<span class="n">ENGINE</span> <span class="o">=</span> <span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span> <span class="k">default</span><span class="p">,</span> <span class="n">p_local</span><span class="p">,</span> <span class="n">rand</span><span class="p">())</span>
-</code></pre></td></tr></table>
+</span><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w"> 
+</span><span class="w"></span><span class="p">(</span><span class="w">
+</span><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span><span class="w"></span><span class="p">)</span><span class="w">
+</span><span class="w"></span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">,</span><span class="w"> </span><span class="n">p_local</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">())</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>创建物化视图</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_consumer ON CLUSTER p_3shards_2replicas
-</span><span class="c1"></span><span class="k">CREATE</span> <span class="n">MATERIALIZED</span> <span class="k">VIEW</span> <span class="n">p_consumer</span> <span class="k">ON</span> <span class="k">CLUSTER</span> <span class="n">p_3shards_2replicas</span> <span class="k">TO</span> <span class="n">p</span> <span class="k">AS</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">p_stream</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- DROP TABLE p_consumer ON CLUSTER p_3shards_2replicas
+</span><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="n">MATERIALIZED</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">p_consumer</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">p_stream</span><span class="p">;</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
 </div><p>发送数据</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-console-producer.sh --broker-list s1:9092 --topic topic-p
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">./bin/kafka-console-producer.sh --broker-list s1:9092 --topic topic-p
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;ozone&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="nt">&#34;particullate_matter&#34;</span><span class="p">:</span><span class="mi">69</span><span class="p">,</span> <span class="nt">&#34;carbon_monoxide&#34;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span> <span class="nt">&#34;sulfure_dioxide&#34;</span><span class="p">:</span><span class="mi">67</span><span class="p">,</span> <span class="nt">&#34;nitrogen_dioxide&#34;</span><span class="p">:</span><span class="mi">83</span><span class="p">,</span> <span class="nt">&#34;longitude&#34;</span><span class="p">:</span><span class="mf">10.189355309192706</span><span class="p">,</span> <span class="nt">&#34;latitude&#34;</span><span class="p">:</span><span class="mf">56.18210217593679</span><span class="p">,</span> <span class="nt">&#34;timestamp&#34;</span><span class="p">:</span><span class="s2">&#34;2014-09-01 00:05:00&#34;</span><span class="p">}</span>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span><span class="nt">&#34;ozone&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="nt">&#34;particullate_matter&#34;</span><span class="p">:</span><span class="mi">69</span><span class="p">,</span> <span class="nt">&#34;carbon_monoxide&#34;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span> <span class="nt">&#34;sulfure_dioxide&#34;</span><span class="p">:</span><span class="mi">67</span><span class="p">,</span> <span class="nt">&#34;nitrogen_dioxide&#34;</span><span class="p">:</span><span class="mi">83</span><span class="p">,</span> <span class="nt">&#34;longitude&#34;</span><span class="p">:</span><span class="mf">10.189355309192706</span><span class="p">,</span> <span class="nt">&#34;latitude&#34;</span><span class="p">:</span><span class="mf">56.18210217593679</span><span class="p">,</span> <span class="nt">&#34;timestamp&#34;</span><span class="p">:</span><span class="s2">&#34;2014-09-01 00:05:00&#34;</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
@@ -894,7 +894,7 @@ listeners=PLAINTEXT://s3:9092
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.68.3">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2016 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>

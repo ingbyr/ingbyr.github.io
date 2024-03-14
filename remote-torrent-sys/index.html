@@ -7,14 +7,12 @@
         <title>Linux Server使用IPV6 BT资源 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Linux Server使用IPV6 BT资源" />
 <meta property="og:description" content="啰嗦几句 权利的游戏终于又更新啦，然而目前网络没有IPV6所以怎么下载资源成了最大的问题，试了试公网上的bt，速度慢的令人发指，所以决定还是想" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/remote-torrent-sys/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/remote-torrent-sys/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-08-14T15:19:18+00:00" />
 <meta property="article:modified_time" content="2017-08-14T15:19:18+00:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
-
-<meta name="twitter:title" content="Linux Server使用IPV6 BT资源"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png" /><meta name="twitter:title" content="Linux Server使用IPV6 BT资源"/>
 <meta name="twitter:description" content="啰嗦几句 权利的游戏终于又更新啦，然而目前网络没有IPV6所以怎么下载资源成了最大的问题，试了试公网上的bt，速度慢的令人发指，所以决定还是想"/>
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -153,8 +151,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo apt install deluge
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install deluge
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="安装deluge-web">安装Deluge-web</h2>
 <p>Deluge-web可以将Deluge在浏览器中以可视化的方式展现出来，应该没人希望通过复杂的命令行方式操作吧</p>
@@ -163,8 +161,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo apt install deluge-webui
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install deluge-webui
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="运行deluge">运行Deluge</h2>
 <p>启动Deluge后还需要手动启动Deluge-webui，这里使用screen启动webui</p>
@@ -175,10 +173,10 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo systemctl start deluged
-screen -S deluge
-deluge-web
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl start deluged
+</span></span><span class="line"><span class="cl">screen -S deluge
+</span></span><span class="line"><span class="cl">deluge-web
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这时在浏览器中访问 http://your-server-ip:8112 就可以看到熟悉的bt下载界面了，默认的密码是deluge
 <img
@@ -197,8 +195,8 @@ deluge-web
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo apt install nginx
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt install nginx
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="创建配置文件">创建配置文件</h3>
 <p>在 /etc/nginx/conf.d/ 目录下新建一个配置文件，名称随意后缀为.conf，针对8112端口的配置实例如下：</p>
@@ -214,15 +212,15 @@ deluge-web
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">server <span class="o">{</span>
-    listen 80<span class="p">;</span>
-    server_name <span class="o">[</span>你的域名<span class="o">]</span><span class="p">;</span>
-    location / <span class="o">{</span>
-        proxy_redirect off<span class="p">;</span>
-        proxy_pass http://127.0.0.1:8112<span class="p">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server_name <span class="o">[</span>你的域名<span class="o">]</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        proxy_redirect off<span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_pass http://127.0.0.1:8112<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果要配置其他端口的照猫画虎再填一个就行了，因为在 /etc/nginx/nginx.conf 默认读入了conf.d文件夹下的配置文件，所以不再需要动它的默认配置文件</p>
 <h3 id="重启nginx">重启nginx</h3>
@@ -231,8 +229,8 @@ deluge-web
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sudo systemctl restart nginx.service
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo systemctl restart nginx.service
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="绑定域名">绑定域名</h3>
 <p>在DNS服务商添加一条A记录，域名为上文中的域名，ip指向服务器IP即可，等DNS生效就可以通过二级域名访问Deluge了</p>
@@ -268,8 +266,8 @@ deluge-web
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.8">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

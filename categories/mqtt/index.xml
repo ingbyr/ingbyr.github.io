@@ -7,8 +7,9 @@
     <title>Mosquitto证书双向验证</title>
     <link>https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</link>
     <pubDate>Wed, 14 Oct 2020 09:08:58 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>ingbyr</author>
     <guid>https://ingbyr.github.io/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</guid>
     <description><![CDATA[<p>使用openssl生成自签名证书并配置Mosquitto双向验证</p>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

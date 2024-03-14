@@ -7,8 +7,9 @@
     <title>Kubeedge 国内环境安装</title>
     <link>https://ingbyr.github.io/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link>
     <pubDate>Mon, 31 Aug 2020 17:26:02 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>ingbyr</author>
     <guid>https://ingbyr.github.io/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid>
     <description><![CDATA[<p>国内网络环境下快速安装k8s</p>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

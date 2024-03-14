@@ -7,8 +7,9 @@
     <title>北邮网关登陆工具</title>
     <link>https://ingbyr.github.io/bupt-net-login/</link>
     <pubDate>Thu, 14 Apr 2016 14:45:42 &#43;0000</pubDate>
-    <author>作者</author>
+    <author>ingbyr</author>
     <guid>https://ingbyr.github.io/bupt-net-login/</guid>
     <description><![CDATA[北邮校园网网关登陆工具，适配新网关 ngw.bupt.edu.cn。已开源至 GitHub。 安装 使用pip安装 pip3 install BUPTNetLogin 使用便携版 下载页面 使用方法 使]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

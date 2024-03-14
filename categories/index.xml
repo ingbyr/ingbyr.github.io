@@ -1,42 +1,79 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Categories on ingbyr博客</title>
-    <link>http://localhost:1313/categories/</link>
-    <description>Recent content in Categories on ingbyr博客</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Mon, 31 Aug 2020 17:29:12 +0800</lastBuildDate>
-    
-	<atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>边缘计算</title>
-      <link>http://localhost:1313/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</link>
-      <pubDate>Mon, 31 Aug 2020 17:29:12 +0800</pubDate>
-      
-      <guid>http://localhost:1313/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>时序数据库</title>
-      <link>http://localhost:1313/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
-      <pubDate>Mon, 31 Aug 2020 17:20:48 +0800</pubDate>
-      
-      <guid>http://localhost:1313/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Java</title>
-      <link>http://localhost:1313/categories/java/</link>
-      <pubDate>Mon, 04 May 2020 11:16:10 +0800</pubDate>
-      
-      <guid>http://localhost:1313/categories/java/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - 分类 - ingbyr</title>
+        <link>https://ingbyr.github.io/categories/</link>
+        <description>Categories - 分类 - ingbyr</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Mar 2024 10:24:03 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Java</title>
+    <link>https://ingbyr.github.io/categories/java/</link>
+    <pubDate>Thu, 14 Mar 2024 10:24:03 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/java/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>分布式系统</title>
+    <link>https://ingbyr.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/</link>
+    <pubDate>Sat, 07 Oct 2023 14:45:11 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>算法</title>
+    <link>https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/</link>
+    <pubDate>Tue, 15 Mar 2022 10:53:07 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>缓存</title>
+    <link>https://ingbyr.github.io/categories/%E7%BC%93%E5%AD%98/</link>
+    <pubDate>Mon, 16 Aug 2021 09:55:00 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/%E7%BC%93%E5%AD%98/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>数据库</title>
+    <link>https://ingbyr.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <pubDate>Thu, 12 Aug 2021 09:01:43 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>CICD</title>
+    <link>https://ingbyr.github.io/categories/cicd/</link>
+    <pubDate>Thu, 04 Mar 2021 14:35:59 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/cicd/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>MQTT</title>
+    <link>https://ingbyr.github.io/categories/mqtt/</link>
+    <pubDate>Wed, 14 Oct 2020 09:08:58 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/mqtt/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>时序数据库</title>
+    <link>https://ingbyr.github.io/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <pubDate>Fri, 04 Sep 2020 14:08:14 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>边缘计算</title>
+    <link>https://ingbyr.github.io/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</link>
+    <pubDate>Mon, 31 Aug 2020 17:29:12 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/</guid>
+    <description><![CDATA[]]></description>
+</item>
+</channel>
 </rss>

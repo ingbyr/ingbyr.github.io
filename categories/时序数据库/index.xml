@@ -7,15 +7,17 @@
     <title>ClickHouse 多分片多备份进程模式</title>
     <link>https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/</link>
     <pubDate>Fri, 04 Sep 2020 14:08:14 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>ingbyr</author>
     <guid>https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/</guid>
     <description><![CDATA[<p>基于原生安装方式进行部署</p>]]></description>
-</item><item>
+</item>
+<item>
     <title>ClickHouse 多分片多备份部署</title>
     <link>https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2/</link>
     <pubDate>Mon, 31 Aug 2020 17:20:48 &#43;0800</pubDate>
-    <author>作者</author>
+    <author>ingbyr</author>
     <guid>https://ingbyr.github.io/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2/</guid>
     <description><![CDATA[<p>基于Docker的部署方式</p>]]></description>
-</item></channel>
+</item>
+</channel>
 </rss>

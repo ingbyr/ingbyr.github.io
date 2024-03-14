@@ -7,14 +7,12 @@
         <title>Redis集群示例 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Redis集群示例" />
 <meta property="og:description" content="Redis集群相关" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-08-16T09:55:00+08:00" />
 <meta property="article:modified_time" content="2021-08-16T09:55:00+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
-
-<meta name="twitter:title" content="Redis集群示例"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png" /><meta name="twitter:title" content="Redis集群示例"/>
 <meta name="twitter:description" content="Redis集群相关"/>
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -30,7 +28,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ingbyr.github.io\/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B\/"
-        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Redis","wordcount":  979 ,
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Redis","wordcount":  1087 ,
         "url": "https:\/\/ingbyr.github.io\/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B\/","datePublished": "2021-08-16T09:55:00+08:00","dateModified": "2021-08-16T09:55:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -110,8 +108,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Redis集群示例</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%BC%93%E5%AD%98/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>缓存</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-08-16">2021-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 979 字&nbsp;
-                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2021-08-16">2021-08-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1087 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  data-kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -137,13 +135,13 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">port ${PORT}
-protected-mode no
-cluster-enabled yes
-cluster-config-file nodes.conf
-cluster-node-timeout 5000
-appendonly yes
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">port ${PORT}
+</span></span><span class="line"><span class="cl">protected-mode no
+</span></span><span class="line"><span class="cl">cluster-enabled yes
+</span></span><span class="line"><span class="cl">cluster-config-file nodes.conf
+</span></span><span class="line"><span class="cl">cluster-node-timeout 5000
+</span></span><span class="line"><span class="cl">appendonly yes
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>各个Redis实例配置生成脚本 <code>redis-cluster-config.sh</code>，脚本生成端口号 7000-7005 6个Redis实例：</p>
 <div class="highlight"><div class="chroma">
@@ -158,15 +156,15 @@ appendonly yes
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="k">for</span> port in <span class="sb">`</span>seq <span class="m">7000</span> 7005<span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
-  mkdir -p ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf
-  <span class="nv">PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span> envsubst &lt; ./redis-cluster.tmpl &gt; ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/redis.conf
-  chmod <span class="m">666</span> ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/redis.conf
-  mkdir -p ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/data
-<span class="k">done</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> port in <span class="sb">`</span>seq <span class="m">7000</span> 7005<span class="sb">`</span><span class="p">;</span> <span class="k">do</span>
+</span></span><span class="line"><span class="cl">  mkdir -p ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf
+</span></span><span class="line"><span class="cl">  <span class="nv">PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span> envsubst &lt; ./redis-cluster.tmpl &gt; ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/redis.conf
+</span></span><span class="line"><span class="cl">  chmod <span class="m">666</span> ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/redis.conf
+</span></span><span class="line"><span class="cl">  mkdir -p ./redis-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/data
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Redis Sentinel配置模版 <code>redis-sentinel-cluster.tmpl</code>：</p>
 <div class="highlight"><div class="chroma">
@@ -177,11 +175,11 @@ appendonly yes
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">port ${PORT}
-sentinel monitor mymaster 127.0.0.1 7000 2
-sentinel down-after-milliseconds mymaster 5000
-sentinel failover-timeout mymaster 60000
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">port ${PORT}
+</span></span><span class="line"><span class="cl">sentinel monitor mymaster 127.0.0.1 7000 2
+</span></span><span class="line"><span class="cl">sentinel down-after-milliseconds mymaster 5000
+</span></span><span class="line"><span class="cl">sentinel failover-timeout mymaster 60000
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>Redis Sentinel 实例的配置文件 <code>redis-sentinel-cluster-config.sh</code>，生成 5000-5002 3个实例：</p>
 <div class="highlight"><div class="chroma">
@@ -196,15 +194,15 @@ sentinel failover-timeout mymaster 60000
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="cp">#!/bin/bash
-</span><span class="cp"></span>
-<span class="k">for</span> port in <span class="sb">`</span>seq <span class="m">5000</span> 5002<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="se">\
-</span><span class="se"></span>  mkdir -p ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf
-  <span class="nv">PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span> envsubst &lt; ./redis-sentinel-cluster.tmpl &gt; ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/sentinel.conf
-  chmod <span class="m">666</span> ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/sentinel.conf
-  mkdir -p ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/data
-<span class="k">done</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="cp">#!/bin/bash
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> port in <span class="sb">`</span>seq <span class="m">5000</span> 5002<span class="sb">`</span><span class="p">;</span> <span class="k">do</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>  mkdir -p ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf
+</span></span><span class="line"><span class="cl">  <span class="nv">PORT</span><span class="o">=</span><span class="si">${</span><span class="nv">port</span><span class="si">}</span> envsubst &lt; ./redis-sentinel-cluster.tmpl &gt; ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/sentinel.conf
+</span></span><span class="line"><span class="cl">  chmod <span class="m">666</span> ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/conf/sentinel.conf
+</span></span><span class="line"><span class="cl">  mkdir -p ./redis-sentinel-cluster/<span class="si">${</span><span class="nv">port</span><span class="si">}</span>/data
+</span></span><span class="line"><span class="cl"><span class="k">done</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="redis集群启动">Redis集群启动</h2>
 <p>使用 Docker Compose 部署：</p>
@@ -288,83 +286,83 @@ sentinel failover-timeout mymaster 60000
 </span><span class="lnt">76
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="nt">redis7000</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7000</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7000/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7000/data:/data</span><span class="w">
-</span><span class="w">    </span><span class="nt">redis7001</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7001</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7001/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7001/data:/data</span><span class="w">
-</span><span class="w">    </span><span class="nt">redis7002</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7002</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7002/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7002/data:/data</span><span class="w">
-</span><span class="w">    </span><span class="nt">redis7003</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7003</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7003/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7003/data:/data</span><span class="w">
-</span><span class="w">    </span><span class="nt">redis7004</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7004</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7004/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7004/data:/data</span><span class="w">
-</span><span class="w">    </span><span class="nt">redis7005</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7005</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7005/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-cluster/7005/data:/data</span><span class="w">
-</span><span class="w">    </span><span class="nt">sentinel5000</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5000</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5000/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5000/data:/data      </span><span class="w">
-</span><span class="w">    </span><span class="nt">sentinel5001</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5001</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5001/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5001/data:/data   </span><span class="w">
-</span><span class="w">    </span><span class="nt">sentinel5002</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
-</span><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5002</span><span class="w">
-</span><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
-</span><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
-</span><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
-</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5002/conf:/usr/local/etc/redis</span><span class="w">
-</span><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5002/data:/data</span><span class="w">
-</span><span class="w">            
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">redis7000</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7000/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7000/data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">redis7001</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7001/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7001/data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">redis7002</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7002</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7002/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7002/data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">redis7003</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7003</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7003/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7003/data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">redis7004</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7004</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7004/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7004/data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">redis7005</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">redis7005</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/redis.conf&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7005/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-cluster/7005/data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sentinel5000</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5000/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5000/data:/data      </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sentinel5001</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5001</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5001/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5001/data:/data   </span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">sentinel5002</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">redis:alpine</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">sentinel5002</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;redis-server /usr/local/etc/redis/sentinel.conf --sentinel&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">network_mode</span><span class="p">:</span><span class="w"> </span><span class="l">host</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">volumes</span><span class="p">:</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5002/conf:/usr/local/etc/redis</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span>- <span class="l">./redis-sentinel-cluster/5002/data:/data</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>容器启动完毕后，连接至任意一个Redis示例，开始初始化集群：</p>
 <div class="highlight"><div class="chroma">
@@ -375,11 +373,11 @@ sentinel failover-timeout mymaster 60000
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 <span class="se">\
-</span><span class="se"></span>                           127.0.0.1:7002 127.0.0.1:7003 <span class="se">\
-</span><span class="se"></span>                           127.0.0.1:7004 127.0.0.1:7005 <span class="se">\
-</span><span class="se"></span>                           --cluster-replicas <span class="m">1</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                           127.0.0.1:7002 127.0.0.1:7003 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                           127.0.0.1:7004 127.0.0.1:7005 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>                           --cluster-replicas <span class="m">1</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行完毕后将构建一个3主3从的Redis集群。</p>
 <h2 id="测试集群">测试集群</h2>
@@ -399,15 +397,15 @@ sentinel failover-timeout mymaster 60000
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:7000&gt; cluster nodes
-
-output&gt; 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c 127.0.0.1:7002@17002 master - <span class="m">0</span> <span class="m">1629082981000</span> <span class="m">3</span> connected 10923-16383
-fc92c1709a88bdca8e86b9b5a27d035609e46059 127.0.0.1:7001@17001 master - <span class="m">0</span> <span class="m">1629082982000</span> <span class="m">2</span> connected 5461-10922
-3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 127.0.0.1:7000@17000 myself,master - <span class="m">0</span> <span class="m">1629082981000</span> <span class="m">1</span> connected 0-5460
-cf361fc2b72ca2bfd070b282754ad19da7640485 127.0.0.1:7003@17003 slave 3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 <span class="m">0</span> <span class="m">1629082982590</span> <span class="m">1</span> connected
-fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88bdca8e86b9b5a27d035609e46059 <span class="m">0</span> <span class="m">1629082981586</span> <span class="m">2</span> connected
-2a5e09014c852fd15c2e54d500c532ec6ee2490e 127.0.0.1:7005@17005 slave 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c <span class="m">0</span> <span class="m">1629082982088</span> <span class="m">3</span> connected
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:7000&gt; cluster nodes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">output&gt; 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c 127.0.0.1:7002@17002 master - <span class="m">0</span> <span class="m">1629082981000</span> <span class="m">3</span> connected 10923-16383
+</span></span><span class="line"><span class="cl">fc92c1709a88bdca8e86b9b5a27d035609e46059 127.0.0.1:7001@17001 master - <span class="m">0</span> <span class="m">1629082982000</span> <span class="m">2</span> connected 5461-10922
+</span></span><span class="line"><span class="cl">3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 127.0.0.1:7000@17000 myself,master - <span class="m">0</span> <span class="m">1629082981000</span> <span class="m">1</span> connected 0-5460
+</span></span><span class="line"><span class="cl">cf361fc2b72ca2bfd070b282754ad19da7640485 127.0.0.1:7003@17003 slave 3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 <span class="m">0</span> <span class="m">1629082982590</span> <span class="m">1</span> connected
+</span></span><span class="line"><span class="cl">fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88bdca8e86b9b5a27d035609e46059 <span class="m">0</span> <span class="m">1629082981586</span> <span class="m">2</span> connected
+</span></span><span class="line"><span class="cl">2a5e09014c852fd15c2e54d500c532ec6ee2490e 127.0.0.1:7005@17005 slave 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c <span class="m">0</span> <span class="m">1629082982088</span> <span class="m">3</span> connected
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>连接至端口号为5000的哨兵，查看监控信息：</p>
 <div class="highlight"><div class="chroma">
@@ -417,10 +415,10 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:5000&gt; SENTINEL get-master-addr-by-name mymaster
-1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
-2<span class="o">)</span> <span class="s2">&#34;7000&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:5000&gt; SENTINEL get-master-addr-by-name mymaster
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;7000&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>现在让7000的实例离线30秒：</p>
 <div class="highlight"><div class="chroma">
@@ -428,8 +426,8 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">redis-cli -p <span class="m">7000</span> DEBUG sleep <span class="m">30</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">redis-cli -p <span class="m">7000</span> DEBUG sleep <span class="m">30</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在哨兵5000中再次查看监控：</p>
 <div class="highlight"><div class="chroma">
@@ -439,10 +437,10 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:5000&gt; SENTINEL get-master-addr-by-name mymaster
-1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
-2<span class="o">)</span> <span class="s2">&#34;7003&#34;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:5000&gt; SENTINEL get-master-addr-by-name mymaster
+</span></span><span class="line"><span class="cl">1<span class="o">)</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl">2<span class="o">)</span> <span class="s2">&#34;7003&#34;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到主节点已经由7000自动切换到了7003，现在看一下集群信息：</p>
 <div class="highlight"><div class="chroma">
@@ -456,14 +454,14 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">127.0.0.1:7000&gt; cluster nodes
-2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c 127.0.0.1:7002@17002 master - <span class="m">0</span> <span class="m">1629083362653</span> <span class="m">3</span> connected 10923-16383
-fc92c1709a88bdca8e86b9b5a27d035609e46059 127.0.0.1:7001@17001 master - <span class="m">0</span> <span class="m">1629083361000</span> <span class="m">2</span> connected 5461-10922
-3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 127.0.0.1:7000@17000 myself,slave cf361fc2b72ca2bfd070b282754ad19da7640485 <span class="m">0</span> <span class="m">1629083362000</span> <span class="m">7</span> connected
-cf361fc2b72ca2bfd070b282754ad19da7640485 127.0.0.1:7003@17003 master - <span class="m">0</span> <span class="m">1629083362000</span> <span class="m">7</span> connected 0-5460
-fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88bdca8e86b9b5a27d035609e46059 <span class="m">0</span> <span class="m">1629083362553</span> <span class="m">2</span> connected
-2a5e09014c852fd15c2e54d500c532ec6ee2490e 127.0.0.1:7005@17005 slave 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c <span class="m">0</span> <span class="m">1629083361647</span> <span class="m">3</span> connected
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">127.0.0.1:7000&gt; cluster nodes
+</span></span><span class="line"><span class="cl">2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c 127.0.0.1:7002@17002 master - <span class="m">0</span> <span class="m">1629083362653</span> <span class="m">3</span> connected 10923-16383
+</span></span><span class="line"><span class="cl">fc92c1709a88bdca8e86b9b5a27d035609e46059 127.0.0.1:7001@17001 master - <span class="m">0</span> <span class="m">1629083361000</span> <span class="m">2</span> connected 5461-10922
+</span></span><span class="line"><span class="cl">3bd1b8cbe2e0e30a77dfa2b92dd70ed834bfcba4 127.0.0.1:7000@17000 myself,slave cf361fc2b72ca2bfd070b282754ad19da7640485 <span class="m">0</span> <span class="m">1629083362000</span> <span class="m">7</span> connected
+</span></span><span class="line"><span class="cl">cf361fc2b72ca2bfd070b282754ad19da7640485 127.0.0.1:7003@17003 master - <span class="m">0</span> <span class="m">1629083362000</span> <span class="m">7</span> connected 0-5460
+</span></span><span class="line"><span class="cl">fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88bdca8e86b9b5a27d035609e46059 <span class="m">0</span> <span class="m">1629083362553</span> <span class="m">2</span> connected
+</span></span><span class="line"><span class="cl">2a5e09014c852fd15c2e54d500c532ec6ee2490e 127.0.0.1:7005@17005 slave 2fc17db8bb8818ec8ac50f40f07bfbdf1ee8d56c <span class="m">0</span> <span class="m">1629083361647</span> <span class="m">3</span> connected
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以看到7000已经切换为了salve模式，7003切换成了master模式。</p>
 <p>使用Go语言测试读写：</p>
@@ -510,46 +508,46 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
 </span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">(</span>
-	<span class="s">&#34;context&#34;</span>
-	<span class="s">&#34;fmt&#34;</span>
-	<span class="s">&#34;github.com/go-redis/redis/v8&#34;</span>
-<span class="p">)</span>
-
-<span class="kd">var</span> <span class="nx">ctx</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
-
-<span class="kd">func</span> <span class="nf">redisAddrList</span><span class="p">()</span> <span class="p">[]</span><span class="kt">string</span> <span class="p">{</span>
-	<span class="nx">ip</span> <span class="o">:=</span> <span class="s">&#34;localhost&#34;</span>
-	<span class="nx">addrList</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
-	<span class="k">for</span> <span class="nx">port</span> <span class="o">:=</span> <span class="mi">7000</span><span class="p">;</span> <span class="nx">port</span> <span class="p">&lt;</span> <span class="mi">7006</span><span class="p">;</span> <span class="nx">port</span><span class="o">++</span> <span class="p">{</span>
-		<span class="nx">addrList</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">addrList</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%d&#34;</span><span class="p">,</span> <span class="nx">ip</span><span class="p">,</span> <span class="nx">port</span><span class="p">))</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">addrList</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">NewRedisClient</span><span class="p">()</span> <span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">ClusterClient</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClusterClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">ClusterOptions</span><span class="p">{</span>
-		<span class="nx">Addrs</span><span class="p">:</span> <span class="nf">redisAddrList</span><span class="p">(),</span>
-	<span class="p">})</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nf">NewRedisClient</span><span class="p">()</span>
-	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
-	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-	<span class="p">}</span>
-
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;context&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="s">&#34;github.com/go-redis/redis/v8&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">ctx</span> <span class="p">=</span> <span class="nx">context</span><span class="p">.</span><span class="nf">Background</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">redisAddrList</span><span class="p">()</span> <span class="p">[]</span><span class="kt">string</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">ip</span> <span class="o">:=</span> <span class="s">&#34;localhost&#34;</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">addrList</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">string</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">port</span> <span class="o">:=</span> <span class="mi">7000</span><span class="p">;</span> <span class="nx">port</span> <span class="p">&lt;</span> <span class="mi">7006</span><span class="p">;</span> <span class="nx">port</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">addrList</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">addrList</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Sprintf</span><span class="p">(</span><span class="s">&#34;%s:%d&#34;</span><span class="p">,</span> <span class="nx">ip</span><span class="p">,</span> <span class="nx">port</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">addrList</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewRedisClient</span><span class="p">()</span> <span class="o">*</span><span class="nx">redis</span><span class="p">.</span><span class="nx">ClusterClient</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">redis</span><span class="p">.</span><span class="nf">NewClusterClient</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">redis</span><span class="p">.</span><span class="nx">ClusterOptions</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">Addrs</span><span class="p">:</span> <span class="nf">redisAddrList</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">	<span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rdb</span> <span class="o">:=</span> <span class="nf">NewRedisClient</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Set</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">,</span> <span class="s">&#34;bar&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">).</span><span class="nf">Err</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">rdb</span><span class="p">.</span><span class="nf">Get</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span> <span class="s">&#34;foo&#34;</span><span class="p">).</span><span class="nf">Result</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">panic</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -581,8 +579,8 @@ fddc21542112cdcd8857bbfc77481b673e3a543e 127.0.0.1:7004@17004 slave fc92c1709a88
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.8">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

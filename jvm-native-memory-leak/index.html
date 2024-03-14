@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>一次JVM堆外内存问题排查 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="一次JVM堆外内存问题排查" />
+<meta property="og:description" content="记录一下JVM堆外内存泄露排查的过程" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ingbyr.github.io/jvm-native-memory-leak/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-14T10:24:03+08:00" />
+<meta property="article:modified_time" content="2024-03-14T10:24:03+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png" /><meta name="twitter:title" content="一次JVM堆外内存问题排查"/>
+<meta name="twitter:description" content="记录一下JVM堆外内存泄露排查的过程"/>
+<meta name="application-name" content="ingbyr">
+<meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ingbyr.github.io/jvm-native-memory-leak/" /><link rel="prev" href="https://ingbyr.github.io/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "一次JVM堆外内存问题排查",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ingbyr.github.io\/jvm-native-memory-leak\/"
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Java","wordcount":  632 ,
+        "url": "https:\/\/ingbyr.github.io\/jvm-native-memory-leak\/","datePublished": "2024-03-14T10:24:03+08:00","dateModified": "2024-03-14T10:24:03+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ingbyr"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ingbyr">ingbyr</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="选择语言">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/jvm-native-memory-leak/" selected>简体中文</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ingbyr">ingbyr</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/jvm-native-memory-leak/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">一次JVM堆外内存问题排查</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>Java</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-03-14">2024-03-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 632 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#出现的问题">出现的问题</a></li>
+    <li><a href="#开启jvm堆外内存追踪">开启JVM堆外内存追踪</a></li>
+    <li><a href="#查看未释放的堆外内存内容">查看未释放的堆外内存内容</a></li>
+    <li><a href="#监控内存分配">监控内存分配</a></li>
+    <li><a href="#定位问题代码">定位问题代码</a></li>
+    <li><a href="#修改问题代码">修改问题代码</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>记录一下JVM堆外内存泄露排查的过程</p>
+<h2 id="出现的问题">出现的问题</h2>
+<p>线上运行的Java应用在持续运行数小时后会因堆外内存不足而终止，查看日志可以看到类似输出：
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/hs-error-log.png"
+        data-srcset="/jvm-native-memory-leak/hs-error-log.png, /jvm-native-memory-leak/hs-error-log.png 1.5x, /jvm-native-memory-leak/hs-error-log.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/hs-error-log.png"
+        title="/jvm-native-memory-leak/hs-error-log.png" width="2209" height="1618" /></p>
+<p>先尝试了使用手动释放cached memory，发现还有大量内存未释放，基本排除了操作系统内存释放策略配置错误的问题</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/release-cached-memory.png"
+        data-srcset="/jvm-native-memory-leak/release-cached-memory.png, /jvm-native-memory-leak/release-cached-memory.png 1.5x, /jvm-native-memory-leak/release-cached-memory.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/release-cached-memory.png"
+        title="/jvm-native-memory-leak/release-cached-memory.png" width="1460" height="279" /></p>
+<h2 id="开启jvm堆外内存追踪">开启JVM堆外内存追踪</h2>
+<p>在启动Java应用的参数中添加 <code>-XX:NativeMemoryTracking=detail</code>
+，重启应用后运行一段时间，使用 <code>jcmd $pid VM.native_memory summary</code>
+查看内存分配情况，可以看到类似输出</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png"
+        data-srcset="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png, /jvm-native-memory-leak/jcmd-native-memory-sumarry.png 1.5x, /jvm-native-memory-leak/jcmd-native-memory-sumarry.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png"
+        title="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png" width="1354" height="1820" /></p>
+<p>与 top 命令输出的 RSS 比对发现远小于其值，此时基本可以确定是 JNI 调用 Native Code 导致的堆外内存泄露</p>
+<h2 id="查看未释放的堆外内存内容">查看未释放的堆外内存内容</h2>
+<p>先使用 <code>pmp -x $pid</code> 查看内存分布情况，对比前后两次的内容发现一直会申请一些64MB的内存块，并且始终处于未释放状态，
+查看 <code>/proc/$pid/smaps</code> 或 <code>/proc/$pid/maps</code> 找到对应内存起始和终止地址，使用 <code>gdb -pid $pid</code> attach 到问题进程，
+使用 <code>dump memory mem.bin 起始地址 终止地址</code> dump 出对应的多块内存块。</p>
+<p>由于此次Java应用中存在中文字符，因此使用 <code>strings -eS mem.bin</code> 查看可现实的字符内容，为了方便统计最好排序后查看
+<code>strings -eS  mem-0x7f7e28000000-0x7f7e2bfff000.bin | sort | uniq -c | sort -nr | head -n 20</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/strings-memory.png"
+        data-srcset="/jvm-native-memory-leak/strings-memory.png, /jvm-native-memory-leak/strings-memory.png 1.5x, /jvm-native-memory-leak/strings-memory.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/strings-memory.png"
+        title="/jvm-native-memory-leak/strings-memory.png" width="2073" height="831" /></p>
+<p>经查看多个内存块后发现出现频率高的字符串没有明显规律，需要进一步排查</p>
+<h2 id="监控内存分配">监控内存分配</h2>
+<p>本次使用 <a href="https://github.com/jemalloc/jemalloc" target="_blank" rel="noopener noreffer ">Jemalloc</a> 分析应用内存分配情况，首先在应用启动环境添加</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">LD_PRELOAD</span><span class="o">=</span>/usr/local/lib/libjemalloc.so
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">MALLOC_CONF</span><span class="o">=</span>prof:true,lg_prof_interval:31,prof_prefix:/root/jeprof-result/app
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>重启应用后等待 Jemalloc 输出内存采样文件，查看多个采样文件后发现端倪</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/jeprof-heap.png"
+        data-srcset="/jvm-native-memory-leak/jeprof-heap.png, /jvm-native-memory-leak/jeprof-heap.png 1.5x, /jvm-native-memory-leak/jeprof-heap.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/jeprof-heap.png"
+        title="/jvm-native-memory-leak/jeprof-heap.png" width="1630" height="684" /></p>
+<p>可以看到 <code>524336   0.1% 100.0%  7386790   0.8% Java_java_util_zip_Inflater_init</code> JNI调用</p>
+<h2 id="定位问题代码">定位问题代码</h2>
+<p>使用 <code>jstack $pid | grep Inflater</code> 查找调用栈（可能需要多次）</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/jstack-inflater.png"
+        data-srcset="/jvm-native-memory-leak/jstack-inflater.png, /jvm-native-memory-leak/jstack-inflater.png 1.5x, /jvm-native-memory-leak/jstack-inflater.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/jstack-inflater.png"
+        title="/jvm-native-memory-leak/jstack-inflater.png" width="1783" height="702" /></p>
+<p>发现在 Redis 序列化与反序列时使用了 JDK 中的 ZLIB 压缩算法，查看源码可以看到未调用 <code>stream.close()</code>
+<code>infalter.end()</code> 和 <code>defalter.end()</code>方法</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/wrong-java-code.png"
+        data-srcset="/jvm-native-memory-leak/wrong-java-code.png, /jvm-native-memory-leak/wrong-java-code.png 1.5x, /jvm-native-memory-leak/wrong-java-code.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/wrong-java-code.png"
+        title="/jvm-native-memory-leak/wrong-java-code.png" width="2047" height="1434" /></p>
+<p>顺便确认下 native code 调用</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/infalter-java-code.png"
+        data-srcset="/jvm-native-memory-leak/infalter-java-code.png, /jvm-native-memory-leak/infalter-java-code.png 1.5x, /jvm-native-memory-leak/infalter-java-code.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/infalter-java-code.png"
+        title="/jvm-native-memory-leak/infalter-java-code.png" width="1564" height="1616" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/infalter-java-code-2.png"
+        data-srcset="/jvm-native-memory-leak/infalter-java-code-2.png, /jvm-native-memory-leak/infalter-java-code-2.png 1.5x, /jvm-native-memory-leak/infalter-java-code-2.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/infalter-java-code-2.png"
+        title="/jvm-native-memory-leak/infalter-java-code-2.png" width="1452" height="171" /></p>
+<h2 id="修改问题代码">修改问题代码</h2>
+<p>直接看代码</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/jvm-native-memory-leak/right-code.png"
+        data-srcset="/jvm-native-memory-leak/right-code.png, /jvm-native-memory-leak/right-code.png 1.5x, /jvm-native-memory-leak/right-code.png 2x"
+        data-sizes="auto"
+        alt="/jvm-native-memory-leak/right-code.png"
+        title="/jvm-native-memory-leak/right-code.png" width="2022" height="1718" /></p></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-03-14</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/jvm-native-memory-leak/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ingbyr.github.io/jvm-native-memory-leak/" data-title="一次JVM堆外内存问题排查" data-hashtags="Java"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ingbyr.github.io/jvm-native-memory-leak/" data-hashtag="Java"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://ingbyr.github.io/jvm-native-memory-leak/" data-title="一次JVM堆外内存问题排查"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ingbyr.github.io/jvm-native-memory-leak/" data-title="一次JVM堆外内存问题排查"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ingbyr.github.io/jvm-native-memory-leak/" data-title="一次JVM堆外内存问题排查" data-ralateuid="zwkv5"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/java/">Java</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" class="prev" rel="prev" title="Elk分布式日志收集"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>Elk分布式日志收集</a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.8">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["ingbyr"],"clientID":"f9a51bd6b0f1a981f818","clientSecret":"e26281e64a4ae2bc50ea1177260fc214d09f22ac","id":"2024-03-14T10:24:03+08:00","owner":"ingbyr","repo":"ingbyr.github.io","title":"一次JVM堆外内存问题排查"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

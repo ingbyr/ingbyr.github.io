@@ -7,14 +7,12 @@
         <title>算法基础-链表 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="算法基础-链表" />
 <meta property="og:description" content="链表基础算法题目" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-02-19T14:22:03+08:00" />
 <meta property="article:modified_time" content="2021-02-19T14:22:03+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
-
-<meta name="twitter:title" content="算法基础-链表"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png" /><meta name="twitter:title" content="算法基础-链表"/>
 <meta name="twitter:description" content="链表基础算法题目"/>
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -153,18 +151,18 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-	<span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span>
-	<span class="k">for</span> <span class="nx">next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">next</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-		<span class="nx">next</span> <span class="p">=</span> <span class="nx">next</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="p">}</span>
-	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span> <span class="c1">// head的下个一节点是与head值不同的节点
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">head</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">next</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">next</span> <span class="p">=</span> <span class="nx">next</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span> <span class="c1">// head的下个一节点是与head值不同的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>迭代</p>
 <div class="highlight"><div class="chroma">
@@ -187,23 +185,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-	<span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="k">for</span> <span class="nx">cur</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">pre</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">cur</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span> <span class="c1">// 若与前一个元素相同，则跳过
-</span><span class="c1"></span>			<span class="nx">cur</span> <span class="p">=</span> <span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur</span>
-			<span class="nx">pre</span> <span class="p">=</span> <span class="nx">cur</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// pre之后的有可能是与pre相同的若干节点，故断开后续节点
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">head</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">cur</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">pre</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">cur</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span> <span class="c1">// 若与前一个元素相同，则跳过
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="nx">cur</span> <span class="p">=</span> <span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">pre</span> <span class="p">=</span> <span class="nx">cur</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// pre之后的有可能是与pre相同的若干节点，故断开后续节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="删除排序链表中的重复元素-ii">删除排序链表中的重复元素 II</h2>
 <blockquote>
@@ -227,20 +225,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-		<span class="k">for</span> <span class="nx">head</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-			<span class="nx">head</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="c1">// head 与 head.Next值相同时，head指针无需保留，故向后移动
-</span><span class="c1"></span>		<span class="p">}</span>
-		<span class="k">return</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span> <span class="c1">// 重复的元素不保留
-</span><span class="c1"></span>	<span class="p">}</span>
-	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">head</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">head</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">head</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="c1">// head 与 head.Next值相同时，head指针无需保留，故向后移动
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span> <span class="c1">// 重复的元素不保留
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>迭代</p>
 <div class="highlight"><div class="chroma">
@@ -266,26 +264,26 @@
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-  <span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="nx">head</span><span class="p">}</span> <span class="c1">// 头节点可能会被删除，故引入虚拟头节点
-</span><span class="c1"></span>	<span class="nx">head</span> <span class="p">=</span> <span class="nx">dummyHead</span>
-	<span class="nx">rmV</span> <span class="o">:=</span> <span class="mi">0</span> <span class="c1">// 重复值
-</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-			<span class="nx">rmV</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="c1">// 删除 head 后的所有与rmV相同的节点
-</span><span class="c1"></span>			<span class="k">for</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">rmV</span> <span class="p">{</span>
-				<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
-			<span class="p">}</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">head</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">deleteDuplicates</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="nx">head</span><span class="p">}</span> <span class="c1">// 头节点可能会被删除，故引入虚拟头节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">head</span> <span class="p">=</span> <span class="nx">dummyHead</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">rmV</span> <span class="o">:=</span> <span class="mi">0</span> <span class="c1">// 重复值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">rmV</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="c1">// 删除 head 后的所有与rmV相同的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">for</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Val</span> <span class="o">==</span> <span class="nx">rmV</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">head</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="反转链表">反转链表</h2>
 <blockquote>
@@ -305,16 +303,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>	<span class="c1">// 返回反转后的头节点
-</span><span class="c1"></span>	<span class="p">}</span>
-	<span class="nx">newHead</span> <span class="o">:=</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span> <span class="c1">// 递归获取新头节点
-</span><span class="c1"></span>	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span> <span class="c1">// 反转当前节点和其后继节点的指向
-</span><span class="c1"></span>	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// 反转后的最后一个节点指向nil
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">newHead</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>	<span class="c1">// 返回反转后的头节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">newHead</span> <span class="o">:=</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span> <span class="c1">// 递归获取新头节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span> <span class="c1">// 反转当前节点和其后继节点的指向
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// 反转后的最后一个节点指向nil
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">newHead</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>迭代</p>
 <div class="highlight"><div class="chroma">
@@ -334,20 +332,20 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-	<span class="kd">var</span> <span class="nx">pre</span> <span class="o">*</span><span class="nx">ListNode</span>
-	<span class="k">for</span> <span class="nx">head</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">pre</span>
-		<span class="nx">pre</span> <span class="p">=</span> <span class="nx">head</span>
-		<span class="nx">head</span> <span class="p">=</span> <span class="nx">next</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">pre</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">reverseList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">pre</span> <span class="o">*</span><span class="nx">ListNode</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">head</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">pre</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pre</span> <span class="p">=</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span> <span class="p">=</span> <span class="nx">next</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">pre</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="反转链表-ii">反转链表 II</h2>
 <blockquote>
@@ -378,27 +376,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">m</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">m</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 递归移动到翻转区间
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">head</span>
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">next</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="c1">// 保存翻转区间后的第一个节点
-</span><span class="c1">// 翻转链表的前n个节点
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
-		<span class="nx">next</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-	<span class="nx">last</span> <span class="o">:=</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span>
-	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">next</span> <span class="c1">// 反转后的最后一个节点会指向next，其他的会被上一行覆盖
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">last</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">m</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">m</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">m</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// 递归移动到翻转区间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">next</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="c1">// 保存翻转区间后的第一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 翻转链表的前n个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">next</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">last</span> <span class="o">:=</span> <span class="nf">reverseN</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">next</span> <span class="c1">// 反转后的最后一个节点会指向next，其他的会被上一行覆盖
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">last</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>迭代</p>
 <div class="highlight"><div class="chroma">
@@ -434,36 +432,36 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">m</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span>
-	<span class="p">}</span>
-	<span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="nx">head</span><span class="p">}</span> <span class="c1">// 头节点可能被反转
-</span><span class="c1"></span>	<span class="c1">// 反转区间表示为[l, r]，pre为区间外左侧第一个节点，next为右侧第一个节点
-</span><span class="c1"></span>	<span class="c1">// head 移动到 l
-</span><span class="c1"></span>	<span class="nx">head</span> <span class="p">=</span> <span class="nx">dummyHead</span>
-	<span class="kd">var</span> <span class="nx">pre</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="c1">// 区间左侧第一个节点
-</span><span class="c1"></span>	<span class="nx">l</span> <span class="o">:=</span> <span class="mi">0</span>
-	<span class="k">for</span> <span class="nx">l</span> <span class="p">&lt;</span> <span class="nx">m</span> <span class="p">{</span>
-		<span class="nx">pre</span> <span class="p">=</span> <span class="nx">head</span>
-		<span class="nx">head</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="nx">l</span><span class="o">++</span>
-	<span class="p">}</span>
-	<span class="nx">lNode</span> <span class="o">:=</span> <span class="nx">head</span> <span class="c1">// 位于 l 的节点
-</span><span class="c1"></span>	<span class="kd">var</span> <span class="nx">rNode</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="c1">// 位于 r 的节点 （下面for循环结束后）
-</span><span class="c1"></span>	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">l</span>
-	<span class="k">for</span> <span class="nx">r</span> <span class="o">&lt;=</span> <span class="nx">n</span> <span class="p">{</span>
-		<span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">inPre</span>
-		<span class="nx">rNode</span> <span class="p">=</span> <span class="nx">head</span> <span class="c1">// 循环中代表head的前一个节点
-</span><span class="c1"></span>		<span class="nx">head</span> <span class="p">=</span> <span class="nx">next</span>
-		<span class="nx">r</span><span class="o">++</span>
-	<span class="p">}</span> <span class="c1">// 结束时 head=next 位于r+1
-</span><span class="c1"></span>	<span class="nx">lNode</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">next</span>
-	<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">inPre</span>
-	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">reverseBetween</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">m</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="nx">head</span><span class="p">}</span> <span class="c1">// 头节点可能被反转
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 反转区间表示为[l, r]，pre为区间外左侧第一个节点，next为右侧第一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// head 移动到 l
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">head</span> <span class="p">=</span> <span class="nx">dummyHead</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">pre</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="c1">// 区间左侧第一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">l</span> <span class="o">:=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">l</span> <span class="p">&lt;</span> <span class="nx">m</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">pre</span> <span class="p">=</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span> <span class="p">=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">l</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lNode</span> <span class="o">:=</span> <span class="nx">head</span> <span class="c1">// 位于 l 的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kd">var</span> <span class="nx">rNode</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="c1">// 位于 r 的节点 （下面for循环结束后）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">r</span> <span class="o">:=</span> <span class="nx">l</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">r</span> <span class="o">&lt;=</span> <span class="nx">n</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">inPre</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">rNode</span> <span class="p">=</span> <span class="nx">head</span> <span class="c1">// 循环中代表head的前一个节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">head</span> <span class="p">=</span> <span class="nx">next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">r</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="c1">// 结束时 head=next 位于r+1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">lNode</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">next</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">inPre</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="合并两个有序链表">合并两个有序链表</h2>
 <blockquote>
@@ -491,24 +489,24 @@
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">l2</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">l2</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">l1</span>
-	<span class="p">}</span>
-	<span class="kd">var</span> <span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span>
-	<span class="k">if</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-		<span class="nx">head</span> <span class="p">=</span> <span class="nx">l1</span>
-		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">l2</span><span class="p">)</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-		<span class="nx">head</span> <span class="p">=</span> <span class="nx">l2</span>
-		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span><span class="p">,</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">head</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">l2</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">l2</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">l1</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="kd">var</span> <span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span> <span class="p">=</span> <span class="nx">l1</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">l2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span> <span class="p">=</span> <span class="nx">l2</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span><span class="p">,</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>迭代</p>
 <div class="highlight"><div class="chroma">
@@ -539,31 +537,31 @@
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">l2</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span>
-	<span class="nx">curr</span> <span class="o">:=</span> <span class="nx">dummyHead</span>
-	<span class="k">for</span> <span class="nx">l1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">l2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-			<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l1</span>
-			<span class="nx">l1</span> <span class="p">=</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l2</span>
-			<span class="nx">l2</span> <span class="p">=</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span>
-		<span class="nx">curr</span> <span class="p">=</span> <span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l2</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l1</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">mergeTwoLists</span><span class="p">(</span><span class="nx">l1</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">l2</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">curr</span> <span class="o">:=</span> <span class="nx">dummyHead</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">l1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">l2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l1</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">l1</span> <span class="p">=</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l2</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">l2</span> <span class="p">=</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">curr</span> <span class="p">=</span> <span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l2</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">curr</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">l1</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="分隔链表">分隔链表</h2>
 <blockquote>
@@ -595,28 +593,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">partition</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">x</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span>
-	<span class="p">}</span>
-	<span class="nx">smallHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span> <span class="c1">// 保存小于x的节点
-</span><span class="c1"></span>	<span class="nx">small</span> <span class="o">:=</span> <span class="nx">smallHead</span>
-	<span class="nx">largeHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span>	<span class="c1">// 保存大于等于x的节点
-</span><span class="c1"></span>	<span class="nx">large</span> <span class="o">:=</span> <span class="nx">largeHead</span>
-	<span class="k">for</span> <span class="nx">node</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">;</span> <span class="nx">node</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">;</span> <span class="nx">node</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">Next</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">node</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">x</span> <span class="p">{</span>
-			<span class="nx">small</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">node</span>
-			<span class="nx">small</span> <span class="p">=</span> <span class="nx">small</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">large</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">node</span>
-			<span class="nx">large</span> <span class="p">=</span> <span class="nx">large</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="nx">small</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">largeHead</span><span class="p">.</span><span class="nx">Next</span> <span class="c1">// 合并节点
-</span><span class="c1"></span>	<span class="nx">large</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span>	<span class="c1">// 断开后续节点
-</span><span class="c1"></span>	<span class="k">return</span> <span class="nx">smallHead</span><span class="p">.</span><span class="nx">Next</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">partition</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">x</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">smallHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span> <span class="c1">// 保存小于x的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">small</span> <span class="o">:=</span> <span class="nx">smallHead</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">largeHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span>	<span class="c1">// 保存大于等于x的节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">large</span> <span class="o">:=</span> <span class="nx">largeHead</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">node</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">;</span> <span class="nx">node</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">;</span> <span class="nx">node</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">Next</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">node</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">x</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">small</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">small</span> <span class="p">=</span> <span class="nx">small</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">large</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">large</span> <span class="p">=</span> <span class="nx">large</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">small</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">largeHead</span><span class="p">.</span><span class="nx">Next</span> <span class="c1">// 合并节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">large</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span>	<span class="c1">// 断开后续节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="nx">smallHead</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="排序链表">排序链表</h2>
 <blockquote>
@@ -670,51 +668,51 @@
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 基于分治思想，使用归并排序
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">sortList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nf">sort</span><span class="p">(</span><span class="nx">head</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="c1">// 对区间 [left, right) 排序
-</span><span class="c1"></span><span class="kd">func</span> <span class="nf">sort</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">left</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">left</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="nx">right</span> <span class="p">{</span> <span class="c1">// 只有一个left节点
-</span><span class="c1"></span>		<span class="nx">left</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// 断开连接所有节点的链接，在merge中会排序后再次连接
-</span><span class="c1"></span>		<span class="k">return</span> <span class="nx">left</span>
-	<span class="p">}</span>
-	<span class="c1">// 快慢指针寻找中间节点
-</span><span class="c1"></span>	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">left</span>
-	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="nx">right</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="nx">right</span> <span class="p">{</span> <span class="c1">// 右侧结尾是right节点
-</span><span class="c1"></span>		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="p">}</span>
-	<span class="nx">mid</span> <span class="o">:=</span> <span class="nx">slow</span>
-	<span class="k">return</span> <span class="nf">merge</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">mid</span><span class="p">),</span> <span class="nf">sort</span><span class="p">(</span><span class="nx">mid</span><span class="p">,</span> <span class="nx">right</span><span class="p">))</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">merge</span><span class="p">(</span><span class="nx">head1</span><span class="p">,</span> <span class="nx">head2</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span>
-	<span class="nx">cur</span><span class="p">,</span> <span class="nx">cur1</span><span class="p">,</span> <span class="nx">cur2</span> <span class="o">:=</span> <span class="nx">dummyHead</span><span class="p">,</span> <span class="nx">head1</span><span class="p">,</span> <span class="nx">head2</span>
-	<span class="k">for</span> <span class="nx">cur1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">cur2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">cur1</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">cur2</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-			<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur1</span>
-			<span class="nx">cur1</span> <span class="p">=</span> <span class="nx">cur1</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-			<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur2</span>
-			<span class="nx">cur2</span> <span class="p">=</span> <span class="nx">cur2</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="p">}</span>
-		<span class="nx">cur</span> <span class="p">=</span> <span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="p">}</span>
-	<span class="k">if</span> <span class="nx">cur1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur1</span>
-	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">cur2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur2</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 基于分治思想，使用归并排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">sortList</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">sort</span><span class="p">(</span><span class="nx">head</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 对区间 [left, right) 排序
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">sort</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">left</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">left</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="nx">right</span> <span class="p">{</span> <span class="c1">// 只有一个left节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">left</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span> <span class="c1">// 断开连接所有节点的链接，在merge中会排序后再次连接
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">return</span> <span class="nx">left</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 快慢指针寻找中间节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">left</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="nx">right</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="nx">right</span> <span class="p">{</span> <span class="c1">// 右侧结尾是right节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">mid</span> <span class="o">:=</span> <span class="nx">slow</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nf">merge</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">mid</span><span class="p">),</span> <span class="nf">sort</span><span class="p">(</span><span class="nx">mid</span><span class="p">,</span> <span class="nx">right</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">merge</span><span class="p">(</span><span class="nx">head1</span><span class="p">,</span> <span class="nx">head2</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dummyHead</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="kc">nil</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">cur</span><span class="p">,</span> <span class="nx">cur1</span><span class="p">,</span> <span class="nx">cur2</span> <span class="o">:=</span> <span class="nx">dummyHead</span><span class="p">,</span> <span class="nx">head1</span><span class="p">,</span> <span class="nx">head2</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">cur1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">cur2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">cur1</span><span class="p">.</span><span class="nx">Val</span> <span class="p">&lt;</span> <span class="nx">cur2</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur1</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">cur1</span> <span class="p">=</span> <span class="nx">cur1</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur2</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">cur2</span> <span class="p">=</span> <span class="nx">cur2</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cur</span> <span class="p">=</span> <span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">cur1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur1</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="nx">cur2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">cur2</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">dummyHead</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="两两交换链表中的节点">两两交换链表中的节点</h2>
 <blockquote>
@@ -734,16 +732,16 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">swapPairs</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-	<span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">,</span> <span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">pre</span>
-	<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">swapPairs</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">cur</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">swapPairs</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">,</span> <span class="nx">next</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">cur</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">pre</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">pre</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nf">swapPairs</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">cur</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="环形链表">环形链表</h2>
 <blockquote>
@@ -767,21 +765,21 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">false</span>
-	<span class="p">}</span>
-	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
-	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="k">if</span> <span class="nx">slow</span> <span class="o">==</span> <span class="nx">fast</span> <span class="p">{</span> <span class="c1">// 在环内每执行一次快慢指针距离减1
-</span><span class="c1"></span>			<span class="k">return</span> <span class="kc">true</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="kc">false</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">hasCycle</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">slow</span> <span class="o">==</span> <span class="nx">fast</span> <span class="p">{</span> <span class="c1">// 在环内每执行一次快慢指针距离减1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="环形链表-ii">环形链表 II</h2>
 <blockquote>
@@ -799,14 +797,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">         a            入环点          
-+----------------------#------------------X 相遇点
-                       |                  |
-                       |                  |
-                       |                  |
-                       +------------------+
-                                 b
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">         a            入环点          
+</span></span><span class="line"><span class="cl">+----------------------#------------------X 相遇点
+</span></span><span class="line"><span class="cl">                       |                  |
+</span></span><span class="line"><span class="cl">                       |                  |
+</span></span><span class="line"><span class="cl">                       |                  |
+</span></span><span class="line"><span class="cl">                       +------------------+
+</span></span><span class="line"><span class="cl">                                 b
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>入环前节点个数为<code>a</code>，环内节点个数为<code>b</code>，快指针移动距离<code>f</code>，慢指针移动距离<code>s</code>，快慢指针<strong>相遇</strong>时有：</p>
 <ul>
@@ -843,27 +841,27 @@
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">detectCycle</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">nil</span>
-	<span class="p">}</span>
-	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
-	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="k">if</span> <span class="nx">slow</span> <span class="o">==</span> <span class="nx">fast</span> <span class="p">{</span> <span class="c1">// 相遇点
-</span><span class="c1"></span>			<span class="nx">p</span> <span class="o">:=</span> <span class="nx">head</span> <span class="c1">// p指向头节点开始移动a个距离
-</span><span class="c1"></span>			<span class="k">for</span> <span class="nx">p</span> <span class="o">!=</span> <span class="nx">slow</span> <span class="p">{</span>
-				<span class="nx">p</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Next</span>
-				<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
-			<span class="p">}</span>
-			<span class="k">return</span> <span class="nx">p</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="c1">// 无环
-</span><span class="c1"></span>	<span class="k">return</span> <span class="kc">nil</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">detectCycle</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">slow</span> <span class="o">==</span> <span class="nx">fast</span> <span class="p">{</span> <span class="c1">// 相遇点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="nx">p</span> <span class="o">:=</span> <span class="nx">head</span> <span class="c1">// p指向头节点开始移动a个距离
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">for</span> <span class="nx">p</span> <span class="o">!=</span> <span class="nx">slow</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">p</span> <span class="p">=</span> <span class="nx">p</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="nx">p</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 无环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">return</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="回文链表">回文链表</h2>
 <blockquote>
@@ -903,37 +901,37 @@
 </span><span class="lnt">30
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="kc">true</span>
-	<span class="p">}</span>
-	<span class="c1">// 快慢指针找中点
-</span><span class="c1"></span>	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
-	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
-		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
-	<span class="p">}</span>
-	<span class="c1">// 递归反转链表
-</span><span class="c1"></span>	<span class="nx">right</span> <span class="o">:=</span> <span class="nf">reverse</span><span class="p">(</span><span class="nx">slow</span><span class="p">)</span>
-	<span class="c1">// 判断回文
-</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">left</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">;</span> <span class="nx">left</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">right</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">;</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="p">=</span> <span class="nx">left</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">right</span><span class="p">.</span><span class="nx">Next</span> <span class="p">{</span>
-		<span class="k">if</span> <span class="nx">left</span><span class="p">.</span><span class="nx">Val</span> <span class="o">!=</span> <span class="nx">right</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
-			<span class="k">return</span> <span class="kc">false</span>
-		<span class="p">}</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="kc">true</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">reverse</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="k">return</span> <span class="nx">head</span>
-	<span class="p">}</span>
-	<span class="nx">last</span> <span class="o">:=</span> <span class="nf">reverse</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span>
-	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span>
-	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span>
-	<span class="k">return</span> <span class="nx">last</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">isPalindrome</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 快慢指针找中点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">slow</span><span class="p">,</span> <span class="nx">fast</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">,</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">fast</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">slow</span> <span class="p">=</span> <span class="nx">slow</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">fast</span> <span class="p">=</span> <span class="nx">fast</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 递归反转链表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nx">right</span> <span class="o">:=</span> <span class="nf">reverse</span><span class="p">(</span><span class="nx">slow</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 判断回文
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="nx">left</span> <span class="o">:=</span> <span class="nx">head</span><span class="p">;</span> <span class="nx">left</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">&amp;&amp;</span> <span class="nx">right</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">;</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">right</span> <span class="p">=</span> <span class="nx">left</span><span class="p">.</span><span class="nx">Next</span><span class="p">,</span> <span class="nx">right</span><span class="p">.</span><span class="nx">Next</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">left</span><span class="p">.</span><span class="nx">Val</span> <span class="o">!=</span> <span class="nx">right</span><span class="p">.</span><span class="nx">Val</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">reverse</span><span class="p">(</span><span class="nx">head</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">head</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">last</span> <span class="o">:=</span> <span class="nf">reverse</span><span class="p">(</span><span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">last</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -965,8 +963,8 @@
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.8">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

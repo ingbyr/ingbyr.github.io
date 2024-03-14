@@ -7,14 +7,12 @@
         <title>算法设计-LRU与LFU - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="算法设计-LRU与LFU" />
 <meta property="og:description" content="go实现LRU和LFU" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-lru%E4%B8%8Elfu/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-lru%E4%B8%8Elfu/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-01-29T15:58:29+08:00" />
 <meta property="article:modified_time" content="2021-01-29T15:58:29+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
-
-<meta name="twitter:title" content="算法设计-LRU与LFU"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png" /><meta name="twitter:title" content="算法设计-LRU与LFU"/>
 <meta name="twitter:description" content="go实现LRU和LFU"/>
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -207,85 +205,85 @@
 </span><span class="lnt">78
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">LRUCache</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">size</span><span class="p">,</span> <span class="nx">capacity</span> <span class="kt">int</span>
-	<span class="nx">head</span><span class="p">,</span> <span class="nx">tail</span>     <span class="o">*</span><span class="nx">KVNode</span>
-	<span class="nx">cache</span>          <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span>
-<span class="p">}</span>
-
-<span class="kd">type</span> <span class="nx">KVNode</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">prev</span><span class="p">,</span> <span class="nx">next</span> <span class="o">*</span><span class="nx">KVNode</span>
-	<span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">NewKVNode</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">KVNode</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span>
-		<span class="nx">key</span><span class="p">:</span>   <span class="nx">key</span><span class="p">,</span>
-		<span class="nx">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">Constructor</span><span class="p">(</span><span class="nx">capacity</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">LRUCache</span> <span class="p">{</span>
-	<span class="nx">lru</span> <span class="o">:=</span> <span class="nx">LRUCache</span><span class="p">{</span>
-		<span class="nx">size</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
-		<span class="nx">capacity</span><span class="p">:</span> <span class="nx">capacity</span><span class="p">,</span>
-		<span class="nx">head</span><span class="p">:</span>     <span class="nf">NewKVNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-		<span class="nx">tail</span><span class="p">:</span>     <span class="nf">NewKVNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-		<span class="nx">cache</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span><span class="p">{},</span>
-	<span class="p">}</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">head</span>
-	<span class="k">return</span> <span class="nx">lru</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">Get</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">lru</span><span class="p">.</span><span class="nf">MoveToHead</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-		<span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">value</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">Put</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">node</span><span class="p">.</span><span class="nx">value</span> <span class="p">=</span> <span class="nx">value</span>
-		<span class="nx">lru</span><span class="p">.</span><span class="nf">MoveToHead</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-	<span class="nx">newNode</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span><span class="nx">key</span><span class="p">:</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">}</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nf">InsertToHead</span><span class="p">(</span><span class="nx">newNode</span><span class="p">)</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nx">size</span><span class="o">++</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">newNode</span>
-	<span class="k">if</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">size</span> <span class="p">&gt;</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">capacity</span> <span class="p">{</span>
-		<span class="nx">lastNode</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nf">RemoveTail</span><span class="p">()</span>
-		<span class="nx">lru</span><span class="p">.</span><span class="nx">size</span><span class="o">--</span>
-		<span class="nb">delete</span><span class="p">(</span><span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">lastNode</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">MoveToHead</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nf">RemoveNode</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nf">InsertToHead</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">InsertToHead</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">head</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">RemoveTail</span><span class="p">()</span> <span class="o">*</span><span class="nx">KVNode</span> <span class="p">{</span>
-	<span class="nx">lastNode</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span>
-	<span class="nx">lru</span><span class="p">.</span><span class="nf">RemoveNode</span><span class="p">(</span><span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">lastNode</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">RemoveNode</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">prev</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">LRUCache</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">size</span><span class="p">,</span> <span class="nx">capacity</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">,</span> <span class="nx">tail</span>     <span class="o">*</span><span class="nx">KVNode</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">cache</span>          <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">KVNode</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">prev</span><span class="p">,</span> <span class="nx">next</span> <span class="o">*</span><span class="nx">KVNode</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewKVNode</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">KVNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">key</span><span class="p">:</span>   <span class="nx">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Constructor</span><span class="p">(</span><span class="nx">capacity</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">LRUCache</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span> <span class="o">:=</span> <span class="nx">LRUCache</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">size</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">capacity</span><span class="p">:</span> <span class="nx">capacity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span><span class="p">:</span>     <span class="nf">NewKVNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">tail</span><span class="p">:</span>     <span class="nf">NewKVNode</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cache</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">lru</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">Get</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lru</span><span class="p">.</span><span class="nf">MoveToHead</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">value</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">Put</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">node</span><span class="p">.</span><span class="nx">value</span> <span class="p">=</span> <span class="nx">value</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lru</span><span class="p">.</span><span class="nf">MoveToHead</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">newNode</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span><span class="nx">key</span><span class="p">:</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nf">InsertToHead</span><span class="p">(</span><span class="nx">newNode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nx">size</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">newNode</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">size</span> <span class="p">&gt;</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">capacity</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lastNode</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nf">RemoveTail</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lru</span><span class="p">.</span><span class="nx">size</span><span class="o">--</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">delete</span><span class="p">(</span><span class="nx">lru</span><span class="p">.</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">lastNode</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">MoveToHead</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nf">RemoveNode</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nf">InsertToHead</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">InsertToHead</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">RemoveTail</span><span class="p">()</span> <span class="o">*</span><span class="nx">KVNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lastNode</span> <span class="o">:=</span> <span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lru</span><span class="p">.</span><span class="nf">RemoveNode</span><span class="p">(</span><span class="nx">lru</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">lastNode</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lru</span> <span class="o">*</span><span class="nx">LRUCache</span><span class="p">)</span> <span class="nf">RemoveNode</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">prev</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="lfu">LFU</h2>
 <div class="highlight"><div class="chroma">
@@ -399,114 +397,114 @@
 </span><span class="lnt">107
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">KVNode</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">prev</span><span class="p">,</span> <span class="nx">next</span> <span class="o">*</span><span class="nx">KVNode</span>
-	<span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span>
-	<span class="nx">freq</span>       <span class="kt">int</span>
-<span class="p">}</span>
-
-<span class="kd">type</span> <span class="nx">DoubleList</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">head</span><span class="p">,</span> <span class="nx">tail</span> <span class="o">*</span><span class="nx">KVNode</span>
-	<span class="nx">size</span>       <span class="kt">int</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">NewDoubleList</span><span class="p">()</span> <span class="o">*</span><span class="nx">DoubleList</span> <span class="p">{</span>
-	<span class="nx">dl</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">DoubleList</span><span class="p">{</span>
-		<span class="nx">head</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span> <span class="nx">key</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
-		<span class="nx">tail</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span> <span class="nx">key</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
-		<span class="nx">size</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-	<span class="p">}</span>
-	<span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">tail</span>
-	<span class="nx">dl</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">head</span>
-	<span class="k">return</span> <span class="nx">dl</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">dl</span> <span class="o">*</span><span class="nx">DoubleList</span><span class="p">)</span> <span class="nf">PushFront</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">head</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span>
-	<span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span>
-	<span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span>
-	<span class="nx">dl</span><span class="p">.</span><span class="nx">size</span><span class="o">++</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">dl</span> <span class="o">*</span><span class="nx">DoubleList</span><span class="p">)</span> <span class="nf">RemoveBack</span><span class="p">()</span> <span class="o">*</span><span class="nx">KVNode</span> <span class="p">{</span>
-	<span class="nx">lastNode</span> <span class="o">:=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span>
-	<span class="nx">dl</span><span class="p">.</span><span class="nf">Remove</span><span class="p">(</span><span class="nx">lastNode</span><span class="p">)</span>
-	<span class="k">return</span> <span class="nx">lastNode</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">dl</span> <span class="o">*</span><span class="nx">DoubleList</span><span class="p">)</span> <span class="nf">Remove</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">prev</span>
-	<span class="nx">dl</span><span class="p">.</span><span class="nx">size</span><span class="o">--</span>
-<span class="p">}</span>
-
-<span class="kd">type</span> <span class="nx">LFUCache</span> <span class="kd">struct</span> <span class="p">{</span>
-	<span class="nx">cache</span>                   <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span>
-	<span class="nx">freq</span>                    <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">DoubleList</span>
-	<span class="nx">capacity</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">minFreq</span> <span class="kt">int</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">Constructor</span><span class="p">(</span><span class="nx">capacity</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">LFUCache</span> <span class="p">{</span>
-	<span class="k">return</span> <span class="nx">LFUCache</span><span class="p">{</span>
-		<span class="nx">cache</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span><span class="p">{},</span>
-		<span class="nx">freq</span><span class="p">:</span>     <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">DoubleList</span><span class="p">{},</span>
-		<span class="nx">capacity</span><span class="p">:</span> <span class="nx">capacity</span><span class="p">,</span>
-		<span class="nx">size</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
-		<span class="nx">minFreq</span><span class="p">:</span>  <span class="mi">0</span><span class="p">,</span>
-	<span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lfu</span> <span class="o">*</span><span class="nx">LFUCache</span><span class="p">)</span> <span class="nf">IncFreq</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
-	<span class="nx">preFreq</span> <span class="o">:=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">freq</span>
-	<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">preFreq</span><span class="p">].</span><span class="nf">Remove</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-	<span class="k">if</span> <span class="nx">preFreq</span> <span class="o">==</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span> <span class="o">&amp;&amp;</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">preFreq</span><span class="p">].</span><span class="nx">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
-		<span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span><span class="o">++</span>
-		<span class="nb">delete</span><span class="p">(</span><span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">,</span> <span class="nx">preFreq</span><span class="p">)</span>
-	<span class="p">}</span>
-	<span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="o">++</span>
-	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="p">]</span> <span class="p">=</span> <span class="nf">NewDoubleList</span><span class="p">()</span>
-	<span class="p">}</span>
-	<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="p">].</span><span class="nf">PushFront</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lfu</span> <span class="o">*</span><span class="nx">LFUCache</span><span class="p">)</span> <span class="nf">Get</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">lfu</span><span class="p">.</span><span class="nf">IncFreq</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-		<span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">value</span>
-	<span class="p">}</span>
-	<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-<span class="p">}</span>
-
-<span class="kd">func</span> <span class="p">(</span><span class="nx">lfu</span> <span class="o">*</span><span class="nx">LFUCache</span><span class="p">)</span> <span class="nf">Put</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
-	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">capacity</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-
-	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
-		<span class="nx">node</span><span class="p">.</span><span class="nx">value</span> <span class="p">=</span> <span class="nx">value</span>
-		<span class="nx">lfu</span><span class="p">.</span><span class="nf">IncFreq</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-		<span class="k">return</span>
-	<span class="p">}</span>
-
-	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">size</span> <span class="o">==</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">capacity</span> <span class="p">{</span>
-		<span class="nx">node</span> <span class="o">:=</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span><span class="p">].</span><span class="nf">RemoveBack</span><span class="p">()</span>
-		<span class="nb">delete</span><span class="p">(</span><span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">node</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span>
-		<span class="nx">lfu</span><span class="p">.</span><span class="nx">size</span><span class="o">--</span>
-		<span class="c1">// No need to update minFreq because it will be set 1 below
-</span><span class="c1"></span>	<span class="p">}</span>
-
-	<span class="nx">node</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span> <span class="nx">key</span><span class="p">:</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">freq</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
-	<span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">node</span>
-	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
-		<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="nf">NewDoubleList</span><span class="p">()</span>
-	<span class="p">}</span>
-	<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">PushFront</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
-	<span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span> <span class="p">=</span> <span class="mi">1</span>
-	<span class="nx">lfu</span><span class="p">.</span><span class="nx">size</span><span class="o">++</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">KVNode</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">prev</span><span class="p">,</span> <span class="nx">next</span> <span class="o">*</span><span class="nx">KVNode</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">key</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">freq</span>       <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">DoubleList</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">head</span><span class="p">,</span> <span class="nx">tail</span> <span class="o">*</span><span class="nx">KVNode</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">size</span>       <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">NewDoubleList</span><span class="p">()</span> <span class="o">*</span><span class="nx">DoubleList</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">DoubleList</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">head</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span> <span class="nx">key</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">tail</span><span class="p">:</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span> <span class="nx">key</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">size</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">tail</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">dl</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">dl</span> <span class="o">*</span><span class="nx">DoubleList</span><span class="p">)</span> <span class="nf">PushFront</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">head</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span><span class="p">.</span><span class="nx">head</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span><span class="p">.</span><span class="nx">size</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">dl</span> <span class="o">*</span><span class="nx">DoubleList</span><span class="p">)</span> <span class="nf">RemoveBack</span><span class="p">()</span> <span class="o">*</span><span class="nx">KVNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lastNode</span> <span class="o">:=</span> <span class="nx">dl</span><span class="p">.</span><span class="nx">tail</span><span class="p">.</span><span class="nx">prev</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span><span class="p">.</span><span class="nf">Remove</span><span class="p">(</span><span class="nx">lastNode</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">lastNode</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">dl</span> <span class="o">*</span><span class="nx">DoubleList</span><span class="p">)</span> <span class="nf">Remove</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">prev</span><span class="p">.</span><span class="nx">next</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">next</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">next</span><span class="p">.</span><span class="nx">prev</span> <span class="p">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">prev</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">dl</span><span class="p">.</span><span class="nx">size</span><span class="o">--</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">LFUCache</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">cache</span>                   <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">freq</span>                    <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">DoubleList</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">capacity</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">minFreq</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Constructor</span><span class="p">(</span><span class="nx">capacity</span> <span class="kt">int</span><span class="p">)</span> <span class="nx">LFUCache</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">LFUCache</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">cache</span><span class="p">:</span>    <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">KVNode</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">freq</span><span class="p">:</span>     <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="o">*</span><span class="nx">DoubleList</span><span class="p">{},</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">capacity</span><span class="p">:</span> <span class="nx">capacity</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">size</span><span class="p">:</span>     <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">minFreq</span><span class="p">:</span>  <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lfu</span> <span class="o">*</span><span class="nx">LFUCache</span><span class="p">)</span> <span class="nf">IncFreq</span><span class="p">(</span><span class="nx">node</span> <span class="o">*</span><span class="nx">KVNode</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">preFreq</span> <span class="o">:=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">freq</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">preFreq</span><span class="p">].</span><span class="nf">Remove</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">preFreq</span> <span class="o">==</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span> <span class="o">&amp;&amp;</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">preFreq</span><span class="p">].</span><span class="nx">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">delete</span><span class="p">(</span><span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">,</span> <span class="nx">preFreq</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="p">]</span> <span class="p">=</span> <span class="nf">NewDoubleList</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">freq</span><span class="p">].</span><span class="nf">PushFront</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lfu</span> <span class="o">*</span><span class="nx">LFUCache</span><span class="p">)</span> <span class="nf">Get</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lfu</span><span class="p">.</span><span class="nf">IncFreq</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="nx">node</span><span class="p">.</span><span class="nx">value</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">lfu</span> <span class="o">*</span><span class="nx">LFUCache</span><span class="p">)</span> <span class="nf">Put</span><span class="p">(</span><span class="nx">key</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">value</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">capacity</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">node</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">node</span><span class="p">.</span><span class="nx">value</span> <span class="p">=</span> <span class="nx">value</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lfu</span><span class="p">.</span><span class="nf">IncFreq</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">size</span> <span class="o">==</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">capacity</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">node</span> <span class="o">:=</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span><span class="p">].</span><span class="nf">RemoveBack</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">delete</span><span class="p">(</span><span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">,</span> <span class="nx">node</span><span class="p">.</span><span class="nx">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lfu</span><span class="p">.</span><span class="nx">size</span><span class="o">--</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">// No need to update minFreq because it will be set 1 below
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nx">node</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">KVNode</span><span class="p">{</span> <span class="nx">key</span><span class="p">:</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">freq</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lfu</span><span class="p">.</span><span class="nx">cache</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">=</span> <span class="nx">node</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">=</span> <span class="nf">NewDoubleList</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lfu</span><span class="p">.</span><span class="nx">freq</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nf">PushFront</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lfu</span><span class="p">.</span><span class="nx">minFreq</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">lfu</span><span class="p">.</span><span class="nx">size</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
@@ -538,8 +536,8 @@
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.8">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

@@ -7,14 +7,12 @@
         <title>使用ffmpeg压缩60FPS视频并上传至Bilibili - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="使用ffmpeg压缩60FPS视频并上传至Bilibili" />
 <meta property="og:description" content="样例 我们要达到的视频效果是这样的 确定压缩目标 bilibili不进行二压的参数要求如下： 视频码率最高1800kbps（H264/AVC编码） 音" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/compress-video-by-ffmpeg/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/compress-video-by-ffmpeg/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-12-19T22:42:00+00:00" />
 <meta property="article:modified_time" content="2017-12-19T22:42:00+00:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
-
-<meta name="twitter:title" content="使用ffmpeg压缩60FPS视频并上传至Bilibili"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png" /><meta name="twitter:title" content="使用ffmpeg压缩60FPS视频并上传至Bilibili"/>
 <meta name="twitter:description" content="样例 我们要达到的视频效果是这样的 确定压缩目标 bilibili不进行二压的参数要求如下： 视频码率最高1800kbps（H264/AVC编码） 音"/>
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -162,8 +160,8 @@ level≤4.1
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">ffmpeg -i <span class="nv">$argv</span><span class="o">[</span>1<span class="o">]</span> -vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 1780k -r <span class="m">60</span> -acodec aac -strict -2 -ac <span class="m">2</span> -ab 128k -ar <span class="m">44100</span> -pass <span class="m">1</span> -f flv /dev/null<span class="p">;</span> and ffmpeg -i <span class="nv">$argv</span><span class="o">[</span>1<span class="o">]</span> -vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 1780k -r <span class="m">60</span> -acodec aac -strict -2 -ac <span class="m">2</span> -ab 128k -ar <span class="m">44100</span> -pass <span class="m">2</span> -f flv <span class="nv">$argv</span><span class="o">[</span>2<span class="o">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ffmpeg -i <span class="nv">$argv</span><span class="o">[</span>1<span class="o">]</span> -vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 1780k -r <span class="m">60</span> -acodec aac -strict -2 -ac <span class="m">2</span> -ab 128k -ar <span class="m">44100</span> -pass <span class="m">1</span> -f flv /dev/null<span class="p">;</span> and ffmpeg -i <span class="nv">$argv</span><span class="o">[</span>1<span class="o">]</span> -vcodec libx264 -preset veryslow -profile:v high -level:v 4.1 -pix_fmt yuv420p -b:v 1780k -r <span class="m">60</span> -acodec aac -strict -2 -ac <span class="m">2</span> -ab 128k -ar <span class="m">44100</span> -pass <span class="m">2</span> -f flv <span class="nv">$argv</span><span class="o">[</span>2<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里总共执行了两条命令，下面详细说一下。</p>
 <h2 id="-i-argv1">-i $argv[1]</h2>
@@ -218,8 +216,8 @@ level≤4.1
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.8">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

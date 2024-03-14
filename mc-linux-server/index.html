@@ -7,14 +7,12 @@
         <title>Minecraft服务器搭建 - ingbyr</title><meta name="Description" content="ingbyr博客"><meta property="og:title" content="Minecraft服务器搭建" />
 <meta property="og:description" content="Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ingbyr.github.io/mc-linux-server/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ingbyr.github.io/mc-linux-server/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-08-03T16:03:27+08:00" />
 <meta property="article:modified_time" content="2018-08-03T16:03:27+08:00" /><meta property="og:site_name" content="My cool site" />
 
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
-
-<meta name="twitter:title" content="Minecraft服务器搭建"/>
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png" /><meta name="twitter:title" content="Minecraft服务器搭建"/>
 <meta name="twitter:description" content="Spigot服务器（类Bukkit） 介绍 spigotmc是一个以高性能著称的MC服务器端，Spigot服务端只支持plugin形式的扩展，如"/>
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -151,8 +149,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">java -jar BuildTools.jar --rev <span class="o">[</span>版本号<span class="o">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -jar BuildTools.jar --rev <span class="o">[</span>版本号<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>编译需要一段时间，完成编译后将生成的jar文件拷贝至单独的文件夹。</p>
 <h2 id="插件配置">插件配置</h2>
@@ -164,8 +162,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">java -Xms1024M -Xmx1024M -jar <span class="o">[</span>your-jar-file<span class="o">]</span> nogui
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java -Xms1024M -Xmx1024M -jar <span class="o">[</span>your-jar-file<span class="o">]</span> nogui
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>启动一个Screen终端，然后输入</p>
 <div class="highlight"><div class="chroma">
@@ -173,8 +171,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">sh start.sh
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sh start.sh
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>等待服务器启动完毕即可，要使服务器后台运行，按下ctrl+a,d后screen将处于后台。恢复screen输入：</p>
 <div class="highlight"><div class="chroma">
@@ -182,8 +180,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash">screen -r mc
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">screen -r mc
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>终止服务器直接 ctrl+c 即可</p>
 <h1 id="forge服务器">Forge服务器</h1>
@@ -234,8 +232,8 @@
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.92.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
-                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.123.8">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 

@@ -3,15 +3,23 @@
         <title>ingbyr</title>
         <link>https://ingbyr.github.io/</link>
         <description>ingbyr博客</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 07 Oct 2023 14:45:11 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Mar 2024 10:24:03 &#43;0800</lastBuildDate>
             <atom:link href="https://ingbyr.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>一次JVM堆外内存问题排查</title>
+    <link>https://ingbyr.github.io/jvm-native-memory-leak/</link>
+    <pubDate>Thu, 14 Mar 2024 10:24:03 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/jvm-native-memory-leak/</guid>
+    <description><![CDATA[<p>记录一下JVM堆外内存泄露排查的过程</p>]]></description>
+</item>
+<item>
     <title>Elk分布式日志收集</title>
     <link>https://ingbyr.github.io/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</link>
     <pubDate>Sat, 07 Oct 2023 14:45:11 &#43;0800</pubDate>
     <author>ingbyr</author>
     <guid>https://ingbyr.github.io/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[ELK 架构 文档 配置ES 修改文件config/elasticsearch.yml path.data path.logs network.host http.port 生成相应账户密码 ./bin/elasticsearch-reset-password -u elastic ./bin/elasticsearch-reset-password -u kibana-system 配置Kibana server.port server.host elasticsearch.username elasticsearch.password i18n.locale 配置]]></description>
 </item>
 <item>
     <title>算法基础-前缀树</title>
@@ -76,14 +84,6 @@
     <author>ingbyr</author>
     <guid>https://ingbyr.github.io/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid>
     <description><![CDATA[<p>分布式事务简介</p>]]></description>
-</item>
-<item>
-    <title>CICD搭建部署</title>
-    <link>https://ingbyr.github.io/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/</link>
-    <pubDate>Thu, 04 Mar 2021 14:35:59 &#43;0800</pubDate>
-    <author>ingbyr</author>
-    <guid>https://ingbyr.github.io/cicd%E6%90%AD%E5%BB%BA%E9%83%A8%E7%BD%B2/</guid>
-    <description><![CDATA[<p>基于Gitea和Drone实现CICD</p>]]></description>
 </item>
 </channel>
 </rss>

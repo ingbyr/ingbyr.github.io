@@ -12,7 +12,7 @@
     <description><![CDATA[<p>记录一下JVM堆外内存泄露排查的过程</p>]]></description>
 </item>
 <item>
-    <title>Elk分布式日志收集</title>
+    <title>ELK分布式日志收集</title>
     <link>https://ingbyr.github.io/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/</link>
     <pubDate>Sat, 07 Oct 2023 14:45:11 &#43;0800</pubDate>
     <author>ingbyr</author>

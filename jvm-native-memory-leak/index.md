@@ -26,12 +26,10 @@
 
 ## 查看未释放的堆外内存内容
 
-先使用 `pmp -x $pid` 查看内存分布情况，对比前后两次的内容发现一直会申请一些64MB的内存块，并且始终处于未释放状态，
-查看 `/proc/$pid/smaps` 或 `/proc/$pid/maps` 找到对应内存起始和终止地址，使用 `gdb -pid $pid` attach 到问题进程，
-使用 `dump memory mem.bin 起始地址 终止地址` dump 出对应的多块内存块。
-
-由于此次Java应用中存在中文字符，因此使用 `strings -eS mem.bin` 查看可现实的字符内容，为了方便统计最好排序后查看
-`strings -eS  mem-0x7f7e28000000-0x7f7e2bfff000.bin | sort | uniq -c | sort -nr | head -n 20`
+1. 先使用 `pmp -x $pid` 查看内存分布情况，对比前后两次的内容发现一直会申请一些64MB的内存块，并且始终处于未释放状态
+2. 查看 `/proc/$pid/smaps` 或 `/proc/$pid/maps` 找到对应内存起始和终止地址
+3. 使用 `gdb -pid $pid` attach 到问题进程， `dump memory mem.bin 起始地址 终止地址` dump 出对应的多块内存块。
+4. 由于此次Java应用中存在中文字符，因此使用 `strings -eS mem.bin` 查看可显示的字符内容
 
 ![](strings-memory.png)
 

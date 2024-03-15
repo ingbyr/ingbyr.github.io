@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Java - 标签 - ingbyr</title>
-        <link>https://ingbyr.github.io/tags/java/</link>
+        <link>http://localhost:55874/tags/java/</link>
         <description>Java - 标签 - ingbyr</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Mar 2024 10:24:03 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/tags/java/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Mar 2024 10:24:03 &#43;0800</lastBuildDate><atom:link href="http://localhost:55874/tags/java/" rel="self" type="application/rss+xml" /><item>
     <title>一次JVM堆外内存问题排查</title>
-    <link>https://ingbyr.github.io/jvm-native-memory-leak/</link>
+    <link>http://localhost:55874/jvm-native-memory-leak/</link>
     <pubDate>Thu, 14 Mar 2024 10:24:03 &#43;0800</pubDate>
     <author>ingbyr</author>
-    <guid>https://ingbyr.github.io/jvm-native-memory-leak/</guid>
+    <guid>http://localhost:55874/jvm-native-memory-leak/</guid>
     <description><![CDATA[<p>记录一下JVM堆外内存泄露排查的过程</p>]]></description>
 </item>
 </channel>

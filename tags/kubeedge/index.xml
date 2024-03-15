@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Kubeedge - 标签 - ingbyr</title>
-        <link>https://ingbyr.github.io/tags/kubeedge/</link>
+        <link>http://localhost:55874/tags/kubeedge/</link>
         <description>Kubeedge - 标签 - ingbyr</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 31 Aug 2020 17:26:02 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/tags/kubeedge/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 31 Aug 2020 17:26:02 &#43;0800</lastBuildDate><atom:link href="http://localhost:55874/tags/kubeedge/" rel="self" type="application/rss+xml" /><item>
     <title>Kubeedge 国内环境安装</title>
-    <link>https://ingbyr.github.io/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link>
+    <link>http://localhost:55874/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</link>
     <pubDate>Mon, 31 Aug 2020 17:26:02 &#43;0800</pubDate>
     <author>ingbyr</author>
-    <guid>https://ingbyr.github.io/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid>
+    <guid>http://localhost:55874/kubeedge-%E5%9B%BD%E5%86%85%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/</guid>
     <description><![CDATA[<p>国内网络环境下快速安装k8s</p>]]></description>
 </item>
 </channel>

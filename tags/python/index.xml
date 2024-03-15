@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Python - 标签 - ingbyr</title>
-        <link>https://ingbyr.github.io/tags/python/</link>
+        <link>http://localhost:55874/tags/python/</link>
         <description>Python - 标签 - ingbyr</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Apr 2016 14:45:42 &#43;0000</lastBuildDate><atom:link href="https://ingbyr.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 14 Apr 2016 14:45:42 &#43;0000</lastBuildDate><atom:link href="http://localhost:55874/tags/python/" rel="self" type="application/rss+xml" /><item>
     <title>北邮网关登陆工具</title>
-    <link>https://ingbyr.github.io/bupt-net-login/</link>
+    <link>http://localhost:55874/bupt-net-login/</link>
     <pubDate>Thu, 14 Apr 2016 14:45:42 &#43;0000</pubDate>
     <author>ingbyr</author>
-    <guid>https://ingbyr.github.io/bupt-net-login/</guid>
+    <guid>http://localhost:55874/bupt-net-login/</guid>
     <description><![CDATA[北邮校园网网关登陆工具，适配新网关 ngw.bupt.edu.cn。已开源至 GitHub。 安装 使用pip安装 pip3 install BUPTNetLogin 使用便携版 下载页面 使用方法 使]]></description>
 </item>
 </channel>

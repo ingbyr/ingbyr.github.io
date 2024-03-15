@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Linux - 标签 - ingbyr</title>
-        <link>https://ingbyr.github.io/tags/linux/</link>
+        <link>http://localhost:55874/tags/linux/</link>
         <description>Linux - 标签 - ingbyr</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 14 Aug 2017 15:19:18 &#43;0000</lastBuildDate><atom:link href="https://ingbyr.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 14 Aug 2017 15:19:18 &#43;0000</lastBuildDate><atom:link href="http://localhost:55874/tags/linux/" rel="self" type="application/rss+xml" /><item>
     <title>Linux Server使用IPV6 BT资源</title>
-    <link>https://ingbyr.github.io/remote-torrent-sys/</link>
+    <link>http://localhost:55874/remote-torrent-sys/</link>
     <pubDate>Mon, 14 Aug 2017 15:19:18 &#43;0000</pubDate>
     <author>ingbyr</author>
-    <guid>https://ingbyr.github.io/remote-torrent-sys/</guid>
+    <guid>http://localhost:55874/remote-torrent-sys/</guid>
     <description><![CDATA[啰嗦几句 权利的游戏终于又更新啦，然而目前网络没有IPV6所以怎么下载资源成了最大的问题，试了试公网上的bt，速度慢的令人发指，所以决定还是想]]></description>
 </item>
 </channel>

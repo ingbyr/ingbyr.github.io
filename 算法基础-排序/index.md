@@ -79,6 +79,61 @@ func partition(arr []int, l int, r int) int {
 }
 ```
 
+```java
+    class Solution {
+        public int[] sortArray(int[] nums) {
+            if (nums == null || nums.length <= 1) {
+                return nums;
+            }
+            quickSort(nums, 0, nums.length - 1);
+            return nums;
+        }
+
+        private void quickSort(int[] nums, int l, int r) {
+            if (l >= r) {
+                return;
+            }
+            int p = partition(nums, l, r);
+            quickSort(nums, l, p - 1);
+            quickSort(nums, p + 1, r);
+        }
+
+        private int partition(int[] nums, int l, int r) {
+            int v = randomPiv(nums, l, r);
+            int i = l + 1;
+            int j = r;
+            while (true) {
+                while (i < r && nums[i] < v) {
+                    i++;
+                }
+                while (j > l && nums[j] >= v) {
+                    j--;
+                }
+                if (i >= j) {
+                    break;
+                }
+                swap(nums, i, j);
+                i++;
+                j--;
+            }
+            swap(nums, l, j);
+            return j;
+        }
+
+        private int randomPiv(int[] nums, int l, int r) {
+            Random random = new Random();
+            int p = random.nextInt(r - l + 1) + l;
+            swap(nums, l, p);
+            return nums[l];
+        }
+
+        private void swap(int[] nums, int i, int j) {
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
+        }
+    }
+```
 
 ## 插入排序
 
@@ -258,6 +313,51 @@ func merge(left, right []int) []int {
 	}
 	return res
 }
+```
+
+```java
+    class Solution {
+        public int[] sortArray(int[] nums) {
+            if (nums == null || nums.length <= 1) {
+                return nums;
+            }
+            sort(nums, 0, nums.length - 1);
+            return nums;
+        }
+
+        private void sort(int[] nums, int l, int r) {
+            if (l >= r) {
+                return;
+            }
+            int m = l + (r - l) / 2;
+            sort(nums, l, m);
+            sort(nums, m + 1, r);
+            merge(nums, l, m, r);
+        }
+
+        private void merge(int[] nums, int l, int m, int r) {
+            int[] temp = new int[r - l + 1];
+            int p = 0;
+            int i = l, j = m + 1;
+            while (i <= m && j <= r) {
+                if (nums[i] < nums[j]) {
+                    temp[p++] = nums[i++];
+                } else {
+                    temp[p++] = nums[j++];
+                }
+            }
+            while (i <= m) {
+                temp[p++] = nums[i++];
+            }
+            while (j <= r) {
+                temp[p++] = nums[j++];
+            }
+            for (int k = l; k <= r; k++) {
+                nums[k] = temp[k - l];
+            }
+        }
+
+    }
 ```
 
 ## 计数排序

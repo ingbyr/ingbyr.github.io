@@ -1,7 +1,7 @@
 # 算法基础-排序
 
 
-经典排序算法go语言实现版本
+经典排序算法
 
 <!--more-->
 
@@ -80,59 +80,50 @@ func partition(arr []int, l int, r int) int {
 ```
 
 ```java
-    class Solution {
-        public int[] sortArray(int[] nums) {
-            if (nums == null || nums.length <= 1) {
-                return nums;
-            }
-            quickSort(nums, 0, nums.length - 1);
+   class Solution {
+
+    public int[] sortArray(int[] nums) {
+        if (nums == null || nums.length <= 1) {
             return nums;
         }
-
-        private void quickSort(int[] nums, int l, int r) {
-            if (l >= r) {
-                return;
-            }
-            int p = partition(nums, l, r);
-            quickSort(nums, l, p - 1);
-            quickSort(nums, p + 1, r);
-        }
-
-        private int partition(int[] nums, int l, int r) {
-            int v = randomPiv(nums, l, r);
-            int i = l + 1;
-            int j = r;
-            while (true) {
-                while (i < r && nums[i] < v) {
-                    i++;
-                }
-                while (j > l && nums[j] >= v) {
-                    j--;
-                }
-                if (i >= j) {
-                    break;
-                }
-                swap(nums, i, j);
-                i++;
-                j--;
-            }
-            swap(nums, l, j);
-            return j;
-        }
-
-        private int randomPiv(int[] nums, int l, int r) {
-            Random random = new Random();
-            int p = random.nextInt(r - l + 1) + l;
-            swap(nums, l, p);
-            return nums[l];
-        }
-
-        private void swap(int[] nums, int i, int j) {
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
-        }
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
     }
+
+    private void quickSort(int[] nums, int l, int r) {
+        if (l >= r) {
+            return;
+        }
+        int p = partition(nums, l, r);
+        quickSort(nums, l, p - 1);
+        quickSort(nums, p + 1, r);
+    }
+
+    private int partition(int[] nums, int l, int r) {
+        int v = randomPiv(nums, l, r);
+        while (l < r) {
+            while (l < r && nums[r] >= v) {
+                r--;
+            }
+            nums[l] = nums[r];
+            while (l < r && nums[l] <= v) {
+                l++;
+            }
+            nums[r] = nums[l];
+        }
+        nums[l] = v;
+        return l;
+    }
+
+    private int randomPiv(int[] nums, int l, int r) {
+        int p = ThreadLocalRandom.current().nextInt(r - l + 1) + l;
+        int temp = nums[l];
+        nums[l] = nums[p];
+        nums[p] = temp;
+        return nums[l];
+    }
+
+}  
 ```
 
 ## 插入排序
@@ -316,48 +307,49 @@ func merge(left, right []int) []int {
 ```
 
 ```java
-    class Solution {
-        public int[] sortArray(int[] nums) {
-            if (nums == null || nums.length <= 1) {
-                return nums;
-            }
-            sort(nums, 0, nums.length - 1);
+class Solution {
+
+    public int[] sortArray(int[] nums) {
+        if (nums == null || nums.length <= 1) {
             return nums;
         }
-
-        private void sort(int[] nums, int l, int r) {
-            if (l >= r) {
-                return;
-            }
-            int m = l + (r - l) / 2;
-            sort(nums, l, m);
-            sort(nums, m + 1, r);
-            merge(nums, l, m, r);
-        }
-
-        private void merge(int[] nums, int l, int m, int r) {
-            int[] temp = new int[r - l + 1];
-            int p = 0;
-            int i = l, j = m + 1;
-            while (i <= m && j <= r) {
-                if (nums[i] < nums[j]) {
-                    temp[p++] = nums[i++];
-                } else {
-                    temp[p++] = nums[j++];
-                }
-            }
-            while (i <= m) {
-                temp[p++] = nums[i++];
-            }
-            while (j <= r) {
-                temp[p++] = nums[j++];
-            }
-            for (int k = l; k <= r; k++) {
-                nums[k] = temp[k - l];
-            }
-        }
-
+        sort(nums, 0, nums.length);
+        return nums;
     }
+
+    // [left, right)
+    private void sort(int[] nums, int left, int right) {
+        if (right - left <= 1) {
+            return;
+        }
+        int mid = left + (right - left) / 2;
+        sort(nums, left, mid);
+        sort(nums, mid, right);
+        merge(nums, left, mid, right);
+    }
+
+    private void merge(int[] nums, int left, int mid, int right) {
+        int[] arr = new int[right - left];
+        int p = 0;
+        int i = left, j = mid;
+        while (i < mid && j < right) {
+            if (nums[i] < nums[j]) {
+                arr[p] = nums[i++];
+            } else {
+                arr[p] = nums[j++];
+            }
+            p++;
+        }
+        while (i < mid) {
+            arr[p++] = nums[i++];
+        }
+        while (j < right) {
+            arr[p++] = nums[j++];
+        }
+        System.arraycopy(arr, 0, nums, left, right-left);
+    }
+
+}
 ```
 
 ## 计数排序

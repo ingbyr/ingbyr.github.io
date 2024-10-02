@@ -19,7 +19,7 @@
 <meta name="application-name" content="ingbyr">
 <meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ingbyr.github.io/jvm-native-memory-leak/" /><link rel="prev" href="https://ingbyr.github.io/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ingbyr.github.io/jvm-native-memory-leak/" /><link rel="prev" href="https://ingbyr.github.io/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" /><link rel="next" href="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%951-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -137,8 +137,7 @@
         data-srcset="/jvm-native-memory-leak/hs-error-log.png, /jvm-native-memory-leak/hs-error-log.png 1.5x, /jvm-native-memory-leak/hs-error-log.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/hs-error-log.png"
-        title="/jvm-native-memory-leak/hs-error-log.png" />
-       </p>
+        title="/jvm-native-memory-leak/hs-error-log.png" width="2209" height="1618" /></p>
 <p>先尝试了使用手动释放cached memory，发现还有大量内存未释放，基本排除了操作系统内存释放策略配置错误的问题</p>
 <p><img
         class="lazyload"
@@ -147,8 +146,7 @@
         data-srcset="/jvm-native-memory-leak/release-cached-memory.png, /jvm-native-memory-leak/release-cached-memory.png 1.5x, /jvm-native-memory-leak/release-cached-memory.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/release-cached-memory.png"
-        title="/jvm-native-memory-leak/release-cached-memory.png" />
-       </p>
+        title="/jvm-native-memory-leak/release-cached-memory.png" width="1460" height="279" /></p>
 <h2 id="开启jvm堆外内存追踪">开启JVM堆外内存追踪</h2>
 <p>在启动Java应用的参数中添加 <code>-XX:NativeMemoryTracking=detail</code>
 ，重启应用后运行一段时间，使用 <code>jcmd $pid VM.native_memory summary</code>
@@ -160,8 +158,7 @@
         data-srcset="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png, /jvm-native-memory-leak/jcmd-native-memory-sumarry.png 1.5x, /jvm-native-memory-leak/jcmd-native-memory-sumarry.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png"
-        title="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png" />
-       </p>
+        title="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png" width="1354" height="1820" /></p>
 <p>与 top 命令输出的 RSS 比对发现远小于其值，此时基本可以确定是 JNI 调用 Native Code 导致的堆外内存泄露</p>
 <h2 id="查看未释放的堆外内存内容">查看未释放的堆外内存内容</h2>
 <ol>
@@ -177,8 +174,7 @@
         data-srcset="/jvm-native-memory-leak/strings-memory.png, /jvm-native-memory-leak/strings-memory.png 1.5x, /jvm-native-memory-leak/strings-memory.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/strings-memory.png"
-        title="/jvm-native-memory-leak/strings-memory.png" />
-       </p>
+        title="/jvm-native-memory-leak/strings-memory.png" width="2073" height="831" /></p>
 <p>经查看多个内存块后发现出现频率高的字符串没有明显规律，需要进一步排查</p>
 <h2 id="监控内存分配">监控内存分配</h2>
 <p>本次使用 <a href="https://github.com/jemalloc/jemalloc" target="_blank" rel="noopener noreffer ">Jemalloc</a> 分析应用内存分配情况，首先在应用启动环境添加</p>
@@ -200,8 +196,7 @@
         data-srcset="/jvm-native-memory-leak/jeprof-heap.png, /jvm-native-memory-leak/jeprof-heap.png 1.5x, /jvm-native-memory-leak/jeprof-heap.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/jeprof-heap.png"
-        title="/jvm-native-memory-leak/jeprof-heap.png" />
-       </p>
+        title="/jvm-native-memory-leak/jeprof-heap.png" width="1630" height="684" /></p>
 <p>可以看到 <code>524336   0.1% 100.0%  7386790   0.8% Java_java_util_zip_Inflater_init</code> JNI调用</p>
 <h2 id="定位问题代码">定位问题代码</h2>
 <p>使用 <code>jstack $pid | grep Inflater</code> 查找调用栈（可能需要多次）</p>
@@ -212,8 +207,7 @@
         data-srcset="/jvm-native-memory-leak/jstack-inflater.png, /jvm-native-memory-leak/jstack-inflater.png 1.5x, /jvm-native-memory-leak/jstack-inflater.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/jstack-inflater.png"
-        title="/jvm-native-memory-leak/jstack-inflater.png" />
-       </p>
+        title="/jvm-native-memory-leak/jstack-inflater.png" width="1783" height="702" /></p>
 <p>发现在 Redis 序列化与反序列时使用了 JDK 中的 ZLIB 压缩算法，查看源码可以看到未调用 <code>stream.close()</code>
 <code>infalter.end()</code> 和 <code>defalter.end()</code>方法</p>
 <p><img
@@ -223,8 +217,7 @@
         data-srcset="/jvm-native-memory-leak/wrong-java-code.png, /jvm-native-memory-leak/wrong-java-code.png 1.5x, /jvm-native-memory-leak/wrong-java-code.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/wrong-java-code.png"
-        title="/jvm-native-memory-leak/wrong-java-code.png" />
-       </p>
+        title="/jvm-native-memory-leak/wrong-java-code.png" width="2047" height="1434" /></p>
 <p>顺便确认下 native code 调用</p>
 <p><img
         class="lazyload"
@@ -233,8 +226,7 @@
         data-srcset="/jvm-native-memory-leak/infalter-java-code.png, /jvm-native-memory-leak/infalter-java-code.png 1.5x, /jvm-native-memory-leak/infalter-java-code.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/infalter-java-code.png"
-        title="/jvm-native-memory-leak/infalter-java-code.png" />
-       </p>
+        title="/jvm-native-memory-leak/infalter-java-code.png" width="1564" height="1616" /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -242,8 +234,7 @@
         data-srcset="/jvm-native-memory-leak/infalter-java-code-2.png, /jvm-native-memory-leak/infalter-java-code-2.png 1.5x, /jvm-native-memory-leak/infalter-java-code-2.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/infalter-java-code-2.png"
-        title="/jvm-native-memory-leak/infalter-java-code-2.png" />
-       </p>
+        title="/jvm-native-memory-leak/infalter-java-code-2.png" width="1452" height="171" /></p>
 <h2 id="修改问题代码">修改问题代码</h2>
 <p>直接看代码</p>
 <p><img
@@ -253,8 +244,7 @@
         data-srcset="/jvm-native-memory-leak/right-code.png, /jvm-native-memory-leak/right-code.png 1.5x, /jvm-native-memory-leak/right-code.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/right-code.png"
-        title="/jvm-native-memory-leak/right-code.png" />
-       </p></div><div class="post-footer" id="post-footer">
+        title="/jvm-native-memory-leak/right-code.png" width="2022" height="1718" /></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
@@ -277,11 +267,14 @@
         </section>
     </div>
 
-    <div class="post-nav"><a href="/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" class="prev" rel="prev" title="ELK分布式日志收集"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ELK分布式日志收集</a></div>
+    <div class="post-nav"><a href="/elk%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86/" class="prev" rel="prev" title="ELK分布式日志收集"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ELK分布式日志收集</a>
+            <a href="/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%951-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="next" rel="next" title="系统架构师考试1-数据库">系统架构师考试1-数据库<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 <div id="comments"><div id="gitalk" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
-            </noscript></div></article></div>
+            </noscript></div></article>
+
+    </div>
             </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
                 </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>

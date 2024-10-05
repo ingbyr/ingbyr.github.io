@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>系统架构师考试8-系统质量属性与架构评估 - ingbyr</title><meta name="Description" content="系统架构师考试"><meta property="og:title" content="系统架构师考试8-系统质量属性与架构评估" />
+<meta property="og:description" content="系统架构师考试" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" /><meta property="og:image" content="https://ingbyr.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-04T17:02:55+08:00" />
+<meta property="article:modified_time" content="2024-10-04T17:02:55+08:00" /><meta property="og:site_name" content="My cool site" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ingbyr.github.io/logo.png"/>
+
+<meta name="twitter:title" content="系统架构师考试8-系统质量属性与架构评估"/>
+<meta name="twitter:description" content="系统架构师考试"/>
+<meta name="application-name" content="ingbyr">
+<meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" /><link rel="prev" href="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%957-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" /><link rel="next" href="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%959-%E8%BD%AF%E4%BB%B6%E5%8F%AF%E9%9D%A0%E6%80%A7/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "系统架构师考试8-系统质量属性与架构评估",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ingbyr.github.io\/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0\/"
+        },"image": ["https:\/\/ingbyr.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "系统架构师考试","wordcount":  1233 ,
+        "url": "https:\/\/ingbyr.github.io\/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0\/","datePublished": "2024-10-04T17:02:55+08:00","dateModified": "2024-10-04T17:02:55+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "ingbyr"
+            },"description": "系统架构师考试"
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="ingbyr">ingbyr</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a><a href="javascript:void(0);" class="menu-item language" title="选择语言">
+                    <i class="fa fa-globe" aria-hidden="true"></i>                      
+                    <select class="language-select" id="language-select-desktop" onchange="location = this.value;"><option value="/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" selected>简体中文</option></select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="ingbyr">ingbyr</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw" aria-hidden="true"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a><a href="javascript:void(0);" class="menu-item" title="选择语言">
+                    <i class="fa fa-globe fa-fw" aria-hidden="true"></i>
+                    <select class="language-select" onchange="location = this.value;"><option value="/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header><div class="search-dropdown desktop">
+        <div id="search-dropdown-desktop"></div>
+    </div>
+    <div class="search-dropdown mobile">
+        <div id="search-dropdown-mobile"></div>
+    </div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">系统架构师考试8-系统质量属性与架构评估</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>ingbyr</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%95/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>系统架构师考试</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2024-10-04">2024-10-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;约 1233 字&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#软件系统质量属性qa">软件系统质量属性（QA）</a></li>
+    <li><a href="#系统架构评估">系统架构评估</a>
+      <ul>
+        <li><a href="#重要概念">重要概念</a></li>
+        <li><a href="#系统架构评估方法">系统架构评估方法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="软件系统质量属性qa">软件系统质量属性（QA）</h2>
+<ul>
+<li>软件系统与明确或隐含地定义的需求一致的程度</li>
+<li>可测量、可测试的属性，描述系统满足利益相关者需求的程度</li>
+<li>开发期质量属性</li>
+<li>运行期质量属性</li>
+<li>面向架构评估的质量属性
+<ul>
+<li>性能：定量表示，性能测试常使用基准测试程序</li>
+<li>可靠性：维持软件系统的功能特性的基本能力
+<ul>
+<li>MTBF = MTTF + MTTR</li>
+<li>容错：内部修复</li>
+<li>健壮性：确保按某种预定义方式终止执行</li>
+</ul>
+</li>
+<li>可用性：系统能够正常运行的时间比例</li>
+<li>安全性
+<ul>
+<li>机密性：不泄露给非授权用户</li>
+<li>完整性：信息完整和准确，防止非法修改</li>
+<li>不可否认性：双方不能否认收发消息的行为</li>
+<li>可控性：对信息的传播及内容具有控制能力</li>
+</ul>
+</li>
+<li>可修改性
+<ul>
+<li>可维护性：问题修复</li>
+<li>可扩展性</li>
+<li>结构重组</li>
+<li>可移植性</li>
+</ul>
+</li>
+<li>功能性</li>
+<li>可变性</li>
+<li>互操作性</li>
+</ul>
+</li>
+<li>质量属性场景
+<ul>
+<li>刺激源</li>
+<li>刺激</li>
+<li>环境：运行环境</li>
+<li>制品：系统或其中一部分</li>
+<li>响应</li>
+<li>响应度量</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统架构评估">系统架构评估</h2>
+<ul>
+<li>基于调查问卷或检查表的方法
+<ul>
+<li>缺点：依赖于评估人员的主观推断</li>
+</ul>
+</li>
+<li>基于场景的评估方法
+<ul>
+<li>应用于架构权衡分析法（ATAM）和软件架构分析方法（SAAM）中</li>
+</ul>
+</li>
+<li>基于度量的评估方法
+<ul>
+<li>建立质量属性与度量之间之间的映射原则</li>
+</ul>
+</li>
+</ul>
+<h3 id="重要概念">重要概念</h3>
+<ul>
+<li>敏感点
+<ul>
+<li>一个或多个构件（和构件或构件之间的关系）的特性</li>
+</ul>
+</li>
+<li>权衡点
+<ul>
+<li>影响多个质量属性的特性，是多个质量属性的敏感点</li>
+<li>例如安全性与性能</li>
+</ul>
+</li>
+<li>风险点</li>
+<li>非风险点</li>
+<li>场景
+<ul>
+<li>从风险承担着的角度</li>
+<li>刺激、环境、响应</li>
+</ul>
+</li>
+</ul>
+<h3 id="系统架构评估方法">系统架构评估方法</h3>
+<ul>
+<li>SAAM 基于场景的评估方法
+<ul>
+<li>评估主要目标质量属性为可修改性</li>
+<li>基于场景，目标为描述应用程序属性的文档</li>
+<li>主要输入问题描述、需求说明和架构描述</li>
+</ul>
+</li>
+</ul>
+<pre class="mermaid">    flowchart LR
+    a[场景开发] --> b[体系结构描述]
+    a -- and --> c[单个场景评估]
+    b -- and --> c
+    c --> d[场景交互评估]
+    c -- or --> e[总体评估 比较多个体系结构]
+    d -- or --> e
+</pre>
+<ul>
+<li><code>ATAM 架构权衡分析方法</code>
+<ul>
+<li>基于SAAM</li>
+<li>主要关注
+<ul>
+<li>性能</li>
+<li>安全性</li>
+<li>可修改性</li>
+<li>可用性</li>
+</ul>
+</li>
+<li>多个属性之间折中</li>
+<li>活动过程
+<ul>
+<li>场景和需求收集：收集场景，需求，约束，环境</li>
+<li>体系结构视图和场景实现：描述体系结构视图，实现场景</li>
+<li>属性模型构造和分析：特定属性分析（优秀的单一理论）</li>
+<li>折中：标志折中，标志敏感度</li>
+</ul>
+</li>
+<li>效用树
+<ul>
+<li>树根 &ndash; 质量属性 &ndash; 属性分类 &ndash; 质量属性场景（叶子节点）</li>
+<li>按场景排定优先级
+<ul>
+<li>（H/M/L，H/M/L）</li>
+<li>（重要性，实现的难易程度）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre class="mermaid">flowchart LR
+    subgraph 描述和介绍阶段
+        direction TB
+        介绍ATAM方法 --> 描述商业目标
+        描述商业目标 --> 描述体系结构
+    end
+    subgraph 调查和分析阶段
+        direction TB
+        标识体系结构步骤 --> 产生质量属性树
+        产生质量属性树 --> 分析体系结构方法
+    end
+    subgraph 测试阶段
+        direction TB
+        讨论质量需求的次序 --> 分析体系结构步骤
+    end
+    subgraph 报告阶段
+        提交结果
+    end
+
+    描述和介绍阶段 --> 调查和分析阶段
+    调查和分析阶段 --> 测试阶段
+    测试阶段 --> 报告阶段
+</pre>
+<ul>
+<li>CBAM 成本效益分析法
+<ul>
+<li>对架构设计决策的成本和收益进行建模</li>
+<li>在ATAM结束时开始，利于ATAM的结果</li>
+<li>依据 ROI 投资回报 选择架构策略</li>
+</ul>
+</li>
+<li>SAEM 软件体系结构分析方法
+<ul>
+<li>Software Architecture Analysis Method</li>
+<li>评估软件系统的质量属性和架构决策的有效性</li>
+<li>外部质量属性、内部质量属性</li>
+</ul>
+</li>
+<li>SAABNet
+<ul>
+<li>Bayesian Belief Networks</li>
+<li>来源于人工智能，贝叶斯网络</li>
+<li>定性评估</li>
+</ul>
+</li>
+<li>SACMM
+<ul>
+<li>Software Architecture Change Management Model</li>
+<li>软件架构修改的度量方法</li>
+</ul>
+</li>
+<li>SASAM
+<ul>
+<li>Software Architecture Static Analysis Method</li>
+<li>对预期架构和实际架构进行映射和比较，静态地评估SA</li>
+</ul>
+</li>
+<li>ALRRA
+<ul>
+<li>Architecture Level Reliability Risk Assessment</li>
+<li>软件架构可靠性风险评估方法</li>
+</ul>
+</li>
+<li>AHP
+<ul>
+<li>Analytical Hierarchy Process 层次分析法</li>
+<li>将复杂问题分层，两两对比，主观判断结构</li>
+</ul>
+</li>
+<li>COSMIC+UML
+<ul>
+<li>面向对象系统源代码的可维护性度量</li>
+</ul>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-10-04</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" data-title="系统架构师考试8-系统质量属性与架构评估" data-hashtags="系统架构师考试"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" data-hashtag="系统架构师考试"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" data-title="系统架构师考试8-系统质量属性与架构评估"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" data-title="系统架构师考试8-系统质量属性与架构评估"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/" data-title="系统架构师考试8-系统质量属性与架构评估" data-ralateuid="zwkv5"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%95/">系统架构师考试</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%957-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="prev" rel="prev" title="系统架构师考试7-系统架设计基础知识"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>系统架构师考试7-系统架设计基础知识</a>
+            <a href="/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%959-%E8%BD%AF%E4%BB%B6%E5%8F%AF%E9%9D%A0%E6%80%A7/" class="next" rel="next" title="系统架构师考试9-软件可靠性">系统架构师考试9-软件可靠性<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+<div id="comments"><div id="gitalk" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://github.com/gitalk/gitalk"></a>Gitalk</a>.
+            </noscript></div></article>
+
+    
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    </div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.105.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2016 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">ingbyr</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css"><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":50},"comment":{"gitalk":{"admin":["ingbyr"],"clientID":"f9a51bd6b0f1a981f818","clientSecret":"e26281e64a4ae2bc50ea1177260fc214d09f22ac","id":"2024-10-04T17:02:55+08:00","owner":"ingbyr","repo":"ingbyr.github.io","title":"系统架构师考试8-系统质量属性与架构评估"}},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

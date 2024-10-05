@@ -3,7 +3,23 @@
         <title>所有文章 - ingbyr</title>
         <link>https://ingbyr.github.io/posts/</link>
         <description>所有文章 | ingbyr</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 02 Oct 2024 19:58:41 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 05 Oct 2024 11:06:46 &#43;0800</lastBuildDate><atom:link href="https://ingbyr.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>系统架构师考试9-软件可靠性</title>
+    <link>https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%959-%E8%BD%AF%E4%BB%B6%E5%8F%AF%E9%9D%A0%E6%80%A7/</link>
+    <pubDate>Sat, 05 Oct 2024 11:06:46 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%959-%E8%BD%AF%E4%BB%B6%E5%8F%AF%E9%9D%A0%E6%80%A7/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>系统架构师考试8-系统质量属性与架构评估</title>
+    <link>https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/</link>
+    <pubDate>Fri, 04 Oct 2024 17:02:55 &#43;0800</pubDate>
+    <author>ingbyr</author>
+    <guid>https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%958-%E7%B3%BB%E7%BB%9F%E8%B4%A8%E9%87%8F%E5%B1%9E%E6%80%A7%E4%B8%8E%E6%9E%B6%E6%9E%84%E8%AF%84%E4%BC%B0/</guid>
+    <description><![CDATA[系统架构师考试]]></description>
+</item>
+<item>
     <title>系统架构师考试7-系统架设计基础知识</title>
     <link>https://ingbyr.github.io/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%B8%88%E8%80%83%E8%AF%957-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
     <pubDate>Wed, 02 Oct 2024 19:58:41 &#43;0800</pubDate>
@@ -66,22 +82,6 @@
     <author>ingbyr</author>
     <guid>https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
     <description><![CDATA[<p>用于判断连通性、等效等问题</p>]]></description>
-</item>
-<item>
-    <title>算法基础-排序</title>
-    <link>https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%8E%92%E5%BA%8F/</link>
-    <pubDate>Fri, 10 Sep 2021 15:36:40 &#43;0800</pubDate>
-    <author>ingbyr</author>
-    <guid>https://ingbyr.github.io/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%8E%92%E5%BA%8F/</guid>
-    <description><![CDATA[<p>经典排序算法</p>]]></description>
-</item>
-<item>
-    <title>Redis集群示例</title>
-    <link>https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B/</link>
-    <pubDate>Mon, 16 Aug 2021 09:55:00 &#43;0800</pubDate>
-    <author>ingbyr</author>
-    <guid>https://ingbyr.github.io/redis%E9%9B%86%E7%BE%A4%E7%A4%BA%E4%BE%8B/</guid>
-    <description><![CDATA[<p>Redis集群相关</p>]]></description>
 </item>
 </channel>
 </rss>

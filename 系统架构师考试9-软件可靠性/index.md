@@ -34,7 +34,7 @@
 
 ## 可靠性建模
 
-软件可靠性模型：为预计或估算软件的可靠性所建立的可靠性狂徒和数学模型
+软件可靠性模型：为预计或估算软件的可靠性所建立的可靠性框架和数学模型
 
 好的建模：
 
@@ -55,7 +55,7 @@
 
 ```mermaid
 flowchart LR
-    subgraph 恢复快
+    subgraph 恢复块
         direction LR
         subgraph s0
             direction TB

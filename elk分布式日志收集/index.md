@@ -7,7 +7,7 @@
 
 [文档](https://www.elastic.co/guide/index.html)
 
-{{< mermaid >}}
+```mermaid
 flowchart LR
     subgraph server-1
         log-file-1 --> filebeat-1
@@ -22,7 +22,7 @@ flowchart LR
     kafka -- sub log --> logstash
     logstash -- push --> es
     kibana -- query --> es
-{{< /mermaid >}}
+```
 
 
 ## 配置ES

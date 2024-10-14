@@ -10,6 +10,10 @@
 线上运行的Java应用在持续运行数小时后会因堆外内存不足而终止，查看日志可以看到类似输出：
 ![](hs-error-log.png)
 
+```text
+
+```
+
 先尝试了使用手动释放cached memory，发现还有大量内存未释放，基本排除了操作系统内存释放策略配置错误的问题
 
 ![](release-cached-memory.png)

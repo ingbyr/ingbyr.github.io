@@ -5,8 +5,6 @@
 
 我们要达到的视频效果是[这样的](https://www.bilibili.com/video/av17425062/)
 
-![](https://wx2.sinaimg.cn/large/bca3b20dly1fmmh64mosnj20zr0msdxm.jpg)
-
 # 确定压缩目标
 
 bilibili不进行二压的参数要求如下：

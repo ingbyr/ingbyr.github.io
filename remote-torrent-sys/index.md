@@ -32,7 +32,6 @@ screen -S deluge
 deluge-web
 ```
 这时在浏览器中访问 http://your-server-ip:8112 就可以看到熟悉的bt下载界面了，默认的密码是deluge
-![](https://wx2.sinaimg.cn/large/bca3b20dly1fijb5oj59hj21hb0t8dhv.jpg)
 
 ## 懒人必备（非必须步骤）
 一串数字的网址毕竟不太好记忆，况且还有一个8112的端口号，所以接下来使用dnspod和nginx实现域名访问

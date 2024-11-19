@@ -137,14 +137,10 @@
         data-srcset="/jvm-native-memory-leak/hs-error-log.png, /jvm-native-memory-leak/hs-error-log.png 1.5x, /jvm-native-memory-leak/hs-error-log.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/hs-error-log.png"
-        title="/jvm-native-memory-leak/hs-error-log.png" width="2209" height="1618" /></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"></code></pre></td></tr></table>
-</div>
-</div><p>先尝试了使用手动释放cached memory，发现还有大量内存未释放，基本排除了操作系统内存释放策略配置错误的问题</p>
+        title="/jvm-native-memory-leak/hs-error-log.png"
+        style="padding: 15px 0;"
+        /></p>
+<p>先尝试了使用手动释放cached memory，发现还有大量内存未释放，基本排除了操作系统内存释放策略配置错误的问题</p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -152,7 +148,9 @@
         data-srcset="/jvm-native-memory-leak/release-cached-memory.png, /jvm-native-memory-leak/release-cached-memory.png 1.5x, /jvm-native-memory-leak/release-cached-memory.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/release-cached-memory.png"
-        title="/jvm-native-memory-leak/release-cached-memory.png" width="1460" height="279" /></p>
+        title="/jvm-native-memory-leak/release-cached-memory.png"
+        style="padding: 15px 0;"
+        /></p>
 <h2 id="开启jvm堆外内存追踪">开启JVM堆外内存追踪</h2>
 <p>在启动Java应用的参数中添加 <code>-XX:NativeMemoryTracking=detail</code>
 ，重启应用后运行一段时间，使用 <code>jcmd $pid VM.native_memory summary</code>
@@ -164,7 +162,9 @@
         data-srcset="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png, /jvm-native-memory-leak/jcmd-native-memory-sumarry.png 1.5x, /jvm-native-memory-leak/jcmd-native-memory-sumarry.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png"
-        title="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png" width="1354" height="1820" /></p>
+        title="/jvm-native-memory-leak/jcmd-native-memory-sumarry.png"
+        style="padding: 15px 0;"
+        /></p>
 <p>与 top 命令输出的 RSS 比对发现远小于其值，此时基本可以确定是 JNI 调用 Native Code 导致的堆外内存泄露</p>
 <h2 id="查看未释放的堆外内存内容">查看未释放的堆外内存内容</h2>
 <ol>
@@ -180,7 +180,9 @@
         data-srcset="/jvm-native-memory-leak/strings-memory.png, /jvm-native-memory-leak/strings-memory.png 1.5x, /jvm-native-memory-leak/strings-memory.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/strings-memory.png"
-        title="/jvm-native-memory-leak/strings-memory.png" width="2073" height="831" /></p>
+        title="/jvm-native-memory-leak/strings-memory.png"
+        style="padding: 15px 0;"
+        /></p>
 <p>经查看多个内存块后发现出现频率高的字符串没有明显规律，需要进一步排查</p>
 <h2 id="监控内存分配">监控内存分配</h2>
 <p>本次使用 <a href="https://github.com/jemalloc/jemalloc" target="_blank" rel="noopener noreffer ">Jemalloc</a> 分析应用内存分配情况，首先在应用启动环境添加</p>
@@ -202,7 +204,9 @@
         data-srcset="/jvm-native-memory-leak/jeprof-heap.png, /jvm-native-memory-leak/jeprof-heap.png 1.5x, /jvm-native-memory-leak/jeprof-heap.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/jeprof-heap.png"
-        title="/jvm-native-memory-leak/jeprof-heap.png" width="1630" height="684" /></p>
+        title="/jvm-native-memory-leak/jeprof-heap.png"
+        style="padding: 15px 0;"
+        /></p>
 <p>可以看到 <code>524336   0.1% 100.0%  7386790   0.8% Java_java_util_zip_Inflater_init</code> JNI调用</p>
 <h2 id="定位问题代码">定位问题代码</h2>
 <p>使用 <code>jstack $pid | grep Inflater</code> 查找调用栈（可能需要多次）</p>
@@ -213,7 +217,9 @@
         data-srcset="/jvm-native-memory-leak/jstack-inflater.png, /jvm-native-memory-leak/jstack-inflater.png 1.5x, /jvm-native-memory-leak/jstack-inflater.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/jstack-inflater.png"
-        title="/jvm-native-memory-leak/jstack-inflater.png" width="1783" height="702" /></p>
+        title="/jvm-native-memory-leak/jstack-inflater.png"
+        style="padding: 15px 0;"
+        /></p>
 <p>发现在 Redis 序列化与反序列时使用了 JDK 中的 ZLIB 压缩算法，查看源码可以看到未调用 <code>stream.close()</code>
 <code>infalter.end()</code> 和 <code>defalter.end()</code>方法</p>
 <p><img
@@ -223,7 +229,9 @@
         data-srcset="/jvm-native-memory-leak/wrong-java-code.png, /jvm-native-memory-leak/wrong-java-code.png 1.5x, /jvm-native-memory-leak/wrong-java-code.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/wrong-java-code.png"
-        title="/jvm-native-memory-leak/wrong-java-code.png" width="2047" height="1434" /></p>
+        title="/jvm-native-memory-leak/wrong-java-code.png"
+        style="padding: 15px 0;"
+        /></p>
 <p>顺便确认下 native code 调用</p>
 <p><img
         class="lazyload"
@@ -232,7 +240,9 @@
         data-srcset="/jvm-native-memory-leak/infalter-java-code.png, /jvm-native-memory-leak/infalter-java-code.png 1.5x, /jvm-native-memory-leak/infalter-java-code.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/infalter-java-code.png"
-        title="/jvm-native-memory-leak/infalter-java-code.png" width="1564" height="1616" /></p>
+        title="/jvm-native-memory-leak/infalter-java-code.png"
+        style="padding: 15px 0;"
+        /></p>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -240,7 +250,9 @@
         data-srcset="/jvm-native-memory-leak/infalter-java-code-2.png, /jvm-native-memory-leak/infalter-java-code-2.png 1.5x, /jvm-native-memory-leak/infalter-java-code-2.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/infalter-java-code-2.png"
-        title="/jvm-native-memory-leak/infalter-java-code-2.png" width="1452" height="171" /></p>
+        title="/jvm-native-memory-leak/infalter-java-code-2.png"
+        style="padding: 15px 0;"
+        /></p>
 <h2 id="修改问题代码">修改问题代码</h2>
 <p>直接看代码</p>
 <p><img
@@ -250,7 +262,9 @@
         data-srcset="/jvm-native-memory-leak/right-code.png, /jvm-native-memory-leak/right-code.png 1.5x, /jvm-native-memory-leak/right-code.png 2x"
         data-sizes="auto"
         alt="/jvm-native-memory-leak/right-code.png"
-        title="/jvm-native-memory-leak/right-code.png" width="2022" height="1718" /></p></div><div class="post-footer" id="post-footer">
+        title="/jvm-native-memory-leak/right-code.png"
+        style="padding: 15px 0;"
+        /></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">

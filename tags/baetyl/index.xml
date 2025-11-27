@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Baetyl - 标签 - ingbyr</title>
+    <link>https://ingbyr.github.io/tags/baetyl/</link>
+    <description>ingbyr</description>
+    <generator>Hugo 0.148.2 &amp; FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7</generator>
+    <language>zh-CN</language>
+    <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
+    <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
+    <lastBuildDate>Mon, 31 Aug 2020 17:29:12 +0800</lastBuildDate>
+    <atom:link href="https://ingbyr.github.io/tags/baetyl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Baetyl V2安装指南</title>
+      <link>https://ingbyr.github.io/posts/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Mon, 31 Aug 2020 17:29:12 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/">边缘计算</category>
+      <description>&lt;p&gt;Baetyl v2.0.0安装指南&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

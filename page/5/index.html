@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+	<meta name="generator" content="Hugo 0.148.2">
+      <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@latest/dist/autoload.js"></script>
+    <meta name="theme" content='FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>ingbyr</title><meta name="author" content="ingbyr">
+<meta name="description" content="">
+  <meta itemprop="name" content="ingbyr">
+  <meta itemprop="datePublished" content="2024-03-14T10:24:03+08:00">
+  <meta itemprop="dateModified" content="2025-11-27T10:15:50+08:00"><meta property="og:url" content="https://ingbyr.github.io/">
+  <meta property="og:site_name" content="ingbyr">
+  <meta property="og:title" content="ingbyr">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ingbyr">
+<meta name="application-name" content="ingbyr">
+<meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ingbyr.github.io/" title="ingbyr" /><link rel="alternate" type="application/rss+xml" href="https://ingbyr.github.io/index.xml" title="ingbyr"><link rel="search" type="application/json" href="https://ingbyr.github.io/search.json" title="ingbyr"><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "url": "https:\/\/ingbyr.github.io\/","inLanguage": "zh-CN","author": {
+        "@type": "Person",
+        "name": "ingbyr"
+      },"name": "ingbyr"
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-instant-intensity="viewport" data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="ingbyr"><span class="header-title-text">ingbyr</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/doc/" title="所有文档"><i class="fa-solid fa-book fa-fw fa-sm" aria-hidden="true"></i> 文档</a></li><li class="menu-item">
+              <a class="menu-link" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-github fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item">
+              <a class="menu-link" href="https://www.weibo.com/u/3164844557" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-weibo fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item">
+              <a class="menu-link" href="mailto:ingbyr@outlook.com"><i class="fa-solid fa-envelope fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" role="button" aria-label="切换主题" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="ingbyr"><span class="header-title-text">ingbyr</span></a><span class="header-subtitle"></span></div>
+      <div class="theme-switch" role="button" aria-label="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></div>
+      <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item"><a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item"><a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item"><a class="menu-link" href="/categories/doc/" title="所有文档"><i class="fa-solid fa-book fa-fw fa-sm" aria-hidden="true"></i> 文档</a></li><li class="menu-item"><a class="menu-link" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-github fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item"><a class="menu-link" href="https://www.weibo.com/u/3164844557" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-weibo fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item"><a class="menu-link" href="mailto:ingbyr@outlook.com"><i class="fa-solid fa-envelope fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item menu-system"></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="fi-container"><div class="page home posts"><article class="single summary" itemscope itemtype="http://schema.org/Article"><h2 class="single-title" itemprop="name headline"><a href="/posts/pic16f877-ljt/">基于PIC16F877单片机的智能垃圾桶</a>
+  </h2><div class="post-meta"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      ingbyr</span></span>&nbsp;<span class="post-publish" title='2015-11-21 21:47:21'>发布于 <time datetime="2015-11-21">2015-11-21</time></span></div><div class="content"><blockquote>
+<p>微芯2016北邮奖学金获奖作品</p></blockquote>
+<h3 class="heading-element" id="视频演示" data-decreased><span>视频演示</span>
+  <a href="#%e8%a7%86%e9%a2%91%e6%bc%94%e7%a4%ba" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><iframe height=498 width=510 src="https://player.youku.com/embed/XMTM5MjQ2NzQ4MA==" frameborder=0 'allowfullscreen'></iframe>
+<h3 class="heading-element" id="汇编部分" data-decreased><span>汇编部分</span>
+  <a href="#%e6%b1%87%e7%bc%96%e9%83%a8%e5%88%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span><span class="lnt">230
+</span><span class="lnt">231
+</span><span class="lnt">232
+</span><span class="lnt">233
+</span><span class="lnt">234
+</span><span class="lnt">235
+</span><span class="lnt">236
+</span><span class="lnt">237
+</span><span class="lnt">238
+</span><span class="lnt">239
+</span><span class="lnt">240
+</span><span class="lnt">241
+</span><span class="lnt">242
+</span><span class="lnt">243
+</span><span class="lnt">244
+</span><span class="lnt">245
+</span><span class="lnt">246
+</span><span class="lnt">247
+</span><span class="lnt">248
+</span><span class="lnt">249
+</span><span class="lnt">250
+</span><span class="lnt">251
+</span><span class="lnt">252
+</span><span class="lnt">253
+</span><span class="lnt">254
+</span><span class="lnt">255
+</span><span class="lnt">256
+</span><span class="lnt">257
+</span><span class="lnt">258
+</span><span class="lnt">259
+</span><span class="lnt">260
+</span><span class="lnt">261
+</span><span class="lnt">262
+</span><span class="lnt">263
+</span><span class="lnt">264
+</span><span class="lnt">265
+</span><span class="lnt">266
+</span><span class="lnt">267
+</span><span class="lnt">268
+</span><span class="lnt">269
+</span><span class="lnt">270
+</span><span class="lnt">271
+</span><span class="lnt">272
+</span><span class="lnt">273
+</span><span class="lnt">274
+</span><span class="lnt">275
+</span><span class="lnt">276
+</span><span class="lnt">277
+</span><span class="lnt">278
+</span><span class="lnt">279
+</span><span class="lnt">280
+</span><span class="lnt">281
+</span><span class="lnt">282
+</span><span class="lnt">283
+</span><span class="lnt">284
+</span><span class="lnt">285
+</span><span class="lnt">286
+</span><span class="lnt">287
+</span><span class="lnt">288
+</span><span class="lnt">289
+</span><span class="lnt">290
+</span><span class="lnt">291
+</span><span class="lnt">292
+</span><span class="lnt">293
+</span><span class="lnt">294
+</span><span class="lnt">295
+</span><span class="lnt">296
+</span><span class="lnt">297
+</span><span class="lnt">298
+</span><span class="lnt">299
+</span><span class="lnt">300
+</span><span class="lnt">301
+</span><span class="lnt">302
+</span><span class="lnt">303
+</span><span class="lnt">304
+</span><span class="lnt">305
+</span><span class="lnt">306
+</span><span class="lnt">307
+</span><span class="lnt">308
+</span><span class="lnt">309
+</span><span class="lnt">310
+</span><span class="lnt">311
+</span><span class="lnt">312
+</span><span class="lnt">313
+</span><span class="lnt">314
+</span><span class="lnt">315
+</span><span class="lnt">316
+</span><span class="lnt">317
+</span><span class="lnt">318
+</span><span class="lnt">319
+</span><span class="lnt">320
+</span><span class="lnt">321
+</span><span class="lnt">322
+</span><span class="lnt">323
+</span><span class="lnt">324
+</span><span class="lnt">325
+</span><span class="lnt">326
+</span><span class="lnt">327
+</span><span class="lnt">328
+</span><span class="lnt">329
+</span><span class="lnt">330
+</span><span class="lnt">331
+</span><span class="lnt">332
+</span><span class="lnt">333
+</span><span class="lnt">334
+</span><span class="lnt">335
+</span><span class="lnt">336
+</span><span class="lnt">337
+</span><span class="lnt">338
+</span><span class="lnt">339
+</span><span class="lnt">340
+</span><span class="lnt">341
+</span><span class="lnt">342
+</span><span class="lnt">343
+</span><span class="lnt">344
+</span><span class="lnt">345
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">		status	equ			03h
+</span></span><span class="line"><span class="cl">		portc		equ		07h
+</span></span><span class="line"><span class="cl">		trisc		equ		87h
+</span></span><span class="line"><span class="cl">		portd		equ		08h	<span class="p">;</span>hw,smoke
+</span></span><span class="line"><span class="cl">		trisd		equ		88h
+</span></span><span class="line"><span class="cl">		porta		equ		05h 	
+</span></span><span class="line"><span class="cl">		trisa		equ		85h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		porte		equ		09h	<span class="p">;</span>re0蜂鸣器 低有效
+</span></span><span class="line"><span class="cl">		trise		equ		89h			
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>keyborad
+</span></span><span class="line"><span class="cl">		portb		equ		06h
+</span></span><span class="line"><span class="cl">		trisb		equ		86h
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">=================</span><span class="nv">定时器tmr0</span><span class="o">===================</span>
+</span></span><span class="line"><span class="cl">		tmr0		equ		01h
+</span></span><span class="line"><span class="cl">		option_reg	equ		81h
+</span></span><span class="line"><span class="cl">		intcon		equ 		0bh
+</span></span><span class="line"><span class="cl">		tmr0b_fast	equ 		<span class="m">128</span>
+</span></span><span class="line"><span class="cl">		tmr0b_slow	equ		<span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">==================</span><span class="nv">常量定义</span><span class="o">===================</span>
+</span></span><span class="line"><span class="cl">		count 		equ	21h	<span class="p">;</span>电机转数
+</span></span><span class="line"><span class="cl">		ljt_status	equ	22h 	<span class="p">;</span>桶盖状态，0为关闭，1为打开状态
+</span></span><span class="line"><span class="cl">		jp_status	equ	23h	<span class="p">;</span>键盘状态
+</span></span><span class="line"><span class="cl">		yw_status  	equ	24h 	<span class="p">;</span>yw
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">===================</span><span class="nv">体1设置</span><span class="o">=========================</span>
+</span></span><span class="line"><span class="cl">			org		000h
+</span></span><span class="line"><span class="cl">			nop
+</span></span><span class="line"><span class="cl">			bsf		status,5
+</span></span><span class="line"><span class="cl">			bcf 		status,6	<span class="p">;</span>转到体1
+</span></span><span class="line"><span class="cl">			movlw		00h		<span class="p">;</span>电机四位信号输出	
+</span></span><span class="line"><span class="cl">			movwf		trisc
+</span></span><span class="line"><span class="cl">			movlw		0ffh
+</span></span><span class="line"><span class="cl">			movwf		trisd		<span class="p">;</span>红外信号一低两位输入,0为遮挡
+</span></span><span class="line"><span class="cl">			movlw		0ffh		<span class="p">;</span>设置ra为输入
+</span></span><span class="line"><span class="cl">			movwf		trisa	
+</span></span><span class="line"><span class="cl">			movlw		0ffh		<span class="p">;</span>rb输入	
+</span></span><span class="line"><span class="cl">			movwf		trisb
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">			movlw 		00h		<span class="p">;</span>蜂鸣器输出
+</span></span><span class="line"><span class="cl">			movwf		trise
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			movlw		03h 		<span class="p">;</span>分频数
+</span></span><span class="line"><span class="cl">			movwf		option_reg
+</span></span><span class="line"><span class="cl">			bcf		option_reg,3	<span class="p">;</span>分频器分配给tmr0
+</span></span><span class="line"><span class="cl">			bcf		option_reg,4	<span class="p">;</span>上升沿tmr0递增
+</span></span><span class="line"><span class="cl">			bcf		option_reg,5	<span class="p">;</span>内部时钟提供时钟源
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			bcf		option_reg,7	<span class="p">;</span>启用b端口上拉电阻
+</span></span><span class="line"><span class="cl">			goto		init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">=====================</span><span class="nv">体0设置</span><span class="o">=====================</span>
+</span></span><span class="line"><span class="cl">		init
+</span></span><span class="line"><span class="cl">			bcf		status,5	<span class="p">;</span>转到体0
+</span></span><span class="line"><span class="cl">			movlw		00h		<span class="p">;</span>输出初始化	
+</span></span><span class="line"><span class="cl">			movwf		portc	
+</span></span><span class="line"><span class="cl">			movwf		ljt_status	<span class="p">;</span>桶盖初始状态为0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			movlw		0ffh		<span class="p">;</span>蜂鸣器初始不工作
+</span></span><span class="line"><span class="cl">			movwf		porte
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			movlw		01dh		<span class="p">;</span>电机初始转数
+</span></span><span class="line"><span class="cl">			movwf		count
+</span></span><span class="line"><span class="cl">			nop
+</span></span><span class="line"><span class="cl">			nop
+</span></span><span class="line"><span class="cl">			goto 		main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">======================</span><span class="nv">主程序</span><span class="o">====================</span>
+</span></span><span class="line"><span class="cl">		main
+</span></span><span class="line"><span class="cl">			call		scan		<span class="p">;</span>调用键盘扫描
+</span></span><span class="line"><span class="cl">			call		yw_gy
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			movlw		01dh		<span class="p">;</span>电机初始转数
+</span></span><span class="line"><span class="cl">			movwf		count
+</span></span><span class="line"><span class="cl">			btfsc		portd,0
+</span></span><span class="line"><span class="cl">			goto 		work1
+</span></span><span class="line"><span class="cl">			btfss		ljt_status,0	<span class="p">;</span>若桶盖为1,跳过正转
+</span></span><span class="line"><span class="cl">			call		djzz		<span class="p">;</span>电机正转
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		work1
+</span></span><span class="line"><span class="cl">			movlw		01dh		<span class="p">;</span>电机初始转数
+</span></span><span class="line"><span class="cl">			movwf		count
+</span></span><span class="line"><span class="cl">			btfss		portd,0
+</span></span><span class="line"><span class="cl">			goto		main
+</span></span><span class="line"><span class="cl">			btfsc		ljt_status,0	<span class="p">;</span>若桶盖为0,跳过反转
+</span></span><span class="line"><span class="cl">			call		djfz		<span class="p">;</span>电机反转
+</span></span><span class="line"><span class="cl">			goto		main
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">==============</span><span class="nv">键盘扫描</span><span class="o">===============</span>
+</span></span><span class="line"><span class="cl">		scan
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>第一行扫描	
+</span></span><span class="line"><span class="cl">			movlw		B<span class="s1">&#39;11111110&#39;</span>
+</span></span><span class="line"><span class="cl">			movwf		portb
+</span></span><span class="line"><span class="cl">			nop
+</span></span><span class="line"><span class="cl">			nop
+</span></span><span class="line"><span class="cl">			bsf		status,5	<span class="p">;</span>到体1，转换方向
+</span></span><span class="line"><span class="cl">			movlw		0f0h
+</span></span><span class="line"><span class="cl">			movwf		trisb
+</span></span><span class="line"><span class="cl">			bcf		status,5	<span class="p">;</span>返回体0
+</span></span><span class="line"><span class="cl">			movf		portb,0
+</span></span><span class="line"><span class="cl">			movwf		jp_status	<span class="p">;</span>键盘状态读入通用寄存器
+</span></span><span class="line"><span class="cl">			btfss		jp_status,4
+</span></span><span class="line"><span class="cl">			goto		set_flag1
+</span></span><span class="line"><span class="cl">			btfss		jp_status,4
+</span></span><span class="line"><span class="cl">			goto		scan
+</span></span><span class="line"><span class="cl">			btfss		jp_status,5
+</span></span><span class="line"><span class="cl">			goto		set_flag2
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>第二行扫描
+</span></span><span class="line"><span class="cl">			bsf		status,5	<span class="p">;</span>到体1，转换方向
+</span></span><span class="line"><span class="cl">			movlw		0fh
+</span></span><span class="line"><span class="cl">			movwf		trisb
+</span></span><span class="line"><span class="cl">			bcf		status,5	<span class="p">;</span>返回体0
+</span></span><span class="line"><span class="cl">			movlw		B<span class="s1">&#39;11111101&#39;</span>
+</span></span><span class="line"><span class="cl">			movwf		portb
+</span></span><span class="line"><span class="cl">			nop
+</span></span><span class="line"><span class="cl">			nop
+</span></span><span class="line"><span class="cl">			bsf		status,5	<span class="p">;</span>转换方向
+</span></span><span class="line"><span class="cl">			movlw		0f0h
+</span></span><span class="line"><span class="cl">			movwf		trisb
+</span></span><span class="line"><span class="cl">			bcf		status,5	<span class="p">;</span>返回体0
+</span></span><span class="line"><span class="cl">			movf		portb,0
+</span></span><span class="line"><span class="cl">			movwf		jp_status
+</span></span><span class="line"><span class="cl">			btfss		jp_status,4
+</span></span><span class="line"><span class="cl">			goto		set_flag3
+</span></span><span class="line"><span class="cl">			btfss		jp_status,5
+</span></span><span class="line"><span class="cl">			goto		set_flag4
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">============</span><span class="nv">标志测试</span><span class="o">=============</span>
+</span></span><span class="line"><span class="cl">		set_flag1				<span class="p">;</span>电机正转打开桶盖
+</span></span><span class="line"><span class="cl">			movlw		01dh		<span class="p">;</span>电机初始转数
+</span></span><span class="line"><span class="cl">			movwf		count
+</span></span><span class="line"><span class="cl">			call		djzz
+</span></span><span class="line"><span class="cl">			bsf		ljt_status,0
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		set_flag2				<span class="p">;</span>电机反转关闭桶盖进入工作状态
+</span></span><span class="line"><span class="cl">			movlw		01dh		<span class="p">;</span>电机初始转数
+</span></span><span class="line"><span class="cl">			movwf		count
+</span></span><span class="line"><span class="cl">			call		djfz
+</span></span><span class="line"><span class="cl">			bcf		ljt_status,0
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		set_flag3	<span class="p">;</span>无
+</span></span><span class="line"><span class="cl">				
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		set_flag4	<span class="p">;</span>无
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">=====================</span><span class="nv">电机正转</span><span class="o">=====================</span>
+</span></span><span class="line"><span class="cl">		djzz
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	080h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call	delay_fast
+</span></span><span class="line"><span class="cl">			call	delay_fast
+</span></span><span class="line"><span class="cl">			call	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	0c0h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	040h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	060h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	020h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	030h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw	010h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	090h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			decfsz 	count,1
+</span></span><span class="line"><span class="cl">			goto 	djzz
+</span></span><span class="line"><span class="cl">			bsf	ljt_status,0	<span class="p">;</span>桶盖打开标志1
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">======================</span><span class="nv">电机反转</span><span class="o">====================</span>
+</span></span><span class="line"><span class="cl">		djfz
+</span></span><span class="line"><span class="cl">			call	 delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	090h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	010h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	030h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	020h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	060h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	040h
+</span></span><span class="line"><span class="cl">			movwf 	portc
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	0c0h
+</span></span><span class="line"><span class="cl">			movwf 	portc  
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			movlw 	080h
+</span></span><span class="line"><span class="cl">			movwf	portc
+</span></span><span class="line"><span class="cl">			call	 delay_fast
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">				call 	hwgy_tg_open  <span class="p">;</span>检测满，是则蜂鸣
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">			decfsz	count,1
+</span></span><span class="line"><span class="cl">			goto	djfz	
+</span></span><span class="line"><span class="cl">			bcf	ljt_status,0	<span class="p">;</span>桶盖关闭0
+</span></span><span class="line"><span class="cl">			call 	delay_fast
+</span></span><span class="line"><span class="cl">			call 	hwgy_tg_close	<span class="p">;</span>检测清空
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">==============</span><span class="nv">红外感应</span><span class="o">===================</span>	
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>红外感应使桶盖打开 rd0 
+</span></span><span class="line"><span class="cl">		hwgy_open
+</span></span><span class="line"><span class="cl">			call	delay_slow
+</span></span><span class="line"><span class="cl">			call	delay_slow
+</span></span><span class="line"><span class="cl">			call	delay_slow	
+</span></span><span class="line"><span class="cl">			btfsc	portd,0
+</span></span><span class="line"><span class="cl">			goto 	hwgy_open
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>红外感应使桶盖关闭	rd0
+</span></span><span class="line"><span class="cl">		hwgy_close
+</span></span><span class="line"><span class="cl">			call	delay_slow
+</span></span><span class="line"><span class="cl">			call	delay_slow
+</span></span><span class="line"><span class="cl">			call	delay_slow	
+</span></span><span class="line"><span class="cl">			btfss	portd,0
+</span></span><span class="line"><span class="cl">			goto 	hwgy_close
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>红外感应范围内是否有目标
+</span></span><span class="line"><span class="cl">		hwgy_tg_open
+</span></span><span class="line"><span class="cl">			btfss	portd,1
+</span></span><span class="line"><span class="cl">			call 	fmq_open
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">		hwgy_tg_close
+</span></span><span class="line"><span class="cl">			btfsc 	portd,1
+</span></span><span class="line"><span class="cl">			call 	fmq_close
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">==============</span><span class="nv">蜂鸣器</span><span class="o">====================</span>
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>蜂鸣器工作
+</span></span><span class="line"><span class="cl">		fmq_open
+</span></span><span class="line"><span class="cl">			movlw	00h
+</span></span><span class="line"><span class="cl">			movwf	porte
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">		<span class="p">;</span>蜂鸣器停止工作
+</span></span><span class="line"><span class="cl">		fmq_close
+</span></span><span class="line"><span class="cl">			movlw	0ffh
+</span></span><span class="line"><span class="cl">			movwf   porte
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">================</span><span class="nv">短延时</span><span class="o">===================</span>
+</span></span><span class="line"><span class="cl">		delay_fast
+</span></span><span class="line"><span class="cl">			bcf	intcon,2
+</span></span><span class="line"><span class="cl">			movlw	tmr0b_fast
+</span></span><span class="line"><span class="cl">			movwf	tmr0
+</span></span><span class="line"><span class="cl">		loop1
+</span></span><span class="line"><span class="cl">			btfss	intcon,2
+</span></span><span class="line"><span class="cl">			goto	loop1
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">===============</span><span class="nv">长延时</span><span class="o">===================</span>
+</span></span><span class="line"><span class="cl">		delay_slow	
+</span></span><span class="line"><span class="cl">			bcf	intcon,2
+</span></span><span class="line"><span class="cl">			movlw	tmr0b_slow
+</span></span><span class="line"><span class="cl">			movwf	tmr0
+</span></span><span class="line"><span class="cl">		loop2
+</span></span><span class="line"><span class="cl">			btfss	intcon,2
+</span></span><span class="line"><span class="cl">			goto	loop2
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>	
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		<span class="p">;</span><span class="o">===========</span><span class="nv">yw</span><span class="o">===============</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">		yw_gy
+</span></span><span class="line"><span class="cl">			btfss	portd,4
+</span></span><span class="line"><span class="cl">			call	fmq_open
+</span></span><span class="line"><span class="cl">			btfsc	portd,4
+</span></span><span class="line"><span class="cl">			call	fmq_close
+</span></span><span class="line"><span class="cl">			<span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			end</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer">
+    <a href="/posts/pic16f877-ljt/">阅读全文</a></div>
+</article><ul class="pagination"><li class="page-item">
+          <span class="page-link">
+            <a href="/">1</a>
+          </span>
+        </li><li class="page-item">
+          <span class="page-link" aria-hidden="true">&hellip;</span>
+        </li><li class="page-item">
+          <span class="page-link">
+            <a href="/page/3/">3</a>
+          </span>
+        </li><li class="page-item">
+          <span class="page-link">
+            <a href="/page/4/">4</a>
+          </span>
+        </li><li class="page-item active">
+          <span class="page-link">
+            <a href="/page/5/">5</a>
+          </span>
+        </li></ul></div></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.148.2"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">ingbyr</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/json-viewer-element/json-viewer-element.umd.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/search.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":30,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"version":"v0.4.0-alpha.3-20251124100610-99fd4fb7"};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

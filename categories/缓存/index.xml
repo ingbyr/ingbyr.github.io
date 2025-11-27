@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>缓存 - 分类 - ingbyr</title>
+    <link>https://ingbyr.github.io/categories/%E7%BC%93%E5%AD%98/</link>
+    <description>ingbyr</description>
+    <generator>Hugo 0.148.2 &amp; FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7</generator>
+    <language>zh-CN</language>
+    <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
+    <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
+    <lastBuildDate>Mon, 16 Aug 2021 09:55:00 +0800</lastBuildDate>
+    <atom:link href="https://ingbyr.github.io/categories/%E7%BC%93%E5%AD%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis主从与集群模式</title>
+      <link>https://ingbyr.github.io/posts/redis%E4%B8%BB%E4%BB%8E%E4%B8%8E%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Mon, 16 Aug 2021 09:55:00 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/redis%E4%B8%BB%E4%BB%8E%E4%B8%8E%E9%9B%86%E7%BE%A4%E6%A8%A1%E5%BC%8F/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%BC%93%E5%AD%98/">缓存</category>
+      <description>&lt;p&gt;Redis集群相关&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

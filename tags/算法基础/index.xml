@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法基础 - 标签 - ingbyr</title>
+    <link>https://ingbyr.github.io/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
+    <description>ingbyr</description>
+    <generator>Hugo 0.148.2 &amp; FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7</generator>
+    <language>zh-CN</language>
+    <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
+    <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
+    <lastBuildDate>Tue, 15 Mar 2022 10:53:07 +0800</lastBuildDate>
+    <atom:link href="https://ingbyr.github.io/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法基础-前缀树</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%89%8D%E7%BC%80%E6%A0%91/</link>
+      <pubDate>Tue, 15 Mar 2022 10:53:07 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%89%8D%E7%BC%80%E6%A0%91/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;字符串前缀相关操作&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>算法基础-最小生成树</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</link>
+      <pubDate>Thu, 10 Mar 2022 14:42:47 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;由图生成权重最小的树&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>算法基础-二分图</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E4%BA%8C%E5%88%86%E5%9B%BE/</link>
+      <pubDate>Tue, 08 Mar 2022 17:42:32 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E4%BA%8C%E5%88%86%E5%9B%BE/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;用于将节点分为两组&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>算法基础-并查集</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%B9%B6%E6%9F%A5%E9%9B%86/</link>
+      <pubDate>Tue, 08 Mar 2022 17:38:39 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%B9%B6%E6%9F%A5%E9%9B%86/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;用于判断连通性、等效等问题&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>算法基础-排序</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Fri, 10 Sep 2021 15:36:40 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E6%8E%92%E5%BA%8F/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;经典排序算法&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>算法基础-堆</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/</link>
+      <pubDate>Fri, 13 Aug 2021 09:47:50 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E5%A0%86/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;堆，亦称为优先队列&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>算法基础-链表</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 19 Feb 2021 14:22:03 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-%E9%93%BE%E8%A1%A8/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;链表基础算法题目&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>算法设计-LRU与LFU</title>
+      <link>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-lru%E4%B8%8Elfu/</link>
+      <pubDate>Fri, 29 Jan 2021 15:58:29 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80-lru%E4%B8%8Elfu/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E7%AE%97%E6%B3%95/">算法</category>
+      <description>&lt;p&gt;go实现LRU和LFU&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

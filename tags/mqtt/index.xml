@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MQTT - 标签 - ingbyr</title>
+    <link>https://ingbyr.github.io/tags/mqtt/</link>
+    <description>ingbyr</description>
+    <generator>Hugo 0.148.2 &amp; FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7</generator>
+    <language>zh-CN</language>
+    <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
+    <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
+    <lastBuildDate>Wed, 14 Oct 2020 09:08:58 +0800</lastBuildDate>
+    <atom:link href="https://ingbyr.github.io/tags/mqtt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mosquitto证书双向验证</title>
+      <link>https://ingbyr.github.io/posts/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</link>
+      <pubDate>Wed, 14 Oct 2020 09:08:58 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/mosquitto%E8%AF%81%E4%B9%A6%E5%8F%8C%E5%90%91%E9%AA%8C%E8%AF%81/</guid>
+      <category domain="https://ingbyr.github.io/categories/mqtt/">MQTT</category>
+      <description>&lt;p&gt;使用openssl生成自签名证书并配置Mosquitto双向验证&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

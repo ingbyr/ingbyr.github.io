@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java - 分类 - ingbyr</title>
+    <link>https://ingbyr.github.io/categories/java/</link>
+    <description>ingbyr</description>
+    <generator>Hugo 0.148.2 &amp; FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7</generator>
+    <language>zh-CN</language>
+    <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
+    <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
+    <lastBuildDate>Tue, 19 Nov 2024 10:04:11 +0800</lastBuildDate>
+    <atom:link href="https://ingbyr.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>一次JVM堆外内存问题排查</title>
+      <link>https://ingbyr.github.io/posts/jvm-native-memory-leak/</link>
+      <pubDate>Thu, 14 Mar 2024 10:24:03 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/jvm-native-memory-leak/</guid>
+      <category domain="https://ingbyr.github.io/categories/java/">Java</category>
+      <description>&lt;p&gt;记录一下JVM堆外内存泄露排查的过程&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>JavaFX系列-开发环境</title>
+      <link>https://ingbyr.github.io/posts/javafx%E7%B3%BB%E5%88%97-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Mon, 04 May 2020 11:16:10 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/javafx%E7%B3%BB%E5%88%97-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <category domain="https://ingbyr.github.io/categories/java/">Java</category>
+      <description>&lt;p&gt;本文主要介绍JavaFX环境的搭建和如何部署JavaFX应用&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

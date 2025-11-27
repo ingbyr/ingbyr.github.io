@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ClickHouse - 标签 - ingbyr</title>
+    <link>https://ingbyr.github.io/tags/clickhouse/</link>
+    <description>ingbyr</description>
+    <generator>Hugo 0.148.2 &amp; FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7</generator>
+    <language>zh-CN</language>
+    <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
+    <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
+    <lastBuildDate>Fri, 04 Sep 2020 14:08:14 +0800</lastBuildDate>
+    <atom:link href="https://ingbyr.github.io/tags/clickhouse/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ClickHouse 多分片多备份进程模式</title>
+      <link>https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Fri, 04 Sep 2020 14:08:14 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/">时序数据库</category>
+      <description>&lt;p&gt;基于原生安装方式进行部署&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ClickHouse 多分片多备份部署</title>
+      <link>https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2/</link>
+      <pubDate>Mon, 31 Aug 2020 17:20:48 +0800</pubDate><author>ingbyr@outlook.com (ingbyr)</author>
+      <guid>https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E9%83%A8%E7%BD%B2/</guid>
+      <category domain="https://ingbyr.github.io/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/">时序数据库</category>
+      <description>&lt;p&gt;基于Docker的部署方式&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

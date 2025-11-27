@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+      <script src="https://fastly.jsdelivr.net/npm/live2d-widgets@latest/dist/autoload.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>ClickHouse 多分片多备份进程模式 - ingbyr</title><meta name="author" content="ingbyr">
+<meta name="description" content="基于原生安装方式进行部署
+"><meta name="keywords" content='ClickHouse'>
+  <meta itemprop="name" content="ClickHouse 多分片多备份进程模式">
+  <meta itemprop="description" content="基于原生安装方式进行部署">
+  <meta itemprop="datePublished" content="2020-09-04T14:08:14+08:00">
+  <meta itemprop="dateModified" content="2020-09-04T14:08:14+08:00">
+  <meta itemprop="wordCount" content="2022">
+  <meta itemprop="keywords" content="ClickHouse"><meta property="og:url" content="https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/">
+  <meta property="og:site_name" content="ingbyr">
+  <meta property="og:title" content="ClickHouse 多分片多备份进程模式">
+  <meta property="og:description" content="基于原生安装方式进行部署">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-09-04T14:08:14+08:00">
+    <meta property="article:modified_time" content="2020-09-04T14:08:14+08:00">
+    <meta property="article:tag" content="ClickHouse">
+    <meta property="article:tag" content="时序数据库">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ClickHouse 多分片多备份进程模式">
+  <meta name="twitter:description" content="基于原生安装方式进行部署">
+<meta name="application-name" content="ingbyr">
+<meta name="apple-mobile-web-app-title" content="ingbyr"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" title="ClickHouse 多分片多备份进程模式 - ingbyr" /><link rel="prev" type="text/html" href="https://ingbyr.github.io/posts/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" title="Baetyl V2安装指南" /><link rel="next" type="text/html" href="https://ingbyr.github.io/posts/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/" title="Hbuildx本地打包iOS" /><link rel="alternate" type="text/markdown" href="https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/index.md" title="ClickHouse 多分片多备份进程模式 - ingbyr"><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "ClickHouse 多分片多备份进程模式",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ingbyr.github.io\/posts\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/"
+    },"genre": "posts","keywords": "ClickHouse, 时序数据库","wordcount":  2022 ,
+    "url": "https:\/\/ingbyr.github.io\/posts\/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F\/","datePublished": "2020-09-04T14:08:14+08:00","dateModified": "2020-09-04T14:08:14+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "ingbyr"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-instant-intensity="viewport" data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="ingbyr"><span class="header-title-text">ingbyr</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item">
+              <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item">
+              <a class="menu-link" href="/categories/doc/" title="所有文档"><i class="fa-solid fa-book fa-fw fa-sm" aria-hidden="true"></i> 文档</a></li><li class="menu-item">
+              <a class="menu-link" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-github fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item">
+              <a class="menu-link" href="https://www.weibo.com/u/3164844557" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-weibo fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item">
+              <a class="menu-link" href="mailto:ingbyr@outlook.com"><i class="fa-solid fa-envelope fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" role="button" aria-label="切换主题" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="ingbyr"><span class="header-title-text">ingbyr</span></a><span class="header-subtitle"></span></div>
+      <div class="theme-switch" role="button" aria-label="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></div>
+      <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> 归档</a></li><li class="menu-item"><a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-fw fa-sm" aria-hidden="true"></i> 分类</a></li><li class="menu-item"><a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> 标签</a></li><li class="menu-item"><a class="menu-link" href="/categories/doc/" title="所有文档"><i class="fa-solid fa-book fa-fw fa-sm" aria-hidden="true"></i> 文档</a></li><li class="menu-item"><a class="menu-link" href="https://github.com/ingbyr" title="GitHub" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-github fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item"><a class="menu-link" href="https://www.weibo.com/u/3164844557" rel="noopener noreferrer" target="_blank"><i class="fa-brands fa-weibo fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item"><a class="menu-link" href="mailto:ingbyr@outlook.com"><i class="fa-solid fa-envelope fa-fw fa-sm" aria-hidden="true"></i> </a></li><li class="menu-item menu-system"></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="fi-container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>ClickHouse 多分片多备份进程模式</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      ingbyr</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-category" title="分类 - 时序数据库"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> 时序数据库</a></span></div><div class="post-meta-line"><span title="发布于 2020-09-04 14:08:14"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2020-09-04">2020-09-04</time></span>&nbsp;<span title="2022 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#服务器">服务器</a></li>
+    <li><a href="#设置host">设置Host</a></li>
+    <li><a href="#配置zookeeper">配置Zookeeper</a>
+      <ul>
+        <li><a href="#下载">下载</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#启动">启动</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装clickhouse">安装ClickHouse</a></li>
+    <li><a href="#clickhouse工作目录">ClickHouse工作目录</a></li>
+    <li><a href="#运行clickhouse">运行ClickHouse</a></li>
+    <li><a href="#自定义用户名和密码">自定义用户名和密码</a></li>
+    <li><a href="#测试">测试</a></li>
+    <li><a href="#配置kafka">配置kafka</a>
+      <ul>
+        <li><a href="#下载-1">下载</a></li>
+        <li><a href="#配置-1">配置</a></li>
+        <li><a href="#启动-1">启动</a></li>
+      </ul>
+    </li>
+    <li><a href="#添加kafka缓冲">添加kafka缓冲</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p>基于原生安装方式进行部署</p>
+<p>部署进程模式下的ClickHouse</p>
+<!--more-->
+<h2 class="heading-element" id="服务器"><span>服务器</span>
+  <a href="#%e6%9c%8d%e5%8a%a1%e5%99%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><ul>
+<li>s1r1（分片1副本1）、s3r2（分片3副本2） 位于 s1 服务器</li>
+<li>s2r1（分片2副本1）、s1r2 （分片1副本2）位于 s2 服务器</li>
+<li>s3r1（分片3副本1）、s2r2（分片2副本2） 位于 s3 服务器</li>
+<li>zoo1（位于s1）、zoo2（位于s2）、zoo3 （位于s3）为 zookeeper集群</li>
+</ul>
+<blockquote>
+<p>注意端口限制，有些可能需要手动设置防火墙放行端口</p></blockquote>
+<h2 class="heading-element" id="设置host"><span>设置Host</span>
+  <a href="#%e8%ae%be%e7%bd%aehost" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>在 s1、s2、s3中的/etc/hosts 中添加以下内容（需替换为自己的IP）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">s1-ip s1
+</span></span><span class="line"><span class="cl">s2-ip s2
+</span></span><span class="line"><span class="cl">s3-ip s3</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="配置zookeeper"><span>配置Zookeeper</span>
+  <a href="#%e9%85%8d%e7%bd%aezookeeper" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="下载"><span>下载</span>
+  <a href="#%e4%b8%8b%e8%bd%bd" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><a href="https://zookeeper.apache.org/releases.html"target="_blank" rel="external nofollow noopener noreferrer">Zookeeper官网</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
+</span></span><span class="line"><span class="cl">wget https://mirrors.bfsu.edu.cn/apache/zookeeper/zookeeper-3.6.2/apache-zookeeper-3.6.2-bin.tar.gz
+</span></span><span class="line"><span class="cl">tar -zxf apache-zookeeper-3.6.2-bin.tar.gz <span class="o">&amp;&amp;</span> mv apache-zookeeper-3.6.2-bin zookeeper
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> zookeeper <span class="o">&amp;&amp;</span> cp conf/zoo_sample.cfg conf/zoo.cfg <span class="o">&amp;&amp;</span> vim conf/zoo.cfg</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 class="heading-element" id="配置"><span>配置</span>
+  <a href="#%e9%85%8d%e7%bd%ae" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>修改 <code>conf/zoo.cfg</code> 内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="c1"># The number of milliseconds of each tick</span>
+</span></span><span class="line"><span class="cl"><span class="na">tickTime</span><span class="o">=</span><span class="s">2000</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The number of ticks that the initial</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># synchronization phase can take</span>
+</span></span><span class="line"><span class="cl"><span class="na">initLimit</span><span class="o">=</span><span class="s">10</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The number of ticks that can pass between</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># sending a request and getting an acknowledgement</span>
+</span></span><span class="line"><span class="cl"><span class="na">syncLimit</span><span class="o">=</span><span class="s">5</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># the directory where the snapshot is stored.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># do not use /tmp for storage, /tmp here is just</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># example sakes.</span>
+</span></span><span class="line"><span class="cl"><span class="na">dataDir</span><span class="o">=</span><span class="s">/data/zookeeper</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># the port at which the clients will connect</span>
+</span></span><span class="line"><span class="cl"><span class="na">clientPort</span><span class="o">=</span><span class="s">2181</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># the maximum number of client connections.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># increase this if you need to handle more clients</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#maxClientCnxns=60</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Be sure to read the maintenance section of the</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># administrator guide before turning on autopurge.</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># The number of snapshots to retain in dataDir</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#autopurge.snapRetainCount=3</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Purge task interval in hours</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Set to &#34;0&#34; to disable auto purge feature</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#autopurge.purgeInterval=1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Metrics Providers</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># https://prometheus.io Metrics Exporter</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#metricsProvider.className=org.apache.zookeeper.metrics.prometheus.PrometheusMetricsProvider</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#metricsProvider.httpPort=7000</span>
+</span></span><span class="line"><span class="cl"><span class="c1">#metricsProvider.exportJvmInfo=true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">## Cluster 如果是云服务器需要使用内网地址ip或在白名单中的hostname</span>
+</span></span><span class="line"><span class="cl"><span class="na">server.1</span><span class="o">=</span><span class="s">s1:2888:3888</span>
+</span></span><span class="line"><span class="cl"><span class="na">server.2</span><span class="o">=</span><span class="s">s2:2888:3888</span>
+</span></span><span class="line"><span class="cl"><span class="na">server.3</span><span class="o">=</span><span class="s">s3:2888:3888</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>修改<code>conf/log4j.properties</code> <code>zookeeper.log.dir=/data/log/zookeeper</code></li>
+<li>在<code>～/.bashrc</code>中添加 <code>export ZOO_LOG_DIR=/data/log/zookeeper</code></li>
+<li>在<code>dataDir</code>对应目录下新建<code>myid</code>文件，分别在s1、s2、s3上填入 1 2 3</li>
+</ul>
+<h3 class="heading-element" id="启动"><span>启动</span>
+  <a href="#%e5%90%af%e5%8a%a8" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/zkServer.sh start</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行命令验证安装结果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/zkServer.sh status</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="安装clickhouse"><span>安装ClickHouse</span>
+  <a href="#%e5%ae%89%e8%a3%85clickhouse" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p><a href="https://clickhouse.tech/docs/zh/getting-started/install/"target="_blank" rel="external nofollow noopener noreferrer">官方文档</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt-get install apt-transport-https ca-certificates dirmngr
+</span></span><span class="line"><span class="cl">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv E0C56BD4
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;deb https://repo.clickhouse.tech/deb/stable/ main/&#34;</span> <span class="p">|</span> sudo tee <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    /etc/apt/sources.list.d/clickhouse.list
+</span></span><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt-get install -y clickhouse-server clickhouse-client
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo service clickhouse-server start
+</span></span><span class="line"><span class="cl">clickhouse-client</span></span></code></pre></td></tr></table>
+</div>
+</div><p>手动安装</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-common-static_20.9.7.11_amd64.deb
+</span></span><span class="line"><span class="cl">wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-client_20.9.7.11_all.deb
+</span></span><span class="line"><span class="cl">wget https://mirrors.tuna.tsinghua.edu.cn/clickhouse/deb/stable/main/clickhouse-server_20.9.7.11_all.deb
+</span></span><span class="line"><span class="cl">dpkg -i clickhouse-common-static_20.9.7.11_amd64.deb
+</span></span><span class="line"><span class="cl">dpkg -i clickhouse-client_20.9.7.11_all.deb
+</span></span><span class="line"><span class="cl">dpkg -i clickhouse-server_20.9.7.11_all.deb</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="clickhouse工作目录"><span>ClickHouse工作目录</span>
+  <a href="#clickhouse%e5%b7%a5%e4%bd%9c%e7%9b%ae%e5%bd%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># s1</span>
+</span></span><span class="line"><span class="cl">├── data_p.csv				<span class="c1">#（测试用）示例数据</span>
+</span></span><span class="line"><span class="cl">├── s1r1
+</span></span><span class="line"><span class="cl">│   ├── config.xml		<span class="c1"># 配置文件</span>
+</span></span><span class="line"><span class="cl">│   ├── metrika.xml		<span class="c1"># 分片配置文件</span>
+</span></span><span class="line"><span class="cl">├── s3r2
+</span></span><span class="line"><span class="cl">│   ├── config.xml
+</span></span><span class="line"><span class="cl">│   ├── metrika.xml
+</span></span><span class="line"><span class="cl">└── users.xml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># s2</span>
+</span></span><span class="line"><span class="cl">├── s1r2
+</span></span><span class="line"><span class="cl">│   ├── config.xml
+</span></span><span class="line"><span class="cl">│   ├── metrika.xml
+</span></span><span class="line"><span class="cl">├── s2r1
+</span></span><span class="line"><span class="cl">│   ├── config.xml
+</span></span><span class="line"><span class="cl">│   ├── metrika.xml
+</span></span><span class="line"><span class="cl">└── users.xml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># s3</span>
+</span></span><span class="line"><span class="cl">├── s2r2
+</span></span><span class="line"><span class="cl">│   ├── config.xml
+</span></span><span class="line"><span class="cl">│   ├── metrika.xml
+</span></span><span class="line"><span class="cl">├── s3r1
+</span></span><span class="line"><span class="cl">│   ├── config.xml
+</span></span><span class="line"><span class="cl">│   ├── metrika.xml
+</span></span><span class="line"><span class="cl">└── users.xml</span></span></code></pre></td></tr></table>
+</div>
+</div><p>配置中tcp访问端口如下：</p>
+<ul>
+<li>s1r1:9111</li>
+<li>s3r2:9132</li>
+<li>s2r1:9121</li>
+<li>s1r2:9112</li>
+<li>s3r1:9131</li>
+<li>s2r2:9122</li>
+</ul>
+<p>配置中http访问端口（datagrip工具使用此端口通信）如下：</p>
+<ul>
+<li>s1r1:9011</li>
+<li>s3r2:9032</li>
+<li>s2r1:9021</li>
+<li>s1r2:9012</li>
+<li>s3r1:9031</li>
+<li>s2r2:9022</li>
+</ul>
+<h2 class="heading-element" id="运行clickhouse"><span>运行ClickHouse</span>
+  <a href="#%e8%bf%90%e8%a1%8cclickhouse" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>停止默认clickhouse</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo service clickhouse stop</span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行clickhouse</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># s1</span>
+</span></span><span class="line"><span class="cl">nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s1r1/config.xml &gt; /data/log/ch/s1r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r2/config.xml &gt; /data/log/ch/s3r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># s2</span>
+</span></span><span class="line"><span class="cl">nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s1r2/config.xml &gt; /data/log/ch/s1r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s2r1/config.xml &gt; /data/log/ch/s2r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># s3</span>
+</span></span><span class="line"><span class="cl">nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s2r2/config.xml &gt; /data/log/ch/s2r2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl">nohup clickhouse-server --config-file<span class="o">=</span>/data/ch/s3r1/config.xml &gt; /data/log/ch/s3r1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>停止运行： ps -A | grep clickhouse | grep -v grep | awk &lsquo;{print $1}&rsquo; | xargs kill</p></blockquote>
+<h2 class="heading-element" id="自定义用户名和密码"><span>自定义用户名和密码</span>
+  <a href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e7%94%a8%e6%88%b7%e5%90%8d%e5%92%8c%e5%af%86%e7%a0%81" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>** 在metrika.xml中需要设置密码，注意同步 **</p>
+<p>在users.xml中有详细的注释说明了如何添加用户、密码、用户权限等配置方法。（配置文件中已添加了以下内容，需要其他账户可参考以下步骤）</p>
+<p>添加defualt用户密码和新建一个tom用户，由于密码存储在文件，因此推荐使用sha256编码后放入文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s2">&#34;default&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f  </span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> -n <span class="s2">&#34;tom-password&#34;</span> <span class="p">|</span> sha256sum <span class="p">|</span> tr -d <span class="s1">&#39;-&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672  </span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>default用户密码为default，tom的密码为tom-password，添加至users.xml，在 users/default中删除password项，添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;password_sha256_hex&gt;</span>37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f<span class="nt">&lt;/password_sha256_hex&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在users/下添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;tom&gt;</span>
+</span></span><span class="line"><span class="cl"> <span class="nt">&lt;password_sha256_hex&gt;</span>d8c862690b30f6f2add244327715cb08ac926c7c2fb4fcbb7694650bfde5b672<span class="nt">&lt;/password_sha256_hex&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;profile&gt;</span>default<span class="nt">&lt;/profile&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;quota&gt;</span>default<span class="nt">&lt;/quota&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;networks</span> <span class="na">incl=</span><span class="s">&#34;networks&#34;</span> <span class="na">replace=</span><span class="s">&#34;replace&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;ip&gt;</span>::/0<span class="nt">&lt;/ip&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&lt;/networks&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/tom&gt;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>登陆数据库：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span>
+</span></span><span class="line"><span class="cl">clickhouse-client --host s1 --user tom --password tom-password --port <span class="m">9111</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="测试"><span>测试</span>
+  <a href="#%e6%b5%8b%e8%af%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>登陆任意副本数据库，创建测试表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p_local</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/default/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">timestamp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">timestamp</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>为表<code>p_local</code>创建分布表<code>p</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">p_local</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">,</span><span class="w"> </span><span class="n">p_local</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">())</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>退出数据库交互界面，在终端中执行语句导入数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">clickhouse-client --host s1 -u default --password default --port <span class="m">9111</span> --query <span class="s2">&#34;INSERT INTO p FORMAT CSV&#34;</span> &lt; data_p.csv</span></span></code></pre></td></tr></table>
+</div>
+</div><p>删除测试表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">cluster</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">p_local</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="k">cluster</span><span class="w"> </span><span class="n">p_3shards_2replicas</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="配置kafka"><span>配置kafka</span>
+  <a href="#%e9%85%8d%e7%bd%aekafka" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="下载-1"><span>下载</span>
+  <a href="#%e4%b8%8b%e8%bd%bd-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p><a href="https://kafka.apache.org/downloads"target="_blank" rel="external nofollow noopener noreferrer">Kafka官网</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 使用国内镜像源，下载前请确认当前版本在镜像中存在</span>
+</span></span><span class="line"><span class="cl">wget https://mirrors.bfsu.edu.cn/apache/kafka/2.6.0/kafka_2.13-2.6.0.tgz
+</span></span><span class="line"><span class="cl">tar -zxf kafka_2.13-2.6.0.tgz <span class="o">&amp;&amp;</span> mv kafka_2.13-2.6.0 kafka</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 class="heading-element" id="配置-1"><span>配置</span>
+  <a href="#%e9%85%8d%e7%bd%ae-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>修改配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> kafka <span class="o">&amp;&amp;</span> vim config/server.properties</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通用配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="c1"># A comma separated list of directories under which to store log files</span>
+</span></span><span class="line"><span class="cl"><span class="na">log.dirs</span><span class="o">=</span><span class="s">/data/log/kafka</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># root directory for all kafka znodes.</span>
+</span></span><span class="line"><span class="cl"><span class="na">zookeeper.connect</span><span class="o">=</span><span class="s">s1:2181,s2:2181,s3:2181</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>分节点配置</p>
+<ul>
+<li>
+<p>s1</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="na">broker.id</span><span class="o">=</span><span class="s">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://s1:9092</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>s2</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="na">broker.id</span><span class="o">=</span><span class="s">2</span>
+</span></span><span class="line"><span class="cl"><span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://s2:9092</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>s3</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="na">broker.id</span><span class="o">=</span><span class="s">3</span>
+</span></span><span class="line"><span class="cl"><span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://s3:9092</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 class="heading-element" id="启动-1"><span>启动</span>
+  <a href="#%e5%90%af%e5%8a%a8-1" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./bin/kafka-server-start.sh -daemon ./config/server.properties</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看topic</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">bin/kafka-topics.sh --list --bootstrap-server s1:9092</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="添加kafka缓冲"><span>添加kafka缓冲</span>
+  <a href="#%e6%b7%bb%e5%8a%a0kafka%e7%bc%93%e5%86%b2" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>创建kafka主题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># ./bin/kafka-topics.sh --delete --bootstrap-server s1:9092 --topic topic-p</span>
+</span></span><span class="line"><span class="cl">./bin/kafka-topics.sh --create --bootstrap-server s1:9092 --replication-factor <span class="m">2</span> --partitions <span class="m">6</span> --topic topic-p</span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建kafka消费表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- DROP TABLE p_stream ON CLUSTER p_3shards_2replicas
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p_stream</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Kafka</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">SETTINGS</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">kafka_broker_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;s1:9092&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">kafka_topic_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;topic-p&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">kafka_group_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;clickhouse&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">kafka_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;JSONEachRow&#39;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">kafka_row_delimiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>添加 kafka_skip_broken_messages = N 跳过非法消息</p></blockquote>
+<p>创建本地表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- DROP TABLE p_local ON CLUSTER p_3shards_2replicas
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p_local</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w"> </span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ReplicatedMergeTree</span><span class="p">(</span><span class="s1">&#39;/clickhouse/tables/p/{shard}&#39;</span><span class="p">,</span><span class="s1">&#39;{replica}&#39;</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">toYYYYMM</span><span class="p">(</span><span class="k">timestamp</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">timestamp</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="k">timestamp</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建分布表</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- DROP TABLE p ON CLUSTER p_3shards_2replicas
+</span></span></span><span class="line"><span class="cl"><span class="c1">-- CREATE TABLE p ON CLUSTER p_3shards_2replicas AS p_local ENGINE = Distributed(p_3shards_2replicas, default, p_local, rand())
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">ozone</span><span class="w"> </span><span class="n">Int64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">particullate_matter</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">carbon_monoxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sulfure_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">nitrogen_dioxide</span><span class="w"> </span><span class="nb">Int8</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">longitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">latitude</span><span class="w"> </span><span class="n">Float64</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">timestamp</span><span class="w"> </span><span class="n">DateTime</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">ENGINE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Distributed</span><span class="p">(</span><span class="n">p_3shards_2replicas</span><span class="p">,</span><span class="w"> </span><span class="k">default</span><span class="p">,</span><span class="w"> </span><span class="n">p_local</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="p">())</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>创建物化视图</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- DROP TABLE p_consumer ON CLUSTER p_3shards_2replicas
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="n">MATERIALIZED</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">p_consumer</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CLUSTER</span><span class="w"> </span><span class="n">p_3shards_2replicas</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">p_stream</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>发送数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">./bin/kafka-console-producer.sh --broker-list s1:9092 --topic topic-p</span></span></code></pre></td></tr></table>
+</div>
+</div><json-viewer value="&#34;{\&#34;ozone\&#34;:1, \&#34;particullate_matter\&#34;:69, \&#34;carbon_monoxide\&#34;:57, \&#34;sulfure_dioxide\&#34;:67, \&#34;nitrogen_dioxide\&#34;:83, \&#34;longitude\&#34;:10.189355309192706, \&#34;latitude\&#34;:56.18210217593679, \&#34;timestamp\&#34;:\&#34;2014-09-01 00:05:00\&#34;}&#34;" expand-depth="1" boxed copyable="{&#34;copiedText&#34;:&#34;已复制&#34;,&#34;copyText&#34;:&#34;复制&#34;}"></json-viewer></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod"><span title="更新于 2020-09-04 14:08:14">更新于 2020-09-04&nbsp;</span>
+      </div><div class="post-info-license">
+            <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
+          </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 X" data-sharer="twitter" data-url="https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" data-title="ClickHouse 多分片多备份进程模式" data-hashtags="ClickHouse,时序数据库"><i class="fa-brands fa-x-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" data-hashtag="ClickHouse"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ingbyr.github.io/posts/clickhouse-%E5%A4%9A%E5%88%86%E7%89%87%E5%A4%9A%E5%A4%87%E4%BB%BD%E8%BF%9B%E7%A8%8B%E6%A8%A1%E5%BC%8F/" data-title="ClickHouse 多分片多备份进程模式"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/clickhouse/" class="post-tag" title="标签 - ClickHouse">ClickHouse</a><a href="/tags/%E6%97%B6%E5%BA%8F%E6%95%B0%E6%8D%AE%E5%BA%93/" class="post-tag" title="标签 - 时序数据库">时序数据库</a></section>
+    <section><span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/posts/baetyl-v2%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" class="post-nav-item" rel="prev" title="Baetyl V2安装指南"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Baetyl V2安装指南</a><a href="/posts/hbuildx%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85ios/" class="post-nav-item" rel="next" title="Hbuildx本地打包iOS">Hbuildx本地打包iOS<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside><dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
+      <div class="toc">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-drawer"><nav >
+  <ul>
+    <li><a href="#服务器">服务器</a></li>
+    <li><a href="#设置host">设置Host</a></li>
+    <li><a href="#配置zookeeper">配置Zookeeper</a>
+      <ul>
+        <li><a href="#下载">下载</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#启动">启动</a></li>
+      </ul>
+    </li>
+    <li><a href="#安装clickhouse">安装ClickHouse</a></li>
+    <li><a href="#clickhouse工作目录">ClickHouse工作目录</a></li>
+    <li><a href="#运行clickhouse">运行ClickHouse</a></li>
+    <li><a href="#自定义用户名和密码">自定义用户名和密码</a></li>
+    <li><a href="#测试">测试</a></li>
+    <li><a href="#配置kafka">配置kafka</a>
+      <ul>
+        <li><a href="#下载-1">下载</a></li>
+        <li><a href="#配置-1">配置</a></li>
+        <li><a href="#启动-1">启动</a></li>
+      </ul>
+    </li>
+    <li><a href="#添加kafka缓冲">添加kafka缓冲</a></li>
+  </ul>
+</nav></div>
+      </div>
+    </dialog></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.148.2"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2025</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">ingbyr</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i></div><div id="toc-drawer-button" class="fixed-button toc-drawer-button d-none" role="button" aria-label="目录"><i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/json-viewer-element/json-viewer-element.umd.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/js/config/1119f7d895ae9b855081fae76985e365.js" defer></script><script src="/js/theme.min.js" defer></script></body>
+</html>

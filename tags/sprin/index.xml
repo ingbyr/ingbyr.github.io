@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sprin - 标签 - ingbyr</title>
+    <link>http://localhost:1313/tags/sprin/</link>
+    <description>ingbyr</description>
+    <generator>Hugo 0.148.2 &amp; FixIt v0.4.0-alpha.3-20251124100610-99fd4fb7</generator>
+    <language>zh-CN</language>
+    <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
+    <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
+    <lastBuildDate>Mon, 15 Dec 2025 16:26:11 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/sprin/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>JDK8 Spring MVC 项目迁移 JDK21 SpringBoot3.5</title>
+      <link>http://localhost:1313/posts/ae2118d/</link>
+      <pubDate>Mon, 15 Dec 2025 16:26:11 +0800</pubDate>
+      <guid>http://localhost:1313/posts/ae2118d/</guid>
+      <category domain="http://localhost:1313/categories/draft/">Draft</category>
+      <description>JDK8 Spring MVC 项目迁移 JDK21 SpringBoot3.5</description>
+    </item>
+  </channel>
+</rss>

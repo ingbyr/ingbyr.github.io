@@ -8,8 +8,17 @@
     <language>zh-CN</language>
     <managingEditor>ingbyr@outlook.com (ingbyr)</managingEditor>
     <webMaster>ingbyr@outlook.com (ingbyr)</webMaster>
-    <lastBuildDate>Tue, 19 Nov 2024 10:04:11 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 15 Dec 2025 16:26:11 +0800</lastBuildDate>
     <atom:link href="https://ingbyr.github.io/categories/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java8 Spring MVC 5 项目迁移 Java21 SpringBoot 3.5 记录</title>
+      <link>https://ingbyr.github.io/posts/ae2118d/</link>
+      <pubDate>Mon, 15 Dec 2025 16:26:11 +0800</pubDate>
+      <guid>https://ingbyr.github.io/posts/ae2118d/</guid>
+      <category domain="https://ingbyr.github.io/categories/java/">Java</category>
+      <category domain="https://ingbyr.github.io/categories/spring/">Spring</category>
+      <description>&lt;p&gt;总结了迁移 JDK8 Spring MVC 5 项目到 JDK21 SpringBoot 3.5 的一些处理方式与步骤。&lt;/p&gt;</description>
+    </item>
     <item>
       <title>一次JVM堆外内存问题排查</title>
       <link>https://ingbyr.github.io/posts/jvm-native-memory-leak/</link>

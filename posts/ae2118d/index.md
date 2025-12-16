@@ -110,9 +110,55 @@
 
 ## 项目代码适配
 
-### javax 迁移 jakarta 命名空间
+### javax 迁移 Jakarta 命名空间
+
+使用IDEA自带工具批量替换 `javax` 命名空间为 `jakarta`，菜单位于
+`Refactoring -> Migrate Packages and Classes -> Java EE to Jakarta EE`，本质上是替换代码文件中的字符串，可以新建自己的规则
+批量替换其他命名空间。
+
 ### 迁移 spring xml 配置为代码配置方式
+
+旧项目使用了spring xml 配置，需要将配置文件迁移为代码配置方式，并使用 `@Configuration` 注解声明为配置类，这个需要按项目
+具体需求进行修改，注意最好不要使用xml与代码混合使用，建议全部迁移为代码配置方式。
+
 ### 旧配置文件适配 spring boot 3
+
+项目中配置文件为多个`properties`文件，使用springboot3中新引入的配置文件导入，由spring合并配置，例如在`application.yaml`中
+引入旧项目配置文件`base.properties`、`biz.properties`等：
+
+```yaml
+spring:
+  config:
+    import:
+      - classpath:base.properties
+      - classpath:biz.properties
+```
+
+项目中如果使用了自定义的配置读取类，需要将配置文件注入到Spring Environment中，例如:
+
+```java
+public class MyPropertySourcePostProcessor implements EnvironmentPostProcessor {
+    private static MapPropertySource mergeMyPropertySource() {
+        Properties properties = Global.PROPERTIES_LOADER.getProperties();
+        Map<String, Object> map = new HashMap<>();
+        properties.forEach((k, v) -> map.put(k.toString(), Global.getConfig(k.toString())));
+        MapPropertySource source = new MapPropertySource("myProperties", map);
+        return source;
+    }
+
+    @Override
+    public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
+        environment.getPropertySources()
+                .addFirst(mergeMyPropertySource());
+    }
+}
+```
+
+## 编译测试
+
+完成迁移后，需要编译测试项目，确保项目正常启动，并检查是否有兼容性问题。具体而言要完成回归测试、集成测试和性能测试，
+同时部署后进行渗透漏洞扫描，确保当前依赖下无重大安全隐患。
+
 
 ---
 

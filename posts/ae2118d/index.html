@@ -11,8 +11,8 @@
   <meta itemprop="name" content="Java8 Spring MVC 5 项目迁移 Java21 SpringBoot 3.5 记录">
   <meta itemprop="description" content="总结了迁移 JDK8 Spring MVC 5 项目到 JDK21 SpringBoot 3.5 的一些处理方式与步骤。">
   <meta itemprop="datePublished" content="2025-12-15T16:26:11+08:00">
-  <meta itemprop="dateModified" content="2025-12-15T16:26:11+08:00">
-  <meta itemprop="wordCount" content="918">
+  <meta itemprop="dateModified" content="2025-12-15T17:38:30+08:00">
+  <meta itemprop="wordCount" content="1431">
   <meta itemprop="keywords" content="Java,Spring"><meta property="og:url" content="https://ingbyr.github.io/posts/ae2118d/">
   <meta property="og:site_name" content="ingbyr">
   <meta property="og:title" content="Java8 Spring MVC 5 项目迁移 Java21 SpringBoot 3.5 记录">
@@ -21,7 +21,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2025-12-15T16:26:11+08:00">
-    <meta property="article:modified_time" content="2025-12-15T16:26:11+08:00">
+    <meta property="article:modified_time" content="2025-12-15T17:38:30+08:00">
     <meta property="article:tag" content="Java">
     <meta property="article:tag" content="Spring">
 
@@ -42,8 +42,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ingbyr.github.io\/posts\/ae2118d\/"
-    },"genre": "posts","keywords": "Java, Spring","wordcount":  918 ,
-    "url": "https:\/\/ingbyr.github.io\/posts\/ae2118d\/","datePublished": "2025-12-15T16:26:11+08:00","dateModified": "2025-12-15T16:26:11+08:00","publisher": {
+    },"genre": "posts","keywords": "Java, Spring","wordcount":  1431 ,
+    "url": "https:\/\/ingbyr.github.io\/posts\/ae2118d\/","datePublished": "2025-12-15T16:26:11+08:00","dateModified": "2025-12-15T17:38:30+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"description": ""
   }
@@ -116,7 +116,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Java8 Spring MVC 5 项目迁移 Java21 SpringBoot 3.5 记录</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Java</a>&ensp;<a href="/categories/spring/" class="post-category" title="分类 - Spring"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Spring</a></span></div><div class="post-meta-line"><span title="发布于 2025-12-15 16:26:11"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-12-15">2025-12-15</time></span>&nbsp;<span title="918 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Java</a>&ensp;<a href="/categories/spring/" class="post-category" title="分类 - Spring"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Spring</a></span></div><div class="post-meta-line"><span title="发布于 2025-12-15 16:26:11"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2025-12-15">2025-12-15</time></span>&nbsp;<span title="更新于 2025-12-15 17:38:30"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2025-12-15">2025-12-15</time></span>&nbsp;<span title="1431 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -136,11 +136,12 @@
     </li>
     <li><a href="#项目代码适配">项目代码适配</a>
       <ul>
-        <li><a href="#javax-迁移-jakarta-命名空间">javax 迁移 jakarta 命名空间</a></li>
+        <li><a href="#javax-迁移-jakarta-命名空间">javax 迁移 Jakarta 命名空间</a></li>
         <li><a href="#迁移-spring-xml-配置为代码配置方式">迁移 spring xml 配置为代码配置方式</a></li>
         <li><a href="#旧配置文件适配-spring-boot-3">旧配置文件适配 spring boot 3</a></li>
       </ul>
     </li>
+    <li><a href="#编译测试">编译测试</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><p>总结了迁移 JDK8 Spring MVC 5 项目到 JDK21 SpringBoot 3.5 的一些处理方式与步骤。</p>
@@ -318,22 +319,85 @@
   <a href="#%e9%a1%b9%e7%9b%ae%e4%bb%a3%e7%a0%81%e9%80%82%e9%85%8d" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><h3 class="heading-element" id="javax-迁移-jakarta-命名空间"><span>javax 迁移 jakarta 命名空间</span>
+</h2><h3 class="heading-element" id="javax-迁移-jakarta-命名空间"><span>javax 迁移 Jakarta 命名空间</span>
   <a href="#javax-%e8%bf%81%e7%a7%bb-jakarta-%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 class="heading-element" id="迁移-spring-xml-配置为代码配置方式"><span>迁移 spring xml 配置为代码配置方式</span>
+</h3><p>使用IDEA自带工具批量替换 <code>javax</code> 命名空间为 <code>jakarta</code>，菜单位于
+<code>Refactoring -&gt; Migrate Packages and Classes -&gt; Java EE to Jakarta EE</code>，本质上是替换代码文件中的字符串，可以新建自己的规则
+批量替换其他命名空间。</p>
+<h3 class="heading-element" id="迁移-spring-xml-配置为代码配置方式"><span>迁移 spring xml 配置为代码配置方式</span>
   <a href="#%e8%bf%81%e7%a7%bb-spring-xml-%e9%85%8d%e7%bd%ae%e4%b8%ba%e4%bb%a3%e7%a0%81%e9%85%8d%e7%bd%ae%e6%96%b9%e5%bc%8f" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><h3 class="heading-element" id="旧配置文件适配-spring-boot-3"><span>旧配置文件适配 spring boot 3</span>
+</h3><p>旧项目使用了spring xml 配置，需要将配置文件迁移为代码配置方式，并使用 <code>@Configuration</code> 注解声明为配置类，这个需要按项目
+具体需求进行修改，注意最好不要使用xml与代码混合使用，建议全部迁移为代码配置方式。</p>
+<h3 class="heading-element" id="旧配置文件适配-spring-boot-3"><span>旧配置文件适配 spring boot 3</span>
   <a href="#%e6%97%a7%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e9%80%82%e9%85%8d-spring-boot-3" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3></div><div class="post-footer" id="post-footer">
+</h3><p>项目中配置文件为多个<code>properties</code>文件，使用springboot3中新引入的配置文件导入，由spring合并配置，例如在<code>application.yaml</code>中
+引入旧项目配置文件<code>base.properties</code>、<code>biz.properties</code>等：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">spring</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">config</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">import</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">classpath:base.properties</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">classpath:biz.properties</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>项目中如果使用了自定义的配置读取类，需要将配置文件注入到Spring Environment中，例如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">MyPropertySourcePostProcessor</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">EnvironmentPostProcessor</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">MapPropertySource</span><span class="w"> </span><span class="nf">mergeMyPropertySource</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Properties</span><span class="w"> </span><span class="n">properties</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Global</span><span class="p">.</span><span class="na">PROPERTIES_LOADER</span><span class="p">.</span><span class="na">getProperties</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">properties</span><span class="p">.</span><span class="na">forEach</span><span class="p">((</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">k</span><span class="p">.</span><span class="na">toString</span><span class="p">(),</span><span class="w"> </span><span class="n">Global</span><span class="p">.</span><span class="na">getConfig</span><span class="p">(</span><span class="n">k</span><span class="p">.</span><span class="na">toString</span><span class="p">())));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">MapPropertySource</span><span class="w"> </span><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">MapPropertySource</span><span class="p">(</span><span class="s">&#34;myProperties&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">source</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">postProcessEnvironment</span><span class="p">(</span><span class="n">ConfigurableEnvironment</span><span class="w"> </span><span class="n">environment</span><span class="p">,</span><span class="w"> </span><span class="n">SpringApplication</span><span class="w"> </span><span class="n">application</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">environment</span><span class="p">.</span><span class="na">getPropertySources</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="n">mergeMyPropertySource</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 class="heading-element" id="编译测试"><span>编译测试</span>
+  <a href="#%e7%bc%96%e8%af%91%e6%b5%8b%e8%af%95" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>完成迁移后，需要编译测试项目，确保项目正常启动，并检查是否有兼容性问题。具体而言要完成回归测试、集成测试和性能测试，
+同时部署后进行渗透漏洞扫描，确保当前依赖下无重大安全隐患。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
-      <div class="post-info-mod"><span title="更新于 2025-12-15 16:26:11">更新于 2025-12-15&nbsp;</span>
+      <div class="post-info-mod"><span title="更新于 2025-12-15 17:38:30">更新于 2025-12-15&nbsp;</span>
       </div></div><div class="post-info-line">
         <div class="post-info-md"><span><a href="/posts/ae2118d/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
         <div class="post-info-share">
@@ -370,11 +434,12 @@
     </li>
     <li><a href="#项目代码适配">项目代码适配</a>
       <ul>
-        <li><a href="#javax-迁移-jakarta-命名空间">javax 迁移 jakarta 命名空间</a></li>
+        <li><a href="#javax-迁移-jakarta-命名空间">javax 迁移 Jakarta 命名空间</a></li>
         <li><a href="#迁移-spring-xml-配置为代码配置方式">迁移 spring xml 配置为代码配置方式</a></li>
         <li><a href="#旧配置文件适配-spring-boot-3">旧配置文件适配 spring boot 3</a></li>
       </ul>
     </li>
+    <li><a href="#编译测试">编译测试</a></li>
   </ul>
 </nav></div>
       </div>
